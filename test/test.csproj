@@ -9791,6 +9791,16 @@
     <Content Include="_view\_debug\test.js" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\clsApi.cs" />
+    <Content Include="App_Code\clsCache.cs" />
+    <Content Include="App_Code\clsGlobal.cs" />
+    <Content Include="App_Code\clsJS.cs" />
+    <Content Include="App_Code\Model\oApi.cs" />
+    <Content Include="App_Code\Model\oApiAddnew.cs" />
+    <Content Include="App_Code\Model\oImageItem.cs" />
+    <Content Include="App_Code\Model\oLinkItem.cs" />
+    <Content Include="App_Code\Model\oResult.cs" />
+    <Content Include="App_Code\_CONFIG.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

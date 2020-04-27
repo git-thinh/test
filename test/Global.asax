@@ -1,1 +1,1 @@
-﻿<%@ Application Inherits="ckv_site.clsGlobal" Language="C#" %>
+﻿<%@ Application Inherits="test.clsGlobal" Language="C#" %>
