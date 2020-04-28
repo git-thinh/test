@@ -1,3 +1,5 @@
 /.vs
 /test/obj
 /test/bin/roslyn
+/njs/test-soket.io/node_modules
+/njs/test-soket.io/iisnode

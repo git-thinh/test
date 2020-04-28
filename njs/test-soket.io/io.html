@@ -1,0 +1,16 @@
+<html>
+<body>
+    <a href="/index.html" target="_blank">Main</a><br />
+    <h1>IO.html</h1>
+    <div id="data"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io.connect('http://' + location.host);
+        socket.on('news', (data) => {
+            console.log(data);
+            document.getElementById('data').innerText = JSON.stringify(data);
+            socket.emit('my other event', { my: 'data' });
+        });
+    </script>
+</body>
+</html>

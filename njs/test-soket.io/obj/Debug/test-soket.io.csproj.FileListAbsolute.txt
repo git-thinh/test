@@ -1,0 +1,6 @@
+C:\test\njs\test-soket.io\bin\test-soket.io.dll.config
+C:\test\njs\test-soket.io\bin\test-soket.io.dll
+C:\test\njs\test-soket.io\bin\test-soket.io.pdb
+C:\test\njs\test-soket.io\obj\Debug\test-soket.io.csproj.CoreCompileInputs.cache
+C:\test\njs\test-soket.io\obj\Debug\test-soket.io.dll
+C:\test\njs\test-soket.io\obj\Debug\test-soket.io.pdb
