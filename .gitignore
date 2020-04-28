@@ -11,3 +11,5 @@
 /njs/test-puppeteer/node_modules
 /njs/test-puppeteer/obj
 /njs/test-puppeteer/iisnode
+/njs/headless-chrome-crawler/package-lock.json
+/njs/headless-chrome-crawler/node_modules

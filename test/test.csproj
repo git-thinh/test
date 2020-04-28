@@ -15,7 +15,7 @@
     <RootNamespace>test</RootNamespace>
     <AssemblyName>test</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44367</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -80,6 +80,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin.html" />
+    <Content Include="App_Code\Redis\Sider\src\RedisClientPipeliningExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RedisClientPipeliningExtensions.cs</LastGenOutput>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="test.html" />
     <Content Include="test\assets\images\avatar\nan.jpg" />
@@ -400,6 +404,63 @@
     <Content Include="App_Code\Model\oLinkItem.cs" />
     <Content Include="App_Code\Model\oResult.cs" />
     <Content Include="App_Code\_CONFIG.cs" />
+    <Content Include="App_Code\JobCrawler.cs" />
+    <Content Include="App_Code\JobEmail.cs" />
+    <Content Include="App_Code\JOB_TYPE.cs" />
+    <Content Include="App_Code\LogRedis.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Aggregate.cs" />
+    <Content Include="App_Code\Redis\Sider\src\AutoActivatingPool.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Exceptions.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Executors\ExecutorBase.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Executors\IExecutor.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Executors\ImmediateExecutor.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Executors\IocpExecutor.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Executors\MonitorExecutor.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Executors\PipelinedExecutor.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Executors\PubSubExecutor.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Executors\TransactedExecutor.cs" />
+    <Content Include="App_Code\Redis\Sider\src\IClientsPool.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Invocation.cs" />
+    <Content Include="App_Code\Redis\Sider\src\IRedisClient.cs" />
+    <Content Include="App_Code\Redis\Sider\src\LimitingStream.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Message.cs" />
+    <Content Include="App_Code\Redis\Sider\src\MessageType.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Mode.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Observable.cs" />
+    <Content Include="App_Code\Redis\Sider\src\ProtocolEncoder.cs" />
+    <Content Include="App_Code\Redis\Sider\src\ProtocolReader.cs" />
+    <Content Include="App_Code\Redis\Sider\src\ProtocolWriter.cs" />
+    <Content Include="App_Code\Redis\Sider\src\RedisClient.API.cs" />
+    <Content Include="App_Code\Redis\Sider\src\RedisClient.cs" />
+    <Content Include="App_Code\Redis\Sider\src\RedisClient.IO.core.cs" />
+    <Content Include="App_Code\Redis\Sider\src\RedisClientBase.cs" />
+    <Content Include="App_Code\Redis\Sider\src\RedisReader.cs" />
+    <Content Include="App_Code\Redis\Sider\src\RedisSettings.cs" />
+    <Content Include="App_Code\Redis\Sider\src\RedisType.cs" />
+    <Content Include="App_Code\Redis\Sider\src\RedisVersionAttribute.cs" />
+    <Content Include="App_Code\Redis\Sider\src\RedisWriter.cs" />
+    <Content Include="App_Code\Redis\Sider\src\ResponseType.cs" />
+    <Content Include="App_Code\Redis\Sider\src\RoundRobinPool.cs" />
+    <Content Include="App_Code\Redis\Sider\src\SAssert.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Serialization\BufferSerializer.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Serialization\ISerializer.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Serialization\ObjectSerializer.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Serialization\SerializerBase.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Serialization\Serializers.cs" />
+    <Content Include="App_Code\Redis\Sider\src\Serialization\StringSerializer.cs" />
+    <Content Include="App_Code\Redis\Sider\src\SettingsWrapper.cs" />
+    <Content Include="App_Code\Redis\Sider\src\StringExtensions.cs" />
+    <Content Include="App_Code\Redis\Sider\src\ThreadwisePool.cs" />
+    <Content Include="App_Code\Redis\Sider\src\TrackedThreadwisePool.cs" />
+    <Content Include="App_Code\Redis\Sider\src\RedisClientPipeliningExtensions.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RedisClientPipeliningExtensions.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Code\JobListener.cs" />
+    <Content Include="App_Code\JobApiJS.cs" />
+    <Content Include="App_Code\JobExt.cs" />
+    <Content Include="App_Code\clsEngineJS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -442,6 +503,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -459,7 +521,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56557</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44367/</IISUrl>
+          <IISUrl>http://localhost/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

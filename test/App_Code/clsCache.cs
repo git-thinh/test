@@ -9,9 +9,9 @@ namespace test
 {
     public interface ICache
     {
-        void Reload();
-        bool Exist(string cache_name);
-        oResult ExecuteAPI(string cache_name, string do_action, string id = "", Dictionary<string, object> parameters = null);
+        void reloadCache_ApiJS(string cache_name = null, string api_name = null);
+        bool existCache_ApiJS(string cache_name, string api_name);
+        bool existCache_Data(string cache_name);
     }
 
     public class clsCache : ICache
@@ -1326,63 +1326,30 @@ namespace test
 
         #endregion
 
+        public bool existCache_Data(string cache_name) { return m___check(cache_name); }
 
-        static readonly JsConsole m_console;
-        static readonly V8ScriptEngine m_engine;
-        static clsCache()
+        static ConcurrentDictionary<string, string> m_storeApiJS = new ConcurrentDictionary<string, string>() { };
+        public void reloadCache_ApiJS(string cache_name = null, string api_name = null)
         {
-            m_console = new JsConsole();
-            m_engine = new V8ScriptEngine();
-            m_engine.AddHostType("Action", typeof(Action));
-            m_engine.AddHostObject("console", m_console);
-        }
-
-        public void Reload()
-        {
-            string dir = Path.Combine(_CONFIG.PATH_ROOT, "_cache");
-        }
-
-        public bool Exist(string cache_name) { return m___check(cache_name); }
-
-        public oResult ExecuteAPI(string cache_name, string do_action, string id = "", Dictionary<string, object> parameters = null)
-        {
-            oResult r = new oResult() { ok = false };
-            string file = Path.Combine(_CONFIG.PATH_ROOT, "_api\\" + cache_name + "___" + do_action + ".js");
-            
-            if (File.Exists(file) == false) {
-                r.error = "ERROR[clsCache.ExecuteAPI] Cannot found file: " + file;
-                return r;
-            }
-
-            try
-            {
-                string script = "";
-                object v = m_engine.Evaluate(script);
-                if (v is Microsoft.ClearScript.Undefined)
-                {
-                    r.error = "ERROR[clsCache.ExecuteAPI] The script _api/" + cache_name + "___" + do_action + ".js return is Undefined";
+            string dir = Path.Combine(_CONFIG.PATH_ROOT, "_api");
+            if (Directory.Exists(dir)) {
+                var fs = Directory.GetFiles(dir, "*.js");
+                foreach (var f in fs) {
+                    string file_name = Path.GetFileName(f);
+                    file_name = file_name.Substring(0, file_name.Length - 3).ToLower();
+                    if (file_name.Contains("___")) 
+                        m_storeApiJS.TryAdd(file_name, File.ReadAllText(f));
                 }
-                else r = (oResult)v;
             }
-            catch (Exception e)
-            {
-                r.error = "ERROR[clsCache.ExecuteAPI] " + e.Message;
-            }
-            return r;
         }
 
-        public static void _init()
+        bool existCache_ApiJS(string cache_name, string api_name)
         {
-            //api_reload();
-            //api_global_reload();
+            string file = Path.Combine(_CONFIG.PATH_ROOT, "_api\\" + cache_name + "___" + api_name + ".js");
+            return File.Exists(file);
         }
+
+
     }
 
-    public class JsConsole
-    {
-        public void log(string s)
-        {
-            Console.WriteLine(s);
-        }
-    }
 }

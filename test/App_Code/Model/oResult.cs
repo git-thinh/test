@@ -16,6 +16,7 @@ namespace test
     {
         public bool ok { set; get; }
         public object data { set; get; }
+        public Dictionary<string, object> input { set; get; }
         public string name { set; get; }
         public string error { set; get; }
         public Dictionary<string, object> request { set; get; }

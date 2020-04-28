@@ -1,6 +1,11 @@
 ﻿using Newtonsoft.Json;
+using Quartz;
+using Quartz.Impl;
+using Quartz.Impl.Matchers;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -11,11 +16,135 @@ namespace test
     {
         static ICache m_cache;
         static IApi m_api;
+
+        #region [ JOB ]
+
+        static IScheduler m_scheduler;
+        static ConcurrentDictionary<string, IJobDetail> m_job = new ConcurrentDictionary<string, IJobDetail>();
+        static ConcurrentDictionary<string, ITrigger> m_trigger = new ConcurrentDictionary<string, ITrigger>();
+
+        static void _init_job()
+        {
+            NameValueCollection configuration = new NameValueCollection
+            {
+                { "quartz.jobStore.type", "Quartz.Simpl.RAMJobStore, Quartz" },
+                { "quartz.threadPool.threadCount", "3" },
+                { "quartz.serializer.type", "binary" }
+            };
+            ISchedulerFactory factory = new StdSchedulerFactory(configuration);
+            m_scheduler = factory.GetScheduler().GetAwaiter().GetResult();
+            //m_scheduler = StdSchedulerFactory.GetDefaultScheduler().GetAwaiter().GetResult();
+            m_scheduler.ListenerManager.AddJobListener(new JobListener());
+            m_scheduler.Start().Wait();
+            m_scheduler.Context.Put("ILOG___", new LogRedis());
+            m_scheduler.Context.Put("SCOPE_NAME___", "CKV_IIS");
+        }
+
+        public void clearAllJobs() {
+            m_scheduler.Shutdown();
+            m_scheduler.Start();
+            m_job.Clear();
+            m_trigger.Clear();
+        }
+
+        public static string[] list_jobs() {
+            var a = m_scheduler.GetJobKeys(GroupMatcher<JobKey>.AnyGroup())
+                .GetAwaiter().GetResult().Select(x=>x.Name).ToArray();
+            return a;
+        }
+
+        public static void resume_job(string job_name)
+        {
+            if (m_scheduler.CheckExists(new JobKey(job_name)).GetAwaiter().GetResult())
+                m_scheduler.ResumeJob(new JobKey(job_name)).GetAwaiter().GetResult();
+        }
+
+        public static void pause_job(string job_name)
+        {
+            if (m_scheduler.CheckExists(new JobKey(job_name)).GetAwaiter().GetResult())
+                m_scheduler.PauseJob(new JobKey(job_name)).GetAwaiter().GetResult();
+        }
+
+        public static bool remove_job(string job_name)
+        {
+            if (m_scheduler.CheckExists(new JobKey(job_name)).GetAwaiter().GetResult())
+            {
+                //var ok = m_scheduler.Interrupt(new JobKey(job_name)).GetAwaiter().GetResult();
+                var ok = m_scheduler.DeleteJob(new JobKey(job_name)).GetAwaiter().GetResult();
+                if (ok)
+                {
+                    m_job.TryRemove(job_name, out IJobDetail j);
+                    m_trigger.TryRemove(job_name, out ITrigger t);
+                }
+                return ok;
+            }
+            return false;
+        }
+
+        public static bool exist_job(string job_name) { return m_job.ContainsKey(job_name); }
+
+        public static string create_job(JOB_TYPE type, string group_name, Dictionary<string, object> para = null, string schedule = null)
+        {
+            if (para == null) para = new Dictionary<string, object>() { };
+            group_name = group_name.ToLower();
+            string name = group_name + "." + DateTime.Now.ToString("yyMMdd-HHmmss-fff");
+            if (!string.IsNullOrEmpty(schedule)) name += "." + schedule;
+
+            JobDataMap m = new JobDataMap();
+            m.Put("ID___", name);
+            m.Put("SCHEDULE___", schedule);
+            m.Put("TYPE___", type);
+            m.Put("CURRENT_ID___", 0);
+            m.Put("COUNTER___", new ConcurrentDictionary<long, bool>());
+            m.Put("PARA___", para);
+
+            JobBuilder job = null;
+            TriggerBuilder trigger = null;
+
+            switch (type)
+            {
+                case JOB_TYPE.CRAWLER_NET:
+                case JOB_TYPE.CRAWLER_CURL:
+                    job = JobBuilder.Create<JobCrawler>();
+                    break;
+                case JOB_TYPE.API_JS:
+                    job = JobBuilder.Create<JobApiJS>();
+                    break;
+            }
+
+            if (job != null)
+            {
+                job = job.WithIdentity(name, group_name).UsingJobData(m);
+                trigger = TriggerBuilder.Create();
+
+                if (!string.IsNullOrEmpty(schedule))
+                    trigger = trigger.WithSchedule(CronScheduleBuilder.CronSchedule(schedule));
+                trigger = trigger.StartNow();
+
+                var j = job.Build();
+                var t = trigger.Build();
+
+                m_scheduler.ScheduleJob(j, t);
+
+                m_job.TryAdd(name, j);
+                m_trigger.TryAdd(name, t);
+
+                m_scheduler.ScheduleJob(j, t).Wait();
+                return name;
+            }
+
+            return string.Empty;
+        }
+
+        #endregion
+
         protected void Application_Start(object sender, EventArgs e)
         {
+            _init_job();
             _CONFIG._init();
             m_cache = new clsCache();
             m_api = new clsApi(m_cache);
+            clsEngineJS._init(m_api);
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
@@ -29,11 +158,11 @@ namespace test
             string domain = uri.Host;
             if (domain == "localhost" || domain == "127.0.0.1") domain = _CONFIG.DOMAIN_LOCALHOST;
 
-            //[1] api/{cache_name}/{do_action}/{id}
+            //[1] api/{cache_name}/{api_name}/{id}
             if (a[0] == "api" && a.Length > 2)
             {
                 Response.ContentType = "application/json";
-                if (m_api.cache_exist(a[1]))
+                if (m_cache.existCache_ApiJS(a[1], a[2]))
                 {
                     Response.Write(JsonConvert.SerializeObject(oResult.Error("Cannot found cache name: " + a[1])));
                     Response.End();
@@ -43,7 +172,7 @@ namespace test
                 oResult rv = null;
                 oResult rp = get_api_parameters();
                 if (rp.ok)
-                    rv = m_api.execute(a[1], a[2], string.Empty, (Dictionary<string, object>)rp.data);
+                    rv = clsEngineJS.Execute(a[1] + "___" + a[2], (Dictionary<string, object>)rp.data, null);
                 else
                     rv = rp;
 
@@ -74,12 +203,13 @@ namespace test
             }
             else
             {
-                if (isHome) {
+                if (isHome)
+                {
                     Response.ContentType = contentType;
                     Response.Write("<h1>Cannot found page " + domain + "</h1>");
                 }
                 else
-                Response.StatusCode = 404;
+                    Response.StatusCode = 404;
             }
 
             Response.End();
