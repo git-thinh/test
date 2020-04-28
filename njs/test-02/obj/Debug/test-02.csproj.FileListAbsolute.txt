@@ -1,7 +1,0 @@
-C:\test\njs\test-02\bin\test-02.dll.config
-C:\test\njs\test-02\bin\test-02.dll
-C:\test\njs\test-02\bin\test-02.pdb
-C:\test\njs\test-02\obj\Debug\test-02.csproj.CoreCompileInputs.cache
-C:\test\njs\test-02\obj\Debug\test-02.dll
-C:\test\njs\test-02\obj\Debug\test-02.pdb
-C:\test\njs\test-02\obj\Debug\test-02.csprojAssemblyReference.cache

@@ -3,3 +3,7 @@
 /test/bin/roslyn
 /njs/test-soket.io/node_modules
 /njs/test-soket.io/iisnode
+/njs/test-soket.io/bin
+/njs/test-soket.io/obj
+/njs/test-02/bin
+/njs/test-02/obj
