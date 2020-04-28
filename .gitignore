@@ -7,3 +7,7 @@
 /njs/test-soket.io/obj
 /njs/test-02/bin
 /njs/test-02/obj
+/njs/test-puppeteer/bin
+/njs/test-puppeteer/node_modules
+/njs/test-puppeteer/obj
+/njs/test-puppeteer/iisnode

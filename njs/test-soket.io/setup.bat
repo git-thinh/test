@@ -1,0 +1,1 @@
+%systemroot%\system32\inetsrv\appcmd.exe add app /site.name:"Default Web Site" /path:/dir_name_xxx /physicalPath:%~dp0 /applicationPool:DefaultAppPool

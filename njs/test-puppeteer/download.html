@@ -1,0 +1,31 @@
+<html>
+<body>
+    <a href="/index.html" target="_blank">Main</a><br />
+    <h1>download.html</h1>
+    <hr />
+    <input type="text" id="txt_url" value="https://www.google.com/"/>
+    <button onclick="___download()">Download</button>
+    <hr />
+    <div id="data"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+
+        function ___download() {
+            var url = document.getElementById('txt_url').value;
+            fetch('/njs/api/download?url=' + url).then(r => r.text()).then(s => {
+                console.log(url);
+                console.log(s);
+                document.getElementById('data').innerHTML = s.split('^').join('<br>');
+            }).catch(err => {
+                console.log('????=', err);
+            });
+        }
+
+        const socket = io.connect('http://' + location.host);
+        socket.on('messages', (data) => {
+            console.log(data);
+            document.getElementById('data').innerHTML = JSON.stringify(data) + '<br>' + document.getElementById('data').innerHTML;
+        });
+    </script>
+</body>
+</html>
