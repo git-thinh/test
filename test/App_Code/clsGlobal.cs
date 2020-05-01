@@ -73,8 +73,10 @@ namespace test
                 var ok = m_scheduler.DeleteJob(new JobKey(job_name)).GetAwaiter().GetResult();
                 if (ok)
                 {
-                    m_job.TryRemove(job_name, out IJobDetail j);
-                    m_trigger.TryRemove(job_name, out ITrigger t);
+                    IJobDetail j;
+                    ITrigger t;
+                    m_job.TryRemove(job_name, out j);
+                    m_trigger.TryRemove(job_name, out t);
                 }
                 return ok;
             }

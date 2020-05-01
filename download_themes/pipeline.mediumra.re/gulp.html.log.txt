@@ -1,0 +1,11 @@
+gulp.html -> https://pipeline.mediumra.re/gulp.html
+
+text/html -> https://pipeline.mediumra.re/gulp.html: gulp.html | D:\test\download_themes\pipeline.mediumra.re\gulp.html
+text/css -> https://fonts.googleapis.com/css?family=Roboto: css | D:\test\download_themes\pipeline.mediumra.re\css.css
+ -> https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2: KFOmCnqEu92Fr1Mu4mxK.woff2 | D:\test\download_themes\pipeline.mediumra.re\s\roboto\v20\KFOmCnqEu92Fr1Mu4mxK.woff2
+font/woff2 -> https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2: KFOmCnqEu92Fr1Mu4mxK.woff2 | D:\test\download_themes\pipeline.mediumra.re\s\roboto\v20\KFOmCnqEu92Fr1Mu4mxK.woff2
+
+--------------------
+ERROR:
+
+[DONE]

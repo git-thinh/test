@@ -1,0 +1,59 @@
+components-pipeline.html -> https://pipeline.mediumra.re/components-pipeline.html
+
+text/html -> https://pipeline.mediumra.re/components-pipeline.html: components-pipeline.html | D:\test\download_themes\pipeline.mediumra.re\components-pipeline.html
+text/css -> https://pipeline.mediumra.re/assets/css/theme.css: theme.css | D:\test\download_themes\pipeline.mediumra.re\assets\css\theme.css
+image/svg+xml -> https://pipeline.mediumra.re/assets/img/logo.svg: logo.svg | D:\test\download_themes\pipeline.mediumra.re\assets\img\logo.svg
+image/jpeg -> https://pipeline.mediumra.re/assets/img/avatar-male-4.jpg: avatar-male-4.jpg | D:\test\download_themes\pipeline.mediumra.re\assets\img\avatar-male-4.jpg
+image/svg+xml -> https://pipeline.mediumra.re/assets/img/logo-color.svg: logo-color.svg | D:\test\download_themes\pipeline.mediumra.re\assets\img\logo-color.svg
+image/png -> https://pipeline.mediumra.re/assets/img/components/activity.png: activity.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\activity.png
+text/css -> https://fonts.googleapis.com/icon?family=Material+Icons: icon | D:\test\download_themes\pipeline.mediumra.re\icon.css
+image/png -> https://pipeline.mediumra.re/assets/img/components/avatar.png: avatar.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\avatar.png
+text/css -> https://fonts.googleapis.com/css?family=Gothic+A1: css | D:\test\download_themes\pipeline.mediumra.re\css.css
+ -> https://fonts.gstatic.com/s/materialicons/v50/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2: flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2 | D:\test\download_themes\pipeline.mediumra.re\s\materialicons\v50\flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2
+ -> https://pipeline.mediumra.re/assets/fonts/Inter-UI-Regular.woff2: Inter-UI-Regular.woff2 | D:\test\download_themes\pipeline.mediumra.re\assets\fonts\Inter-UI-Regular.woff2
+ -> https://pipeline.mediumra.re/assets/fonts/Inter-UI-Medium.woff2: Inter-UI-Medium.woff2 | D:\test\download_themes\pipeline.mediumra.re\assets\fonts\Inter-UI-Medium.woff2
+ -> https://pipeline.mediumra.re/assets/fonts/Inter-UI-Bold.woff2: Inter-UI-Bold.woff2 | D:\test\download_themes\pipeline.mediumra.re\assets\fonts\Inter-UI-Bold.woff2
+image/png -> https://pipeline.mediumra.re/assets/img/components/avatar-list.png: avatar-list.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\avatar-list.png
+image/png -> https://pipeline.mediumra.re/assets/img/components/checklist.png: checklist.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\checklist.png
+image/png -> https://pipeline.mediumra.re/assets/img/components/chat-module.png: chat-module.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\chat-module.png
+image/png -> https://pipeline.mediumra.re/assets/img/components/chat-item.png: chat-item.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\chat-item.png
+image/png -> https://pipeline.mediumra.re/assets/img/components/card-list.png: card-list.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\card-list.png
+image/png -> https://pipeline.mediumra.re/assets/img/components/card-task.png: card-task.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\card-task.png
+image/png -> https://pipeline.mediumra.re/assets/img/components/card-team.png: card-team.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\card-team.png
+image/png -> https://pipeline.mediumra.re/assets/img/components/date-picker.png: date-picker.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\date-picker.png
+image/jpeg -> https://pipeline.mediumra.re/assets/img/avatar-male-3.jpg: avatar-male-3.jpg | D:\test\download_themes\pipeline.mediumra.re\assets\img\avatar-male-3.jpg
+image/jpeg -> https://pipeline.mediumra.re/assets/img/avatar-female-1.jpg: avatar-female-1.jpg | D:\test\download_themes\pipeline.mediumra.re\assets\img\avatar-female-1.jpg
+image/jpeg -> https://pipeline.mediumra.re/assets/img/avatar-female-4.jpg: avatar-female-4.jpg | D:\test\download_themes\pipeline.mediumra.re\assets\img\avatar-female-4.jpg
+image/jpeg -> https://pipeline.mediumra.re/assets/img/avatar-female-2.jpg: avatar-female-2.jpg | D:\test\download_themes\pipeline.mediumra.re\assets\img\avatar-female-2.jpg
+image/png -> https://pipeline.mediumra.re/assets/img/components/files.png: files.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\files.png
+image/jpeg -> https://pipeline.mediumra.re/assets/img/avatar-male-2.jpg: avatar-male-2.jpg | D:\test\download_themes\pipeline.mediumra.re\assets\img\avatar-male-2.jpg
+image/jpeg -> https://pipeline.mediumra.re/assets/img/avatar-male-1.jpg: avatar-male-1.jpg | D:\test\download_themes\pipeline.mediumra.re\assets\img\avatar-male-1.jpg
+image/jpeg -> https://pipeline.mediumra.re/assets/img/avatar-female-3.jpg: avatar-female-3.jpg | D:\test\download_themes\pipeline.mediumra.re\assets\img\avatar-female-3.jpg
+image/svg+xml -> https://pipeline.mediumra.re/assets/img/loader.svg: loader.svg | D:\test\download_themes\pipeline.mediumra.re\assets\img\loader.svg
+application/javascript -> https://www.googletagmanager.com/gtag/js?id=UA-52115242-14: js | D:\test\download_themes\pipeline.mediumra.re\gtag\js.js
+image/png -> https://pipeline.mediumra.re/assets/img/components/card-kanban.png: card-kanban.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\card-kanban.png
+image/png -> https://pipeline.mediumra.re/assets/img/components/card-note.png: card-note.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\card-note.png
+image/png -> https://pipeline.mediumra.re/assets/img/components/card-project.png: card-project.png | D:\test\download_themes\pipeline.mediumra.re\assets\img\components\card-project.png
+text/javascript -> https://pipeline.mediumra.re/assets/js/autosize.min.js: autosize.min.js | D:\test\download_themes\pipeline.mediumra.re\assets\js\autosize.min.js
+text/javascript -> https://pipeline.mediumra.re/assets/js/popper.min.js: popper.min.js | D:\test\download_themes\pipeline.mediumra.re\assets\js\popper.min.js
+text/javascript -> https://pipeline.mediumra.re/assets/js/list.min.js: list.min.js | D:\test\download_themes\pipeline.mediumra.re\assets\js\list.min.js
+text/javascript -> https://pipeline.mediumra.re/assets/js/prism.js: prism.js | D:\test\download_themes\pipeline.mediumra.re\assets\js\prism.js
+text/javascript -> https://pipeline.mediumra.re/assets/js/theme.js: theme.js | D:\test\download_themes\pipeline.mediumra.re\assets\js\theme.js
+text/javascript -> https://pipeline.mediumra.re/assets/js/swap-animation.js: swap-animation.js | D:\test\download_themes\pipeline.mediumra.re\assets\js\swap-animation.js
+text/javascript -> https://pipeline.mediumra.re/assets/js/dropzone.min.js: dropzone.min.js | D:\test\download_themes\pipeline.mediumra.re\assets\js\dropzone.min.js
+text/javascript -> https://pipeline.mediumra.re/assets/js/bootstrap.js: bootstrap.js | D:\test\download_themes\pipeline.mediumra.re\assets\js\bootstrap.js
+text/javascript -> https://pipeline.mediumra.re/assets/js/flatpickr.min.js: flatpickr.min.js | D:\test\download_themes\pipeline.mediumra.re\assets\js\flatpickr.min.js
+text/javascript -> https://pipeline.mediumra.re/assets/js/jquery.min.js: jquery.min.js | D:\test\download_themes\pipeline.mediumra.re\assets\js\jquery.min.js
+text/javascript -> https://pipeline.mediumra.re/assets/js/draggable.bundle.legacy.js: draggable.bundle.legacy.js | D:\test\download_themes\pipeline.mediumra.re\assets\js\draggable.bundle.legacy.js
+font/woff2 -> https://fonts.gstatic.com/s/materialicons/v50/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2: flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2 | D:\test\download_themes\pipeline.mediumra.re\s\materialicons\v50\flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2
+font/woff2 -> https://pipeline.mediumra.re/assets/fonts/Inter-UI-Medium.woff2: Inter-UI-Medium.woff2 | D:\test\download_themes\pipeline.mediumra.re\assets\fonts\Inter-UI-Medium.woff2
+font/woff2 -> https://pipeline.mediumra.re/assets/fonts/Inter-UI-Regular.woff2: Inter-UI-Regular.woff2 | D:\test\download_themes\pipeline.mediumra.re\assets\fonts\Inter-UI-Regular.woff2
+text/javascript -> https://www.google-analytics.com/analytics.js: analytics.js | D:\test\download_themes\pipeline.mediumra.re\analytics.js
+font/woff2 -> https://pipeline.mediumra.re/assets/fonts/Inter-UI-Bold.woff2: Inter-UI-Bold.woff2 | D:\test\download_themes\pipeline.mediumra.re\assets\fonts\Inter-UI-Bold.woff2
+image/gif -> https://media.giphy.com/media/aTeHNLRLrwwwM/giphy.gif: giphy.gif | D:\test\download_themes\pipeline.mediumra.re\media\aTeHNLRLrwwwM\giphy.gif
+image/gif -> https://www.google-analytics.com/r/collect?v=1&_v=j81&a=1469988542&t=pageview&_s=1&dl=https%3A%2F%2Fpipeline.mediumra.re%2Fcomponents-pipeline.html&ul=en-us&de=UTF-8&dt=Pipeline%20Project%20Management%20Bootstrap%20Theme&sd=0-bit&sr=1366x3500&vp=1366x3500&je=0&_u=IEBAAUAB~&jid=1270586909&gjid=2089781184&cid=275618351.1588336383&tid=UA-52115242-14&_gid=412487219.1588336383&_r=1&gtm=2ou4m0&z=752399427: collect | D:\test\download_themes\pipeline.mediumra.re\r\collect.gif
+
+--------------------
+ERROR:
+
+[DONE]

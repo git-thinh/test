@@ -13,6 +13,33 @@ using System.Windows.Forms;
 
 namespace CefSharp.MinimalExample.OffScreen
 {
+    public class Utility {
+        public static string build_path_folder_save(Uri uri)
+        {
+            //var uri = new Uri(URL);
+            //string PATH_STORE = DateTime.Now.ToString("yyMMdd-HHmmss");
+            string PATH_STORE = uri.Host.Replace(':', '_');
+            //if (args.Length > 1) PATH_STORE = args[1];
+            if (PATH_STORE.Contains(":") == false) PATH_STORE = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PATH_STORE);
+            if (Directory.Exists(PATH_STORE) == false) Directory.CreateDirectory(PATH_STORE);
+            return PATH_STORE;
+        }
+
+        public static string build_path_file_save(Uri uri)
+        {
+            string PATH_STORE = build_path_folder_save(uri);
+            string path = uri.AbsolutePath == "/" ? "index.html" : uri.AbsolutePath.Replace("/", "\\");
+            if (path[0] == '\\') path = path.Substring(1);
+            string file = Path.Combine(PATH_STORE, path);
+            string[] a = file.Split('\\');
+            string dir = string.Join("\\", a.Where((x, i) => i < a.Length - 1));
+            if (Directory.Exists(dir) == false) Directory.CreateDirectory(dir);
+            //Console.WriteLine(dir);
+            if (file.EndsWith("\\index.html")) file = file.Substring(0, file.Length - "\\index.html".Length) + "\\_index.html";
+            return file;
+        }
+    }
+
     public class CefBasicRequestHandler : RequestHandler
     {
         readonly oSite m_site;
@@ -47,19 +74,10 @@ namespace CefSharp.MinimalExample.OffScreen
         {
             string url = request.Url;
             string url_file = url.Split('?')[0];
-
             var uri = new Uri(url);
             string type = response.MimeType;
 
-            string path = uri.AbsolutePath == "/" ? "index.html" : uri.AbsolutePath.Replace("/", "\\");
-            if (path[0] == '\\') path = path.Substring(1);
-
-            string file = Path.Combine(m_site.PATH_STORE, path);
-
-            string[] a = file.Split('\\');
-            string dir = string.Join("\\", a.Where((x, i) => i < a.Length - 1));
-            if (Directory.Exists(dir) == false) Directory.CreateDirectory(dir);
-            //Console.WriteLine(dir);
+            string file = Utility.build_path_file_save(uri);
 
             byte[] buf = null;
             if (memoryStream != null) buf = memoryStream.ToArray();
@@ -73,9 +91,7 @@ namespace CefSharp.MinimalExample.OffScreen
                     if (buf != null)
                     {
                         ok = true;
-                        if (file.EndsWith("index.html"))
-                            file = file.Substring("index.html".Length) + "_index.html";
-                        File.WriteAllText(file, Encoding.UTF8.GetString(buf));
+                        File.WriteAllText(file, Encoding.UTF8.GetString(buf).Replace("index.html", "_index.html"));
                     }
                     break;
                 case "text/css":
@@ -201,23 +217,35 @@ namespace CefSharp.MinimalExample.OffScreen
                 };
 
             string URL = args[0];
-            var uri = new Uri(URL);
+            Uri uri = new Uri(URL);
+            string PATH_STORE = Utility.build_path_folder_save(uri);
+            string file = Utility.build_path_file_save(uri);
+            Console.Title = URL + " -> " + file;
 
+            if (File.Exists(file))
+            {
+                string f_links = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, uri.Host.Replace(':', '_') + ".txt");
+                if (File.Exists(f_links))
+                {
+                    var lines = File.ReadAllLines(f_links).Where(o => o.Trim().Length > 0).ToList();
+                    if (lines.Count > 0)
+                    {
+                        int index = lines.FindIndex(x => x == URL);
+                        if (index == -1)
+                            URL_NEXT = lines[0];
+                        else if (index < lines.Count - 1) 
+                            URL_NEXT = lines[index + 1];
 
-            //string PATH_STORE = DateTime.Now.ToString("yyMMdd-HHmmss");
-            string PATH_STORE = uri.Host.Replace(':', '_');
+                        if (!string.IsNullOrEmpty(URL_NEXT))
+                            return Main(new string[] { URL_NEXT });
+                    }
+                }
+            }
 
-            if (args.Length > 1) PATH_STORE = args[1];
-            if (PATH_STORE.Contains(":") == false) PATH_STORE = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PATH_STORE);
-            if (Directory.Exists(PATH_STORE) == false) Directory.CreateDirectory(PATH_STORE);
-
-            //Console.WriteLine(URL + " -> " + PATH_STORE + "\r\n");
-            Console.Title = URL + " -> " + PATH_STORE;
 
             SITE.NAME = uri.AbsolutePath.Split('?')[0].Replace('/', '_').Trim().ToLower();
             if (SITE.NAME[0] == '_') SITE.NAME = SITE.NAME.Substring(1);
             if (SITE.NAME.Length == 0) SITE.NAME = "index.html";
-
             SITE.URL = uri;
             SITE.PATH_STORE = PATH_STORE;
 
@@ -241,7 +269,6 @@ namespace CefSharp.MinimalExample.OffScreen
                 Process.Start(Application.ExecutablePath, URL_NEXT);
             }
 
-            // Closes the current process
             Environment.Exit(0);
             return 0;
         }
@@ -292,7 +319,9 @@ namespace CefSharp.MinimalExample.OffScreen
                         //    UseShellExecute = true
                         //});
 
-                        string log = Path.Combine(SITE.PATH_STORE, SITE.NAME + ".log.txt");
+                        string path = Path.Combine(SITE.PATH_STORE, "_log");
+                        if (Directory.Exists(path) == false) Directory.CreateDirectory(path);
+                        string log = Path.Combine(SITE.PATH_STORE, "log\\" + SITE.NAME + ".txt");
                         string s = SITE.LOG_OK.ToString() +
                             Environment.NewLine +
                             "--------------------" +
@@ -319,8 +348,8 @@ namespace CefSharp.MinimalExample.OffScreen
                             var response = y.Result;
                             if (response.Success && response.Result != null)
                             {
-                                var links = response.Result.ToString();
-                                string[] a = links.Split('^')
+                                var links = response.Result.ToString()
+                                .Split('^')
                                 .Select(o => o.Trim())
                                 .Where(o => o.Length > 0 && o[0] != '#')
                                 .Select(o => o.Trim().Split('?')[0].Split('#')[0])
@@ -328,39 +357,22 @@ namespace CefSharp.MinimalExample.OffScreen
                                 .Select(o => o[0] == '/' ? o.Substring(1) : o)
                                 .Distinct()
                                 .Select(o => o.StartsWith("http") ? o : SITE.URL.Scheme + "://" + SITE.URL.Host + "/" + o)
+                                .Select(o => o.Replace("/../", "/"))
                                 .Where(o => o != SITE.URL.ToString())
-                                .ToArray();
+                                .Where(o => o.Contains("/" + SITE.URL.Host + "/"))
+                                .ToList();
 
-                                if (a.Length > 0)
-                                {
-                                    string st;
-                                    string file_urls = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, SITE.URL.Host.Replace(':', '_') + ".txt");
-                                    if (File.Exists(file_urls) == false)
-                                    {
-                                        st = "OK " + SITE.URL.ToString() + "\r\n-> " + string.Join("\r\n-> ", a);
-                                        if (a.Length > 0)
-                                            URL_NEXT = a[0];
-                                    }
-                                    else
-                                    {
-                                        var ls_url = File.ReadAllLines(file_urls)
-                                            .Where(o => o.Trim().Length > 0 && o != "-> " + SITE.URL.ToString())
-                                            .ToList();
+                                links.Insert(0, SITE.URL.ToString());
 
-                                        ls_url.Add("OK " + SITE.URL.ToString());
-                                        foreach (string url in a)
-                                            if (ls_url.FindIndex(o => o.EndsWith(url)) == -1)
-                                            {
-                                                if (string.IsNullOrEmpty(URL_NEXT))
-                                                    URL_NEXT = url;
-                                                ls_url.Add("\r\n-> " + url);
-                                            }
-                                        st = string.Join(string.Empty, ls_url.ToArray());
-                                    }
-                                    File.WriteAllText(file_urls, st);
-                                }
+                                string f_links = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, SITE.URL.Host.Replace(':', '_') + ".txt");
+                                if (File.Exists(f_links)) links.AddRange(File.ReadAllLines(f_links).Where(o => o.Trim().Length > 0));
+
+                                var a = links.Distinct().ToArray();
+                                File.WriteAllLines(f_links, a);
+
+                                if (a.Length > 1) 
+                                    URL_NEXT = a[1];
                             }
-
                         });
 
                         signal.Set();

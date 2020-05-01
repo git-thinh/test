@@ -13,12 +13,12 @@ namespace test
     {
         public string Name { get { return "clsJobListener"; } }
 
-        public Task JobExecutionVetoed(IJobExecutionContext context, CancellationToken cancellationToken = default)
+        public Task JobExecutionVetoed(IJobExecutionContext context, CancellationToken cancellationToken)
         {
             return Task.FromResult(false);
         }
 
-        public Task JobToBeExecuted(IJobExecutionContext context, CancellationToken cancellationToken = default)
+        public Task JobToBeExecuted(IJobExecutionContext context, CancellationToken cancellationToken)
         {
             JobDataMap dataMap = context.JobDetail.JobDataMap;
             if (dataMap.ContainsKey("CURRENT_ID___"))
@@ -35,7 +35,7 @@ namespace test
             return Task.FromResult(false);
         }
 
-        public Task JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException, CancellationToken cancellationToken = default)
+        public Task JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException, CancellationToken cancellationToken)
         {
             JobDataMap dataMap = context.JobDetail.JobDataMap;
             if (dataMap.ContainsKey("CURRENT_ID___"))

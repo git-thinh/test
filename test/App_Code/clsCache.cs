@@ -1343,13 +1343,10 @@ namespace test
             }
         }
 
-        bool existCache_ApiJS(string cache_name, string api_name)
+        public bool existCache_ApiJS(string cache_name, string api_name)
         {
             string file = Path.Combine(_CONFIG.PATH_ROOT, "_api\\" + cache_name + "___" + api_name + ".js");
             return File.Exists(file);
         }
-
-
     }
-
 }
