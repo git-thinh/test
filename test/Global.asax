@@ -1,1 +1,1 @@
-﻿<%@ Application Inherits="tests.clsGlobal" Language="C#" %>
+﻿<%@ Application Inherits="test.clsGlobal" Language="C#" %>

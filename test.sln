@@ -26,7 +26,26 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "njs", "njs\", "{3FA66390-16
 		SlnRelativePath = "njs\"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests", "tests\tests.csproj", "{3766F9A3-6998-4668-9D01-CB4989827070}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "dev.iot.vn", "test\_site\dev.iot.vn\", "{ED65ED93-A16B-4B09-AC43-64E897461831}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_49980"
+		Debug.AspNetCompiler.PhysicalPath = "test\_site\dev.iot.vn\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49980\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_49980"
+		Release.AspNetCompiler.PhysicalPath = "test\_site\dev.iot.vn\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49980\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "49980"
+		SlnRelativePath = "test\_site\dev.iot.vn\"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,14 +71,14 @@ Global
 		{3FA66390-1644-4216-9FAE-AA5464DD8280}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{3FA66390-1644-4216-9FAE-AA5464DD8280}.Release|x86.ActiveCfg = Debug|Any CPU
 		{3FA66390-1644-4216-9FAE-AA5464DD8280}.Release|x86.Build.0 = Debug|Any CPU
-		{3766F9A3-6998-4668-9D01-CB4989827070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3766F9A3-6998-4668-9D01-CB4989827070}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3766F9A3-6998-4668-9D01-CB4989827070}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{3766F9A3-6998-4668-9D01-CB4989827070}.Debug|x86.Build.0 = Debug|Any CPU
-		{3766F9A3-6998-4668-9D01-CB4989827070}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3766F9A3-6998-4668-9D01-CB4989827070}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3766F9A3-6998-4668-9D01-CB4989827070}.Release|x86.ActiveCfg = Release|Any CPU
-		{3766F9A3-6998-4668-9D01-CB4989827070}.Release|x86.Build.0 = Release|Any CPU
+		{ED65ED93-A16B-4B09-AC43-64E897461831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED65ED93-A16B-4B09-AC43-64E897461831}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED65ED93-A16B-4B09-AC43-64E897461831}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ED65ED93-A16B-4B09-AC43-64E897461831}.Debug|x86.Build.0 = Debug|Any CPU
+		{ED65ED93-A16B-4B09-AC43-64E897461831}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED65ED93-A16B-4B09-AC43-64E897461831}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{ED65ED93-A16B-4B09-AC43-64E897461831}.Release|x86.ActiveCfg = Debug|Any CPU
+		{ED65ED93-A16B-4B09-AC43-64E897461831}.Release|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
