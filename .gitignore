@@ -13,3 +13,12 @@
 /njs/test-puppeteer/iisnode
 /njs/headless-chrome-crawler/package-lock.json
 /njs/headless-chrome-crawler/node_modules
+/cef/console_cef_download_theme/bin
+/cef/console_cef_download_theme/obj
+/download_themes/GPUCache
+/download_themes/CefSharp.BrowserSubprocess.Core.pdb
+/download_themes/CefSharp.BrowserSubprocess.pdb
+/packages/cef.redist.x86.79.1.36
+/packages/CefSharp.Common.79.1.360
+/packages/CefSharp.OffScreen.79.1.360
+/packages/cef.redist.x64.79.1.36

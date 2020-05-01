@@ -33,3 +33,5 @@ socketio.iot.vn
 quangcao.iot.vn
 push.iot.vn
 baove.iot.vn
+cms.iot.vn
+landing.iot.vn

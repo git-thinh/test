@@ -1,0 +1,342 @@
+[0501/145714.910:INFO:CONSOLE(1)] "Uncaught TypeError: Cannot set property 'value' of null", source: about:blank (1)
+[0501/150421.230:INFO:CONSOLE(1)] "Uncaught TypeError: Cannot set property 'value' of null", source: about:blank (1)
+[0501/151933.202:VERBOSE1:pref_proxy_config_tracker_impl.cc(184)] 05A4CA58: set chrome proxy config service to 05A4CD00
+[0501/151933.211:VERBOSE1:webrtc_internals.cc(120)] Could not get the download directory.
+[0501/151933.239:VERBOSE1:pref_proxy_config_tracker_impl.cc(184)] 05ACEB38: set chrome proxy config service to 08C7AFD0
+[0501/151952.124:VERBOSE1:statistics_recorder.cc(409)] Collections of all histograms
+Histogram: ChildProcess.FieldTrials.CreateFromShmemSuccess recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.ANGLE.D3D11FeatureLevel recorded 1 samples, mean = 5.0 (flags = 0x1)
+0  ... 
+5  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+6  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.ANGLE.D3D11InitializeResult recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1  ... 
+
+Histogram: GPU.ANGLE.DisplayInitializeMS recorded 1 samples, mean = 28.0 (flags = 0x1)
+0   ... 
+24  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+29  ... 
+
+Histogram: GPU.ANGLE.SupportsDXGI1_2 recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.CollectContextGraphicsInfo recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: GPU.D3DShaderModel recorded 1 samples, mean = 5.0 (flags = 0x1)
+0  ... 
+5  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+6  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.DirectComposition.OverlaysSupported recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1  ... 
+
+Histogram: GPU.EGLDisplayType recorded 1 samples, mean = 4.0 (flags = 0x1)
+0  ... 
+4  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+5  ... 
+
+Histogram: GPU.GLImplementation recorded 1 samples, mean = 9.0 (flags = 0x1)
+0  ... 
+9  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+10 O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.GPUInitializationTime recorded 1 samples, mean = 114.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1000... 
+
+Histogram: GPU.GpuGeneration recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1  ... 
+
+Histogram: GPU.InitializeOneOffMediumTime recorded 1 samples, mean = 43.0 (flags = 0x1)
+0   ... 
+41  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+50  ... 
+
+Histogram: GPU.MaxMSAASampleCount recorded 1 samples (flags = 0x1)
+8  ------------------------------------------------------------------------O (1 = 100.0%)
+
+Histogram: GPU.Sandbox.InitializedSuccessfully recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1  ... 
+
+Histogram: GPU.WatchdogThread.Event recorded 2 samples, mean = 1.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 50.0%)
+1  O                                                                         (0 = 0.0%) {50.0%}
+2  ------------------------------------------------------------------------O (1 = 50.0%) {50.0%}
+3  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: LibraryLoader.LoadNativeLibraryWindows recorded 3 samples, mean = 0.3 (flags = 0x1)
+0  ------------------------------------------------------------------------O (2 = 66.7%)
+1  ------------------------------------O                                     (1 = 33.3%) {66.7%}
+2  ... 
+
+Histogram: ThreadPool.DetachDuration.ContentChild.Background recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.DetachDuration.ContentChild.Foreground recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumActiveWorkers.ContentChild.Background recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumActiveWorkers.ContentChild.Foreground recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumTasksBeforeDetach.ContentChild.Background recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumTasksBeforeDetach.ContentChild.Foreground recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumWorkers.ContentChild.Background recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumWorkers.ContentChild.Foreground recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: Windows.CreateThreadTime recorded 6 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (6 = 100.0%)
+1  ... 
+
+
+[0501/152036.449:VERBOSE1:pref_proxy_config_tracker_impl.cc(184)] 052E4D18: set chrome proxy config service to 052E4FC0
+[0501/152036.457:VERBOSE1:webrtc_internals.cc(120)] Could not get the download directory.
+[0501/152036.487:VERBOSE1:pref_proxy_config_tracker_impl.cc(184)] 0842E8C8: set chrome proxy config service to 0842EB70
+[0501/152041.467:VERBOSE1:statistics_recorder.cc(409)] Collections of all histograms
+Histogram: ChildProcess.FieldTrials.CreateFromShmemSuccess recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.ANGLE.D3D11FeatureLevel recorded 1 samples, mean = 5.0 (flags = 0x1)
+0  ... 
+5  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+6  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.ANGLE.D3D11InitializeResult recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1  ... 
+
+Histogram: GPU.ANGLE.DisplayInitializeMS recorded 1 samples, mean = 29.0 (flags = 0x1)
+0   ... 
+29  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+34  ... 
+
+Histogram: GPU.ANGLE.SupportsDXGI1_2 recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.CollectContextGraphicsInfo recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: GPU.D3DShaderModel recorded 1 samples, mean = 5.0 (flags = 0x1)
+0  ... 
+5  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+6  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.DirectComposition.OverlaysSupported recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1  ... 
+
+Histogram: GPU.EGLDisplayType recorded 1 samples, mean = 4.0 (flags = 0x1)
+0  ... 
+4  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+5  ... 
+
+Histogram: GPU.GLImplementation recorded 1 samples, mean = 9.0 (flags = 0x1)
+0  ... 
+9  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+10 O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.GPUInitializationTime recorded 1 samples, mean = 111.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1000... 
+
+Histogram: GPU.GpuGeneration recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1  ... 
+
+Histogram: GPU.InitializeOneOffMediumTime recorded 1 samples, mean = 42.0 (flags = 0x1)
+0   ... 
+41  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+50  ... 
+
+Histogram: GPU.MaxMSAASampleCount recorded 1 samples (flags = 0x1)
+8  ------------------------------------------------------------------------O (1 = 100.0%)
+
+Histogram: GPU.Sandbox.InitializedSuccessfully recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1  ... 
+
+Histogram: GPU.WatchdogThread.Event recorded 2 samples, mean = 1.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 50.0%)
+1  O                                                                         (0 = 0.0%) {50.0%}
+2  ------------------------------------------------------------------------O (1 = 50.0%) {50.0%}
+3  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: LibraryLoader.LoadNativeLibraryWindows recorded 3 samples, mean = 0.3 (flags = 0x1)
+0  ------------------------------------------------------------------------O (2 = 66.7%)
+1  ------------------------------------O                                     (1 = 33.3%) {66.7%}
+2  ... 
+
+Histogram: ThreadPool.DetachDuration.ContentChild.Background recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.DetachDuration.ContentChild.Foreground recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumActiveWorkers.ContentChild.Background recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumActiveWorkers.ContentChild.Foreground recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumTasksBeforeDetach.ContentChild.Background recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumTasksBeforeDetach.ContentChild.Foreground recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumWorkers.ContentChild.Background recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumWorkers.ContentChild.Foreground recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: Windows.CreateThreadTime recorded 6 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (6 = 100.0%)
+1  ... 
+
+
+[0501/152058.869:VERBOSE1:pref_proxy_config_tracker_impl.cc(184)] 05B1F598: set chrome proxy config service to 05B1F840
+[0501/152058.878:VERBOSE1:webrtc_internals.cc(120)] Could not get the download directory.
+[0501/152058.905:VERBOSE1:pref_proxy_config_tracker_impl.cc(184)] 05BA3080: set chrome proxy config service to 05BA3328
+[0501/152113.564:VERBOSE1:statistics_recorder.cc(409)] Collections of all histograms
+Histogram: ChildProcess.FieldTrials.CreateFromShmemSuccess recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.ANGLE.D3D11FeatureLevel recorded 1 samples, mean = 5.0 (flags = 0x1)
+0  ... 
+5  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+6  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.ANGLE.D3D11InitializeResult recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1  ... 
+
+Histogram: GPU.ANGLE.DisplayInitializeMS recorded 1 samples, mean = 30.0 (flags = 0x1)
+0   ... 
+29  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+34  ... 
+
+Histogram: GPU.ANGLE.SupportsDXGI1_2 recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.CollectContextGraphicsInfo recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: GPU.D3DShaderModel recorded 1 samples, mean = 5.0 (flags = 0x1)
+0  ... 
+5  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+6  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.DirectComposition.OverlaysSupported recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1  ... 
+
+Histogram: GPU.EGLDisplayType recorded 1 samples, mean = 4.0 (flags = 0x1)
+0  ... 
+4  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+5  ... 
+
+Histogram: GPU.GLImplementation recorded 1 samples, mean = 9.0 (flags = 0x1)
+0  ... 
+9  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+10 O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.GPUInitializationTime recorded 1 samples, mean = 105.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1000... 
+
+Histogram: GPU.GpuGeneration recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1  ... 
+
+Histogram: GPU.InitializeOneOffMediumTime recorded 1 samples, mean = 44.0 (flags = 0x1)
+0   ... 
+41  ------------------------------------------------------------------------O (1 = 100.0%) {0.0%}
+50  ... 
+
+Histogram: GPU.MaxMSAASampleCount recorded 1 samples (flags = 0x1)
+8  ------------------------------------------------------------------------O (1 = 100.0%)
+
+Histogram: GPU.Sandbox.InitializedSuccessfully recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 100.0%)
+1  ... 
+
+Histogram: GPU.WatchdogThread.Event recorded 2 samples, mean = 1.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (1 = 50.0%)
+1  O                                                                         (0 = 0.0%) {50.0%}
+2  ------------------------------------------------------------------------O (1 = 50.0%) {50.0%}
+3  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: LibraryLoader.LoadNativeLibraryWindows recorded 3 samples, mean = 0.3 (flags = 0x1)
+0  ------------------------------------------------------------------------O (2 = 66.7%)
+1  ------------------------------------O                                     (1 = 33.3%) {66.7%}
+2  ... 
+
+Histogram: ThreadPool.DetachDuration.ContentChild.Background recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.DetachDuration.ContentChild.Foreground recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumActiveWorkers.ContentChild.Background recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumActiveWorkers.ContentChild.Foreground recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumTasksBeforeDetach.ContentChild.Background recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumTasksBeforeDetach.ContentChild.Foreground recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumWorkers.ContentChild.Background recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumWorkers.ContentChild.Foreground recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: Windows.CreateThreadTime recorded 6 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (6 = 100.0%)
+1  ... 
+
+
+[0501/153015.445:INFO:CONSOLE(1)] "Uncaught TypeError: Cannot set property 'value' of null", source: about:blank (1)
+[0501/160144.349:WARNING:gpu_process_host.cc(1213)] The GPU process has crashed 1 time(s)
+[0501/160144.546:WARNING:gpu_process_host.cc(982)] Reinitialized the GPU process after a crash. The reported initialization time was 124 ms
+[0501/161509.138:INFO:CONSOLE(1)] "Uncaught TypeError: Cannot set property 'value' of null", source: about:blank (1)

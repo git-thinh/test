@@ -26,20 +26,40 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "njs", "njs\", "{3FA66390-16
 		SlnRelativePath = "njs\"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "console_cef_download_theme", "cef\console_cef_download_theme\console_cef_download_theme.csproj", "{D161CEB8-C11D-438B-9BC7-F42A78D042BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C0BA30CC-C2F7-447E-9C8A-E95A667D8E49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C0BA30CC-C2F7-447E-9C8A-E95A667D8E49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0BA30CC-C2F7-447E-9C8A-E95A667D8E49}.Debug|x86.ActiveCfg = Debug|x86
+		{C0BA30CC-C2F7-447E-9C8A-E95A667D8E49}.Debug|x86.Build.0 = Debug|x86
 		{C0BA30CC-C2F7-447E-9C8A-E95A667D8E49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0BA30CC-C2F7-447E-9C8A-E95A667D8E49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0BA30CC-C2F7-447E-9C8A-E95A667D8E49}.Release|x86.ActiveCfg = Release|x86
+		{C0BA30CC-C2F7-447E-9C8A-E95A667D8E49}.Release|x86.Build.0 = Release|x86
 		{3FA66390-1644-4216-9FAE-AA5464DD8280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3FA66390-1644-4216-9FAE-AA5464DD8280}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FA66390-1644-4216-9FAE-AA5464DD8280}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3FA66390-1644-4216-9FAE-AA5464DD8280}.Debug|x86.Build.0 = Debug|Any CPU
 		{3FA66390-1644-4216-9FAE-AA5464DD8280}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{3FA66390-1644-4216-9FAE-AA5464DD8280}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{3FA66390-1644-4216-9FAE-AA5464DD8280}.Release|x86.ActiveCfg = Debug|Any CPU
+		{3FA66390-1644-4216-9FAE-AA5464DD8280}.Release|x86.Build.0 = Debug|Any CPU
+		{D161CEB8-C11D-438B-9BC7-F42A78D042BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D161CEB8-C11D-438B-9BC7-F42A78D042BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D161CEB8-C11D-438B-9BC7-F42A78D042BF}.Debug|x86.ActiveCfg = Debug|x86
+		{D161CEB8-C11D-438B-9BC7-F42A78D042BF}.Debug|x86.Build.0 = Debug|x86
+		{D161CEB8-C11D-438B-9BC7-F42A78D042BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D161CEB8-C11D-438B-9BC7-F42A78D042BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D161CEB8-C11D-438B-9BC7-F42A78D042BF}.Release|x86.ActiveCfg = Release|x86
+		{D161CEB8-C11D-438B-9BC7-F42A78D042BF}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
