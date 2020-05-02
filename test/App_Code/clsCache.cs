@@ -4,6 +4,8 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
+using System.Text.RegularExpressions;
 
 namespace test
 {
@@ -12,6 +14,9 @@ namespace test
         void reloadCache_ApiJS(string cache_name = null, string api_name = null);
         bool existCache_ApiJS(string cache_name, string api_name);
         bool existCache_Data(string cache_name);
+
+        void view___reload();
+        string view___build(string html, Uri uri);
     }
 
     public class clsCache : ICache
@@ -1325,6 +1330,45 @@ namespace test
         }
 
         #endregion
+
+        static ConcurrentDictionary<string, string> m_views = new ConcurrentDictionary<string, string>();
+        public void view___reload() {
+            
+            string sites = Path.Combine(_CONFIG.PATH_ROOT, "_site");
+            if (Directory.Exists(sites)) {
+                foreach (string site in Directory.GetDirectories(sites)) {
+                    string views = Path.Combine(site, "_view");
+                    string domain = Path.GetFileName(site);
+                    if (Directory.Exists(views)) {
+                        string[] fs = Directory.GetFiles(views, "*.html");
+                        foreach (string fi in fs)
+                        {
+                            string file_name = Path.GetFileName(fi);
+                            file_name = file_name.Substring(0, file_name.Length - 5);
+                            string key = domain + "/" + file_name;
+                            m_views.TryAdd(key.ToLower(), File.ReadAllText(fi));
+                        }
+                    }
+                }
+            }
+        }
+
+        public string view___build(string html, Uri uri) {
+            string s = html;
+
+            var rs = Regex.Matches(html, @"<!--(.|\n)*?-->");
+            foreach(var m in rs) {
+                string key_replace = m.ToString();
+                string key = key_replace.Substring(4, key_replace.Length - 7).Trim();
+                if (key[0] == '{' && key[key.Length - 1] == '}') {
+                    key = (uri.Host + "/" + key.Substring(1, key.Length - 2).Trim()).ToLower();
+                    if (m_views.ContainsKey(key))
+                        s = s.Replace(key_replace, m_views[key]);
+                }
+            }
+
+            return s;
+        }
 
         public bool existCache_Data(string cache_name) { return m___check(cache_name); }
 

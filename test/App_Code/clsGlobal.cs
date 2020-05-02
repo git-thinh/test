@@ -151,6 +151,8 @@ namespace test
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
+            m_cache.view___reload();
+
             Uri uri = Request.Url;
 
             string path = uri.AbsolutePath.Substring(1);
@@ -200,8 +202,15 @@ namespace test
 
             if (File.Exists(file))
             {
-                Response.ContentType = contentType;
-                Response.TransmitFile(file);
+                if (contentType == "text/html") {
+                    string html = File.ReadAllText(file);
+                    html = m_cache.view___build(html, uri);
+                    Response.Write(html);
+                } else
+                {
+                    Response.ContentType = contentType;
+                    Response.TransmitFile(file);
+                }
             }
             else
             {

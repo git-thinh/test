@@ -1,0 +1,13 @@
+﻿.main-container {
+    overflow-x: hidden;
+}
+
+.container-kanban {
+    height: calc(100vh - 3.85rem);
+}
+
+@media (min-width: 992px) {
+    .layout-sidebar .main-container {
+        height: 100vh;
+    }
+}

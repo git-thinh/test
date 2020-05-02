@@ -10,118 +10,39 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">
     <link href="assets/css/theme.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="assets/css/custom.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 
 <body>
 
     <div class="layout layout-nav-top">
-        <div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
-            <a class="navbar-brand" href="_index.html">
-                <img alt="Pipeline" src="assets/img/logo.svg" />
-            </a>
-            <div class="d-flex align-items-center">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="d-block d-lg-none ml-2">
-                    <div class="dropdown">
-                        <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img alt="Image" src="assets/img/avatar-male-4.jpg" class="avatar" />
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a href="-profile.html" class="dropdown-item">Profile</a>
-                            <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="collapse navbar-collapse justify-content-between" id="navbar-collapse">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Kế hoạch</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="-chat.html">Thông báo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="-contact.html">Danh bạ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="-project.html">Dự án</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="-team.html">Nhóm</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="-task.html">Công việc</a>
-                    </li>
-                </ul>
-                <div class="d-lg-flex align-items-center">
-                    <form class="form-inline my-lg-0 my-2">
-                        <div class="input-group input-group-dark input-group-round">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="material-icons">search</i>
-                                </span>
-                            </div>
-                            <input type="search" class="form-control form-control-dark" placeholder="Search" aria-label="Search app">
-                        </div>
-                    </form>
-                    <div class="dropdown mx-lg-2">
-                        <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="newContentButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Add New
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Team</a>
-                            <a class="dropdown-item" href="#">Project</a>
-                            <a class="dropdown-item" href="#">Task</a>
-                        </div>
-                    </div>
-                    <div class="d-none d-lg-block">
-                        <div class="dropdown">
-                            <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img alt="Image" src="assets/img/avatar-male-4.jpg" class="avatar" />
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="-profile.html" class="dropdown-item">Profile</a>
-                                <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
-                                <a href="#" class="dropdown-item">Log Out</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="main-container">
 
             <div class="breadcrumb-bar navbar bg-white sticky-top">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="_index.html">Overview</a>
+                            <a href="index.html"><i class="material-icons">home</i></a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="pages-app.html#">App Pages</a>
+                            <a href="index.html">Kế hoạch</a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Kanban Board</li>
+                        <li class="breadcrumb-item active" aria-current="page" style="width:196px;">
+                            <form>
+                                <div class="input-group input-group-round">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons">search</i>
+                                        </span>
+                                    </div>
+                                    <input type="search" class="form-control filter-list-input" placeholder="Search ..." aria-label="Search Chat">
+                                </div>
+                            </form>
+                        </li>
                     </ol>
                 </nav>
 
-                <div class="dropdown">
-                    <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
-                        <i class="material-icons">settings</i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#project-edit-modal">Edit Project</a>
-                        <a class="dropdown-item" href="#">Share</a>
-                        <a class="dropdown-item" href="#">Mark as Complete</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger" href="#">Archive</a>
-
-                    </div>
-                </div>
+                <!--{user___menu}-->
 
             </div>
             <div class="container-kanban">
@@ -2579,27 +2500,7 @@
             }
         }
     </style>
-    <div class="layout-switcher" tabindex="1">
-        <div class="layout-switcher-head d-flex justify-content-between">
-            <span>Select Layout</span>
-            <i class="material-icons">arrow_drop_up</i>
-        </div>
-        <div class="layout-switcher-body">
 
-            <div class="layout-switcher-option">
-                <a href="nav-side-kanban-board.html">
-                    <img alt="Navigation Side" src="assets/img/layouts/layout-nav-side.svg" class="layout-switcher-icon" />
-                </a>
-            </div>
-
-            <div class="layout-switcher-option active">
-                <a href="nav-top-kanban-board.html">
-                    <img alt="Navigation Top" src="assets/img/layouts/layout-nav-top.svg" class="layout-switcher-icon" />
-                </a>
-            </div>
-
-        </div>
-    </div>
 
 </body>
 
