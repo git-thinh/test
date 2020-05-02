@@ -6,6 +6,10 @@
     height: calc(100vh - 3.85rem);
 }
 
+.breadcrumb-item-width-search {
+    width: 170px;
+}
+
 @media (min-width: 992px) {
     .layout-sidebar .main-container {
         height: 100vh;
