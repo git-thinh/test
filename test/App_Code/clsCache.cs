@@ -1332,14 +1332,18 @@ namespace test
         #endregion
 
         static ConcurrentDictionary<string, string> m_views = new ConcurrentDictionary<string, string>();
-        public void view___reload() {
-            
+        public void view___reload()
+        {
+
             string sites = Path.Combine(_CONFIG.PATH_ROOT, "_site");
-            if (Directory.Exists(sites)) {
-                foreach (string site in Directory.GetDirectories(sites)) {
+            if (Directory.Exists(sites))
+            {
+                foreach (string site in Directory.GetDirectories(sites))
+                {
                     string views = Path.Combine(site, "_view");
                     string domain = Path.GetFileName(site);
-                    if (Directory.Exists(views)) {
+                    if (Directory.Exists(views))
+                    {
                         string[] fs = Directory.GetFiles(views, "*.html");
                         foreach (string fi in fs)
                         {
@@ -1353,17 +1357,23 @@ namespace test
             }
         }
 
-        public string view___build(string html, Uri uri) {
+        public string view___build(string html, Uri uri)
+        {
             string s = html;
 
             var rs = Regex.Matches(html, @"<!--(.|\n)*?-->");
-            foreach(var m in rs) {
+            foreach (var m in rs)
+            {
                 string key_replace = m.ToString();
                 string key = key_replace.Substring(4, key_replace.Length - 7).Trim();
-                if (key[0] == '{' && key[key.Length - 1] == '}') {
-                    key = (uri.Host + "/" + key.Substring(1, key.Length - 2).Trim()).ToLower();
-                    if (m_views.ContainsKey(key))
-                        s = s.Replace(key_replace, m_views[key]);
+                if (key[0] == '{' && key[key.Length - 1] == '}')
+                {
+                    //if (m_views.ContainsKey(key))
+                    //key = (uri.Host + "/" + key.Substring(1, key.Length - 2).Trim()).ToLower();
+                    //if (m_views.ContainsKey(key)) s = s.Replace(key_replace, m_views[key]);
+                    string file = Path.Combine(_CONFIG.PATH_ROOT + "_site\\" + uri.Host + "\\_view\\" + key.Substring(1, key.Length - 2).Trim()) + ".html";
+                    if (File.Exists(file))
+                        s = s.Replace(key_replace, File.ReadAllText(file));
                 }
             }
 
@@ -1376,12 +1386,14 @@ namespace test
         public void reloadCache_ApiJS(string cache_name = null, string api_name = null)
         {
             string dir = Path.Combine(_CONFIG.PATH_ROOT, "_api");
-            if (Directory.Exists(dir)) {
+            if (Directory.Exists(dir))
+            {
                 var fs = Directory.GetFiles(dir, "*.js");
-                foreach (var f in fs) {
+                foreach (var f in fs)
+                {
                     string file_name = Path.GetFileName(f);
                     file_name = file_name.Substring(0, file_name.Length - 3).ToLower();
-                    if (file_name.Contains("___")) 
+                    if (file_name.Contains("___"))
                         m_storeApiJS.TryAdd(file_name, File.ReadAllText(f));
                 }
             }
