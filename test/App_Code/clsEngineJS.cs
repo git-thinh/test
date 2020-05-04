@@ -11,8 +11,8 @@ namespace test
     public class clsEngineJS
     {
         static V8ScriptEngine m_engine;
-        static IApi m_api;
-        public static void _init(IApi api)
+        static clsApi m_api;
+        public static void _init(clsApi api)
         {
             m_api = api;
             m_engine = new V8ScriptEngine();
@@ -21,11 +21,19 @@ namespace test
             m_engine.AddHostObject("___api", api);
         }
 
-        public static oResult Execute(string file___api, object parameters = null, Dictionary<string, object> request = null)
+        public static oResult Execute(string file___api, Dictionary<string, object> parameters = null, Dictionary<string, object> request = null)
         {
             if (request == null) request = new Dictionary<string, object>();
             if (parameters == null) parameters = new Dictionary<string, object>();
-            oResult r = new oResult() { ok = false, name = file___api, request = request };
+
+            oResult r = new oResult()
+            {
+                ok = false,
+                name = file___api,
+                input = parameters,
+                request = request
+            };
+
             string file = Path.Combine(_CONFIG.PATH_ROOT, "_api\\" + file___api + ".js");
             if (File.Exists(file) == false)
             {
@@ -51,6 +59,7 @@ namespace test
                     try {
                         var ___log_text = function(text){ log___.write('" + file___api + @"', '_', text); };
                         var ___log_key = function(key, text){ log___.write('" + file___api + @"', key, text); };
+                        var ___api_call = function(api_name, paramenter, request){ return log___[""api_call""](JSON.stringify(paramenter), JSON.stringify(request)); };
 
                         var ___request = " + JsonConvert.SerializeObject(request) + @";
                         var ___parameters = " + JsonConvert.SerializeObject(parameters) + @";
@@ -67,15 +76,20 @@ namespace test
 
                 var toReturn = m_engine.Evaluate(js);
                 if (toReturn is Microsoft.ClearScript.Undefined)
+                {
                     r.ok = true;
+                }
                 else if (toReturn is oResult)
                 {
                     r = (oResult)toReturn;
                     r.request = request;
+                    r.input = parameters;
                     r.name = file___api;
                 }
                 else
+                {
                     r.error = "ERROR: Expected TYPE of result but got " + toReturn.GetType().FullName;
+                }
             }
             catch (Exception e)
             {
@@ -91,6 +105,27 @@ namespace test
         public ejsConsole()
         {
             m_log = new LogRedis();
+        }
+
+        public oResult api_call(string paramenter = null, string request = null)
+        {
+            Dictionary<string, object> para = null;
+            Dictionary<string, object> req = null;
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(paramenter))
+                    para = JsonConvert.DeserializeObject<Dictionary<string, object>>(paramenter);
+
+                if (!string.IsNullOrWhiteSpace(request))
+                    req = JsonConvert.DeserializeObject<Dictionary<string, object>>(request);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return oResult.Ok();
         }
 
         public void write(string scope_name, string key, string text)

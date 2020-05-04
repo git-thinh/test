@@ -15,7 +15,7 @@ namespace test
     public class clsGlobal : System.Web.HttpApplication
     {
         static ICache m_cache;
-        static IApi m_api;
+        static clsApi m_api;
 
         #region [ JOB ]
 
@@ -156,22 +156,22 @@ namespace test
             Uri uri = Request.Url;
 
             string path = uri.AbsolutePath.Substring(1);
-            if (path == "favicon.ico") { Response.End(); return; }
-            string[] a = path.Split('/');
-
+            if (path == "favicon.ico") { Response.End(); return; }            
             string domain = uri.Host;
             if (domain == "localhost" || domain == "127.0.0.1") domain = _CONFIG.DOMAIN_LOCALHOST;
 
             //[1] api/{cache_name}/{api_name}/{id}
-            if (a[0] == "api" && a.Length > 2)
+            if (path.StartsWith("api/"))
             {
+                string[] a = path.Split('/');
+
                 Response.ContentType = "application/json";
-                if (m_cache.existCache_ApiJS(a[1], a[2]))
-                {
-                    Response.Write(JsonConvert.SerializeObject(oResult.Error("Cannot found cache name: " + a[1])));
-                    Response.End();
-                    return;
-                }
+                ////if (m_cache.existCache_ApiJS(a[1], a[2]))
+                ////{
+                ////    Response.Write(JsonConvert.SerializeObject(oResult.Error("Cannot found cache name: " + a[1])));
+                ////    Response.End();
+                ////    return;
+                ////}
 
                 oResult rv = null;
                 oResult rp = get_api_parameters();

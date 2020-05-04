@@ -108,6 +108,8 @@ namespace test
         oResult job_remove(Dictionary<string, object> paramenter = null, Dictionary<string, object> request = null);
 
         #endregion
+
+        oResult call(string api_name, string paramenter = null, string request = null);
     }
 
     public class clsApi : IApi
@@ -781,5 +783,13 @@ namespace test
 
         #endregion
 
+        public oResult call(string api_name, string paramenter = null, string request = null)
+        {
+            oResult r = new oResult();
+
+
+
+            return r;
+        }
     }
 }
