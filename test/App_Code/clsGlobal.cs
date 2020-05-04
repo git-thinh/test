@@ -15,7 +15,7 @@ namespace test
     public class clsGlobal : System.Web.HttpApplication
     {
         static ICache m_cache;
-        static clsApi m_api;
+        static IApi m_api;
 
         #region [ JOB ]
 

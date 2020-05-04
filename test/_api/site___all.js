@@ -8,5 +8,6 @@ var para = {
 
 
 
-var rs = ___api_call('db_execute', para, {});
+var text_json = ___api_call('db_execute', para, {});
 
+return text_json;

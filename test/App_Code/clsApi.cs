@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -109,7 +110,7 @@ namespace test
 
         #endregion
 
-        oResult call(string api_name, string paramenter = null, string request = null);
+        string js_call(string api_name, string paramenter = null, string request = null);
     }
 
     public class clsApi : IApi
@@ -658,7 +659,7 @@ namespace test
 
         #endregion
 
-        #region [ job_list | job_create | job_stop | job_start | job_remove ]
+        #region [ job_list | job_create | job_pause | job_resume | job_remove ]
 
         public oResult job_list(Dictionary<string, object> paramenter = null, Dictionary<string, object> request = null)
         {
@@ -783,13 +784,227 @@ namespace test
 
         #endregion
 
-        public oResult call(string api_name, string paramenter = null, string request = null)
+        public string js_call(string api_name, string paramenter = null, string request = null)
         {
-            oResult r = new oResult();
+            oResult r = new oResult() { ok = false };
 
+            Dictionary<string, object> para = null;
+            Dictionary<string, object> req = null;
 
+            if (string.IsNullOrWhiteSpace(paramenter)) para = new Dictionary<string, object>();
+            if (string.IsNullOrWhiteSpace(request)) req = new Dictionary<string, object>();
 
-            return r;
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(paramenter))
+                    para = JsonConvert.DeserializeObject<Dictionary<string, object>>(paramenter);
+            }
+            catch (Exception ex)
+            {
+                r.error = ex.Message;
+                return JsonConvert.SerializeObject(r);
+            }
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(request))
+                    req = JsonConvert.DeserializeObject<Dictionary<string, object>>(request);
+            }
+            catch (Exception ex)
+            {
+                r.error = ex.Message;
+                return JsonConvert.SerializeObject(r);
+            }
+
+            bool exist = false;
+            switch (api_name)
+            {
+                case "notify_user":
+                    exist = true;
+                    r = notify_user(para, req);
+                    break;
+                case "notify_broadcast":
+                    exist = true;
+                    r = notify_broadcast(para, req); 
+                    break;
+
+                case "request_async":
+                    exist = true;
+                    r = request_async(para, req); 
+                    break;
+                case "curl_call":
+                    exist = true;
+                    r = curl_call(para, req); 
+                    break;
+
+                case "html_export_links":
+                    exist = true;
+                    r = html_export_links(para, req); 
+                    break;
+                case "html_export_images":
+                    exist = true;
+                    r = html_export_images(para, req); 
+                    break;
+                case "html_to_text_01":
+                    exist = true;
+                    r = html_to_text_01(para, req); 
+                    break;
+                case "html_clean_01":
+                    exist = true;
+                    r = html_clean_01(para, req); 
+                    break;
+                case "html_remove_comment":
+                    exist = true;
+                    r = html_remove_comment(para, req); 
+                    break;
+                case "html_remove_tag_simple":
+                    exist = true;
+                    r = html_remove_tag_simple(para, req); 
+                    break;
+                case "html_remove_tag_content":
+                    exist = true;
+                    r = html_remove_tag_content(para, req); 
+                    break;
+                case "html_remove_tag_keep_content":
+                    exist = true;
+                    r = html_remove_tag_keep_content(para, req); 
+                    break;
+
+                case "api_list":
+                    exist = true;
+                    r = api_list(para, req);
+                    break;
+                case "api_get":
+                    exist = true;
+                    r = api_get(para, req); 
+                    break;
+                case "api_reload":
+                    exist = true;
+                    r = api_reload(para, req); 
+                    break;
+                case "api_reload_all":
+                    exist = true;
+                    r = api_reload_all(para, req); 
+                    break;
+                case "api_exist":
+                    exist = true;
+                    r = api_exist(para, req); 
+                    break;
+
+                case "file_read_text":
+                    exist = true;
+                    r = file_read_text(para, req); 
+                    break;
+                case "file_write_text":
+                    exist = true;
+                    r = file_write_text(para, req); 
+                    break;
+                case "file_append_text":
+                    exist = true;
+                    r = file_append_text(para, req); 
+                    break;
+                case "file_exist":
+                    exist = true;
+                    r = file_exist(para, req); 
+                    break;
+                case "file_delete":
+                    exist = true;
+                    r = file_delete(para, req); 
+                    break;
+
+                case "dir_get_files":
+                    exist = true;
+                    r = dir_get_files(para, req); 
+                    break;
+                case "dir_exist":
+                    exist = true;
+                    r = dir_exist(para, req); 
+                    break;
+                case "dir_create":
+                    exist = true;
+                    r = dir_create(para, req); 
+                    break;
+                case "dir_delete":
+                    exist = true;
+                    r = dir_delete(para, req); 
+                    break;
+
+                case "cache_addnew":
+                    exist = true;
+                    r = cache_addnew(para, req); 
+                    break;
+                case "cache_update":
+                    exist = true;
+                    r = cache_update(para, req); 
+                    break;
+                case "cache_remove":
+                    exist = true;
+                    r = cache_remove(para, req); 
+                    break;
+                case "cache_clear_all":
+                    exist = true;
+                    r = cache_clear_all(para, req); 
+                    break;
+                case "cache_runtime_exist":
+                    exist = true;
+                    r = cache_runtime_exist(para, req); 
+                    break;
+                case "cache_runtime_set":
+                    exist = true;
+                    r = cache_runtime_set(para, req); 
+                    break;
+                case "cache_runtime_get":
+                    exist = true;
+                    r = cache_runtime_get(para, req); 
+                    break;
+                case "cache_runtime_remove":
+                    exist = true;
+                    r = cache_runtime_remove(para, req); 
+                    break;
+                case "cache_search":
+                    exist = true;
+                    r = cache_search(para, req); 
+                    break;
+                case "cache_get_item_by_id":
+                    exist = true;
+                    r = cache_get_item_by_id(para, req); 
+                    break;
+                case "cache_get_items_by_ids":
+                    exist = true;
+                    r = cache_get_items_by_ids(para, req); 
+                    break;
+
+                case "db_execute":
+                    exist = true;
+                    r = db_execute(para, req); 
+                    break;
+
+                case "job_list":
+                    exist = true;
+                    r = job_list(para, req); 
+                    break;
+                case "job_create":
+                    exist = true;
+                    r = job_create(para, req); 
+                    break;
+                case "job_pause":
+                    exist = true;
+                    r = job_pause(para, req); 
+                    break;
+                case "job_resume":
+                    exist = true;
+                    r = job_resume(para, req); 
+                    break;
+                case "job_remove":
+                    exist = true;
+                    r = job_remove(para, req); 
+                    break;
+            }
+
+            if (exist == false) 
+                r.error = "Cannot found API " + api_name;
+
+            return JsonConvert.SerializeObject(r);
         }
     }
 }
