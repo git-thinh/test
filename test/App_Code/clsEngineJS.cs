@@ -59,7 +59,7 @@ namespace test
                     try {
                         var ___log_text = function(text){ log___.write('" + file___api + @"', '_', text); };
                         var ___log_key = function(key, text){ log___.write('" + file___api + @"', key, text); };
-                        var ___api_call = function(api_name, paramenter, request){ return ___api.js_call(api_name, JSON.stringify(paramenter), JSON.stringify(request)); };
+                        var ___api_call = function(api_name, paramenter, request, result_type){ var v = ___api.js_call(api_name, JSON.stringify(paramenter), JSON.stringify(request)); if(result_type == 'text') return v; else return JSON.parse(v); };
 
                         var ___request = " + JsonConvert.SerializeObject(request) + @";
                         var ___parameters = " + JsonConvert.SerializeObject(parameters) + @";
@@ -86,44 +86,43 @@ namespace test
                     {
                         r = JsonConvert.DeserializeObject<oResult>(json);
                     }
-                    catch(Exception ejs) {
+                    catch (Exception ejs)
+                    {
                         r.error = ejs.Message;
                         r.data = json;
                     }
                 }
-                else
-                {
-                    dynamic dynamicResult = toReturn;
-                    foreach (string name in dynamicResult.GetDynamicMemberNames())
-                    {
-                        //Console.WriteLine("{0}: {1}", name, dynamicResult[name]);
-                        switch (name)
-                        {
-                            case "ok":
-                                r.ok = Convert.ToBoolean(dynamicResult[name]);
-                                break;
-                            case "request":
-                                break;
-                            case "input":
-                                break;
-                            case "name":
-                                r.name = Convert.ToString(dynamicResult[name]);
-                                break;
-                            case "error":
-                                r.error = Convert.ToString(dynamicResult[name]);
-                                break;
-                        }
-                    }
 
-                    //r = (oResult)toReturn;
-                    //r.request = request;
-                    //r.input = parameters;
-                    //r.name = file___api;
-                }
-                //else
-                //{
-                //    r.error = "ERROR: Expected TYPE of result but got " + toReturn.GetType().FullName;
-                //}
+                //////else
+                //////{
+                //////    try
+                //////    {
+                //////        dynamic dynamicResult = toReturn;
+                //////        foreach (string name in dynamicResult.GetDynamicMemberNames())
+                //////        {
+                //////            switch (name)
+                //////            {
+                //////                case "ok":
+                //////                    r.ok = Convert.ToBoolean(dynamicResult[name]);
+                //////                    break;
+                //////                case "request":
+                //////                    break;
+                //////                case "input":
+                //////                    break;
+                //////                case "name":
+                //////                    r.name = Convert.ToString(dynamicResult[name]);
+                //////                    break;
+                //////                case "error":
+                //////                    r.error = Convert.ToString(dynamicResult[name]);
+                //////                    break;
+                //////            }
+                //////        }
+                //////    }
+                //////    catch (Exception ejs)
+                //////    {
+                //////        r.error = ejs.Message; 
+                //////    }
+                //////}
             }
             catch (Exception e)
             {
