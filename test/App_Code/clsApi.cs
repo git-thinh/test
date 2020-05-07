@@ -162,148 +162,153 @@ namespace test
             try {
                 #region [ request_async ]
 
-                if (paramenter.Count > 0 && paramenter.ContainsKey("headers"))
-                {
-                    #region
+                //////if (paramenter.Count > 0 && paramenter.ContainsKey("headers"))
+                //////{
+                //////    #region
 
-                    Dictionary<string, object> headers = null;
+                //////    Dictionary<string, object> headers = null;
 
-                    if (paramenter.ContainsKey("headers") == false)
-                    {
-                        r.error = "ERROR_request_async: The paramenter [headers] not exist";
-                        return r;
-                    }
+                //////    if (paramenter.ContainsKey("headers") == false)
+                //////    {
+                //////        r.error = "ERROR_request_async: The paramenter [headers] not exist";
+                //////        return r;
+                //////    }
 
-                    if (paramenter.ContainsKey("headers"))
-                    {
-                        try
-                        {
-                            headers = ((JObject)paramenter["headers"]).ToObject<Dictionary<string, object>>();
-                        }
-                        catch (Exception e)
-                        {
-                            r.error = "ERROR_request_async: The paramenter [headers] must be format JSON. " + e.Message;
-                            return r;
-                        }
-                    }
+                //////    if (paramenter.ContainsKey("headers"))
+                //////    {
+                //////        try
+                //////        {
+                //////            headers = ((JObject)paramenter["headers"]).ToObject<Dictionary<string, object>>();
+                //////        }
+                //////        catch (Exception e)
+                //////        {
+                //////            r.error = "ERROR_request_async: The paramenter [headers] must be format JSON. " + e.Message;
+                //////            return r;
+                //////        }
+                //////    }
 
-                    if (headers.Count == 0
-                        || headers.ContainsKey("url") == false || headers["url"] == null || string.IsNullOrEmpty(headers["url"].ToString())
-                        || headers.ContainsKey("method") == false || headers["method"] == null || string.IsNullOrEmpty(headers["method"].ToString()))
-                    {
-                        r.error = "ERROR_request_async: The paramenter [headers] must be { url:..., method:... } and Value is not null or empty";
-                        return r;
-                    }
+                //////    if (headers.Count == 0
+                //////        || headers.ContainsKey("url") == false || headers["url"] == null || string.IsNullOrEmpty(headers["url"].ToString())
+                //////        || headers.ContainsKey("method") == false || headers["method"] == null || string.IsNullOrEmpty(headers["method"].ToString()))
+                //////    {
+                //////        r.error = "ERROR_request_async: The paramenter [headers] must be { url:..., method:... } and Value is not null or empty";
+                //////        return r;
+                //////    }
 
-                    #endregion
+                //////    #endregion
 
-                    try
-                    {
-                        string httpMethod = "GET";
-                        string type = "v8";
-                        string url = string.Empty;
-                        string htm = string.Empty;
+                //////    try
+                //////    {
+                //////        string httpMethod = "GET";
+                //////        string type = "v8";
+                //////        string url = string.Empty;
+                //////        string htm = string.Empty;
 
-                        foreach (var header in headers)
-                        {
-                            if (header.Key.StartsWith("Content") || header.Key == "data") continue;
+                //////        foreach (var header in headers)
+                //////        {
+                //////            if (header.Key.StartsWith("Content") || header.Key == "data") continue;
 
-                            if (header.Key == "url")
-                            {
-                                url = header.Value.ToString();
-                                continue;
-                            }
+                //////            if (header.Key == "url")
+                //////            {
+                //////                url = header.Value.ToString();
+                //////                continue;
+                //////            }
 
-                            if (header.Key == "method")
-                            {
-                                httpMethod = header.Value.ToString();
-                                continue;
-                            }
+                //////            if (header.Key == "method")
+                //////            {
+                //////                httpMethod = header.Value.ToString();
+                //////                continue;
+                //////            }
 
-                            if (header.Key == "type")
-                            {
-                                type = header.Value.ToString();
-                                continue;
-                            }
-                        }
-                        switch (type)
-                        {
-                            case "curl":
-                                htm = clsCURL.___https(url);
-                                r.ok = true;
-                                r.data = htm;
-                                break;
-                            case "v8":
-                                try
-                                {
-                                    V8ScriptEngine engine = new V8ScriptEngine(V8ScriptEngineFlags.DisableGlobalMembers);
-                                    engine.AddCOMType("XMLHttpRequest", "MSXML2.XMLHTTP");
-                                    engine.Execute(@" function get(url) { var xhr = new XMLHttpRequest(); xhr.open('GET', url, false); xhr.send(); if (xhr.status == 200) return xhr.responseText; else return ''; }");
-                                    htm = engine.Script.get(url);
-                                    engine.Dispose();
+                //////            if (header.Key == "type")
+                //////            {
+                //////                type = header.Value.ToString();
+                //////                continue;
+                //////            }
+                //////        }
+                //////        switch (type)
+                //////        {
+                //////            case "curl":
+                //////                htm = clsCURL.___https(url);
+                //////                r.ok = true;
+                //////                r.data = htm;
+                //////                break;
+                //////            case "v8":
+                //////                try
+                //////                {
+                //////                    V8ScriptEngine engine = new V8ScriptEngine(V8ScriptEngineFlags.DisableGlobalMembers);
+                //////                    engine.AddCOMType("XMLHttpRequest", "MSXML2.XMLHTTP");
+                //////                    engine.Execute(@" function get(url) { var xhr = new XMLHttpRequest(); xhr.open('GET', url, false); xhr.send(); if (xhr.status == 200) return xhr.responseText; else return ''; }");
+                //////                    htm = engine.Script.get(url);
+                //////                    engine.Dispose();
 
-                                    r.ok = true;
-                                    r.data = htm;
-                                }
-                                catch (Exception e1)
-                                {
-                                    //htm = e1.Message;
-                                    r.error = "ERROR_XHR_request_async: " + e1.Message;
-                                    return r;
-                                }
-                                break;
-                            default:
-                                using (var httpClient = new HttpClient())
-                                {
-                                    foreach (var header in headers)
-                                    {
-                                        if (header.Key.StartsWith("Content") || header.Key == "type" || header.Key == "data" || header.Key == "url" || header.Key == "method") continue;
-                                        if (header.Value != null) httpClient.DefaultRequestHeaders.Add(header.Key, header.Value.ToString());
-                                    }
+                //////                    r.ok = true;
+                //////                    r.data = htm;
+                //////                }
+                //////                catch (Exception e1)
+                //////                {
+                //////                    //htm = e1.Message;
+                //////                    r.error = "ERROR_XHR_request_async: " + e1.Message;
+                //////                    return r;
+                //////                }
+                //////                break;
+                //////            default:
+                //////                using (var httpClient = new HttpClient())
+                //////                {
+                //////                    foreach (var header in headers)
+                //////                    {
+                //////                        if (header.Key.StartsWith("Content") || header.Key == "type" || header.Key == "data" || header.Key == "url" || header.Key == "method") continue;
+                //////                        if (header.Value != null) httpClient.DefaultRequestHeaders.Add(header.Key, header.Value.ToString());
+                //////                    }
 
-                                    //============================================================
-                                    //ServicePointManager.CertificatePolicy = new MyPolicy();
-                                    //ServicePointManager.Expect100Continue = true;
-                                    //ServicePointManager.DefaultConnectionLimit = 9999;
-                                    //ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12;
+                //////                    //============================================================
+                //////                    //ServicePointManager.CertificatePolicy = new MyPolicy();
+                //////                    //ServicePointManager.Expect100Continue = true;
+                //////                    //ServicePointManager.DefaultConnectionLimit = 9999;
+                //////                    //ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12;
 
-                                    //============================================================
-                                    HttpResponseMessage responseMessage = null;
-                                    switch (httpMethod)
-                                    {
-                                        case "DELETE":
-                                            responseMessage = httpClient.DeleteAsync(url).Result;
-                                            break;
-                                        case "PATCH":
-                                        case "POST":
-                                            string data = string.Empty;
-                                            if (para.ContainsKey("data") && para[data] != null) data = para["data"].ToString();
-                                            responseMessage = httpClient.PostAsync(url, new StringContent(data)).Result;
-                                            break;
-                                        case "GET":
-                                            responseMessage = httpClient.GetAsync(url).Result;
-                                            break;
-                                    }
+                //////                    //============================================================
+                //////                    HttpResponseMessage responseMessage = null;
+                //////                    switch (httpMethod)
+                //////                    {
+                //////                        case "DELETE":
+                //////                            responseMessage = httpClient.DeleteAsync(url).Result;
+                //////                            break;
+                //////                        case "PATCH":
+                //////                        case "POST":
+                //////                            string data = string.Empty;
 
-                                    if (responseMessage != null)
-                                        using (responseMessage)
-                                        using (var content = responseMessage.Content)
-                                            htm = content.ReadAsStringAsync().Result.Trim();
-                                    if (htm.Length > 0)
-                                    {
-                                        r.ok = true;
-                                        r.data = htm;
-                                    }
-                                }
-                                break;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        r.error = "ERROR_THROW_request_async: " + e.Message;
-                        return r;
-                    }
-                }
+                //////                            if (paramenter.ContainsKey("data") && paramenter[data] != null) 
+                //////                                data = paramenter["data"].ToString();
+
+                //////                            responseMessage = httpClient.PostAsync(url, new StringContent(data)).Result;
+
+                //////                            break;
+                //////                        case "GET":
+                //////                            responseMessage = httpClient.GetAsync(url).Result;
+                //////                            break;
+                //////                    }
+
+                //////                    if (responseMessage != null)
+                //////                        using (responseMessage)
+                //////                        using (var content = responseMessage.Content)
+                //////                            htm = content.ReadAsStringAsync().Result.Trim();
+
+                //////                    if (htm.Length > 0)
+                //////                    {
+                //////                        r.ok = true;
+                //////                        r.data = htm;
+                //////                    }
+                //////                }
+                //////                break;
+                //////        }
+                //////    }
+                //////    catch (Exception e)
+                //////    {
+                //////        r.error = "ERROR_THROW_request_async: " + e.Message;
+                //////        return r;
+                //////    }
+                //////}
 
                 #endregion
 
@@ -314,6 +319,7 @@ namespace test
             }
             return r;
         }
+
         public oResult curl_call(Dictionary<string, object> paramenter = null, Dictionary<string, object> request = null)
         {
             if (paramenter == null) paramenter = new Dictionary<string, object>();

@@ -31,7 +31,7 @@ namespace test
         {
             oResult rs = new oResult() { ok = false, request = request };
 
-            string url = request.getValueByKey<string>("url");
+            string url = request.getValue<string>("url");
             if (string.IsNullOrWhiteSpace(url)) url = "http://localhost/";
 
             try
@@ -72,7 +72,7 @@ namespace test
         {
             oResult rs = new oResult() { ok = false, request = request };
 
-            string url = request.getValueByKey<string>("url");
+            string url = request.getValue<string>("url");
             if (string.IsNullOrWhiteSpace(url)) url = "https://vnexpress.net/ha-noi-de-xuat-keo-dai-cach-ly-xa-hoi-den-30-4-4084947.html";
 
             try
