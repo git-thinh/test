@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--{header___libs}-->
+</head>
+<body>
+    <div id="app" class="d-flex flex-column fixed-top h-100" style="z-index:0;">
+        <component v-bind:is="view___sidebar_left"></component>
+        <component v-bind:is="view___sidebar_right"></component>
+
+        <div class="w-100">
+            <div class="w-100 d-flex flex-column">
+                <div class="w-100">
+                    <component v-bind:is="view___header_top" :obj-user="objUser"></component>
+                </div>
+                <div class="w-100 d-none d-md-block">
+                    <component v-bind:is="view___header_breadcrumb"></component>
+                </div>
+                <div class="w-100 d-none d-md-block">
+                    <component v-bind:is="view___header_tab"></component>
+                </div>
+                <div class="w-100 d-none d-md-block">
+                    <component v-bind:is="view___header_filter"></component>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 flex-fill">
+
+            <div class="d-flex w-100 h-100">
+                <div :class="['h-100 w-25 d-none', view___main_left ? 'd-md-block' : '']">
+                    <component v-bind:is="view___main_left"></component>
+                </div>
+                <div role="main" class="flex-fill h-100">
+                    <component v-bind:is="view___main_body" :obj-user="objUser"></component>
+                </div>
+            </div>
+
+        </div>
+        <div class="w-100">
+            <component v-bind:is="view___footer"></component>
+        </div>
+        <user___logout></user___logout>
+        <component v-bind:is="view___dialog_1" :is-dialog="true" :obj-user="objUser"></component>
+    </div>
+</body>
+</html>

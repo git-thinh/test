@@ -28,3 +28,6 @@
 /download_themes/media.giphy.com
 /download_themes/www.google-analytics.com
 download_themes/debug.log
+/weblib/bin
+/weblib/obj
+/web/obj
