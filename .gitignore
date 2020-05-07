@@ -31,3 +31,9 @@ download_themes/debug.log
 /weblib/bin
 /weblib/obj
 /web/obj
+/web/bin/weblib.pdb
+/web/bin/web.dll.config
+/web/bin/web.pdb
+/web/bin/Quartz.xml
+/web/bin/Newtonsoft.Json.xml
+/web/bin/Quartz.pdb

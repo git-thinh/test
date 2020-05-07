@@ -1,4 +1,4 @@
-﻿using Jint;
+﻿using Microsoft.ClearScript.V8;
 using Newtonsoft.Json;
 using Quartz;
 using Quartz.Impl;
@@ -3063,15 +3063,15 @@ namespace weblib
 
     public class clsEngineJS
     {
-        //static V8ScriptEngine m_engine;
+        static V8ScriptEngine m_engine;
         static IApi m_api;
         public static void _init(IApi api)
         {
             m_api = api;
-            //m_engine = new V8ScriptEngine();
-            ////m_engine.AddHostType("Action", typeof(Action));
-            //m_engine.AddHostObject("log___", new ejsConsole());
-            //m_engine.AddHostObject("___api", api);
+            m_engine = new V8ScriptEngine();
+            m_engine.AddHostType("Action", typeof(Action));
+            m_engine.AddHostObject("log___", new ejsConsole());
+            m_engine.AddHostObject("___api", api);
         }
 
         public static oResult Execute(string file___api, Dictionary<string, object> parameters = null, Dictionary<string, object> request = null)
@@ -3105,27 +3105,6 @@ namespace weblib
 
             try
             {
-                //var p = new Person
-                //{
-                //    Name = "Mickey Mouse"
-                //};
-
-                //var engine = new Engine()
-                //    .SetValue("p", p)
-                //    .Execute("p.Name = 'Minnie'")
-                //    ;
-
-                var engine = new Engine().SetValue("log", new Action<object>(Console.WriteLine));
-
-                engine.Execute(@"
-      function hello() { 
-        log('Hello World');
-      };
-      
-      hello();
-    ");
-
-
                 string js = string.Empty;
                 js = @"
                 (function() {
@@ -3148,24 +3127,24 @@ namespace weblib
                 })();
                 ";
 
-                ////var toReturn = m_engine.Evaluate(js);
-                ////if (toReturn is Microsoft.ClearScript.Undefined)
-                ////{
-                ////    r.ok = true;
-                ////}
-                ////else if (toReturn is string)
-                ////{
-                ////    string json = toReturn.ToString();
-                ////    try
-                ////    {
-                ////        r = JsonConvert.DeserializeObject<oResult>(json);
-                ////    }
-                ////    catch (Exception ejs)
-                ////    {
-                ////        r.error = ejs.Message;
-                ////        r.data = json;
-                ////    }
-                ////}
+                var toReturn = m_engine.Evaluate(js);
+                if (toReturn is Microsoft.ClearScript.Undefined)
+                {
+                    r.ok = true;
+                }
+                else if (toReturn is string)
+                {
+                    string json = toReturn.ToString();
+                    try
+                    {
+                        r = JsonConvert.DeserializeObject<oResult>(json);
+                    }
+                    catch (Exception ejs)
+                    {
+                        r.error = ejs.Message;
+                        r.data = json;
+                    }
+                }
 
                 //////else
                 //////{
