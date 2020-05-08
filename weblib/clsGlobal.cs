@@ -1,5 +1,6 @@
 ﻿using Microsoft.ClearScript.V8;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Impl.Matchers;
@@ -12,6 +13,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -27,14 +29,11 @@ namespace weblib
 
         public static string PATH_ROOT = string.Empty;
         public static int LOG_PORT_REDIS = LOG_PORT_REDIS_DEFAULT;
-        public static string PATH_DATA_FILE = string.Empty;
-        public static string DOMAIN_LOCALHOST = string.Empty;
+        public static string PATH_DATA_FILE = string.Empty; 
 
         public static void _init(System.Web.HttpApplication app, NameValueCollection appSettings)
         {
             PATH_ROOT = AppDomain.CurrentDomain.BaseDirectory;
-
-            DOMAIN_LOCALHOST = appSettings["DOMAIN_LOCALHOST"];
 
             PATH_DATA_FILE = appSettings["PATH_DATA_FILE"];
             if (string.IsNullOrWhiteSpace(PATH_DATA_FILE))
@@ -546,153 +545,153 @@ namespace weblib
             {
                 #region [ request_async ]
 
-                //////if (paramenter.Count > 0 && paramenter.ContainsKey("headers"))
-                //////{
-                //////    #region
+                if (paramenter.Count > 0 && paramenter.ContainsKey("headers"))
+                {
+                    #region
 
-                //////    Dictionary<string, object> headers = null;
+                    Dictionary<string, object> headers = null;
 
-                //////    if (paramenter.ContainsKey("headers") == false)
-                //////    {
-                //////        r.error = "ERROR_request_async: The paramenter [headers] not exist";
-                //////        return r;
-                //////    }
+                    if (paramenter.ContainsKey("headers") == false)
+                    {
+                        r.error = "ERROR_request_async: The paramenter [headers] not exist";
+                        return r;
+                    }
 
-                //////    if (paramenter.ContainsKey("headers"))
-                //////    {
-                //////        try
-                //////        {
-                //////            headers = ((JObject)paramenter["headers"]).ToObject<Dictionary<string, object>>();
-                //////        }
-                //////        catch (Exception e)
-                //////        {
-                //////            r.error = "ERROR_request_async: The paramenter [headers] must be format JSON. " + e.Message;
-                //////            return r;
-                //////        }
-                //////    }
+                    if (paramenter.ContainsKey("headers"))
+                    {
+                        try
+                        {
+                            headers = ((JObject)paramenter["headers"]).ToObject<Dictionary<string, object>>();
+                        }
+                        catch (Exception e)
+                        {
+                            r.error = "ERROR_request_async: The paramenter [headers] must be format JSON. " + e.Message;
+                            return r;
+                        }
+                    }
 
-                //////    if (headers.Count == 0
-                //////        || headers.ContainsKey("url") == false || headers["url"] == null || string.IsNullOrEmpty(headers["url"].ToString())
-                //////        || headers.ContainsKey("method") == false || headers["method"] == null || string.IsNullOrEmpty(headers["method"].ToString()))
-                //////    {
-                //////        r.error = "ERROR_request_async: The paramenter [headers] must be { url:..., method:... } and Value is not null or empty";
-                //////        return r;
-                //////    }
+                    if (headers.Count == 0
+                        || headers.ContainsKey("url") == false || headers["url"] == null || string.IsNullOrEmpty(headers["url"].ToString())
+                        || headers.ContainsKey("method") == false || headers["method"] == null || string.IsNullOrEmpty(headers["method"].ToString()))
+                    {
+                        r.error = "ERROR_request_async: The paramenter [headers] must be { url:..., method:... } and Value is not null or empty";
+                        return r;
+                    }
 
-                //////    #endregion
+                    #endregion
 
-                //////    try
-                //////    {
-                //////        string httpMethod = "GET";
-                //////        string type = "v8";
-                //////        string url = string.Empty;
-                //////        string htm = string.Empty;
+                    try
+                    {
+                        string httpMethod = "GET";
+                        string type = "v8";
+                        string url = string.Empty;
+                        string htm = string.Empty;
 
-                //////        foreach (var header in headers)
-                //////        {
-                //////            if (header.Key.StartsWith("Content") || header.Key == "data") continue;
+                        foreach (var header in headers)
+                        {
+                            if (header.Key.StartsWith("Content") || header.Key == "data") continue;
 
-                //////            if (header.Key == "url")
-                //////            {
-                //////                url = header.Value.ToString();
-                //////                continue;
-                //////            }
+                            if (header.Key == "url")
+                            {
+                                url = header.Value.ToString();
+                                continue;
+                            }
 
-                //////            if (header.Key == "method")
-                //////            {
-                //////                httpMethod = header.Value.ToString();
-                //////                continue;
-                //////            }
+                            if (header.Key == "method")
+                            {
+                                httpMethod = header.Value.ToString();
+                                continue;
+                            }
 
-                //////            if (header.Key == "type")
-                //////            {
-                //////                type = header.Value.ToString();
-                //////                continue;
-                //////            }
-                //////        }
-                //////        switch (type)
-                //////        {
-                //////            case "curl":
-                //////                htm = clsCURL.___https(url);
-                //////                r.ok = true;
-                //////                r.data = htm;
-                //////                break;
-                //////            case "v8":
-                //////                try
-                //////                {
-                //////                    V8ScriptEngine engine = new V8ScriptEngine(V8ScriptEngineFlags.DisableGlobalMembers);
-                //////                    engine.AddCOMType("XMLHttpRequest", "MSXML2.XMLHTTP");
-                //////                    engine.Execute(@" function get(url) { var xhr = new XMLHttpRequest(); xhr.open('GET', url, false); xhr.send(); if (xhr.status == 200) return xhr.responseText; else return ''; }");
-                //////                    htm = engine.Script.get(url);
-                //////                    engine.Dispose();
+                            if (header.Key == "type")
+                            {
+                                type = header.Value.ToString();
+                                continue;
+                            }
+                        }
+                        switch (type)
+                        {
+                            case "curl":
+                                //htm = clsCURL.___https(url);
+                                r.ok = true;
+                                r.data = htm;
+                                break;
+                            case "v8":
+                                try
+                                {
+                                    V8ScriptEngine engine = new V8ScriptEngine(V8ScriptEngineFlags.DisableGlobalMembers);
+                                    engine.AddCOMType("XMLHttpRequest", "MSXML2.XMLHTTP");
+                                    engine.Execute(@" function get(url) { var xhr = new XMLHttpRequest(); xhr.open('GET', url, false); xhr.send(); if (xhr.status == 200) return xhr.responseText; else return ''; }");
+                                    htm = engine.Script.get(url);
+                                    engine.Dispose();
 
-                //////                    r.ok = true;
-                //////                    r.data = htm;
-                //////                }
-                //////                catch (Exception e1)
-                //////                {
-                //////                    //htm = e1.Message;
-                //////                    r.error = "ERROR_XHR_request_async: " + e1.Message;
-                //////                    return r;
-                //////                }
-                //////                break;
-                //////            default:
-                //////                using (var httpClient = new HttpClient())
-                //////                {
-                //////                    foreach (var header in headers)
-                //////                    {
-                //////                        if (header.Key.StartsWith("Content") || header.Key == "type" || header.Key == "data" || header.Key == "url" || header.Key == "method") continue;
-                //////                        if (header.Value != null) httpClient.DefaultRequestHeaders.Add(header.Key, header.Value.ToString());
-                //////                    }
+                                    r.ok = true;
+                                    r.data = htm;
+                                }
+                                catch (Exception e1)
+                                {
+                                    //htm = e1.Message;
+                                    r.error = "ERROR_XHR_request_async: " + e1.Message;
+                                    return r;
+                                }
+                                break;
+                            default:
+                                using (var httpClient = new HttpClient())
+                                {
+                                    foreach (var header in headers)
+                                    {
+                                        if (header.Key.StartsWith("Content") || header.Key == "type" || header.Key == "data" || header.Key == "url" || header.Key == "method") continue;
+                                        if (header.Value != null) httpClient.DefaultRequestHeaders.Add(header.Key, header.Value.ToString());
+                                    }
 
-                //////                    //============================================================
-                //////                    //ServicePointManager.CertificatePolicy = new MyPolicy();
-                //////                    //ServicePointManager.Expect100Continue = true;
-                //////                    //ServicePointManager.DefaultConnectionLimit = 9999;
-                //////                    //ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12;
+                                    //============================================================
+                                    //ServicePointManager.CertificatePolicy = new MyPolicy();
+                                    //ServicePointManager.Expect100Continue = true;
+                                    //ServicePointManager.DefaultConnectionLimit = 9999;
+                                    //ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12;
 
-                //////                    //============================================================
-                //////                    HttpResponseMessage responseMessage = null;
-                //////                    switch (httpMethod)
-                //////                    {
-                //////                        case "DELETE":
-                //////                            responseMessage = httpClient.DeleteAsync(url).Result;
-                //////                            break;
-                //////                        case "PATCH":
-                //////                        case "POST":
-                //////                            string data = string.Empty;
+                                    //============================================================
+                                    HttpResponseMessage responseMessage = null;
+                                    switch (httpMethod)
+                                    {
+                                        case "DELETE":
+                                            responseMessage = httpClient.DeleteAsync(url).Result;
+                                            break;
+                                        case "PATCH":
+                                        case "POST":
+                                            string data = string.Empty;
 
-                //////                            if (paramenter.ContainsKey("data") && paramenter[data] != null) 
-                //////                                data = paramenter["data"].ToString();
+                                            if (paramenter.ContainsKey("data") && paramenter["data"] != null)
+                                                data = paramenter["data"].ToString();
 
-                //////                            responseMessage = httpClient.PostAsync(url, new StringContent(data)).Result;
+                                            responseMessage = httpClient.PostAsync(url, new StringContent(data)).Result;
 
-                //////                            break;
-                //////                        case "GET":
-                //////                            responseMessage = httpClient.GetAsync(url).Result;
-                //////                            break;
-                //////                    }
+                                            break;
+                                        case "GET":
+                                            responseMessage = httpClient.GetAsync(url).Result;
+                                            break;
+                                    }
 
-                //////                    if (responseMessage != null)
-                //////                        using (responseMessage)
-                //////                        using (var content = responseMessage.Content)
-                //////                            htm = content.ReadAsStringAsync().Result.Trim();
+                                    if (responseMessage != null)
+                                        using (responseMessage)
+                                        using (var content = responseMessage.Content)
+                                            htm = content.ReadAsStringAsync().Result.Trim();
 
-                //////                    if (htm.Length > 0)
-                //////                    {
-                //////                        r.ok = true;
-                //////                        r.data = htm;
-                //////                    }
-                //////                }
-                //////                break;
-                //////        }
-                //////    }
-                //////    catch (Exception e)
-                //////    {
-                //////        r.error = "ERROR_THROW_request_async: " + e.Message;
-                //////        return r;
-                //////    }
-                //////}
+                                    if (htm.Length > 0)
+                                    {
+                                        r.ok = true;
+                                        r.data = htm;
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        r.error = "ERROR_THROW_request_async: " + e.Message;
+                        return r;
+                    }
+                }
 
                 #endregion
 
@@ -1557,7 +1556,7 @@ namespace weblib
         bool existCache_Data(string cache_name);
 
         void view___reload();
-        string view___build(string html, Uri uri);
+        string view___build(string html, Uri uri, string wroot);
     }
 
     public class clsCache : ICache
@@ -2898,7 +2897,7 @@ namespace weblib
             }
         }
 
-        public string view___build(string html, Uri uri)
+        public string view___build(string html, Uri uri, string wroot)
         {
             string s = html;
 
@@ -2912,7 +2911,7 @@ namespace weblib
                     //if (m_views.ContainsKey(key))
                     //key = (uri.Host + "/" + key.Substring(1, key.Length - 2).Trim()).ToLower();
                     //if (m_views.ContainsKey(key)) s = s.Replace(key_replace, m_views[key]);
-                    string file = Path.Combine(_CONFIG.PATH_ROOT + "_site\\" + uri.Host + "\\_view\\" + key.Substring(1, key.Length - 2).Trim()) + ".html";
+                    string file = Path.Combine(_CONFIG.PATH_ROOT + "_site\\" + wroot + "\\_view\\" + key.Substring(1, key.Length - 2).Trim()) + ".html";
                     if (File.Exists(file))
                         s = s.Replace(key_replace, File.ReadAllText(file));
                 }
@@ -3277,10 +3276,24 @@ namespace weblib
 
         #endregion
 
+        static ConcurrentDictionary<string, string> m_domains = new ConcurrentDictionary<string, string>();
+        static void domain___reload() {
+            string file = Path.Combine(_CONFIG.PATH_ROOT, "_site\\site.json");
+            if (File.Exists(file)) {
+                try
+                {
+                    var dic = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(file));
+                    foreach (var kv in dic) m_domains.TryAdd(kv.Key, kv.Value);
+                }
+                catch { }
+            }
+        }
+
         public static void Start(System.Web.HttpApplication app, NameValueCollection appSettings)
         {
-            _init_job();
             _CONFIG._init(app, appSettings);
+            domain___reload();
+            _init_job();
             m_cache = new clsCache();
             m_api = new clsApi(m_cache);
             clsEngineJS._init(m_api);
@@ -3288,17 +3301,26 @@ namespace weblib
 
         public static void BeginRequest(System.Web.HttpApplication app)
         {
+            m_cache.view___reload();
+
             var Response = app.Response;
             var Request = app.Request;
 
-            m_cache.view___reload();
-
             Uri uri = Request.Url;
+            string ___DOMAIN = uri.Host, ___WROOT = string.Empty;
+            if (uri.Port != 80 && uri.Port != 443) ___DOMAIN += ":" + uri.Port;
+
+            if (m_domains.Count == 0 || m_domains.ContainsKey(___DOMAIN) == false)
+            { 
+                Response.ContentType = "application/json";
+                Response.Write(@"{""ok"":false,""message"":""Cannot find setting domain in site.json""}");
+                Response.End();
+                return;
+            }
+            ___WROOT = m_domains[___DOMAIN];
 
             string path = uri.AbsolutePath.Substring(1);
             if (path == "favicon.ico") { Response.End(); return; }
-            string domain = uri.Host;
-            if (domain == "localhost" || domain == "127.0.0.1") domain = _CONFIG.DOMAIN_LOCALHOST;
 
             //[1] api/{cache_name}/{api_name}/{id}
             if (path.StartsWith("api/"))
@@ -3320,7 +3342,7 @@ namespace weblib
             string file = string.Empty;
             bool isHome = false;
             if (path.Length == 0) { isHome = true; path = "index.html"; }
-            if (path.EndsWith(".html")) path = "_site\\" + domain + "\\" + path;
+            if (path.EndsWith(".html")) path = "_site\\" + ___WROOT + "\\" + path;
             if (path == "admin") path = "admin.html";
 
             string contentType = MimeTypes.GetMimeType(path);
@@ -3328,7 +3350,7 @@ namespace weblib
             if (path[0] != '_' // break dirs: _lib, _view,..
                 && contentType != "text/html" // break files *.html
                 && Request.UrlReferrer != null) // Ref from other request as request on page html
-                path = "_site\\" + domain + "\\" + path;
+                path = "_site\\" + ___WROOT + "\\" + path;
 
             file = Path.Combine(_CONFIG.PATH_ROOT, path).Replace("/", "\\");
 
@@ -3337,7 +3359,7 @@ namespace weblib
                 if (contentType == "text/html")
                 {
                     string html = File.ReadAllText(file);
-                    html = m_cache.view___build(html, uri);
+                    html = m_cache.view___build(html, uri, ___WROOT);
                     Response.Write(html);
                 }
                 else
@@ -3351,7 +3373,7 @@ namespace weblib
                 if (isHome)
                 {
                     Response.ContentType = contentType;
-                    Response.Write("<h1>Cannot found page " + domain + "</h1>");
+                    Response.Write("<h1>Cannot found page " + path + "</h1>");
                 }
                 else
                     Response.StatusCode = 404;

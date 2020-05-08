@@ -99,6 +99,7 @@
     <Content Include="_api\function\config.json" />
     <Content Include="_api\test\config.json" />
     <Content Include="_site\iot.vn\not-find.spark" />
+    <Content Include="_site\site.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin.html" />

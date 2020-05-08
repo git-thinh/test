@@ -1,4 +1,15 @@
-﻿var ___PATH_DOMAIN = '/_site/' + location.host + '/';
+﻿var ___PATH_DOMAIN = '/_site/[' + location.host + ']/';
+var ___XHR = new XMLHttpRequest();
+___XHR.open('GET', '/_site/site.json', false);
+___XHR.send(null);
+if (___XHR.status === 200) {
+    var domains = JSON.parse(___XHR.responseText);
+    if (domains[location.host] != null)
+        ___PATH_DOMAIN = '/_site/' + domains[location.host] + '/';
+} else {
+    alert('Please setting site.json');
+}
+
 var ___APP, ___VIEW = {}, ___COM = {}, ___HTML = {},
     ___DL_CURRENT_EVENT = null, ___DL_CURRENT_ID = null,
     ___V_LOGOUT, ___V_MAIN;
@@ -54,7 +65,7 @@ var ___DATA = {
         ]
     },
     objProject: {
-        items:[]
+        items: []
     },
 };
 
