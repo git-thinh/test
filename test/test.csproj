@@ -134,6 +134,7 @@
     <Content Include="_api\crawler - Copy.js" />
     <Content Include="_api\crawler___request_async.js" />
     <Content Include="_api\function\request_async.js" />
+    <Content Include="_api\js___test.js" />
     <Content Include="_api\site___all.js" />
     <Content Include="_api\test\cache-search-1.js" />
     <Content Include="_api\test\cache-update-1.js" />

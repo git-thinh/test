@@ -3337,7 +3337,7 @@ namespace weblib
             _CONFIG._init(app, appSettings);
             m_cache = new clsCache();
             m_api = new clsApi(m_cache);
-            //clsEngineJS._init(m_api);
+            clsEngineJS._init(m_api);
         }
 
         public static void BeginRequest(System.Web.HttpApplication app)
@@ -3359,22 +3359,22 @@ namespace weblib
             {
                 string[] a = path.Split('/');
 
+                //if (m_cache.existCache_ApiJS(a[1], a[2]))
+                //{
+                //    Response.Write(JsonConvert.SerializeObject(oResult.Error("Cannot found cache name: " + a[1])));
+                //    Response.End();
+                //    return;
+                //}
+
+                oResult rv = null;
+                oResult rp = get_api_parameters(app);
+                if (rp.ok)
+                    rv = clsEngineJS.Execute(a[1] + "___" + a[2], (Dictionary<string, object>)rp.data, null);
+                else
+                    rv = rp;
+
                 Response.ContentType = "application/json";
-                ////if (m_cache.existCache_ApiJS(a[1], a[2]))
-                ////{
-                ////    Response.Write(JsonConvert.SerializeObject(oResult.Error("Cannot found cache name: " + a[1])));
-                ////    Response.End();
-                ////    return;
-                ////}
-
-                ////oResult rv = null;
-                ////oResult rp = get_api_parameters(app);
-                ////if (rp.ok)
-                ////    rv = clsEngineJS.Execute(a[1] + "___" + a[2], (Dictionary<string, object>)rp.data, null);
-                ////else
-                ////rv = rp;
-
-                ////Response.Write(JsonConvert.SerializeObject(rv));
+                Response.Write(JsonConvert.SerializeObject(rv));
                 Response.End();
                 return;
             }

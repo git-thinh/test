@@ -66,6 +66,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="_api\js___test.js" />
     <Content Include="_view\config.json" />
     <Content Include="_lib\fomantic-ui\themes\basic\assets\fonts\icons.eot" />
     <Content Include="_lib\fomantic-ui\themes\basic\assets\fonts\icons.ttf" />
