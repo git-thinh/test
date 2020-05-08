@@ -66,7 +66,10 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="_api\js___test.js" />
+    <Content Include="_api\function_1.js" />
+    <Content Include="_api\function_1.sql" />
+    <Content Include="_api\js.test.js" />
+    <Content Include="_api\app.js" />
     <Content Include="_view\config.json" />
     <Content Include="_lib\fomantic-ui\themes\basic\assets\fonts\icons.eot" />
     <Content Include="_lib\fomantic-ui\themes\basic\assets\fonts\icons.ttf" />
@@ -109,7 +112,7 @@
     <Content Include="_api\crawler - Copy.js" />
     <Content Include="_api\crawler___request_async.js" />
     <Content Include="_api\function\request_async.js" />
-    <Content Include="_api\site___all.js" />
+    <Content Include="_api\site.all.js" />
     <Content Include="_api\test\cache-search-1.js" />
     <Content Include="_api\test\cache-update-1.js" />
     <Content Include="_api\test\crawler.js" />

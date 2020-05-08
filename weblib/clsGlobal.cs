@@ -494,7 +494,7 @@ namespace weblib
 
         #endregion
 
-        string js_call(string api_name, string paramenter = null, string request = null);
+        string js_call(string api_source, string api_name, string paramenter = null, string request = null);
     }
 
     public class clsApi : IApi
@@ -1323,7 +1323,7 @@ namespace weblib
 
         #endregion
 
-        public string js_call(string api_name, string paramenter = null, string request = null)
+        public string js_call(string api_source, string api_name, string paramenter = null, string request = null)
         {
             oResult r = new oResult() { ok = false };
 
@@ -3074,7 +3074,7 @@ namespace weblib
             m_engine.AddHostObject("___api", api);
         }
 
-        public static oResult Execute(string file___api, Dictionary<string, object> parameters = null, Dictionary<string, object> request = null)
+        public static string Execute(string api_name, Dictionary<string, object> parameters = null, Dictionary<string, object> request = null)
         {
             if (request == null) request = new Dictionary<string, object>();
             if (parameters == null) parameters = new Dictionary<string, object>();
@@ -3082,106 +3082,52 @@ namespace weblib
             oResult r = new oResult()
             {
                 ok = false,
-                name = file___api,
+                name = api_name,
                 input = parameters,
                 request = request
             };
 
-            string file = Path.Combine(_CONFIG.PATH_ROOT, "_api\\" + file___api + ".js");
-            if (File.Exists(file) == false)
+            string file_main = Path.Combine(_CONFIG.PATH_ROOT, "_api\\app.js");
+            if (File.Exists(file_main) == false)
             {
-                r.error = "ERROR[clsEngineJS.Execute] Cannot found file: " + file;
-                return r;
+                r.error = "ERROR[clsEngineJS.Execute] Cannot found file: app.js ";
+                return JsonConvert.SerializeObject(r);
             }
 
-            if (!file.Contains("___"))
+            string file_api = Path.Combine(_CONFIG.PATH_ROOT, "_api\\" + api_name + ".js");
+            if (File.Exists(file_api) == false)
             {
-                r.error = "ERROR[clsEngineJS.Execute] file___api: " + file___api + " must be format cache_name___api_name ";
-                return r;
+                r.error = "ERROR[clsEngineJS.Execute] Cannot found file: " + file_api;
+                return JsonConvert.SerializeObject(r);
             }
-
-            string[] a = file___api.Split(new string[] { "___" }, StringSplitOptions.None);
-            string cache_name = a[0], api_name = a[1];
 
             try
             {
-                string js = string.Empty;
-                js = @"
-                (function() {
-                    'use strict';
-                    try {
-                        var ___log_text = function(text){ log___.write('" + file___api + @"', '_', text); };
-                        var ___log_key = function(key, text){ log___.write('" + file___api + @"', key, text); };
-                        var ___api_call = function(api_name, paramenter, request, result_type){ var v = ___api.js_call(api_name, JSON.stringify(paramenter), JSON.stringify(request)); if(result_type == 'text') return v; else return JSON.parse(v); };
+                string js_main = File.ReadAllText(file_main);
+                string js_api = File.ReadAllText(file_api);
 
-                        var ___request = " + JsonConvert.SerializeObject(request) + @";
-                        var ___parameters = " + JsonConvert.SerializeObject(parameters) + @";
+                js_main = js_main.Replace("[API_NAME]", api_name)
+                    .Replace("[TEXT_REQUEST]", JsonConvert.SerializeObject(request))
+                    .Replace("[TEXT_PARAMETER]", JsonConvert.SerializeObject(parameters))
+                    .Replace("[EXECUTE_TEXT_JS]", js_api);
 
-                        ___log_text('This is from JavaScript...');
-
-                        " + File.ReadAllText(file) + @"
-
-                    } catch(e) {
-                        return { ok: false, name: '" + file___api + @"', error: e.message };
-                    }
-                })();
-                ";
-
-                var toReturn = m_engine.Evaluate(js);
+                var toReturn = m_engine.Evaluate(js_main);
                 if (toReturn is Microsoft.ClearScript.Undefined)
                 {
                     r.ok = true;
                 }
-                else if (toReturn is string)
+                else
                 {
                     string json = toReturn.ToString();
-                    try
-                    {
-                        r = JsonConvert.DeserializeObject<oResult>(json);
-                    }
-                    catch (Exception ejs)
-                    {
-                        r.error = ejs.Message;
-                        r.data = json;
-                    }
+                    return json;
                 }
 
-                //////else
-                //////{
-                //////    try
-                //////    {
-                //////        dynamic dynamicResult = toReturn;
-                //////        foreach (string name in dynamicResult.GetDynamicMemberNames())
-                //////        {
-                //////            switch (name)
-                //////            {
-                //////                case "ok":
-                //////                    r.ok = Convert.ToBoolean(dynamicResult[name]);
-                //////                    break;
-                //////                case "request":
-                //////                    break;
-                //////                case "input":
-                //////                    break;
-                //////                case "name":
-                //////                    r.name = Convert.ToString(dynamicResult[name]);
-                //////                    break;
-                //////                case "error":
-                //////                    r.error = Convert.ToString(dynamicResult[name]);
-                //////                    break;
-                //////            }
-                //////        }
-                //////    }
-                //////    catch (Exception ejs)
-                //////    {
-                //////        r.error = ejs.Message; 
-                //////    }
-                //////}
             }
             catch (Exception e)
             {
                 r.error = "ERROR_THROW: " + e.Message;
             }
-            return r;
+            return JsonConvert.SerializeObject(r);
         }
     }
 
@@ -3359,23 +3305,14 @@ namespace weblib
             {
                 string[] a = path.Split('/');
 
-                //if (m_cache.existCache_ApiJS(a[1], a[2]))
-                //{
-                //    Response.Write(JsonConvert.SerializeObject(oResult.Error("Cannot found cache name: " + a[1])));
-                //    Response.End();
-                //    return;
-                //}
-
-                oResult rv = null;
-                oResult rp = get_api_parameters(app);
-                if (rp.ok)
-                    rv = clsEngineJS.Execute(a[1] + "___" + a[2], (Dictionary<string, object>)rp.data, null);
-                else
-                    rv = rp;
+                var req_headers = get_request_headers(app);
+                var req_paramenters = get_request_parameters(app);
+                string json = clsEngineJS.Execute(a[1] + "." + a[2], req_paramenters, req_headers);
 
                 Response.ContentType = "application/json";
-                Response.Write(JsonConvert.SerializeObject(rv));
+                Response.Write(json);
                 Response.End();
+
                 return;
             }
 
@@ -3423,13 +3360,9 @@ namespace weblib
             Response.End();
         }
 
-
-        static oResult get_api_parameters(System.Web.HttpApplication app)
+        static Dictionary<string, object> get_request_headers(System.Web.HttpApplication app)
         {
-            var Response = app.Response;
             var Request = app.Request;
-
-            oResult r = oResult.Error();
 
             string path = Request.Url.AbsolutePath.Substring(1).ToLower();
             Dictionary<string, object> para = new Dictionary<string, object>() {
@@ -3437,8 +3370,35 @@ namespace weblib
                 { "___port", Request.Url.Port },
                 { "___url", path },
                 { "___method", Request.HttpMethod },
-                { "___token", string.Empty },
+                //{ "___token", string.Empty },
             };
+
+            try
+            {
+                int key_size = Request.Headers.Keys.Count;
+                for (int i = 0; i < key_size; i++)
+                {
+                    string key_header = Request.Headers.Keys.Get(i);
+                    string val_header = Request.Headers.Get(key_header);
+                    if (para.ContainsKey(key_header))
+                        para[key_header] = val_header;
+                    else para.Add(key_header, val_header);
+                }
+
+                var a = Request.QueryString.Keys.Cast<string>().ToArray();
+                foreach (var key in a) if (!para.ContainsKey(key)) para.Add(key, Uri.UnescapeDataString(Request.QueryString[key]));
+            }
+            catch { }
+
+            return para;
+        }
+
+        static Dictionary<string, object> get_request_parameters(System.Web.HttpApplication app)
+        {
+            var Request = app.Request;
+
+            string path = Request.Url.AbsolutePath.Substring(1).ToLower();
+            Dictionary<string, object> para = new Dictionary<string, object>();
 
             try
             {
@@ -3448,9 +3408,7 @@ namespace weblib
                 if (Request.HttpMethod == "POST")
                 {
                     string s = new StreamReader(Request.InputStream).ReadToEnd();
-                    if (s == null || string.IsNullOrWhiteSpace(s))
-                        return oResult.Error("Body of POST is not null or emtpy");
-                    else
+                    if (!string.IsNullOrWhiteSpace(s))
                     {
                         s = s.Trim();
                         if (s.Length > 1 && s[0] == '{' && s[s.Length - 1] == '}')
@@ -3458,11 +3416,11 @@ namespace weblib
                             try
                             {
                                 var d = JsonConvert.DeserializeObject<Dictionary<string, object>>(s);
-                                foreach (var kv in d) para.Add(kv.Key, kv.Value);
+                                foreach (var kv in d) if(!para.ContainsKey(kv.Key)) para.Add(kv.Key, kv.Value);
                             }
-                            catch (Exception e)
+                            catch
                             {
-                                return oResult.Error("Convert to json of body error: " + e.Message);
+                                para.Add("___BODY", s);
                             }
                         }
                         else
@@ -3471,17 +3429,13 @@ namespace weblib
                         }
                     }
                 }
-
-                r.ok = true;
-                r.data = para;
             }
-            catch (Exception e)
-            {
-                r.error = "ERROR[clsRouter.get_api_parameters()] " + e.Message;
-            }
+            catch { }
 
-            return r;
+            return para;
         }
+
+
 
     }
 }
