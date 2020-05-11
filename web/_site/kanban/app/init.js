@@ -35,6 +35,402 @@ var ___DATA = {
         int_width: window.innerWidth
     },
     objUser: {},
+    objContact: {
+        items: [
+            {
+                "str_fullname": "Domain Admin",
+                "str_email": "admin@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Tuấn Anh",
+                "str_email": "anhnt1@phuquyland.net"
+            },
+            {
+                "str_fullname": "INFO AROMA",
+                "str_email": "aroma@phuquyland.net"
+            },
+            {
+                "str_fullname": "Live Chat",
+                "str_email": "livechat@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Thanh Duân",
+                "str_email": "duannt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Tuyển Dụng",
+                "str_email": "tuyendung@phuquyland.net"
+            },
+            {
+                "str_fullname": "landora facebook",
+                "str_email": "facebook@phuquyland.net"
+            },
+            {
+                "str_fullname": "Liên Giáp Thị Thúy",
+                "str_email": "liengtt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Trần Văn Hiệp",
+                "str_email": "hieptv@phuquyland.net"
+            },
+            {
+                "str_fullname": "tan hoang ngoc",
+                "str_email": "tanhn1@phuquyland.net"
+            },
+            {
+                "str_fullname": "Phương Hoàng Lan",
+                "str_email": "phuonghl@phuquyland.net"
+            },
+            {
+                "str_fullname": "Tân Hoàng Ngọc",
+                "str_email": "tanhn@phuquyland.net"
+            },
+            {
+                "str_fullname": "Phạm Thu Hà",
+                "str_email": "haptt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Mạnh Hà",
+                "str_email": "manhha@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Thanh Hùng",
+                "str_email": "hungnt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Ngô Thị Thu Hương",
+                "str_email": "huongntt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Thị Phương Hảo",
+                "str_email": "haontp@phuquyland.net"
+            },
+            {
+                "str_fullname": "Đường Thị Kim Khánh",
+                "str_email": "khanhdtk@phuquyland.net"
+            },
+            {
+                "str_fullname": "Anh Kiều Hoàng",
+                "str_email": "anhkh@phuquyland.net"
+            },
+            {
+                "str_fullname": "Phú Quý Land",
+                "str_email": "info@phuquyland.net"
+            },
+            {
+                "str_fullname": "Trương Tùng Lâm",
+                "str_email": "lamtt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Long Lê Hữu",
+                "str_email": "longlh@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thảo Lê Thị",
+                "str_email": "thaolt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Hiên Lê Thị",
+                "str_email": "hienlt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Oanh Lê Thị Kim",
+                "str_email": "oanhltk@phuquyland.net"
+            },
+            {
+                "str_fullname": "Anh Lê Tuấn",
+                "str_email": "anhlt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Cường Lê Viết",
+                "str_email": "cuonglv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Doanh Lê Văn",
+                "str_email": "doanhlv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Huỳnh Lê Văn",
+                "str_email": "huynhlv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thịnh Mai Đức",
+                "str_email": "thinhmd@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Thị Mát",
+                "str_email": "matnt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Văn Mạnh",
+                "str_email": "manhnv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Minh Nguyễn Công",
+                "str_email": "minhnc@phuquyland.net"
+            },
+            {
+                "str_fullname": "Phúc Nguyễn Hữu",
+                "str_email": "phucnh@phuquyland.net"
+            },
+            {
+                "str_fullname": "Hưng Nguyễn Duy",
+                "str_email": "hungnd@phuquyland.net"
+            },
+            {
+                "str_fullname": "Việt Nguyễn Hoàng Tuấn",
+                "str_email": "vietnht@phuquyland.net"
+            },
+            {
+                "str_fullname": "Lan Nguyễn Mai",
+                "str_email": "lannm@phuquyland.net"
+            },
+            {
+                "str_fullname": "Huệ Nguyễn Thanh",
+                "str_email": "huent@phuquyland.net"
+            },
+            {
+                "str_fullname": "Long Nguyễn Thành",
+                "str_email": "longnt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Duyên Nguyễn Thị",
+                "str_email": "duyennt1@phuquyland.net"
+            },
+            {
+                "str_fullname": "Loan Nguyễn Thị",
+                "str_email": "loannt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Duyên Nguyễn Thị",
+                "str_email": "duyennt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thơ Nguyễn Thị",
+                "str_email": "thont@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thơ Nguyễn Thị",
+                "str_email": "thont1@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thủy Nguyễn Thị",
+                "str_email": "thuynt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Dũng Nguyễn Tiến",
+                "str_email": "dungnt1@phuquyland.net"
+            },
+            {
+                "str_fullname": "Anh Nguyễn Tuấn",
+                "str_email": "anhnt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Quân Nguyễn Tùng",
+                "str_email": "quannt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Dũng Nguyễn Văn",
+                "str_email": "dungnv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Sơn Nguyễn Văn",
+                "str_email": "sonnv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Vượng Nguyễn Văn",
+                "str_email": "vuongnv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Tây Nguyễn Văn",
+                "str_email": "taynv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thăng Nguyễn Xuân",
+                "str_email": "thangnx@phuquyland.net"
+            },
+            {
+                "str_fullname": "Đại Nguyễn Xuân",
+                "str_email": "dainx@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nhung Ngô Thị Cẩm",
+                "str_email": "nhungntc@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thảo Ngô Thị Tâm",
+                "str_email": "thaontt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Lộc Ngô Văn",
+                "str_email": "locnv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Võ Hồng Nhung",
+                "str_email": "nhungvh@phuquyland.net"
+            },
+            {
+                "str_fullname": "khách hàng online",
+                "str_email": "khachhang@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nghĩa Phan Trọng",
+                "str_email": "nghiapt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Quý Phi",
+                "str_email": "phinq@phuquyland.net"
+            },
+            {
+                "str_fullname": "Report PhuQuyLand",
+                "str_email": "report@phuquyland.net"
+            },
+            {
+                "str_fullname": "Land Phú Quý",
+                "str_email": "phuquyland.service@phuquyland.net"
+            },
+            {
+                "str_fullname": "Gia Phạm Hoàng",
+                "str_email": "giaph@phuquyland.net"
+            },
+            {
+                "str_fullname": "An Phạm Hải",
+                "str_email": "anph@phuquyland.net"
+            },
+            {
+                "str_fullname": "Linh Phạm Mai",
+                "str_email": "linhpm@phuquyland.net"
+            },
+            {
+                "str_fullname": "Phương Phạm Quỳnh",
+                "str_email": "phuongpq@phuquyland.net"
+            },
+            {
+                "str_fullname": "My Phạm Thảo",
+                "str_email": "mypt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thuỳ Phạm Thị",
+                "str_email": "thuypt1@phuquyland.net"
+            },
+            {
+                "str_fullname": "googleads quang cao",
+                "str_email": "googleads@phuquyland.net"
+            },
+            {
+                "str_fullname": "facebook Quảng cáo",
+                "str_email": "ads@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Thị Trúc Quỳnh",
+                "str_email": "trucquynh@phuquyland.net"
+            },
+            {
+                "str_fullname": "Quản Lý Sản Phẩm",
+                "str_email": "qlsp@phuquyland.net"
+            },
+            {
+                "str_fullname": "LOGIN TEAMVIEWER",
+                "str_email": "teamviewer@phuquyland.net"
+            },
+            {
+                "str_fullname": "Vũ Khắc Hoàng Thu",
+                "str_email": "thuvkh@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thành Thái Văn",
+                "str_email": "thanhtv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thành Thân Quang",
+                "str_email": "thanhtq@phuquyland.net"
+            },
+            {
+                "str_fullname": "Đỗ Đức Thịnh",
+                "str_email": "thinhdd@phuquyland.net"
+            },
+            {
+                "str_fullname": "TIVI TIVI",
+                "str_email": "tivi@phuquyland.net"
+            },
+            {
+                "str_fullname": "Vũ Thị Minh Trang",
+                "str_email": "trangvtm@phuquyland.net"
+            },
+            {
+                "str_fullname": "Ân Trương Quốc",
+                "str_email": "antq@phuquyland.net"
+            },
+            {
+                "str_fullname": "An Trần Hoàng",
+                "str_email": "anth@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thiện Trần Hoàng",
+                "str_email": "thienth@phuquyland.net"
+            },
+            {
+                "str_fullname": "Trang Trần Minh",
+                "str_email": "trangtm@phuquyland.net"
+            },
+            {
+                "str_fullname": "Khải Trần Xuân",
+                "str_email": "khaitx@phuquyland.net"
+            },
+            {
+                "str_fullname": "Ánh Trịnh Thị",
+                "str_email": "anhtt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Vũ Văn Tuân",
+                "str_email": "tuanvv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Tô Anh Tuấn",
+                "str_email": "tuanta@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thùy Tống Thị Minh",
+                "str_email": "thuyttm@phuquyland.net"
+            },
+            {
+                "str_fullname": "Đào Đình Việt",
+                "str_email": "vietdd1@phuquyland.net"
+            },
+            {
+                "str_fullname": "Tư Đoàn Văn",
+                "str_email": "tudv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Hoàng Văn Đông",
+                "str_email": "donghv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Kiều Quang  Tiến Đạt",
+                "str_email": "datkqt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Tình Đậu Thị",
+                "str_email": "tinhdt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Long Đỗ Thế",
+                "str_email": "longdt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Linh Đỗ Thị Thùy",
+                "str_email": "linhdtt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Dũng Đỗ Tiến",
+                "str_email": "dungdt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Việt Đỗ Đức",
+                "str_email": "vietdd@phuquyland.net"
+            }
+        ]
+    },
     objKanban: {
         items: [
             {
@@ -267,6 +663,7 @@ view___init((m) => {
                         for (var ky_ in cf_) {
                             var scope_view = cf_[ky_];
                             if (scope_view && scope_view.length > 0) {
+                                scope_view = scope_view.split('|')[0];
                                 var a = scope_view.split('___');
                                 if (a.length == 2) {
                                     var obj_view = view___get(a[0], a[1]);

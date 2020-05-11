@@ -1,4 +1,5 @@
 {
-  "localhost:51046": "admin",
-  "test.f88.vn": "kanban"
+  "localhost": "kanban",
+  "localhost:51046": "kanban",
+  "test.f88.vn": "admin"
 }

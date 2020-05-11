@@ -3342,7 +3342,12 @@ namespace weblib
             string file = string.Empty;
             bool isHome = false;
             if (path.Length == 0) { isHome = true; path = "index.html"; }
-            if (path.EndsWith(".html")) path = "_site\\" + ___WROOT + "\\" + path;
+            
+            if (path.EndsWith(".html") 
+                || path.StartsWith("data/") 
+                || path.StartsWith("file/"))
+                path = "_site\\" + ___WROOT + "\\" + path;
+
             if (path == "admin") path = "admin.html";
 
             string contentType = MimeTypes.GetMimeType(path);
@@ -3353,6 +3358,9 @@ namespace weblib
                 path = "_site\\" + ___WROOT + "\\" + path;
 
             file = Path.Combine(_CONFIG.PATH_ROOT, path).Replace("/", "\\");
+
+            if (file.Contains("fonts"))
+                ;
 
             if (File.Exists(file))
             {

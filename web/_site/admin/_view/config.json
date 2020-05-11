@@ -54,18 +54,7 @@
         "title": "Test module",
         "name": "test",
         "area_allow": [ "url", "menu" ],
-        "enable": true
-      }
-    ]
-  },
-  "contact": {
-    "title": "Contact",
-    "views": [
-      {
-        "type": "inline",
-        "title": "Contact basic module",
-        "name": "basic",
-        "area_allow": [ "menu" ],
+        "area_init": "",
         "enable": true
       }
     ]
