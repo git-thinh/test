@@ -31,7 +31,7 @@ namespace weblib
 
         public static string PATH_ROOT = string.Empty;
         public static int LOG_PORT_REDIS = LOG_PORT_REDIS_DEFAULT;
-        public static string PATH_DATA_FILE = string.Empty; 
+        public static string PATH_DATA_FILE = string.Empty;
 
         public static void _init(System.Web.HttpApplication app, NameValueCollection appSettings)
         {
@@ -3148,6 +3148,32 @@ namespace weblib
 
     #endregion
 
+    public class oUser
+    {
+        public string session_id { set; get; }
+        public oUserZalo zalo_info { set; get; }
+
+        [JsonIgnore]
+        public Zalo3rdAppClient ZaloClient { set; get; }
+    }
+
+    public class oUserZalo
+    {
+        public long user_id { set; get; }
+        public string name { set; get; }
+        public string birthday { set; get; }
+        public string code { set; get; }
+        public string access_token { set; get; }
+    }
+
+    public class oZaloResult
+    {
+        public int error { set; get; }
+        public string message { set; get; }
+        public oUser user_info { set; get; }
+    }
+
+
     public class clsGlobal
     {
         static ICache m_cache;
@@ -3278,10 +3304,14 @@ namespace weblib
 
         #endregion
 
+        static ConcurrentDictionary<string, oUser> m_users = new ConcurrentDictionary<string, oUser>();
+
         static ConcurrentDictionary<string, string> m_domains = new ConcurrentDictionary<string, string>();
-        static void domain___reload() {
+        static void domain___reload()
+        {
             string file = Path.Combine(_CONFIG.PATH_ROOT, "_site\\site.json");
-            if (File.Exists(file)) {
+            if (File.Exists(file))
+            {
                 try
                 {
                     var dic = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(file));
@@ -3314,41 +3344,73 @@ namespace weblib
             if (uri.Port != 80 && uri.Port != 443) ___DOMAIN += ":" + uri.Port;
             string path = uri.AbsolutePath.Substring(1);
 
+            #region [ ZALO ]
+
             if (path.StartsWith("login-zalo"))
             {
                 ZaloAppInfo appInfo = new ZaloAppInfo(4493888734077794545, "2KOY8CIBqKEwbGJ7TV1k", "http://zalo.iot.vn");
-                //ZaloAppInfo appInfo = new ZaloAppInfo(4493888734077794545, "2KOY8CIBqKEwbGJ7TV1k", "http://192.168.11.205");
                 Zalo3rdAppClient appClient = new Zalo3rdAppClient(appInfo);
                 string loginUrl = appClient.getLoginUrl();
-                //Process.Start(loginUrl);
-                //string code = "bNd-9ViT9GcWOAm1xH8SHRf2vrcVA1n0_t62LgTtP4dnBwTJdrfyPEWlyNE2J0zXgYdpJTXXJ6QzSvXDvIjNMejGtrdM6sPzwLYXQSSaM7oxHjTGnKmn3uivrssw3mKxgogJAjfDU2QGTjXZhL8LMRCquKJjUofGanU1TTXd0t7_1lnymXL2BVmZgrBEMXOAZmxU4lznKmYgVg9uxsGbSD9QWZhbANj5rd30G9XIKnsfSuq8umKQ79nmtGgt328Pr7_FOk8iQISiUv89Ka4e0oibbMTySbPZPYFGMOmiJaNS7fJaEKDlosSFzQ1Q76_18Hc1iM8IQSKQ2F-GOsfw_5eenFTMGIkJMIRuE0bemK0g2G";
-                //JObject token = appClient.getAccessToken(code);
-                //var access_token = token["access_token"].ToString();
-
-                ////JObject profile = appClient.getProfile(access_token, "id, name, birthday");
-                //JObject friends = appClient.getFriends(access_token, 0, 100, "id, name, picture");
-                ////JObject sendMessage = appClient.sendMessage(access_token, 3852331461584449386, textBox1.Text, "");
-
-                ////Response.ContentType = "application/json";
-                //Response.Write("{}");
-                //Response.End();
-
+                string id = "zalo-" + Guid.NewGuid().ToString().Substring(5);
+                if (loginUrl.Contains("&state=") == false) loginUrl += "&state=" + id;
+                m_users.TryAdd(id, new oUser() { session_id = id, ZaloClient = appClient, zalo_info = new oUserZalo() });
                 Response.Redirect(loginUrl);
-                //ttp://zalo.iot.vn/?uid=2119814009048858734&code=RltjA8o0a1uYmlOceuoXHYNejMBqiz5dQElFQg2NdN9tsVbsw9YRGc2ao0ZV-Teb2g6wBPVxaGfaYliHfiEX4Zw0mII_pAP4Fg23Llx9srjWcjDhkSIwSMAIrNV_aQHcMg2LNBsXt25o_gGj_RtLGtkfuHhgyV9xOR2JLUdtxJLtXVuThC_G5pUDrb6lZU4Q6f3UPDYKe55Jtz0YwvBTTKEib0IWwv9l8V2iOOJjaZz0jEDyaBhIKNluptorehTqAlsbUUoypMykb_4yv9N9d6hfbloIXOFaKkkLqFs8az0MBFD4gdIeSG73kxlBl-NxHVEHf_AwWhyFzF3clgB-uXNoxFxkq_sfTUg7kzxJ_FucbPmV18A6jWO&scope=access_profile,access_friends_list,send_msg,push_feed
-
                 return;
             }
 
-            if (url.Contains("uid=") && url.Contains("code="))
+            if (path.StartsWith("user-zalo"))
             {
-                //JObject profile = appClient.getProfile(access_token, "id, name, birthday");
-                Response.Write(url);
+                string json = JsonConvert.SerializeObject(m_users.Values);
+                Response.ContentType = "application/json";
+                Response.Write(json);
                 Response.End();
                 return;
             }
 
+            if (url.Contains("uid=") && url.Contains("code=") && url.Contains("state="))
+            {
+                string zalo_session_id = Request.QueryString["state"],
+                    zalo_code = Request.QueryString["code"],
+                    zalo_uid = Request.QueryString["uid"],
+                    zalo_json = "{}";
+
+                if (!string.IsNullOrEmpty(zalo_session_id) && m_users.ContainsKey(zalo_session_id)) {
+                    try
+                    {
+                        oUser u = m_users[zalo_session_id];
+                        u.zalo_info.access_token = zalo_code;
+                        u.zalo_info.user_id = long.Parse(zalo_uid);
+
+                        var jo_token = u.ZaloClient.getAccessToken(zalo_code);
+                        var access_token = jo_token["access_token"].ToString();
+
+                        var jo_profile = u.ZaloClient.getProfile(access_token, "id, name, birthday, address");
+                        u.zalo_info.name = jo_profile["name"].ToString();
+                        u.zalo_info.birthday = jo_profile["birthday"].ToString();
+
+                        var jo_friends = u.ZaloClient.getFriends(access_token, 0, 3, "id, name, picture, address");
+                        string list_friends = JsonConvert.SerializeObject(jo_friends);
+
+                        //var jo_send_msg = u.ZaloClient.sendMessage(access_token, 7900271606406461606, Guid.NewGuid().ToString(), "https://vnexpress.net");
+
+                        string zalo_result = JsonConvert.SerializeObject(jo_profile);
+                        var o = JsonConvert.DeserializeObject<oZaloResult>(zalo_result);
+                        o.user_info = u;
+                        zalo_json = JsonConvert.SerializeObject(o);
+                    }
+                    catch { }
+                }
+
+                Response.ContentType = "application/json";
+                Response.Write(zalo_json);
+                Response.End();
+                return;
+            }
+
+            #endregion
+
             if (m_domains.Count == 0 || m_domains.ContainsKey(___DOMAIN) == false)
-            { 
+            {
                 Response.ContentType = "application/json";
                 Response.Write(@"{""ok"":false,""message"":""Cannot find setting domain in site.json""}");
                 Response.End();
@@ -3379,9 +3441,9 @@ namespace weblib
             string file = string.Empty;
             bool isHome = false;
             if (path.Length == 0) { isHome = true; path = "index.html"; }
-            
-            if (path.EndsWith(".html") 
-                || path.StartsWith("data/") 
+
+            if (path.EndsWith(".html")
+                || path.StartsWith("data/")
                 || path.StartsWith("file/"))
                 path = "_site\\" + ___WROOT + "\\" + path;
 
@@ -3483,7 +3545,7 @@ namespace weblib
                             try
                             {
                                 var d = JsonConvert.DeserializeObject<Dictionary<string, object>>(s);
-                                foreach (var kv in d) if(!para.ContainsKey(kv.Key)) para.Add(kv.Key, kv.Value);
+                                foreach (var kv in d) if (!para.ContainsKey(kv.Key)) para.Add(kv.Key, kv.Value);
                             }
                             catch
                             {
