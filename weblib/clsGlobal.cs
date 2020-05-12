@@ -20,6 +20,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using ZaloCSharpSDK;
+using ZaloDotNetSDK;
 
 namespace weblib
 {
@@ -3307,8 +3309,43 @@ namespace weblib
             var Request = app.Request;
 
             Uri uri = Request.Url;
+            string url = uri.ToString();
             string ___DOMAIN = uri.Host, ___WROOT = string.Empty;
             if (uri.Port != 80 && uri.Port != 443) ___DOMAIN += ":" + uri.Port;
+            string path = uri.AbsolutePath.Substring(1);
+
+            if (path.StartsWith("login-zalo"))
+            {
+                ZaloAppInfo appInfo = new ZaloAppInfo(4493888734077794545, "2KOY8CIBqKEwbGJ7TV1k", "http://zalo.iot.vn");
+                //ZaloAppInfo appInfo = new ZaloAppInfo(4493888734077794545, "2KOY8CIBqKEwbGJ7TV1k", "http://192.168.11.205");
+                Zalo3rdAppClient appClient = new Zalo3rdAppClient(appInfo);
+                string loginUrl = appClient.getLoginUrl();
+                //Process.Start(loginUrl);
+                //string code = "bNd-9ViT9GcWOAm1xH8SHRf2vrcVA1n0_t62LgTtP4dnBwTJdrfyPEWlyNE2J0zXgYdpJTXXJ6QzSvXDvIjNMejGtrdM6sPzwLYXQSSaM7oxHjTGnKmn3uivrssw3mKxgogJAjfDU2QGTjXZhL8LMRCquKJjUofGanU1TTXd0t7_1lnymXL2BVmZgrBEMXOAZmxU4lznKmYgVg9uxsGbSD9QWZhbANj5rd30G9XIKnsfSuq8umKQ79nmtGgt328Pr7_FOk8iQISiUv89Ka4e0oibbMTySbPZPYFGMOmiJaNS7fJaEKDlosSFzQ1Q76_18Hc1iM8IQSKQ2F-GOsfw_5eenFTMGIkJMIRuE0bemK0g2G";
+                //JObject token = appClient.getAccessToken(code);
+                //var access_token = token["access_token"].ToString();
+
+                ////JObject profile = appClient.getProfile(access_token, "id, name, birthday");
+                //JObject friends = appClient.getFriends(access_token, 0, 100, "id, name, picture");
+                ////JObject sendMessage = appClient.sendMessage(access_token, 3852331461584449386, textBox1.Text, "");
+
+                ////Response.ContentType = "application/json";
+                //Response.Write("{}");
+                //Response.End();
+
+                Response.Redirect(loginUrl);
+                //ttp://zalo.iot.vn/?uid=2119814009048858734&code=RltjA8o0a1uYmlOceuoXHYNejMBqiz5dQElFQg2NdN9tsVbsw9YRGc2ao0ZV-Teb2g6wBPVxaGfaYliHfiEX4Zw0mII_pAP4Fg23Llx9srjWcjDhkSIwSMAIrNV_aQHcMg2LNBsXt25o_gGj_RtLGtkfuHhgyV9xOR2JLUdtxJLtXVuThC_G5pUDrb6lZU4Q6f3UPDYKe55Jtz0YwvBTTKEib0IWwv9l8V2iOOJjaZz0jEDyaBhIKNluptorehTqAlsbUUoypMykb_4yv9N9d6hfbloIXOFaKkkLqFs8az0MBFD4gdIeSG73kxlBl-NxHVEHf_AwWhyFzF3clgB-uXNoxFxkq_sfTUg7kzxJ_FucbPmV18A6jWO&scope=access_profile,access_friends_list,send_msg,push_feed
+
+                return;
+            }
+
+            if (url.Contains("uid=") && url.Contains("code="))
+            {
+                //JObject profile = appClient.getProfile(access_token, "id, name, birthday");
+                Response.Write(url);
+                Response.End();
+                return;
+            }
 
             if (m_domains.Count == 0 || m_domains.ContainsKey(___DOMAIN) == false)
             { 
@@ -3319,7 +3356,6 @@ namespace weblib
             }
             ___WROOT = m_domains[___DOMAIN];
 
-            string path = uri.AbsolutePath.Substring(1);
             if (path == "favicon.ico") { Response.End(); return; }
 
             //[1] api/{cache_name}/{api_name}/{id}
@@ -3337,6 +3373,7 @@ namespace weblib
 
                 return;
             }
+
 
             //[2] Files
             string file = string.Empty;

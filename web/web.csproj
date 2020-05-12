@@ -13,7 +13,7 @@
     <RootNamespace>web</RootNamespace>
     <AssemblyName>web</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -71,6 +71,144 @@
     <Content Include="_api\function_1.sql" />
     <Content Include="_api\js.test.js" />
     <Content Include="_api\app.js" />
+    <Content Include="_site\kanban\app\classie.js" />
+    <Content Include="_site\kanban\app\head.load.min.js" />
+    <Content Include="_site\kanban\app\init.js" />
+    <Content Include="_site\kanban\app\jquery-3.4.1.slim.min.js" />
+    <Content Include="_site\kanban\app\lodash.min.js" />
+    <Content Include="_site\kanban\app\vue.min.js" />
+    <Content Include="_site\kanban\assets\css\custom.css" />
+    <Content Include="_site\kanban\assets\css\font-awesome\font-awesome.min.css" />
+    <Content Include="_site\kanban\assets\css\theme.css" />
+    <Content Include="_site\kanban\assets\img\avatar-female-1.jpg" />
+    <Content Include="_site\kanban\assets\img\avatar-female-2.jpg" />
+    <Content Include="_site\kanban\assets\img\avatar-female-3.jpg" />
+    <Content Include="_site\kanban\assets\img\avatar-female-4.jpg" />
+    <Content Include="_site\kanban\assets\img\avatar-female-5.jpg" />
+    <Content Include="_site\kanban\assets\img\avatar-female-6.jpg" />
+    <Content Include="_site\kanban\assets\img\avatar-male-1.jpg" />
+    <Content Include="_site\kanban\assets\img\avatar-male-2.jpg" />
+    <Content Include="_site\kanban\assets\img\avatar-male-3.jpg" />
+    <Content Include="_site\kanban\assets\img\avatar-male-4.jpg" />
+    <Content Include="_site\kanban\assets\img\avatar-male-5.jpg" />
+    <Content Include="_site\kanban\assets\img\avatar-male-6.jpg" />
+    <Content Include="_site\kanban\assets\img\components\activity.png" />
+    <Content Include="_site\kanban\assets\img\components\alerts.png" />
+    <Content Include="_site\kanban\assets\img\components\avatar-list.png" />
+    <Content Include="_site\kanban\assets\img\components\avatar.png" />
+    <Content Include="_site\kanban\assets\img\components\badges.png" />
+    <Content Include="_site\kanban\assets\img\components\breadcrumb.png" />
+    <Content Include="_site\kanban\assets\img\components\buttons.png" />
+    <Content Include="_site\kanban\assets\img\components\card-kanban.png" />
+    <Content Include="_site\kanban\assets\img\components\card-list.png" />
+    <Content Include="_site\kanban\assets\img\components\card-note.png" />
+    <Content Include="_site\kanban\assets\img\components\card-project.png" />
+    <Content Include="_site\kanban\assets\img\components\card-task.png" />
+    <Content Include="_site\kanban\assets\img\components\card-team.png" />
+    <Content Include="_site\kanban\assets\img\components\cards.png" />
+    <Content Include="_site\kanban\assets\img\components\chat-item.png" />
+    <Content Include="_site\kanban\assets\img\components\chat-module.png" />
+    <Content Include="_site\kanban\assets\img\components\checklist.png" />
+    <Content Include="_site\kanban\assets\img\components\date-picker.png" />
+    <Content Include="_site\kanban\assets\img\components\dropdowns.png" />
+    <Content Include="_site\kanban\assets\img\components\files.png" />
+    <Content Include="_site\kanban\assets\img\components\forms.png" />
+    <Content Include="_site\kanban\assets\img\components\input-group.png" />
+    <Content Include="_site\kanban\assets\img\components\list-group.png" />
+    <Content Include="_site\kanban\assets\img\components\navbar.png" />
+    <Content Include="_site\kanban\assets\img\components\navs.png" />
+    <Content Include="_site\kanban\assets\img\components\progress.png" />
+    <Content Include="_site\kanban\assets\img\components\toasts.png" />
+    <Content Include="_site\kanban\assets\img\components\tooltips.png" />
+    <Content Include="_site\kanban\assets\img\empty-state.svg" />
+    <Content Include="_site\kanban\assets\img\layouts\layout-nav-side.svg" />
+    <Content Include="_site\kanban\assets\img\layouts\layout-nav-top-sidebar.svg" />
+    <Content Include="_site\kanban\assets\img\layouts\layout-nav-top.svg" />
+    <Content Include="_site\kanban\assets\img\loader.svg" />
+    <Content Include="_site\kanban\assets\img\logo-bootstrap.svg" />
+    <Content Include="_site\kanban\assets\img\logo-color.svg" />
+    <Content Include="_site\kanban\assets\img\logo-google.svg" />
+    <Content Include="_site\kanban\assets\img\logo-gulp.svg" />
+    <Content Include="_site\kanban\assets\img\logo-integration-drive.svg" />
+    <Content Include="_site\kanban\assets\img\logo-integration-dropbox.svg" />
+    <Content Include="_site\kanban\assets\img\logo-integration-slack.svg" />
+    <Content Include="_site\kanban\assets\img\logo-integration-trello.svg" />
+    <Content Include="_site\kanban\assets\img\logo-npm.svg" />
+    <Content Include="_site\kanban\assets\img\logo-payment-amex.svg" />
+    <Content Include="_site\kanban\assets\img\logo-payment-paypal.svg" />
+    <Content Include="_site\kanban\assets\img\logo-payment-visa.svg" />
+    <Content Include="_site\kanban\assets\img\logo-sass.svg" />
+    <Content Include="_site\kanban\assets\img\logo-team.jpg" />
+    <Content Include="_site\kanban\assets\img\logo.svg" />
+    <Content Include="_site\kanban\assets\img\overview\nav-side-chat.png" />
+    <Content Include="_site\kanban\assets\img\overview\nav-side-kanban-board.png" />
+    <Content Include="_site\kanban\assets\img\overview\nav-side-project.png" />
+    <Content Include="_site\kanban\assets\img\overview\nav-side-task.png" />
+    <Content Include="_site\kanban\assets\img\overview\nav-side-team.png" />
+    <Content Include="_site\kanban\assets\img\overview\nav-side-user.png" />
+    <Content Include="_site\kanban\assets\img\overview\utility-account-settings.png" />
+    <Content Include="_site\kanban\assets\img\overview\utility-create-account.png" />
+    <Content Include="_site\kanban\assets\img\overview\utility-error.png" />
+    <Content Include="_site\kanban\assets\img\overview\utility-forgot-password.png" />
+    <Content Include="_site\kanban\assets\img\overview\utility-login.png" />
+    <Content Include="_site\kanban\assets\js\autosize.min.js" />
+    <Content Include="_site\kanban\assets\js\bootstrap.js" />
+    <Content Include="_site\kanban\assets\js\draggable.bundle.legacy.js" />
+    <Content Include="_site\kanban\assets\js\dropzone.min.js" />
+    <Content Include="_site\kanban\assets\js\flatpickr.min.js" />
+    <Content Include="_site\kanban\assets\js\jquery.min.js" />
+    <Content Include="_site\kanban\assets\js\list.min.js" />
+    <Content Include="_site\kanban\assets\js\popper.min.js" />
+    <Content Include="_site\kanban\assets\js\prism.js" />
+    <Content Include="_site\kanban\assets\js\swap-animation.js" />
+    <Content Include="_site\kanban\assets\js\theme.bak.js" />
+    <Content Include="_site\kanban\assets\js\theme.js" />
+    <Content Include="_site\kanban\chat.html" />
+    <Content Include="_site\kanban\contact.html" />
+    <Content Include="_site\kanban\index - Copy %282%29.html" />
+    <Content Include="_site\kanban\index.html" />
+    <Content Include="_site\kanban\kanban.html" />
+    <Content Include="_site\kanban\login.html" />
+    <Content Include="_site\kanban\profile.html" />
+    <Content Include="_site\kanban\project.html" />
+    <Content Include="_site\kanban\setting.html" />
+    <Content Include="_site\kanban\swipe1.html" />
+    <Content Include="_site\kanban\swipe2.html" />
+    <Content Include="_site\kanban\task.html" />
+    <Content Include="_site\kanban\team.html" />
+    <Content Include="_site\kanban\user.html" />
+    <Content Include="_site\kanban\_view\contact\basic - Copy.htm" />
+    <Content Include="_site\kanban\_view\contact\basic.css" />
+    <Content Include="_site\kanban\_view\contact\basic.htm" />
+    <Content Include="_site\kanban\_view\contact\basic.js" />
+    <Content Include="_site\kanban\_view\dialog\test.css" />
+    <Content Include="_site\kanban\_view\dialog\test.htm" />
+    <Content Include="_site\kanban\_view\form\form01.htm" />
+    <Content Include="_site\kanban\_view\form\form01.js" />
+    <Content Include="_site\kanban\_view\header\search_test.css" />
+    <Content Include="_site\kanban\_view\header\search_test.htm" />
+    <Content Include="_site\kanban\_view\header\search_test.js" />
+    <Content Include="_site\kanban\_view\header\top - Copy.htm" />
+    <Content Include="_site\kanban\_view\header\top.htm" />
+    <Content Include="_site\kanban\_view\header\top.js" />
+    <Content Include="_site\kanban\_view\header___libs.html" />
+    <Content Include="_site\kanban\_view\kanban\trello - Copy.htm" />
+    <Content Include="_site\kanban\_view\kanban\trello.htm" />
+    <Content Include="_site\kanban\_view\kanban\trello.js" />
+    <Content Include="_site\kanban\_view\loading\loading.htm" />
+    <Content Include="_site\kanban\_view\popup\test.css" />
+    <Content Include="_site\kanban\_view\popup\test.htm" />
+    <Content Include="_site\kanban\_view\popup\test.js" />
+    <Content Include="_site\kanban\_view\table\table_basic.htm" />
+    <Content Include="_site\kanban\_view\user\login.css" />
+    <Content Include="_site\kanban\_view\user\login.htm" />
+    <Content Include="_site\kanban\_view\user\login.js" />
+    <Content Include="_site\kanban\_view\user\logout.htm" />
+    <Content Include="_site\kanban\_view\user\logout.js" />
+    <Content Include="_site\kanban\_view\user___menu.html" />
+    <Content Include="_site\kanban\_view\_debug\test.css" />
+    <Content Include="_site\kanban\_view\_debug\test.htm" />
+    <Content Include="_site\kanban\_view\_debug\test.js" />
     <Content Include="_view\config.json" />
     <Content Include="_api\cms_data\addnew.json" />
     <Content Include="_api\cms_data\addnew.valid" />
@@ -79,6 +217,26 @@
     <Content Include="_api\test\config.json" />
     <Content Include="_site\iot\not-find.spark" />
     <Content Include="_site\site.json" />
+    <Content Include="_site\kanban\assets\css\fonts\fontawesome-webfont.woff2" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-Black.woff" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-Black.woff2" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-BlackItalic.woff" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-BlackItalic.woff2" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-Bold.woff" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-Bold.woff2" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-BoldItalic.woff" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-BoldItalic.woff2" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-Italic.woff" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-Italic.woff2" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-Medium.woff" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-Medium.woff2" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-MediumItalic.woff" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-MediumItalic.woff2" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-Regular.woff" />
+    <Content Include="_site\kanban\assets\fonts\Inter-UI-Regular.woff2" />
+    <Content Include="_site\kanban\file\email.xlsx" />
+    <Content Include="_site\kanban\_view\config.json" />
+    <Content Include="_site\kanban\_view\default.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -188,7 +346,10 @@
       <Name>weblib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="_site\kanban\data\" />
+    <Folder Include="_site\kanban\_view\zalo\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -204,7 +365,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54951</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51046/</IISUrl>
+          <IISUrl>http://localhost</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

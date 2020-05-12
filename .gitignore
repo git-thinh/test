@@ -37,3 +37,5 @@ download_themes/debug.log
 /web/bin/Quartz.xml
 /web/bin/Newtonsoft.Json.xml
 /web/bin/Quartz.pdb
+/zalo/zalotest/bin
+/zalo/zalotest/obj
