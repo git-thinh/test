@@ -48,6 +48,55 @@
         "name": "menu",
         "area_allow": [ "dailog" ],
         "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "contact",
+        "name": "contact",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "chat",
+        "name": "chat",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "project",
+        "name": "project",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "group",
+        "name": "group",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "task",
+        "name": "task",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "calendar",
+        "name": "calendar",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "message",
+        "name": "message",
+        "area_allow": [ "dailog" ],
+        "enable": true
       }
     ]
   },

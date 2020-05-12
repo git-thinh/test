@@ -704,6 +704,14 @@ view___init((m) => {
     });
 });
 
+function touchHandler(event) {
+    if (event.touches.length > 1) {
+        //the event is multi-touch. you can then prevent the behavior
+        event.preventDefault()
+    }
+}
+window.addEventListener("touchstart", touchHandler, false);
+
 window.addEventListener("hashchange", function (h) {
     var old_hash = new URL(h.oldURL).hash;
     var new_hash = location.hash;
@@ -712,22 +720,37 @@ window.addEventListener("hashchange", function (h) {
     console.log('HASH_CHANGE: ' + old_hash + ' -> ', new_hash);
     view___load(new_hash, old_hash);
 }, false);
-window.addEventListener('DOMContentLoaded', (e) => {
-    document.onclick = function (event) {
-        var event_id = event.target.getAttribute('id');
-        //console.log('DOC_CLICK: CURRENT_ID = ' + ___DL_CURRENT_ID + ', event_id = ' + event_id);
-        if (___DL_CURRENT_ID && ___DL_CURRENT_ID != event_id) {
-            var dl = event.target.closest('.' + ___DL_CURRENT_ID);
-            //console.log('DOC_CLICK: dl = ', dl == null ? '' : ' dialog_current -> close it');
-            if (dl == null) {
-                // Click out of DIALOG -> close it
-                ___APP.$data.view___dialog_1 = null;
-                ___DL_CURRENT_ID = null;
-                ___DL_CURRENT_EVENT.target.removeAttribute('id');
-                ___DL_CURRENT_EVENT = null;
+
+    var touchStartHandler = function (event) {
+        if (___DL_CURRENT_ID && ___DL_CURRENT_EVENT) {
+            var event_id = event.target.getAttribute('id');
+            //console.log('DOC_CLICK: CURRENT_ID = ' + ___DL_CURRENT_ID + ', event_id = ' + event_id);
+            if (___DL_CURRENT_ID && ___DL_CURRENT_ID != event_id) {
+                var dl = event.target.closest('.' + ___DL_CURRENT_ID);
+                //console.log('DOC_CLICK: dl = ', dl == null ? '' : ' dialog_current -> close it');
+                if (dl == null) {
+                    // Click out of DIALOG -> close it
+                    ___APP.$data.view___dialog_1 = null;
+                    ___DL_CURRENT_ID = null;
+                    ___DL_CURRENT_EVENT.target.removeAttribute('id');
+                    ___DL_CURRENT_EVENT = null;
+                }
             }
         }
     };
+
+window.addEventListener('DOMContentLoaded', (e) => {
+
+    if ('ontouchstart' in document.documentElement) {
+        document.addEventListener("touchstart", function (event) {
+            if (___DL_CURRENT_ID && ___DL_CURRENT_EVENT) {
+                touchStartHandler(event);
+                event.preventDefault();
+            }
+        }, { passive: false });
+    } else {
+        document.onclick = function (event) { touchStartHandler(event); };
+    }
 });
 
 

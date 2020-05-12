@@ -201,6 +201,7 @@
     <Content Include="_site\kanban\_view\popup\test.htm" />
     <Content Include="_site\kanban\_view\popup\test.js" />
     <Content Include="_site\kanban\_view\table\table_basic.htm" />
+    <Content Include="_site\kanban\_view\user\chat.css" />
     <Content Include="_site\kanban\_view\user\login.css" />
     <Content Include="_site\kanban\_view\user\login.htm" />
     <Content Include="_site\kanban\_view\user\login.js" />
