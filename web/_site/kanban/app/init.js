@@ -507,9 +507,31 @@ var ___MIXIN = {
                 classie.add(el, ___DL_CURRENT_ID);
 
                 var rec = ___DL_CURRENT_EVENT.target.getBoundingClientRect();
-                //console.log('MIXIN: ___init_class ' + _self.view_id + ', rec = ', rec);
-                _self.dialog___.top = rec.bottom + 'px';
-                _self.dialog___.left = rec.x + 'px';
+                console.log('MIXIN: ___init_class ' + ___DL_CURRENT_ID + ', ' + _self.view_id + ', rec = ', rec);
+                //_self.dialog___.opacity = 0;
+                //_self.dialog___.top = rec.bottom + 'px';
+
+                var dl = document.querySelector('.' + ___DL_CURRENT_ID);
+                if (dl) {
+                    dl.style.opacity = 0;
+                    dl.style.top = rec.bottom + 'px';
+                }
+
+                setTimeout(function () {
+                    var dl = document.querySelector('.' + ___DL_CURRENT_ID);
+                    if (dl) {
+                        var r1 = dl.getBoundingClientRect();
+                        //console.log(rec.x + r1.width, window.innerWidth);
+                        if (rec.x + r1.width > window.innerWidth) {
+                            dl.style.left = 'auto';
+                            dl.style.right = '0px';
+                        } else {
+                            dl.style.right = 'auto';
+                            dl.style.left = rec.x + 'px';
+                        }
+                        dl.style.opacity = 1;
+                    }
+                }, 100);
             }
         }
     },

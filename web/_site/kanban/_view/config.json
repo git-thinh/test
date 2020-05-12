@@ -33,7 +33,6 @@
         "title": "Login",
         "name": "login",
         "area_allow": [ "url", "menu" ],
-        "area_init": "",
         "enable": true
       },
       {
@@ -41,7 +40,13 @@
         "title": "Logout",
         "name": "logout",
         "area_allow": [ "url", "menu" ],
-        "area_init": "",
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "Menu",
+        "name": "menu",
+        "area_allow": [ "dailog" ],
         "enable": true
       }
     ]

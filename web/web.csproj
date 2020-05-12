@@ -77,8 +77,8 @@
     <Content Include="_site\kanban\app\jquery-3.4.1.slim.min.js" />
     <Content Include="_site\kanban\app\lodash.min.js" />
     <Content Include="_site\kanban\app\vue.min.js" />
+    <Content Include="_site\kanban\assets\css\bootstrap.min.css" />
     <Content Include="_site\kanban\assets\css\custom.css" />
-    <Content Include="_site\kanban\assets\css\font-awesome\font-awesome.min.css" />
     <Content Include="_site\kanban\assets\css\theme.css" />
     <Content Include="_site\kanban\assets\img\avatar-female-1.jpg" />
     <Content Include="_site\kanban\assets\img\avatar-female-2.jpg" />
@@ -153,6 +153,7 @@
     <Content Include="_site\kanban\assets\img\overview\utility-login.png" />
     <Content Include="_site\kanban\assets\js\autosize.min.js" />
     <Content Include="_site\kanban\assets\js\bootstrap.js" />
+    <Content Include="_site\kanban\assets\js\bootstrap.min.js" />
     <Content Include="_site\kanban\assets\js\draggable.bundle.legacy.js" />
     <Content Include="_site\kanban\assets\js\dropzone.min.js" />
     <Content Include="_site\kanban\assets\js\flatpickr.min.js" />
@@ -205,6 +206,8 @@
     <Content Include="_site\kanban\_view\user\login.js" />
     <Content Include="_site\kanban\_view\user\logout.htm" />
     <Content Include="_site\kanban\_view\user\logout.js" />
+    <Content Include="_site\kanban\_view\user\menu.css" />
+    <Content Include="_site\kanban\_view\user\menu.htm" />
     <Content Include="_site\kanban\_view\user___menu.html" />
     <Content Include="_site\kanban\_view\_debug\test.css" />
     <Content Include="_site\kanban\_view\_debug\test.htm" />
@@ -347,6 +350,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="_site\kanban\assets\css\font-awesome\" />
     <Folder Include="_site\kanban\data\" />
     <Folder Include="_site\kanban\_view\zalo\" />
   </ItemGroup>
