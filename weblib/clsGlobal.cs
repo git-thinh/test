@@ -3384,14 +3384,16 @@ namespace weblib
                         var jo_token = u.ZaloClient.getAccessToken(zalo_code);
                         var access_token = jo_token["access_token"].ToString();
 
-                        var jo_profile = u.ZaloClient.getProfile(access_token, "id, name, birthday, address");
+                        var jo_profile = u.ZaloClient.getProfile(access_token, "id, name, birthday");
                         u.zalo_info.name = jo_profile["name"].ToString();
                         u.zalo_info.birthday = jo_profile["birthday"].ToString();
 
-                        var jo_friends = u.ZaloClient.getFriends(access_token, 0, 3, "id, name, picture, address");
-                        string list_friends = JsonConvert.SerializeObject(jo_friends);
+                        //var jo_friends = u.ZaloClient.getFriends(access_token, 0, 3, "id, name, picture");
+                        //string list_friends = JsonConvert.SerializeObject(jo_friends);
 
                         //var jo_send_msg = u.ZaloClient.sendMessage(access_token, 7900271606406461606, Guid.NewGuid().ToString(), "https://vnexpress.net");
+                        var jo_friends = u.ZaloClient.getInvitableFriends(access_token, 0, 3, "id, name, picture");
+                        string list_friends = JsonConvert.SerializeObject(jo_friends);
 
                         string zalo_result = JsonConvert.SerializeObject(jo_profile);
                         var o = JsonConvert.DeserializeObject<oZaloResult>(zalo_result);
