@@ -3392,8 +3392,8 @@ namespace weblib
                         //string list_friends = JsonConvert.SerializeObject(jo_friends);
 
                         //var jo_send_msg = u.ZaloClient.sendMessage(access_token, 7900271606406461606, Guid.NewGuid().ToString(), "https://vnexpress.net");
-                        var jo_friends = u.ZaloClient.getInvitableFriends(access_token, 0, 3, "id, name, picture");
-                        string list_friends = JsonConvert.SerializeObject(jo_friends);
+                        //var jo_friends = u.ZaloClient.getInvitableFriends(access_token, 0, 3, "id, name, picture");
+                        //string list_friends = JsonConvert.SerializeObject(jo_friends);
 
                         string zalo_result = JsonConvert.SerializeObject(jo_profile);
                         var o = JsonConvert.DeserializeObject<oZaloResult>(zalo_result);
@@ -3565,8 +3565,6 @@ namespace weblib
 
             return para;
         }
-
-
 
     }
 }
