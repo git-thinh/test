@@ -3148,8 +3148,6 @@ namespace weblib
 
     #endregion
 
-    #region [ MODEL ]
-
     public class oUser
     {
         public string session_id { set; get; }
@@ -3175,97 +3173,6 @@ namespace weblib
         public oUser user_info { set; get; }
     }
 
-    #endregion
-
-    public static class Utility
-    {
-        public static Dictionary<string, object> get_request_headers(System.Web.HttpApplication app)
-        {
-            var Request = app.Request;
-
-            string path = Request.Url.AbsolutePath.Substring(1).ToLower();
-            Dictionary<string, object> para = new Dictionary<string, object>() {
-                { "___domain", Request.Url.Host },
-                { "___port", Request.Url.Port },
-                { "___url", path },
-                { "___method", Request.HttpMethod },
-                //{ "___token", string.Empty },
-            };
-
-            try
-            {
-                int key_size = Request.Headers.Keys.Count;
-                for (int i = 0; i < key_size; i++)
-                {
-                    string key_header = Request.Headers.Keys.Get(i);
-                    string val_header = Request.Headers.Get(key_header);
-                    if (para.ContainsKey(key_header))
-                        para[key_header] = val_header;
-                    else para.Add(key_header, val_header);
-                }
-
-                var a = Request.QueryString.Keys.Cast<string>().ToArray();
-                foreach (var key in a) if (!para.ContainsKey(key)) para.Add(key, Uri.UnescapeDataString(Request.QueryString[key]));
-            }
-            catch { }
-
-            return para;
-        }
-
-        public static Dictionary<string, object> get_request_parameters(System.Web.HttpApplication app)
-        {
-            var Request = app.Request;
-
-            string path = Request.Url.AbsolutePath.Substring(1).ToLower();
-            Dictionary<string, object> para = new Dictionary<string, object>();
-
-            try
-            {
-                var a = Request.QueryString.Keys.Cast<string>().ToArray();
-                foreach (var key in a) if (!para.ContainsKey(key)) para.Add(key, Uri.UnescapeDataString(Request.QueryString[key]));
-
-                if (Request.HttpMethod == "POST")
-                {
-                    string s = new StreamReader(Request.InputStream).ReadToEnd();
-                    if (!string.IsNullOrWhiteSpace(s))
-                    {
-                        s = s.Trim();
-                        if (s.Length > 1 && s[0] == '{' && s[s.Length - 1] == '}')
-                        {
-                            try
-                            {
-                                var d = JsonConvert.DeserializeObject<Dictionary<string, object>>(s);
-                                foreach (var kv in d) if (!para.ContainsKey(kv.Key)) para.Add(kv.Key, kv.Value);
-                            }
-                            catch
-                            {
-                                para.Add("___BODY", s);
-                            }
-                        }
-                        else
-                        {
-                            para.Add("___BODY", s);
-                        }
-                    }
-                }
-            }
-            catch { }
-
-            return para;
-        }
-
-        public static string Base64Encode(string plainText)
-        {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            return System.Convert.ToBase64String(plainTextBytes);
-        }
-
-        public static string Base64Decode(string base64EncodedData)
-        {
-            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
-        }
-    }
 
     public class clsGlobal
     {
@@ -3439,20 +3346,19 @@ namespace weblib
 
             #region [ ZALO ]
 
-            if (path.StartsWith("zalo/login"))
+            if (path.StartsWith("login-zalo"))
             {
                 ZaloAppInfo appInfo = new ZaloAppInfo(4493888734077794545, "2KOY8CIBqKEwbGJ7TV1k", "http://zalo.iot.vn");
                 Zalo3rdAppClient appClient = new Zalo3rdAppClient(appInfo);
                 string loginUrl = appClient.getLoginUrl();
                 string id = "zalo-" + Guid.NewGuid().ToString().Substring(5);
-                string state = id + "|" + Utility.Base64Encode(uri.Scheme + "://" + uri.Host);
-                if (loginUrl.Contains("&state=") == false) loginUrl += "&state=" + state;
+                if (loginUrl.Contains("&state=") == false) loginUrl += "&state=" + id;
                 m_users.TryAdd(id, new oUser() { session_id = id, ZaloClient = appClient, zalo_info = new oUserZalo() });
                 Response.Redirect(loginUrl);
                 return;
             }
 
-            if (path.StartsWith("zalo/list-user"))
+            if (path.StartsWith("user-zalo"))
             {
                 string json = JsonConvert.SerializeObject(m_users.Values);
                 Response.ContentType = "application/json";
@@ -3461,29 +3367,14 @@ namespace weblib
                 return;
             }
 
-            // Callback of Zalo authentication
             if (url.Contains("uid=") && url.Contains("code=") && url.Contains("state="))
             {
-                string zalo_state = Request.QueryString["state"],
+                string zalo_session_id = Request.QueryString["state"],
                     zalo_code = Request.QueryString["code"],
                     zalo_uid = Request.QueryString["uid"],
-                    zalo_json = "{}",
-                    zalo_session_id = "",
-                    zalo_url = "";
+                    zalo_json = "{}";
 
-                if (!string.IsNullOrEmpty(zalo_state) && zalo_state.Contains('|'))
-                {
-                    zalo_session_id = zalo_state.Split('|')[0];
-                    zalo_url = Utility.Base64Decode(zalo_state.Split('|')[1]);
-                }
-                else
-                {
-                    Response.Redirect("/?msg=[1] Đăng nhập không thành công");
-                    return;
-                }
-
-                if (!string.IsNullOrEmpty(zalo_session_id) && m_users.ContainsKey(zalo_session_id))
-                {
+                if (!string.IsNullOrEmpty(zalo_session_id) && m_users.ContainsKey(zalo_session_id)) {
                     try
                     {
                         oUser u = m_users[zalo_session_id];
@@ -3493,7 +3384,7 @@ namespace weblib
                         var jo_token = u.ZaloClient.getAccessToken(zalo_code);
                         var access_token = jo_token["access_token"].ToString();
 
-                        var jo_profile = u.ZaloClient.getProfile(access_token, "id, name, birthday, picture");
+                        var jo_profile = u.ZaloClient.getProfile(access_token, "id, name, birthday");
                         u.zalo_info.name = jo_profile["name"].ToString();
                         u.zalo_info.birthday = jo_profile["birthday"].ToString();
 
@@ -3508,28 +3399,17 @@ namespace weblib
                         var o = JsonConvert.DeserializeObject<oZaloResult>(zalo_result);
                         o.user_info = u;
                         zalo_json = JsonConvert.SerializeObject(o);
-
-                        Response.Redirect(zalo_url + "?zalo_id=" + zalo_uid + "&msg=[2] Đăng nhập thành công");
-                        return;
                     }
                     catch { }
                 }
-                else
-                {
-                    Response.Redirect(zalo_url + "?msg=[2] Đăng nhập không thành công");
-                    return;
-                }
 
-                //Response.ContentType = "application/json";
-                //Response.Write(zalo_json);
-                //Response.End();
-
+                Response.ContentType = "application/json";
+                Response.Write(zalo_json);
+                Response.End();
                 return;
             }
 
             #endregion
-
-            #region [ HTML, CSS, JS, IMAGES, FONTS ... ]
 
             if (m_domains.Count == 0 || m_domains.ContainsKey(___DOMAIN) == false)
             {
@@ -3547,8 +3427,8 @@ namespace weblib
             {
                 string[] a = path.Split('/');
 
-                var req_headers = Utility.get_request_headers(app);
-                var req_paramenters = Utility.get_request_parameters(app);
+                var req_headers = get_request_headers(app);
+                var req_paramenters = get_request_parameters(app);
                 string json = clsEngineJS.Execute(a[1] + "." + a[2], req_paramenters, req_headers);
 
                 Response.ContentType = "application/json";
@@ -3557,6 +3437,7 @@ namespace weblib
 
                 return;
             }
+
 
             //[2] Files
             string file = string.Empty;
@@ -3608,8 +3489,82 @@ namespace weblib
             }
 
             Response.End();
-
-            #endregion
         }
+
+        static Dictionary<string, object> get_request_headers(System.Web.HttpApplication app)
+        {
+            var Request = app.Request;
+
+            string path = Request.Url.AbsolutePath.Substring(1).ToLower();
+            Dictionary<string, object> para = new Dictionary<string, object>() {
+                { "___domain", Request.Url.Host },
+                { "___port", Request.Url.Port },
+                { "___url", path },
+                { "___method", Request.HttpMethod },
+                //{ "___token", string.Empty },
+            };
+
+            try
+            {
+                int key_size = Request.Headers.Keys.Count;
+                for (int i = 0; i < key_size; i++)
+                {
+                    string key_header = Request.Headers.Keys.Get(i);
+                    string val_header = Request.Headers.Get(key_header);
+                    if (para.ContainsKey(key_header))
+                        para[key_header] = val_header;
+                    else para.Add(key_header, val_header);
+                }
+
+                var a = Request.QueryString.Keys.Cast<string>().ToArray();
+                foreach (var key in a) if (!para.ContainsKey(key)) para.Add(key, Uri.UnescapeDataString(Request.QueryString[key]));
+            }
+            catch { }
+
+            return para;
+        }
+
+        static Dictionary<string, object> get_request_parameters(System.Web.HttpApplication app)
+        {
+            var Request = app.Request;
+
+            string path = Request.Url.AbsolutePath.Substring(1).ToLower();
+            Dictionary<string, object> para = new Dictionary<string, object>();
+
+            try
+            {
+                var a = Request.QueryString.Keys.Cast<string>().ToArray();
+                foreach (var key in a) if (!para.ContainsKey(key)) para.Add(key, Uri.UnescapeDataString(Request.QueryString[key]));
+
+                if (Request.HttpMethod == "POST")
+                {
+                    string s = new StreamReader(Request.InputStream).ReadToEnd();
+                    if (!string.IsNullOrWhiteSpace(s))
+                    {
+                        s = s.Trim();
+                        if (s.Length > 1 && s[0] == '{' && s[s.Length - 1] == '}')
+                        {
+                            try
+                            {
+                                var d = JsonConvert.DeserializeObject<Dictionary<string, object>>(s);
+                                foreach (var kv in d) if (!para.ContainsKey(kv.Key)) para.Add(kv.Key, kv.Value);
+                            }
+                            catch
+                            {
+                                para.Add("___BODY", s);
+                            }
+                        }
+                        else
+                        {
+                            para.Add("___BODY", s);
+                        }
+                    }
+                }
+            }
+            catch { }
+
+            return para;
+        }
+
     }
 }

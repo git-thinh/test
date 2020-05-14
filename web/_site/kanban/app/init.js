@@ -1,4 +1,7 @@
-﻿var ___PATH_DOMAIN = '/_site/[' + location.host + ']/';
+﻿// sessionStorage['USER_ID'] = 'zalo.5130398983683244855'; //Hook login
+var USER_ID = sessionStorage['USER_ID'];
+
+var ___PATH_DOMAIN = '/_site/[' + location.host + ']/';
 var ___XHR = new XMLHttpRequest();
 ___XHR.open('GET', '/_site/site.json', false);
 ___XHR.send(null);
@@ -10,11 +13,30 @@ if (___XHR.status === 200) {
     alert('Please setting site.json');
 }
 
-var ___APP, ___VIEW = {}, ___COM = {}, ___HTML = {},
+if (location.href.indexOf('zalo_id') > 0) {
+    var urlParams = new URLSearchParams(window.location.search);
+    var zalo_id = urlParams.get('zalo_id');
+    var msg = urlParams.get('msg');
+    if (zalo_id) {
+        USER_ID = 'zalo.' + zalo_id;
+        sessionStorage['USER_ID'] = USER_ID;
+        alert(msg);
+        location.href = location.href.split('?')[0];
+    }
+}
+
+/////////////////////////////////////////////////////////////////////
+
+var ___APP, ___VIEW = {}, ___VIEW_CF = {}, ___COM = {}, ___HTML = {},
     ___DL_CURRENT_EVENT = null, ___DL_CURRENT_ID = null,
     ___V_LOGOUT, ___V_MAIN;
 
 var ___DATA = {
+    view___loading: null,
+    view___login: null,
+    view___confirm_pass: null,
+    view___screen_lock: null,
+
     view___sidebar_left: null,
     view___sidebar_right: null,
 
@@ -659,50 +681,7 @@ var view___get = (scope_, name_) => {
     return null;
 };
 
-view___init((m) => {
-    console.log('VIEW___INIT ----> ' + m.ok);
-    if (m.ok == false) return;
-
-    ___APP = new Vue({
-        el: '#app',
-        data: function () { return ___DATA; },
-        mounted: function () {
-            var _self = this;
-            Vue.nextTick(function () {
-                _self.reload();
-            });
-        },
-        methods: {
-            reload: function () {
-                var _self = this;
-
-                if (localStorage['USER_TOKEN'] == null) {
-                    ___APP.$data.view___main_body = 'user___login';
-                } else {
-                    ___APP.$data.objUser = JSON.parse(localStorage['USER']);
-
-                    fetch(___PATH_DOMAIN + '_view/default.json').then(r => r.json()).then(async cf_ => {
-                        for (var ky_ in cf_) {
-                            var scope_view = cf_[ky_];
-                            if (scope_view && scope_view.length > 0) {
-                                scope_view = scope_view.split('|')[0];
-                                var a = scope_view.split('___');
-                                if (a.length == 2) {
-                                    var obj_view = view___get(a[0], a[1]);
-                                    if (obj_view) {
-                                        console.log('VIEW___RELOAD: ' + ky_ + ' === ' + scope_view);
-                                        ___APP.$data['view___' + ky_] = obj_view.key;
-                                    }
-                                }
-                            }
-                        }
-                    });
-
-                }
-            }
-        }
-    });
-});
+/////////////////////////////////////////////////////////////////////
 
 function touchHandler(event) {
     if (event.touches.length > 1) {
@@ -712,33 +691,23 @@ function touchHandler(event) {
 }
 window.addEventListener("touchstart", touchHandler, false);
 
-window.addEventListener("hashchange", function (h) {
-    var old_hash = new URL(h.oldURL).hash;
-    var new_hash = location.hash;
-    if (old_hash && old_hash.indexOf('#!') == 0) old_hash = old_hash.substr(2);
-    if (new_hash && new_hash.indexOf('#!') == 0) new_hash = new_hash.substr(2);
-    console.log('HASH_CHANGE: ' + old_hash + ' -> ', new_hash);
-    view___load(new_hash, old_hash);
-}, false);
-
-    var touchStartHandler = function (event) {
-        if (___DL_CURRENT_ID && ___DL_CURRENT_EVENT) {
-            var event_id = event.target.getAttribute('id');
-            //console.log('DOC_CLICK: CURRENT_ID = ' + ___DL_CURRENT_ID + ', event_id = ' + event_id);
-            if (___DL_CURRENT_ID && ___DL_CURRENT_ID != event_id) {
-                var dl = event.target.closest('.' + ___DL_CURRENT_ID);
-                //console.log('DOC_CLICK: dl = ', dl == null ? '' : ' dialog_current -> close it');
-                if (dl == null) {
-                    // Click out of DIALOG -> close it
-                    ___APP.$data.view___dialog_1 = null;
-                    ___DL_CURRENT_ID = null;
-                    ___DL_CURRENT_EVENT.target.removeAttribute('id');
-                    ___DL_CURRENT_EVENT = null;
-                }
+var touchStartHandler = function (event) {
+    if (___DL_CURRENT_ID && ___DL_CURRENT_EVENT) {
+        var event_id = event.target.getAttribute('id');
+        //console.log('DOC_CLICK: CURRENT_ID = ' + ___DL_CURRENT_ID + ', event_id = ' + event_id);
+        if (___DL_CURRENT_ID && ___DL_CURRENT_ID != event_id) {
+            var dl = event.target.closest('.' + ___DL_CURRENT_ID);
+            //console.log('DOC_CLICK: dl = ', dl == null ? '' : ' dialog_current -> close it');
+            if (dl == null) {
+                // Click out of DIALOG -> close it
+                ___APP.$data.view___dialog_1 = null;
+                ___DL_CURRENT_ID = null;
+                ___DL_CURRENT_EVENT.target.removeAttribute('id');
+                ___DL_CURRENT_EVENT = null;
             }
         }
-    };
-
+    }
+};
 window.addEventListener('DOMContentLoaded', (e) => {
 
     if ('ontouchstart' in document.documentElement) {
@@ -753,6 +722,16 @@ window.addEventListener('DOMContentLoaded', (e) => {
     }
 });
 
+window.addEventListener("hashchange", function (h) {
+    var old_hash = new URL(h.oldURL).hash;
+    var new_hash = location.hash;
+    if (old_hash && old_hash.indexOf('#!') == 0) old_hash = old_hash.substr(2);
+    if (new_hash && new_hash.indexOf('#!') == 0) new_hash = new_hash.substr(2);
+    console.log('HASH_CHANGE: ' + old_hash + ' -> ', new_hash);
+    view___load(new_hash, old_hash);
+}, false);
+
+/////////////////////////////////////////////////////////////////////
 
 var view___load = (view, view_called) => {
     if (view == null || view.length == 0) return;
@@ -835,3 +814,89 @@ var ___logout = () => {
 
         });
 };
+
+/////////////////////////////////////////////////////////////////////
+
+var setup_loading = function (visible) {
+    var el = document.getElementById('setup_loading');
+    if (el) el.style.display = (visible != false) ? 'block' : 'none';
+};
+
+var app___ready = function () {
+    if (USER_ID) {
+        for (var ky_ in ___VIEW_CF) {
+            if (ky_.startsWith('___') == false) {
+                var scope_view = ___VIEW_CF[ky_];
+                if (scope_view && scope_view.length > 0) {
+                    scope_view = scope_view.split('|')[0];
+                    var a = scope_view.split('___');
+                    if (a.length == 2) {
+                        var obj_view = view___get(a[0], a[1]);
+                        if (obj_view) {
+                            console.log('VIEW___RELOAD: ' + ky_ + ' === ' + scope_view);
+                            ___APP.$data['view___' + ky_] = obj_view.key;
+                        }
+                    }
+                }
+            }
+        }
+    } else {
+        ___APP.$data.view___main_body = ___VIEW_CF['___login'];
+    }
+    setup_loading(false);
+};
+
+var app___init = function () {
+    setup_loading();
+
+    view___init((m) => {
+        console.log('VIEW___INIT ----> ' + m.ok);
+        if (m.ok == false) return;
+
+        ___APP = new Vue({
+            el: '#app',
+            data: function () { return ___DATA; },
+            mounted: function () {
+                //var _self = this;
+                //Vue.nextTick(function () {
+                //    //_self.reload();
+                //    app___ready();
+                //});
+
+                fetch(___PATH_DOMAIN + '_view/default.json').then(r => r.json()).then(cf_ => {
+                    ___VIEW_CF = cf_;
+                    app___ready();
+                });
+            },
+            methods: {
+                reload: function () {
+                    var _self = this;
+
+                    //if (localStorage['USER_TOKEN'] == null) {
+                    //    ___APP.$data.view___main_body = 'user___login';
+                    //} else {
+                    //    ___APP.$data.objUser = JSON.parse(localStorage['USER']);
+                    //    fetch(___PATH_DOMAIN + '_view/default.json').then(r => r.json()).then(async cf_ => {
+                    //        for (var ky_ in cf_) {
+                    //            var scope_view = cf_[ky_];
+                    //            if (scope_view && scope_view.length > 0) {
+                    //                scope_view = scope_view.split('|')[0];
+                    //                var a = scope_view.split('___');
+                    //                if (a.length == 2) {
+                    //                    var obj_view = view___get(a[0], a[1]);
+                    //                    if (obj_view) {
+                    //                        console.log('VIEW___RELOAD: ' + ky_ + ' === ' + scope_view);
+                    //                        ___APP.$data['view___' + ky_] = obj_view.key;
+                    //                    }
+                    //                }
+                    //            }
+                    //        }
+                    //    });
+                    //}
+                }
+            }
+        });
+    });
+};
+
+app___init();
