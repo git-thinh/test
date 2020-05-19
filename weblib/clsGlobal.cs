@@ -3154,6 +3154,13 @@ namespace weblib
     public class oUser
     {
         public string session_id { set; get; }
+        public string access_token_zalo { set; get; }
+        public string access_token_fb { set; get; }
+
+        public long user_zalo_id { set; get; }
+        public long user_facebook_id { set; get; }
+
+
         public oUserZalo zalo_info { set; get; }
 
         [JsonIgnore]
@@ -4493,13 +4500,13 @@ namespace weblib
                     zalo_code = Request.QueryString["code"],
                     zalo_uid = Request.QueryString["uid"],
                     zalo_json = "{}",
-                    zalo_session_id = "",
-                    zalo_url = "";
+                    session_id = "",
+                    url_return = "";
 
                 if (!string.IsNullOrEmpty(zalo_state) && zalo_state.Contains('|'))
                 {
-                    zalo_session_id = zalo_state.Split('|')[0];
-                    zalo_url = Utility.Base64Decode(zalo_state.Split('|')[1]);
+                    session_id = zalo_state.Split('|')[0];
+                    url_return = Utility.Base64Decode(zalo_state.Split('|')[1]);
                 }
                 else
                 {
@@ -4507,11 +4514,11 @@ namespace weblib
                     return;
                 }
 
-                if (!string.IsNullOrEmpty(zalo_session_id) && m_users.ContainsKey(zalo_session_id))
+                if (!string.IsNullOrEmpty(session_id) && m_users.ContainsKey(session_id))
                 {
                     try
                     {
-                        oUser u = m_users[zalo_session_id];
+                        oUser u = m_users[session_id];
                         u.zalo_info.access_token = zalo_code;
                         u.zalo_info.user_id = long.Parse(zalo_uid);
 
@@ -4540,14 +4547,14 @@ namespace weblib
                         o.user_info = u;
                         zalo_json = JsonConvert.SerializeObject(o);
 
-                        Response.Redirect(zalo_url + "?zalo_id=" + zalo_uid + "&msg=[2] Đăng nhập thành công");
+                        Response.Redirect(url_return + "?zalo_id=" + zalo_uid + "&msg=[2] Đăng nhập thành công");
                         return;
                     }
                     catch { }
                 }
                 else
                 {
-                    Response.Redirect(zalo_url + "?msg=[2] Đăng nhập không thành công");
+                    Response.Redirect(url_return + "?msg=[2] Đăng nhập không thành công");
                     return;
                 }
 
@@ -4573,10 +4580,10 @@ namespace weblib
                 {
                     client_id = "2559185687674467",
                     redirect_uri = "https://fb.iot.vn/fb-login-callback",
-                    //scope = "user_birthday, email, publish_stream",
+                    scope = "user_birthday, email, user_about_me, read_stream, publish_stream, offline_access",
                     //display = "popup",
                     //display = "touch",
-                    //state = state,
+                    state = state,
                     response_type = "token"
                 });
 
@@ -4599,12 +4606,61 @@ namespace weblib
             if (path.Equals("fb-login-ok"))
             {
                 string access_token = Request.QueryString["access_token"];
+                string state = Request.QueryString["state"];
+                string session_id = "", url_return = "";
 
-                string json = JsonConvert.SerializeObject(m_users.Values);
-                Response.ContentType = "application/json";
-                Response.Write(access_token);
-                Response.End();
-                return;
+                if (!string.IsNullOrEmpty(state) && state.Contains('|'))
+                {
+                    session_id = state.Split('|')[0];
+                    url_return = Utility.Base64Decode(state.Split('|')[1]);
+                }
+                else
+                {
+                    Response.Redirect("/?msg=[1] Đăng nhập không thành công");
+                    return;
+                }
+
+                if (!string.IsNullOrEmpty(session_id) && m_users.ContainsKey(session_id))
+                {
+                    try
+                    {
+                        oUser u = m_users[session_id];
+                        u.access_token_fb = access_token; 
+                        
+                        var appClient = new FacebookClient(access_token);
+                        dynamic me = appClient.Get("me?fields=first_name,last_name,id,email");
+                        string facebook_id = me.id.ToString();
+                        //////u.user_facebook_id = long.Parse(facebook_id);
+                        //////string json_profile = JsonConvert.SerializeObject(me, Formatting.Indented);
+
+                        ////////dynamic feed = appClient.Get("me/feed?fields=message&limit=5");
+                        //////dynamic feed = appClient.Get("me/feed");
+                        ////////var latestMessage = feed[0][0].message;
+                        //////string json_feed = JsonConvert.SerializeObject(feed, Formatting.Indented);
+
+                        //////dynamic parameters = new { };
+                        //////var friends = appClient.Get("me/friends");
+                        //////string json_friends = JsonConvert.SerializeObject(friends, Formatting.Indented);
+
+                        // Get the user's information
+                        dynamic profile = appClient.Get("2929293047149259/feed?limit=10000");
+                        string json_profile = JsonConvert.SerializeObject(profile, Formatting.Indented);
+
+                        Response.ContentType = "application/json";
+                        Response.Write(json_profile);
+                        //Response.Write(json_friends);
+                        Response.End();
+
+                        //Response.Redirect(url_return + "?facebook_id=" + facebook_id + "&msg=[2] Đăng nhập thành công");
+                        return;
+                    }
+                    catch { }
+                }
+                else
+                {
+                    Response.Redirect(url_return + "?msg=[2] Đăng nhập không thành công");
+                    return;
+                }
             }
 
             #endregion
