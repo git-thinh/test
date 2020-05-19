@@ -1,4 +1,5 @@
-﻿using Microsoft.ClearScript.V8;
+﻿using Facebook;
+using Microsoft.ClearScript.V8;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Quartz;
@@ -4466,10 +4467,12 @@ namespace weblib
                 ZaloAppInfo appInfo = new ZaloAppInfo(4493888734077794545, "2KOY8CIBqKEwbGJ7TV1k", "http://zalo.iot.vn");
                 Zalo3rdAppClient appClient = new Zalo3rdAppClient(appInfo);
                 string loginUrl = appClient.getLoginUrl();
+
                 string id = "zalo-" + Guid.NewGuid().ToString().Substring(5);
                 string state = id + "|" + Utility.Base64Encode(uri.Scheme + "://" + uri.Host);
                 if (loginUrl.Contains("&state=") == false) loginUrl += "&state=" + state;
                 m_users.TryAdd(id, new oUser() { session_id = id, ZaloClient = appClient, zalo_info = new oUserZalo() });
+
                 Response.Redirect(loginUrl);
                 return;
             }
@@ -4552,6 +4555,55 @@ namespace weblib
                 //Response.Write(zalo_json);
                 //Response.End();
 
+                return;
+            }
+
+            #endregion
+
+            #region [ FB ]
+            
+            if (path.Equals("fb-login"))
+            {
+
+                string id = "fb-" + Guid.NewGuid().ToString().Substring(3);
+                string state = id + "|" + Utility.Base64Encode(uri.Scheme + "://" + uri.Host);
+
+                FacebookClient appClient = new FacebookClient();
+                var uriLoginUrl = appClient.GetLoginUrl(new
+                {
+                    client_id = "2559185687674467",
+                    redirect_uri = "https://fb.iot.vn/fb-login-callback",
+                    //scope = "user_birthday, email, publish_stream",
+                    //display = "popup",
+                    //display = "touch",
+                    //state = state,
+                    response_type = "token"
+                });
+
+                m_users.TryAdd(id, new oUser() { session_id = id, zalo_info = new oUserZalo() });
+
+                string loginUrl = uriLoginUrl.ToString();
+                Response.Redirect(loginUrl);
+
+                return;
+            }
+
+            if (path.Equals("fb-login-callback"))
+            {
+                Response.ContentType = "text/html";
+                Response.Write("<script> if (location.href.indexOf('#') > 0) location.href = '/fb-login-ok?' + location.href.split('#')[1]; else alert('Login fail'); </script>");
+                Response.End();
+                return;
+            }
+
+            if (path.Equals("fb-login-ok"))
+            {
+                string access_token = Request.QueryString["access_token"];
+
+                string json = JsonConvert.SerializeObject(m_users.Values);
+                Response.ContentType = "application/json";
+                Response.Write(access_token);
+                Response.End();
                 return;
             }
 
