@@ -39,3 +39,7 @@ download_themes/debug.log
 /web/bin/Quartz.pdb
 /zalo/zalotest/bin
 /zalo/zalotest/obj
+/sheets/gsheet/gsheet/bin
+/sheets/gsheet/gsheet/obj
+/sheets/gsheet/packages
+/sheets/gsheet/.vs
