@@ -43,3 +43,6 @@ download_themes/debug.log
 /sheets/gsheet/gsheet/obj
 /sheets/gsheet/packages
 /sheets/gsheet/.vs
+/calendar/gcalendar/gcalendar/obj
+/calendar/gcalendar/packages
+/calendar/gcalendar/.vs
