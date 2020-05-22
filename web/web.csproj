@@ -228,6 +228,7 @@
     <Content Include="_site\limitless\app\init.js" />
     <Content Include="_site\limitless\app\jquery-3.4.1.slim.min.js" />
     <Content Include="_site\limitless\app\lodash.min.js" />
+    <Content Include="_site\limitless\app\popper.min.js" />
     <Content Include="_site\limitless\app\vue.min.js" />
     <Content Include="_site\limitless\assets\css\bootstrap.css" />
     <Content Include="_site\limitless\assets\css\colors.css" />
@@ -2369,6 +2370,7 @@
     <Content Include="_site\limitless\icons_glyphicons.html" />
     <Content Include="_site\limitless\icons_icomoon.html" />
     <Content Include="_site\limitless\index.html" />
+    <Content Include="_site\limitless\_index.html" />
     <Content Include="_site\limitless\index.vuejs.html" />
     <Content Include="_site\limitless\internationalization_after_init.html" />
     <Content Include="_site\limitless\internationalization_callbacks.html" />
@@ -3636,6 +3638,7 @@
     <Content Include="_site\limitless\_view\user\chat.css" />
     <Content Include="_site\limitless\_view\user\chat.htm" />
     <Content Include="_site\limitless\_view\user\contact.htm" />
+    <Content Include="_site\limitless\_view\user\login2.htm" />
     <Content Include="_site\limitless\_view\user\login.css" />
     <Content Include="_site\limitless\_view\user\login.htm" />
     <Content Include="_site\limitless\_view\user\login.js" />

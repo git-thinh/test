@@ -792,6 +792,10 @@ var view___dialog = (event, view) => {
 
 var ___login = (user) => {
     console.log('___login: user = ', user);
+
+    sessionStorage['USER_ID'] = 'zalo.5130398983683244855'; //Hook login
+    USER_ID = sessionStorage['USER_ID'];
+
     localStorage['USER_TOKEN'] = user.str_token;
     localStorage['USER'] = JSON.stringify(user);
     ___APP.$data.objUser = user;
@@ -893,6 +897,7 @@ var app___init = function () {
                     //        }
                     //    });
                     //}
+
                 }
             }
         });
