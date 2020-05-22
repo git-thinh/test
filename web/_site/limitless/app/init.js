@@ -803,20 +803,25 @@ var ___login = (user) => {
 };
 
 var ___logout = () => {
-    if (___V_LOGOUT && ___V_LOGOUT.logout)
-        ___V_LOGOUT.logout((ok) => {
-            localStorage.removeItem('USER_TOKEN');
-            localStorage.removeItem('USER');
+    //if (___V_LOGOUT && ___V_LOGOUT.logout)
+    //    ___V_LOGOUT.logout((ok) => {
 
-            Object.keys(___DATA).forEach(key => {
-                if (key.indexOf('view___') == 0) {
-                    ___APP.$data[key] = null;
-                }
-            });
+    sessionStorage.removeItem('USER_ID');
+    USER_ID = null;
 
-            view___load('user___login');
+    localStorage.removeItem('USER_TOKEN');
+    localStorage.removeItem('USER');
 
-        });
+    Object.keys(___DATA).forEach(key => {
+        if (key.indexOf('view___') == 0) {
+            ___APP.$data[key] = null;
+        }
+    });
+
+    //view___load('user___login');
+    ___APP.reload();
+
+    //});
 };
 
 /////////////////////////////////////////////////////////////////////
