@@ -1,0 +1,74 @@
+﻿
+.user___contact {
+}
+
+    .user___contact ul,
+    .user___contact p {
+        padding: 0;
+        margin: 0;
+    }
+
+        .user___contact ul li {
+        }
+
+            .user___contact ul li img {
+            }
+
+
+            .user___contact ul li .ui-avartar {
+                font-size: 32px;
+                margin-top: 6px;
+                margin-right: 16px;
+                color: #ccc;
+            }
+
+            .user___contact ul li .ui-info {
+                line-height: 16px;
+                padding: 5px 0 0 0;
+            }
+
+                .user___contact ul li .ui-info b {
+                    font-size: 1em;
+                }
+
+                .user___contact ul li .ui-info em {
+                    font-size: 0.7em;
+                    color: #555;
+                }
+
+            .user___contact ul li .ui-call {
+                margin-right: 12px;
+                min-width: 35px;
+            }
+
+                .user___contact ul li .ui-call i.fa {
+                    font-size: 1.5em;
+                    padding: 7px 0 0 0;
+                }
+
+
+            .user___contact ul li .ui-message {
+                padding: 0;
+                position: relative;
+            }
+
+                .user___contact ul li .ui-message i.fa {
+                    font-size: 2em;
+                    padding: 4px 0px 0 0;
+                }
+
+                .user___contact ul li .ui-call i.fa,
+                .user___contact ul li .ui-message i.fa {
+                    color: #999;
+                }
+
+                .user___contact ul li .ui-call .badge,
+                .user___contact ul li .ui-message .badge {
+                    padding: 2px 2px 2px 2px;
+                    min-width: 16px;
+                    text-align: center;
+                    font-weight: normal;
+                    font-size: 0.7em;
+                    left: 22px;
+                    top: 0;
+                }

@@ -1,0 +1,41 @@
+﻿
+.user___chat .list-group .list-group-item {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 50px;
+}
+
+    .user___chat .list-group .list-group-item:nth-child(even) h5 i {
+        padding-left: 3px;
+    }
+
+    .user___chat .list-group .list-group-item:nth-child(odd) h5 i {
+        padding-right: 3px;
+    }
+
+    .user___chat .list-group .list-group-item h5 i {
+        color: deepskyblue;
+    }
+
+    .user___chat .list-group .list-group-item small {
+        padding-top: 3px;
+    }
+
+        .user___chat .list-group .list-group-item small i {
+            color: #ccc;
+            padding-right: 3px;
+        }
+
+    .user___chat .list-group .list-group-item:nth-child(even) {
+        padding-right: 7px;
+        padding-left: 60px;
+        border-right: 1px solid red;
+        border-bottom: none;
+    }
+
+    .user___chat .list-group .list-group-item:nth-child(odd) {
+        padding-right: 60px;
+        padding-left: 7px;
+        border-left: 1px solid #007bff;
+        border-bottom: none;
+    }

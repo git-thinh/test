@@ -33,7 +33,13 @@
         "title": "Login",
         "name": "login",
         "area_allow": [ "url", "menu" ],
-        "area_init": "",
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "Login Full",
+        "name": "login_full",
+        "area_allow": [ "url", "menu" ],
         "enable": true
       },
       {
@@ -41,7 +47,62 @@
         "title": "Logout",
         "name": "logout",
         "area_allow": [ "url", "menu" ],
-        "area_init": "",
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "Menu",
+        "name": "menu",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "contact",
+        "name": "contact",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "chat",
+        "name": "chat",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "project",
+        "name": "project",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "group",
+        "name": "group",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "task",
+        "name": "task",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "calendar",
+        "name": "calendar",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "message",
+        "name": "message",
+        "area_allow": [ "dailog" ],
         "enable": true
       }
     ]
@@ -54,7 +115,18 @@
         "title": "Test module",
         "name": "test",
         "area_allow": [ "url", "menu" ],
-        "area_init": "",
+        "enable": true
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "views": [
+      {
+        "type": "inline",
+        "title": "Contact basic module",
+        "name": "basic",
+        "area_allow": [ "menu" ],
         "enable": true
       }
     ]

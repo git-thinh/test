@@ -1,4 +1,9 @@
 {
+  "___loading": "",
+  "___login": "user___login_full|user___login",
+  "___confirm_pass": "",
+  "___screen_lock": "",
+
   "sidebar_left": "",
   "sidebar_right": "",
 
@@ -8,7 +13,7 @@
   "header_filter": "",
 
   "main_left": "",
-  "main_body": "kanban___trello",
+  "main_body": "user___contact|user___chat|kanban___trello",
   "main_right": "",
   "footer": ""
 }

@@ -1,4 +1,10 @@
-﻿var ___PATH_DOMAIN = '/_site/[' + location.host + ']/';
+﻿// sessionStorage['USER_ID'] = 'zalo.5130398983683244855'; //Hook login
+var USER_ID = sessionStorage['USER_ID'];
+
+var DEVICE_NAME = '';
+if (window.innerWidth < 400) DEVICE_NAME = 'mobi'; else if (window.innerWidth < 1025) DEVICE_NAME = 'tablet'
+
+var ___PATH_DOMAIN = '/_site/[' + location.host + ']/';
 var ___XHR = new XMLHttpRequest();
 ___XHR.open('GET', '/_site/site.json', false);
 ___XHR.send(null);
@@ -10,11 +16,30 @@ if (___XHR.status === 200) {
     alert('Please setting site.json');
 }
 
-var ___APP, ___VIEW = {}, ___COM = {}, ___HTML = {},
+if (location.href.indexOf('zalo_id') > 0) {
+    var urlParams = new URLSearchParams(window.location.search);
+    var zalo_id = urlParams.get('zalo_id');
+    var msg = urlParams.get('msg');
+    if (zalo_id) {
+        USER_ID = 'zalo.' + zalo_id;
+        sessionStorage['USER_ID'] = USER_ID;
+        alert(msg);
+        location.href = location.href.split('?')[0];
+    }
+}
+
+/////////////////////////////////////////////////////////////////////
+
+var ___APP, ___VIEW = {}, ___VIEW_CF = {}, ___COM = {}, ___HTML = {},
     ___DL_CURRENT_EVENT = null, ___DL_CURRENT_ID = null,
     ___V_LOGOUT, ___V_MAIN;
 
 var ___DATA = {
+    view___loading: null,
+    view___login: null,
+    view___confirm_pass: null,
+    view___screen_lock: null,
+
     view___sidebar_left: null,
     view___sidebar_right: null,
 
@@ -35,6 +60,465 @@ var ___DATA = {
         int_width: window.innerWidth
     },
     objUser: {},
+    objContact: {
+        items: [
+            {
+                ok: true,
+                id: 1,
+                str_token: "6171234525",
+                str_username: "thinhnv",
+                str_shortname: "Mr Thinh",
+                str_phones: "0948003456,0626111347",
+                str_fullname: "Nguyễn Văn Thịnh",
+                str_email: "thinhifis@gmail.com",
+                str_avatar: "https://s120.avatar.talk.zdn.vn/7/5/c/b/1/120/ca96210ff1addff45f03e144ec4aa052.jpg",
+                socials: [
+                    {
+                        type: "zalo",
+                        name: "Nguyễn Thịnh",
+                        id: 2998071883607128,
+                        friends: [
+                            {
+                                id: 7287083737778696997,
+                                str_phone: "",
+                                str_username: "Nguyen Huu Sinh",
+                                str_avatar: "https://s120.avatar.talk.zdn.vn/f/1/1/a/12/120/11ddc4a09d9273dc8a1bfd8d2e0adeac.jpg"
+                            },
+                            {
+                                id: 7900271606406461606,
+                                str_phone: "",
+                                str_username: "Việt Cường",
+                                str_avatar: "https://s120.avatar.talk.zdn.vn/5/a/7/0/5/120/ee11866fe3603fd00896d6459d47ffbf.jpg"
+                            },
+                            {
+                                id: 5130398983683244855,
+                                str_phone: "0926111347",
+                                str_username: "Thinh",
+                                str_avatar: "https://s120.avatar.talk.zdn.vn/7/5/c/b/1/120/ca96210ff1addff45f03e144ec4aa052.jpg"
+                            }
+                        ]
+                    },
+                    {
+                        type: "facebook",
+                        name: "Thịnh Nguyễn",
+                        id: 2998071883607128,
+                        friends: [
+                            {
+                                id: 7287083737778696997,
+                                str_phone: "",
+                                str_username: "Nguyen Huu Sinh",
+                                str_avatar: "https://s120.avatar.talk.zdn.vn/f/1/1/a/12/120/11ddc4a09d9273dc8a1bfd8d2e0adeac.jpg"
+                            },
+                            {
+                                id: 7900271606406461606,
+                                str_phone: "",
+                                str_username: "Việt Cường",
+                                str_avatar: "https://s120.avatar.talk.zdn.vn/5/a/7/0/5/120/ee11866fe3603fd00896d6459d47ffbf.jpg"
+                            },
+                            {
+                                id: 5130398983683244855,
+                                str_phone: "0926111347",
+                                str_username: "Thinh",
+                                str_avatar: "https://s120.avatar.talk.zdn.vn/7/5/c/b/1/120/ca96210ff1addff45f03e144ec4aa052.jpg"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "str_fullname": "Domain Admin",
+                "str_email": "admin@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Tuấn Anh",
+                "str_email": "anhnt1@phuquyland.net"
+            },
+            {
+                "str_fullname": "INFO AROMA",
+                "str_email": "aroma@phuquyland.net"
+            },
+            {
+                "str_fullname": "Live Chat",
+                "str_email": "livechat@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Thanh Duân",
+                "str_email": "duannt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Tuyển Dụng",
+                "str_email": "tuyendung@phuquyland.net"
+            },
+            {
+                "str_fullname": "landora facebook",
+                "str_email": "facebook@phuquyland.net"
+            },
+            {
+                "str_fullname": "Liên Giáp Thị Thúy",
+                "str_email": "liengtt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Trần Văn Hiệp",
+                "str_email": "hieptv@phuquyland.net"
+            },
+            {
+                "str_fullname": "tan hoang ngoc",
+                "str_email": "tanhn1@phuquyland.net"
+            },
+            {
+                "str_fullname": "Phương Hoàng Lan",
+                "str_email": "phuonghl@phuquyland.net"
+            },
+            {
+                "str_fullname": "Tân Hoàng Ngọc",
+                "str_email": "tanhn@phuquyland.net"
+            },
+            {
+                "str_fullname": "Phạm Thu Hà",
+                "str_email": "haptt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Mạnh Hà",
+                "str_email": "manhha@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Thanh Hùng",
+                "str_email": "hungnt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Ngô Thị Thu Hương",
+                "str_email": "huongntt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Thị Phương Hảo",
+                "str_email": "haontp@phuquyland.net"
+            },
+            {
+                "str_fullname": "Đường Thị Kim Khánh",
+                "str_email": "khanhdtk@phuquyland.net"
+            },
+            {
+                "str_fullname": "Anh Kiều Hoàng",
+                "str_email": "anhkh@phuquyland.net"
+            },
+            {
+                "str_fullname": "Phú Quý Land",
+                "str_email": "info@phuquyland.net"
+            },
+            {
+                "str_fullname": "Trương Tùng Lâm",
+                "str_email": "lamtt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Long Lê Hữu",
+                "str_email": "longlh@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thảo Lê Thị",
+                "str_email": "thaolt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Hiên Lê Thị",
+                "str_email": "hienlt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Oanh Lê Thị Kim",
+                "str_email": "oanhltk@phuquyland.net"
+            },
+            {
+                "str_fullname": "Anh Lê Tuấn",
+                "str_email": "anhlt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Cường Lê Viết",
+                "str_email": "cuonglv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Doanh Lê Văn",
+                "str_email": "doanhlv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Huỳnh Lê Văn",
+                "str_email": "huynhlv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thịnh Mai Đức",
+                "str_email": "thinhmd@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Thị Mát",
+                "str_email": "matnt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Văn Mạnh",
+                "str_email": "manhnv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Minh Nguyễn Công",
+                "str_email": "minhnc@phuquyland.net"
+            },
+            {
+                "str_fullname": "Phúc Nguyễn Hữu",
+                "str_email": "phucnh@phuquyland.net"
+            },
+            {
+                "str_fullname": "Hưng Nguyễn Duy",
+                "str_email": "hungnd@phuquyland.net"
+            },
+            {
+                "str_fullname": "Việt Nguyễn Hoàng Tuấn",
+                "str_email": "vietnht@phuquyland.net"
+            },
+            {
+                "str_fullname": "Lan Nguyễn Mai",
+                "str_email": "lannm@phuquyland.net"
+            },
+            {
+                "str_fullname": "Huệ Nguyễn Thanh",
+                "str_email": "huent@phuquyland.net"
+            },
+            {
+                "str_fullname": "Long Nguyễn Thành",
+                "str_email": "longnt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Duyên Nguyễn Thị",
+                "str_email": "duyennt1@phuquyland.net"
+            },
+            {
+                "str_fullname": "Loan Nguyễn Thị",
+                "str_email": "loannt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Duyên Nguyễn Thị",
+                "str_email": "duyennt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thơ Nguyễn Thị",
+                "str_email": "thont@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thơ Nguyễn Thị",
+                "str_email": "thont1@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thủy Nguyễn Thị",
+                "str_email": "thuynt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Dũng Nguyễn Tiến",
+                "str_email": "dungnt1@phuquyland.net"
+            },
+            {
+                "str_fullname": "Anh Nguyễn Tuấn",
+                "str_email": "anhnt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Quân Nguyễn Tùng",
+                "str_email": "quannt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Dũng Nguyễn Văn",
+                "str_email": "dungnv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Sơn Nguyễn Văn",
+                "str_email": "sonnv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Vượng Nguyễn Văn",
+                "str_email": "vuongnv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Tây Nguyễn Văn",
+                "str_email": "taynv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thăng Nguyễn Xuân",
+                "str_email": "thangnx@phuquyland.net"
+            },
+            {
+                "str_fullname": "Đại Nguyễn Xuân",
+                "str_email": "dainx@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nhung Ngô Thị Cẩm",
+                "str_email": "nhungntc@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thảo Ngô Thị Tâm",
+                "str_email": "thaontt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Lộc Ngô Văn",
+                "str_email": "locnv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Võ Hồng Nhung",
+                "str_email": "nhungvh@phuquyland.net"
+            },
+            {
+                "str_fullname": "khách hàng online",
+                "str_email": "khachhang@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nghĩa Phan Trọng",
+                "str_email": "nghiapt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Quý Phi",
+                "str_email": "phinq@phuquyland.net"
+            },
+            {
+                "str_fullname": "Report PhuQuyLand",
+                "str_email": "report@phuquyland.net"
+            },
+            {
+                "str_fullname": "Land Phú Quý",
+                "str_email": "phuquyland.service@phuquyland.net"
+            },
+            {
+                "str_fullname": "Gia Phạm Hoàng",
+                "str_email": "giaph@phuquyland.net"
+            },
+            {
+                "str_fullname": "An Phạm Hải",
+                "str_email": "anph@phuquyland.net"
+            },
+            {
+                "str_fullname": "Linh Phạm Mai",
+                "str_email": "linhpm@phuquyland.net"
+            },
+            {
+                "str_fullname": "Phương Phạm Quỳnh",
+                "str_email": "phuongpq@phuquyland.net"
+            },
+            {
+                "str_fullname": "My Phạm Thảo",
+                "str_email": "mypt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thuỳ Phạm Thị",
+                "str_email": "thuypt1@phuquyland.net"
+            },
+            {
+                "str_fullname": "googleads quang cao",
+                "str_email": "googleads@phuquyland.net"
+            },
+            {
+                "str_fullname": "facebook Quảng cáo",
+                "str_email": "ads@phuquyland.net"
+            },
+            {
+                "str_fullname": "Nguyễn Thị Trúc Quỳnh",
+                "str_email": "trucquynh@phuquyland.net"
+            },
+            {
+                "str_fullname": "Quản Lý Sản Phẩm",
+                "str_email": "qlsp@phuquyland.net"
+            },
+            {
+                "str_fullname": "LOGIN TEAMVIEWER",
+                "str_email": "teamviewer@phuquyland.net"
+            },
+            {
+                "str_fullname": "Vũ Khắc Hoàng Thu",
+                "str_email": "thuvkh@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thành Thái Văn",
+                "str_email": "thanhtv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thành Thân Quang",
+                "str_email": "thanhtq@phuquyland.net"
+            },
+            {
+                "str_fullname": "Đỗ Đức Thịnh",
+                "str_email": "thinhdd@phuquyland.net"
+            },
+            {
+                "str_fullname": "TIVI TIVI",
+                "str_email": "tivi@phuquyland.net"
+            },
+            {
+                "str_fullname": "Vũ Thị Minh Trang",
+                "str_email": "trangvtm@phuquyland.net"
+            },
+            {
+                "str_fullname": "Ân Trương Quốc",
+                "str_email": "antq@phuquyland.net"
+            },
+            {
+                "str_fullname": "An Trần Hoàng",
+                "str_email": "anth@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thiện Trần Hoàng",
+                "str_email": "thienth@phuquyland.net"
+            },
+            {
+                "str_fullname": "Trang Trần Minh",
+                "str_email": "trangtm@phuquyland.net"
+            },
+            {
+                "str_fullname": "Khải Trần Xuân",
+                "str_email": "khaitx@phuquyland.net"
+            },
+            {
+                "str_fullname": "Ánh Trịnh Thị",
+                "str_email": "anhtt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Vũ Văn Tuân",
+                "str_email": "tuanvv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Tô Anh Tuấn",
+                "str_email": "tuanta@phuquyland.net"
+            },
+            {
+                "str_fullname": "Thùy Tống Thị Minh",
+                "str_email": "thuyttm@phuquyland.net"
+            },
+            {
+                "str_fullname": "Đào Đình Việt",
+                "str_email": "vietdd1@phuquyland.net"
+            },
+            {
+                "str_fullname": "Tư Đoàn Văn",
+                "str_email": "tudv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Hoàng Văn Đông",
+                "str_email": "donghv@phuquyland.net"
+            },
+            {
+                "str_fullname": "Kiều Quang  Tiến Đạt",
+                "str_email": "datkqt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Tình Đậu Thị",
+                "str_email": "tinhdt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Long Đỗ Thế",
+                "str_email": "longdt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Linh Đỗ Thị Thùy",
+                "str_email": "linhdtt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Dũng Đỗ Tiến",
+                "str_email": "dungdt@phuquyland.net"
+            },
+            {
+                "str_fullname": "Việt Đỗ Đức",
+                "str_email": "vietdd@phuquyland.net"
+            }
+        ]
+    },
     objKanban: {
         items: [
             {
@@ -99,8 +583,13 @@ var ___MIXIN = {
             var el = _self.$el;
             classie.add(el, '___com').add(el, _self.view_id);
 
+            var id = 'idvc___' + _self._uid;
+            el.setAttribute('id', id);
+            _self.idvc___ = id;
+
             //console.log('MIXIN: ___init_class ' + _self.view_id + ', role = ', el.parentElement.getAttribute('role'));
             //console.log('MIXIN: ___init_class ' + _self.view_id + ', is-dialog = ', _self.isDialog);
+            //console.log('MIXIN: ___init_class ' + _self.view_id + ', _uid = ', _self._uid);
 
             var pa = el.parentElement;
             if (pa && pa.hasAttribute('role')) {
@@ -111,10 +600,46 @@ var ___MIXIN = {
                 classie.add(el, ___DL_CURRENT_ID);
 
                 var rec = ___DL_CURRENT_EVENT.target.getBoundingClientRect();
-                //console.log('MIXIN: ___init_class ' + _self.view_id + ', rec = ', rec);
-                _self.dialog___.top = rec.bottom + 'px';
-                _self.dialog___.left = rec.x + 'px';
+                console.log('MIXIN: ___init_class ' + ___DL_CURRENT_ID + ', ' + _self.view_id + ', rec = ', rec);
+                //_self.dialog___.opacity = 0;
+                //_self.dialog___.top = rec.bottom + 'px';
+
+                var dl = document.querySelector('.' + ___DL_CURRENT_ID);
+                if (dl) {
+                    dl.style.opacity = 0;
+                    dl.style.top = rec.bottom + 'px';
+                }
+
+                setTimeout(function () {
+                    var dl = document.querySelector('.' + ___DL_CURRENT_ID);
+                    if (dl) {
+                        var r1 = dl.getBoundingClientRect();
+                        //console.log(rec.x + r1.width, window.innerWidth);
+                        if (rec.x + r1.width > window.innerWidth) {
+                            dl.style.left = 'auto';
+                            dl.style.right = '0px';
+                        } else {
+                            dl.style.right = 'auto';
+                            dl.style.left = rec.x + 'px';
+                        }
+                        dl.style.opacity = 1;
+                    }
+                }, 100);
             }
+        },
+        contact___get_name: function (o) {
+            o = {
+                str_username: "thinhnv",
+                str_shortname: "Mr Thinh",
+                str_phones: "0948003456,0626111347",
+                str_fullname: "Nguyễn Văn Thịnh",
+                str_email: "thinhifis@gmail.com",
+                str_avatar: "https://s120.avatar.talk.zdn.vn/7/5/c/b/1/120/ca96210ff1addff45f03e144ec4aa052.jpg",
+            };
+            if (o) {
+
+            }
+            return '';
         }
     },
     watch: {
@@ -138,9 +663,12 @@ var view___init = (callback) => {
         for (var vn in cf_) {
             if (cf_[vn] && cf_[vn].views) {
                 cf_[vn].views.forEach((vi) => {
-                    fets.push(fetch((___PATH_DOMAIN + '_view/' + vn + '/' + vi.name + '.htm').toLowerCase()));
-                    fets.push(fetch((___PATH_DOMAIN + '_view/' + vn + '/' + vi.name + '.js').toLowerCase()));
-                    fets.push(fetch((___PATH_DOMAIN + '_view/' + vn + '/' + vi.name + '.css').toLowerCase()));
+                    var url_ = (___PATH_DOMAIN + '_view/' + vn + '/' + vi.name).toLowerCase();
+                    fets.push(fetch(url_ + '.htm'));
+                    fets.push(fetch(url_ + '.mobi.htm'));
+                    fets.push(fetch(url_ + '.tablet.htm'));
+                    fets.push(fetch(url_ + '.js'));
+                    fets.push(fetch(url_ + '.css'));
                 });
             }
         }
@@ -155,29 +683,39 @@ var view___init = (callback) => {
                 var api = p[p.length - 1].split('.')[0];
                 var key = scope + '___' + api;
                 var index = -1;
+                var text = '';
 
                 //console.log(r.url, r.ok);
 
                 if (type == 'js') {
                     if (r.ok) text = await r.text();
-                    else text = '{ data: function () { return {}; }, mounted: function () {}, methods: {} }';
+                    if (text.length == 0)
+                        text = '{ data: function () { return {}; }, mounted: function () {}, methods: {} }';
 
                     text = text.trim().substr(1);
-                    text = '___COM["' + key + '"] = { mixins: [___MIXIN], template: ___HTML["' + key + '"], \r\n ' + text + ' \r\n ' +
+
+                    var str_template = '___HTML["' + key + '"]';
+                    if (___HTML[key + '.' + DEVICE_NAME] != null) str_template = '___HTML["' + key + '.' + DEVICE_NAME + '"]';
+
+                    text = '___COM["' + key + '"] = { mixins: [___MIXIN], template: ' + str_template + ', \r\n ' + text + ' \r\n ' +
                         'Vue.component("' + key + '", ___COM["' + key + '"]); \r\n ';
                     var url_js = URL.createObjectURL(new Blob([text], { type: 'text/javascript' }));
 
                     index = ___VIEW[scope].views.findIndex(function (o) { return o.name == api; });
-                    //console.log(scope, api, index);
                     if (index != -1) ___VIEW[scope].views[index].url_js = url_js;
                     ___VIEW[scope].views[index].ok = false;
                     ___VIEW[scope].views[index].key = key;
+
+                    //console.log(scope, api, index);
+                    //console.log(key, str_template);
+                    //console.log(key, url_js);
 
                     a.push({ key: key, scope: scope, api: api, type: 'js', url_js: url_js });
                 } else if (r.ok) {
                     text = await r.text();
                     switch (type) {
                         case 'tm': // htm
+                            //console.log('HTM -> ', key);
                             ___HTML[key] = text;
                             break;
                         case 'ss': // css
@@ -241,60 +779,18 @@ var view___get = (scope_, name_) => {
     return null;
 };
 
-view___init((m) => {
-    console.log('VIEW___INIT ----> ' + m.ok);
-    if (m.ok == false) return;
+/////////////////////////////////////////////////////////////////////
 
-    ___APP = new Vue({
-        el: '#app',
-        data: function () { return ___DATA; },
-        mounted: function () {
-            var _self = this;
-            Vue.nextTick(function () {
-                _self.reload();
-            });
-        },
-        methods: {
-            reload: function () {
-                var _self = this;
+function touchHandler(event) {
+    if (event.touches.length > 1) {
+        //the event is multi-touch. you can then prevent the behavior
+        event.preventDefault()
+    }
+}
+window.addEventListener("touchstart", touchHandler, false);
 
-                if (localStorage['USER_TOKEN'] == null) {
-                    ___APP.$data.view___main_body = 'user___login';
-                } else {
-                    ___APP.$data.objUser = JSON.parse(localStorage['USER']);
-
-                    fetch(___PATH_DOMAIN + '_view/default.json').then(r => r.json()).then(async cf_ => {
-                        for (var ky_ in cf_) {
-                            var scope_view = cf_[ky_];
-                            if (scope_view && scope_view.length > 0) {
-                                var a = scope_view.split('___');
-                                if (a.length == 2) {
-                                    var obj_view = view___get(a[0], a[1]);
-                                    if (obj_view) {
-                                        console.log('VIEW___RELOAD: ' + ky_ + ' === ' + scope_view);
-                                        ___APP.$data['view___' + ky_] = obj_view.key;
-                                    }
-                                }
-                            }
-                        }
-                    });
-
-                }
-            }
-        }
-    });
-});
-
-window.addEventListener("hashchange", function (h) {
-    var old_hash = new URL(h.oldURL).hash;
-    var new_hash = location.hash;
-    if (old_hash && old_hash.indexOf('#!') == 0) old_hash = old_hash.substr(2);
-    if (new_hash && new_hash.indexOf('#!') == 0) new_hash = new_hash.substr(2);
-    console.log('HASH_CHANGE: ' + old_hash + ' -> ', new_hash);
-    view___load(new_hash, old_hash);
-}, false);
-window.addEventListener('DOMContentLoaded', (e) => {
-    document.onclick = function (event) {
+var touchStartHandler = function (event) {
+    if (___DL_CURRENT_ID && ___DL_CURRENT_EVENT) {
         var event_id = event.target.getAttribute('id');
         //console.log('DOC_CLICK: CURRENT_ID = ' + ___DL_CURRENT_ID + ', event_id = ' + event_id);
         if (___DL_CURRENT_ID && ___DL_CURRENT_ID != event_id) {
@@ -308,9 +804,32 @@ window.addEventListener('DOMContentLoaded', (e) => {
                 ___DL_CURRENT_EVENT = null;
             }
         }
-    };
+    }
+};
+window.addEventListener('DOMContentLoaded', (e) => {
+
+    if ('ontouchstart' in document.documentElement) {
+        document.addEventListener("touchstart", function (event) {
+            if (___DL_CURRENT_ID && ___DL_CURRENT_EVENT) {
+                touchStartHandler(event);
+                event.preventDefault();
+            }
+        }, { passive: false });
+    } else {
+        document.onclick = function (event) { touchStartHandler(event); };
+    }
 });
 
+window.addEventListener("hashchange", function (h) {
+    var old_hash = new URL(h.oldURL).hash;
+    var new_hash = location.hash;
+    if (old_hash && old_hash.indexOf('#!') == 0) old_hash = old_hash.substr(2);
+    if (new_hash && new_hash.indexOf('#!') == 0) new_hash = new_hash.substr(2);
+    console.log('HASH_CHANGE: ' + old_hash + ' -> ', new_hash);
+    view___load(new_hash, old_hash);
+}, false);
+
+/////////////////////////////////////////////////////////////////////
 
 var view___load = (view, view_called) => {
     if (view == null || view.length == 0) return;
@@ -371,25 +890,93 @@ var view___dialog = (event, view) => {
 
 var ___login = (user) => {
     console.log('___login: user = ', user);
+
+    sessionStorage['USER_ID'] = 'zalo.5130398983683244855'; //Hook login
+    USER_ID = sessionStorage['USER_ID'];
+
     localStorage['USER_TOKEN'] = user.str_token;
     localStorage['USER'] = JSON.stringify(user);
+
     ___APP.$data.objUser = user;
-    ___APP.reload();
+
+    location.reload();
 };
 
 var ___logout = () => {
-    if (___V_LOGOUT && ___V_LOGOUT.logout)
-        ___V_LOGOUT.logout((ok) => {
-            localStorage.removeItem('USER_TOKEN');
-            localStorage.removeItem('USER');
+    sessionStorage.removeItem('USER_ID');
+    USER_ID = null;
 
-            Object.keys(___DATA).forEach(key => {
-                if (key.indexOf('view___') == 0) {
-                    ___APP.$data[key] = null;
-                }
-            });
+    localStorage.removeItem('USER_TOKEN');
+    localStorage.removeItem('USER');
 
-            view___load('user___login');
+    Object.keys(___DATA).forEach(key => {
+        if (key.indexOf('view___') == 0) {
+            ___APP.$data[key] = null;
+        }
+    });
 
-        });
+    location.reload();
 };
+
+/////////////////////////////////////////////////////////////////////
+
+var setup_loading = function (visible) {
+    var el = document.getElementById('setup_loading');
+    if (el) el.style.display = (visible != false) ? 'block' : 'none';
+};
+
+var app___load_view = function () {
+    if (USER_ID) {
+        var a = Object.keys(___VIEW_CF);
+        a.forEach((ky_) => {
+            if (ky_.startsWith('___') == false) {
+                var scope_view = ___VIEW_CF[ky_];
+                if (scope_view && scope_view.length > 0) {
+                    scope_view = scope_view.split('|')[0];
+                    var a = scope_view.split('___');
+                    if (a.length == 2) {
+                        var obj_view = view___get(a[0], a[1]);
+                        if (obj_view) {
+                            console.log('VIEW___RELOAD: ' + ky_ + ' === ' + scope_view);
+                            ___APP.$data['view___' + ky_] = obj_view.key;
+                        }
+                    }
+                }
+            }
+        });
+    } else {
+        ___APP.$data.view___main_body = ___VIEW_CF['___login'];
+    }
+    setup_loading(false);
+};
+
+var app___init = function () {
+    setup_loading();
+
+    view___init((m) => {
+        console.log('VIEW___INIT ----> ' + m.ok);
+        if (m.ok == false) {
+            alert('Call function view___init() fail...');
+            return;
+        }
+
+        ___APP = new Vue({
+            el: '#app',
+            data: function () { return ___DATA; },
+            mounted: function () {
+                fetch(___PATH_DOMAIN + '_view/default.json').then(r => r.json()).then(cf_ => {
+                    var a = Object.keys(cf_);
+                    a.forEach((key) => {
+                        var val = cf_[key].split('|')[0];
+                        cf_[key] = val;
+                    });
+                    //console.log(cf_);
+                    ___VIEW_CF = cf_;
+                    app___load_view();
+                });
+            }
+        });
+    });
+};
+
+app___init();
