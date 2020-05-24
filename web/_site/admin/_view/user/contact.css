@@ -1,5 +1,10 @@
 ﻿
 .user___contact {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 42px);
+    overflow: auto;
+    padding-bottom: 99px;
 }
 
     .user___contact ul,
@@ -8,67 +13,91 @@
         margin: 0;
     }
 
-        .user___contact ul li {
+    .user___contact p,
+    .user___contact div.btn-group {
+    }
+
+    .user___contact p {
+        width: calc(100% - 139px);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .user___contact div.btn-group {
+        width: 139px;
+        padding-top: 4px;
+    }
+
+    .user___contact ul li {
+        padding-left: 0.3em;
+        padding-right: 0.3em;
+    }
+
+        .user___contact ul li img {
         }
 
-            .user___contact ul li img {
+
+        .user___contact ul li .ui-avartar {
+            width: 32px;
+            margin-right: 7px;
+            margin-top: 7px;
+        }
+
+        .user___contact ul li img.ui-avartar {
+            border-radius: 50%;
+            border: 1px solid orange;
+        }
+
+        .user___contact ul li i.ui-avartar {
+            font-size: 32px;
+            color: #ddd;
+        }
+
+        .user___contact ul li .ui-info {
+            line-height: 12px;
+            padding: 7px 0 0 0;
+            width: calc(100% - 40px);
+        }
+
+            .user___contact ul li .ui-info b {
+                font-size: 0.8em;
+                font-weight: normal;
+                color: #000;
+                font-family: arial;
             }
 
-
-            .user___contact ul li .ui-avartar {
-                font-size: 32px;
-                margin-top: 6px;
-                margin-right: 16px;
-                color: #ccc;
+            .user___contact ul li .ui-info em {
+                font-size: 0.7em;
+                color: #555;
             }
 
-            .user___contact ul li .ui-info {
-                line-height: 16px;
-                padding: 5px 0 0 0;
-            }
+        .user___contact ul li .ui-group,
+        .user___contact ul li .ui-task,
+        .user___contact ul li .ui-call,
+        .user___contact ul li .ui-message {
+            padding: 0;
+            position: relative;
+            width: 32px;
+            margin-left: 4px;
+        }
 
-                .user___contact ul li .ui-info b {
-                    font-size: 1em;
-                }
+        .user___contact ul li .btn-group i {
+            color: #999;
+            font-size: 1em;
+            padding: 7px 0 0 0;
+            min-width: 35px;
+        }
 
-                .user___contact ul li .ui-info em {
-                    font-size: 0.7em;
-                    color: #555;
-                }
+        .user___contact ul li .btn-group .badge {
+            padding: 2px 3px 2px 3px;
+            min-width: 16px;
+            text-align: center;
+            font-weight: normal;
+            font-size: 0.7em;
+            right: 0;
+            top: 0;
+        }
 
-            .user___contact ul li .ui-call {
-                margin-right: 12px;
-                min-width: 35px;
-            }
-
-                .user___contact ul li .ui-call i.fa {
-                    font-size: 1.5em;
-                    padding: 7px 0 0 0;
-                }
-
-
-            .user___contact ul li .ui-message {
-                padding: 0;
-                position: relative;
-            }
-
-                .user___contact ul li .ui-message i.fa {
-                    font-size: 2em;
-                    padding: 4px 0px 0 0;
-                }
-
-                .user___contact ul li .ui-call i.fa,
-                .user___contact ul li .ui-message i.fa {
-                    color: #999;
-                }
-
-                .user___contact ul li .ui-call .badge,
-                .user___contact ul li .ui-message .badge {
-                    padding: 2px 2px 2px 2px;
-                    min-width: 16px;
-                    text-align: center;
-                    font-weight: normal;
-                    font-size: 0.7em;
-                    left: 22px;
-                    top: 0;
-                }
+        .user___contact ul li .ui-call {
+            margin-left: 0px;
+        }

@@ -2,26 +2,36 @@
     <ul class="list-group list-group-flush">
         <li class="list-group-item" v-for="item in ___APP.objContact.items">
             <p class="float-left">
-                <i class="ui-avartar fa fa-user-circle float-left"></i>
+                <img v-if="contact___has_avatar(item)" class="ui-avartar float-left" :src="item.str_avatar"/>
+                <i v-else class="ui-avartar fa fa-user-circle float-left"></i>
                 <span class="ui-info float-left">
-                    <b>Mr Thinh</b><br />
+                    <b>{{ contact___get_name(item) }}</b><br />
                     <em>Nice to meet yout!</em>
                 </span>
             </p>
-            <div class="btn-group mr-2 float-right" role="group">
-                <a class="ui-call">
-                    <i class="fa fa-phone"></i>
-                    <span class="badge badge-danger badge-pill position-absolute">1</span>
+            <div class="btn-group float-right" role="group">
+                <a class="ui-task">
+                    <i class="fa fa-tasks"></i>
+                    <span class="badge badge-success badge-pill position-absolute">1</span>
+                </a>
+                <a class="ui-group">
+                    <i class="fa fa-users"></i>
+                    <span class="badge badge-success badge-pill position-absolute">1</span>
                 </a>
                 <a class="ui-message">
-                    <i class="fa fa-comments"></i>
-                    <span class="badge badge-danger badge-pill position-absolute">5+</span>
+                    <i class="far fa-comment-alt"></i>
+                    <span class="badge badge-success badge-pill position-absolute">5+</span>
+                </a>
+                <a class="ui-call">
+                    <i class="fa fa-phone"></i>
+                    <span class="badge badge-success badge-pill position-absolute">1</span>
                 </a>
             </div>
         </li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Morbi leo risus</li>
-        <li class="list-group-item">Porta ac consectetur ac</li>
-        <li class="list-group-item">Vestibulum at eros</li>
+        <li class="list-group-item" style="text-align:center">
+            <button type="button" class="btn btn-warning">
+                Xem tiếp
+            </button>
+        </li>
     </ul>
 </div>

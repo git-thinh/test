@@ -65,9 +65,11 @@ var ___DATA = {
             {
                 ok: true,
                 id: 1,
+                calls_to: [{ str_phone: "0975600710", time: new Date().getTime() }],
                 str_token: "6171234525",
                 str_username: "thinhnv",
                 str_shortname: "Mr Thinh",
+                str_phone: "0948003456",
                 str_phones: "0948003456,0626111347",
                 str_fullname: "Nguyễn Văn Thịnh",
                 str_email: "thinhifis@gmail.com",
@@ -124,6 +126,46 @@ var ___DATA = {
                         ]
                     }
                 ]
+            },
+            {
+                id: 2,
+                str_phone: "0975600710",
+                str_fullname: "Nguyễn Cẩm Tú",
+                str_username: "Cẩm Tú",
+                str_avatar: "https://scontent.fhph1-1.fna.fbcdn.net/v/t1.0-1/p160x160/18058007_114394709123150_2227901527307964772_n.jpg?_nc_cat=104&_nc_sid=dbb9e7&_nc_ohc=sCErkL5L_C0AX-LATtj&_nc_ht=scontent.fhph1-1.fna&_nc_tp=6&oh=cf751a8fc43294cf65b42d2f85a0e44b&oe=5EEE64A1"
+            },
+            {
+                id: 3,
+                str_phone: "",
+                str_fullname: "Nguyễn Mạnh Hà",
+                str_username: "Mạnh Hà",
+                str_avatar: "https://s120-ava-talk.zadn.vn/9/5/d/0/23/120/949d6a7659fc2f2e27a0af0acc8e009e.jpg"
+            },
+            {
+                id: 4,
+                str_phone: "",
+                str_fullname: "Chị Quỳnh",
+                str_username: "Chị Quỳnh",
+                str_avatar: "https://s120-ava-talk.zadn.vn/e/a/e/4/4/120/19abc4d6e7162510afbf8a2e36e1456f.jpg"
+            },
+            {
+                id: 5,
+                str_phone: "",
+                str_fullname: "Nguyễn Quý Phi",
+                str_username: "Quý Phi",
+                str_avatar: "https://s120-ava-talk.zadn.vn/e/4/e/8/20/120/0e1d0af9a5c954bcfa12797d94961d3b.jpg"
+            },
+            {
+                id: 7287083737778696997,
+                str_phone: "",
+                str_username: "Nguyen Huu Sinh",
+                str_avatar: "https://s120.avatar.talk.zdn.vn/f/1/1/a/12/120/11ddc4a09d9273dc8a1bfd8d2e0adeac.jpg"
+            },
+            {
+                id: 7900271606406461606,
+                str_phone: "",
+                str_username: "Việt Cường",
+                str_avatar: "https://s120.avatar.talk.zdn.vn/5/a/7/0/5/120/ee11866fe3603fd00896d6459d47ffbf.jpg"
             },
             {
                 "str_fullname": "Domain Admin",
@@ -628,18 +670,17 @@ var ___MIXIN = {
             }
         },
         contact___get_name: function (o) {
-            o = {
-                str_username: "thinhnv",
-                str_shortname: "Mr Thinh",
-                str_phones: "0948003456,0626111347",
-                str_fullname: "Nguyễn Văn Thịnh",
-                str_email: "thinhifis@gmail.com",
-                str_avatar: "https://s120.avatar.talk.zdn.vn/7/5/c/b/1/120/ca96210ff1addff45f03e144ec4aa052.jpg",
-            };
             if (o) {
-
+                if (o.str_shortname && o.str_shortname.length > 0) return o.str_shortname;
+                if (o.str_fullname && o.str_fullname.length > 0) return o.str_fullname;
+                if (o.str_username && o.str_username.length > 0) return o.str_username;
+                if (o.str_email && o.str_email.length > 0) return o.str_email;
             }
             return '';
+        },
+        contact___has_avatar: function (o) {
+            if (o && o.str_avatar && o.str_avatar.startsWith('http')) return true;
+            return false;
         }
     },
     watch: {
