@@ -1024,4 +1024,15 @@ var app___init = function () {
     });
 };
 
-app___init();
+if (DEVICE_NAME == 'mobi') {
+    head.load([
+        { reset_css: 'app/reset.css?v=' + new Date().getTime() },
+    ], app___init);
+} else {
+    head.load([
+        { datatables_css: 'app/jquery.dataTables.min.css' },
+        { reset_css: 'app/reset.css?v=' + new Date().getTime() },
+        { datatables_js: 'app/jquery.dataTables.min.js' },
+        { datatables_js_fix_col: 'app/dataTables.fixedColumns.min.js' },
+    ], app___init);
+}

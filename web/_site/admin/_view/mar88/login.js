@@ -11,6 +11,11 @@
     },
     methods: {
         login: function() {
+            if (DEVICE_NAME != '') {
+                alert('System only run on PC')
+                return;
+            }
+
             ___login({
                 ok: true,
                 id: 1,
