@@ -1,4 +1,84 @@
-﻿body {
+﻿
+/*::-webkit-scrollbar {
+    width: 9px !important;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background-color: #fff !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: grey !important;
+    border-radius: 0 !important;
+}*/
+
+.no-select-text {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+textarea {
+    resize: none !important;
+}
+
+.___com {
+    width: 100%;
+}
+/*////////////////////////////////////////////////////*/
+/*////////////////////////////////////////////////////*/
+
+/* dataTables.fixedColumns[BEGIN]: Ensure that the demo table scrolls */
+
+.app-grid-main table th, td {
+    white-space: nowrap;
+}
+
+.app-grid-main div.dataTables_wrapper {
+    width: 888px;
+    margin: 0;
+}
+
+/********************************************************************/
+
+.app-grid-main .dataTables_wrapper
+.dataTables_scroll div.dataTables_scrollBody,
+.app-grid-main table.dataTable.no-footer {
+    /*border-bottom: 1px solid #111;*/
+    border-bottom: none !important;
+}
+
+.app-grid-main .DTFC_LeftHeadWrapper,
+.app-grid-main .DTFC_RightHeadWrapper {
+    background: #fff !important;
+}
+
+.app-grid-main .DTFC_RightHeadBlocker {
+    background: #fff !important;
+}
+
+.app-grid-main .row.dt-table,
+.app-grid-main .ui.grid > .column:not(.row), .ui.grid > .row > .column {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.app-grid-main table.dataTable tbody tr.row_selected {
+    background-color: #B0BED9;
+}
+
+.app-grid-main table.dataTable tbody td.dtm-cell-free {
+    min-width: 900px;
+}
+
+/* dataTables.fixedColumns[END] */
+
+body {
     padding: 0;
     margin: 0;
 }

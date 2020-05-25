@@ -1,4 +1,65 @@
 {
+  "mar88": {
+    "title": "mar88",
+    "views": [
+      {
+        "type": "inline",
+        "title": "Login",
+        "name": "login",
+        "area_allow": [ "url", "menu" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "Menu",
+        "name": "menu",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "cus_all",
+        "name": "cus_all",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "cus_group",
+        "name": "cus_group",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "cus_label",
+        "name": "cus_label",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "msg_template",
+        "name": "msg_template",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "msg_timer",
+        "name": "msg_timer",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "report_broadcast_msg",
+        "name": "report_broadcast_msg",
+        "area_allow": [ "dailog" ],
+        "enable": true
+      }
+    ]
+  },
   "_debug": {
     "title": "Debug",
     "views": [

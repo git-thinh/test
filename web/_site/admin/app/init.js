@@ -593,6 +593,10 @@ var ___DATA = {
     objProject: {
         items: []
     },
+    objViewMain: {
+        str_name: '',
+        str_title: ''
+    }
 };
 
 var ___MIXIN = {
