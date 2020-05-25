@@ -1,6 +1,7 @@
 ﻿
-/*::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 9px !important;
+    height: 9px !important;
 }
 
 ::-webkit-scrollbar-track {
@@ -12,7 +13,7 @@
 ::-webkit-scrollbar-thumb {
     background: grey !important;
     border-radius: 0 !important;
-}*/
+}
 
 .no-select-text {
     -webkit-touch-callout: none; /* iOS Safari */
