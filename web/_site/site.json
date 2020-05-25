@@ -1,4 +1,7 @@
 {
+  "192.168.10.54:54321": "admin",
+  "localhost:54321": "admin",
+  "test-web.f88.vn:54321": "admin",
   "admin.iot.vn": "admin",
   "192.168.1.6": "admin",
   "192.168.11.205": "admin",
