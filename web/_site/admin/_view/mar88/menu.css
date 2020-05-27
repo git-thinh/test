@@ -1,4 +1,7 @@
 ﻿
-.user___menu { 
+.mar88___menu {
 }
- 
+
+    .mar88___menu .ui-cpanel-view .dropdown-toggle::after {
+        display: none;
+    }

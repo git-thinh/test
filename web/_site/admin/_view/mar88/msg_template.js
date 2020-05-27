@@ -39,6 +39,10 @@
                 $('#example_wrapper').css({ width: window.innerWidth + 'px' });
                 $('.DTFC_LeftBodyLiner table tbody tr td:last-of-type').css({ 'border-right': '1px solid #333' });
                 $('.DTFC_RightBodyLiner table tbody tr td:first-child').css({ 'border-left': '1px solid #333' });
+
+                //var it_ = { id: 1, str_subject: '', str_content: '' };
+
+
             }, 50);
         });
     },
@@ -54,9 +58,9 @@
                     a = s.split('|');
                     var subs = _.filter(a, function (o, k) { return k < a.length - 1; });
                     items.push({
-                        id: 0,
-                        subjects: subs,
-                        text: a[a.length - 1]
+                        id: (i + 1),
+                        str_subject: subs.join(', '),
+                        str_content: a[a.length - 1]
                     });
                 }
             }

@@ -31,11 +31,18 @@ textarea {
 .___com {
     width: 100%;
 }
-/*////////////////////////////////////////////////////*/
-/*////////////////////////////////////////////////////*/
 
+.border-none {
+    border: none !important;
+}
+
+.pagination li a{
+    border: none !important;
+}
+
+/*////////////////////////////////////////////////////*/
+/*////////////////////////////////////////////////////*/
 /* dataTables.fixedColumns[BEGIN]: Ensure that the demo table scrolls */
-
 .app-grid-main table th, td {
     white-space: nowrap;
 }

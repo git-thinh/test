@@ -17,6 +17,8 @@
             $(el.parentElement).children().removeClass('active');
 
             ___APP.objViewMain.str_title = str_title;
+            ___APP.objViewMain.objItemSelected.str_title = '';
+
             switch (scope___view) {
                 case 'mar88___cus_group':
                     break;

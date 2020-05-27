@@ -168,396 +168,396 @@ var ___DATA = {
                 str_avatar: "https://s120.avatar.talk.zdn.vn/5/a/7/0/5/120/ee11866fe3603fd00896d6459d47ffbf.jpg"
             },
             {
-                "str_fullname": "Domain Admin",
-                "str_email": "admin@phuquyland.net"
+                str_fullname: "Domain Admin",
+                str_email: "admin@phuquyland.net"
             },
             {
-                "str_fullname": "Nguyễn Tuấn Anh",
-                "str_email": "anhnt1@phuquyland.net"
+                str_fullname: "Nguyễn Tuấn Anh",
+                str_email: "anhnt1@phuquyland.net"
             },
             {
-                "str_fullname": "INFO AROMA",
-                "str_email": "aroma@phuquyland.net"
+                str_fullname: "INFO AROMA",
+                str_email: "aroma@phuquyland.net"
             },
             {
-                "str_fullname": "Live Chat",
-                "str_email": "livechat@phuquyland.net"
+                str_fullname: "Live Chat",
+                str_email: "livechat@phuquyland.net"
             },
             {
-                "str_fullname": "Nguyễn Thanh Duân",
-                "str_email": "duannt@phuquyland.net"
+                str_fullname: "Nguyễn Thanh Duân",
+                str_email: "duannt@phuquyland.net"
             },
             {
-                "str_fullname": "Tuyển Dụng",
-                "str_email": "tuyendung@phuquyland.net"
+                str_fullname: "Tuyển Dụng",
+                str_email: "tuyendung@phuquyland.net"
             },
             {
-                "str_fullname": "landora facebook",
-                "str_email": "facebook@phuquyland.net"
+                str_fullname: "landora facebook",
+                str_email: "facebook@phuquyland.net"
             },
             {
-                "str_fullname": "Liên Giáp Thị Thúy",
-                "str_email": "liengtt@phuquyland.net"
+                str_fullname: "Liên Giáp Thị Thúy",
+                str_email: "liengtt@phuquyland.net"
             },
             {
-                "str_fullname": "Trần Văn Hiệp",
-                "str_email": "hieptv@phuquyland.net"
+                str_fullname: "Trần Văn Hiệp",
+                str_email: "hieptv@phuquyland.net"
             },
             {
-                "str_fullname": "tan hoang ngoc",
-                "str_email": "tanhn1@phuquyland.net"
+                str_fullname: "tan hoang ngoc",
+                str_email: "tanhn1@phuquyland.net"
             },
             {
-                "str_fullname": "Phương Hoàng Lan",
-                "str_email": "phuonghl@phuquyland.net"
+                str_fullname: "Phương Hoàng Lan",
+                str_email: "phuonghl@phuquyland.net"
             },
             {
-                "str_fullname": "Tân Hoàng Ngọc",
-                "str_email": "tanhn@phuquyland.net"
+                str_fullname: "Tân Hoàng Ngọc",
+                str_email: "tanhn@phuquyland.net"
             },
             {
-                "str_fullname": "Phạm Thu Hà",
-                "str_email": "haptt@phuquyland.net"
+                str_fullname: "Phạm Thu Hà",
+                str_email: "haptt@phuquyland.net"
             },
             {
-                "str_fullname": "Nguyễn Mạnh Hà",
-                "str_email": "manhha@phuquyland.net"
+                str_fullname: "Nguyễn Mạnh Hà",
+                str_email: "manhha@phuquyland.net"
             },
             {
-                "str_fullname": "Nguyễn Thanh Hùng",
-                "str_email": "hungnt@phuquyland.net"
+                str_fullname: "Nguyễn Thanh Hùng",
+                str_email: "hungnt@phuquyland.net"
             },
             {
-                "str_fullname": "Ngô Thị Thu Hương",
-                "str_email": "huongntt@phuquyland.net"
+                str_fullname: "Ngô Thị Thu Hương",
+                str_email: "huongntt@phuquyland.net"
             },
             {
-                "str_fullname": "Nguyễn Thị Phương Hảo",
-                "str_email": "haontp@phuquyland.net"
+                str_fullname: "Nguyễn Thị Phương Hảo",
+                str_email: "haontp@phuquyland.net"
             },
             {
-                "str_fullname": "Đường Thị Kim Khánh",
-                "str_email": "khanhdtk@phuquyland.net"
+                str_fullname: "Đường Thị Kim Khánh",
+                str_email: "khanhdtk@phuquyland.net"
             },
             {
-                "str_fullname": "Anh Kiều Hoàng",
-                "str_email": "anhkh@phuquyland.net"
+                str_fullname: "Anh Kiều Hoàng",
+                str_email: "anhkh@phuquyland.net"
             },
             {
-                "str_fullname": "Phú Quý Land",
-                "str_email": "info@phuquyland.net"
+                str_fullname: "Phú Quý Land",
+                str_email: "info@phuquyland.net"
             },
             {
-                "str_fullname": "Trương Tùng Lâm",
-                "str_email": "lamtt@phuquyland.net"
+                str_fullname: "Trương Tùng Lâm",
+                str_email: "lamtt@phuquyland.net"
             },
             {
-                "str_fullname": "Long Lê Hữu",
-                "str_email": "longlh@phuquyland.net"
+                str_fullname: "Long Lê Hữu",
+                str_email: "longlh@phuquyland.net"
             },
             {
-                "str_fullname": "Thảo Lê Thị",
-                "str_email": "thaolt@phuquyland.net"
+                str_fullname: "Thảo Lê Thị",
+                str_email: "thaolt@phuquyland.net"
             },
             {
-                "str_fullname": "Hiên Lê Thị",
-                "str_email": "hienlt@phuquyland.net"
+                str_fullname: "Hiên Lê Thị",
+                str_email: "hienlt@phuquyland.net"
             },
             {
-                "str_fullname": "Oanh Lê Thị Kim",
-                "str_email": "oanhltk@phuquyland.net"
+                str_fullname: "Oanh Lê Thị Kim",
+                str_email: "oanhltk@phuquyland.net"
             },
             {
-                "str_fullname": "Anh Lê Tuấn",
-                "str_email": "anhlt@phuquyland.net"
+                str_fullname: "Anh Lê Tuấn",
+                str_email: "anhlt@phuquyland.net"
             },
             {
-                "str_fullname": "Cường Lê Viết",
-                "str_email": "cuonglv@phuquyland.net"
+                str_fullname: "Cường Lê Viết",
+                str_email: "cuonglv@phuquyland.net"
             },
             {
-                "str_fullname": "Doanh Lê Văn",
-                "str_email": "doanhlv@phuquyland.net"
+                str_fullname: "Doanh Lê Văn",
+                str_email: "doanhlv@phuquyland.net"
             },
             {
-                "str_fullname": "Huỳnh Lê Văn",
-                "str_email": "huynhlv@phuquyland.net"
+                str_fullname: "Huỳnh Lê Văn",
+                str_email: "huynhlv@phuquyland.net"
             },
             {
-                "str_fullname": "Thịnh Mai Đức",
-                "str_email": "thinhmd@phuquyland.net"
+                str_fullname: "Thịnh Mai Đức",
+                str_email: "thinhmd@phuquyland.net"
             },
             {
-                "str_fullname": "Nguyễn Thị Mát",
-                "str_email": "matnt@phuquyland.net"
+                str_fullname: "Nguyễn Thị Mát",
+                str_email: "matnt@phuquyland.net"
             },
             {
-                "str_fullname": "Nguyễn Văn Mạnh",
-                "str_email": "manhnv@phuquyland.net"
+                str_fullname: "Nguyễn Văn Mạnh",
+                str_email: "manhnv@phuquyland.net"
             },
             {
-                "str_fullname": "Minh Nguyễn Công",
-                "str_email": "minhnc@phuquyland.net"
+                str_fullname: "Minh Nguyễn Công",
+                str_email: "minhnc@phuquyland.net"
             },
             {
-                "str_fullname": "Phúc Nguyễn Hữu",
-                "str_email": "phucnh@phuquyland.net"
+                str_fullname: "Phúc Nguyễn Hữu",
+                str_email: "phucnh@phuquyland.net"
             },
             {
-                "str_fullname": "Hưng Nguyễn Duy",
-                "str_email": "hungnd@phuquyland.net"
+                str_fullname: "Hưng Nguyễn Duy",
+                str_email: "hungnd@phuquyland.net"
             },
             {
-                "str_fullname": "Việt Nguyễn Hoàng Tuấn",
-                "str_email": "vietnht@phuquyland.net"
+                str_fullname: "Việt Nguyễn Hoàng Tuấn",
+                str_email: "vietnht@phuquyland.net"
             },
             {
-                "str_fullname": "Lan Nguyễn Mai",
-                "str_email": "lannm@phuquyland.net"
+                str_fullname: "Lan Nguyễn Mai",
+                str_email: "lannm@phuquyland.net"
             },
             {
-                "str_fullname": "Huệ Nguyễn Thanh",
-                "str_email": "huent@phuquyland.net"
+                str_fullname: "Huệ Nguyễn Thanh",
+                str_email: "huent@phuquyland.net"
             },
             {
-                "str_fullname": "Long Nguyễn Thành",
-                "str_email": "longnt@phuquyland.net"
+                str_fullname: "Long Nguyễn Thành",
+                str_email: "longnt@phuquyland.net"
             },
             {
-                "str_fullname": "Duyên Nguyễn Thị",
-                "str_email": "duyennt1@phuquyland.net"
+                str_fullname: "Duyên Nguyễn Thị",
+                str_email: "duyennt1@phuquyland.net"
             },
             {
-                "str_fullname": "Loan Nguyễn Thị",
-                "str_email": "loannt@phuquyland.net"
+                str_fullname: "Loan Nguyễn Thị",
+                str_email: "loannt@phuquyland.net"
             },
             {
-                "str_fullname": "Duyên Nguyễn Thị",
-                "str_email": "duyennt@phuquyland.net"
+                str_fullname: "Duyên Nguyễn Thị",
+                str_email: "duyennt@phuquyland.net"
             },
             {
-                "str_fullname": "Thơ Nguyễn Thị",
-                "str_email": "thont@phuquyland.net"
+                str_fullname: "Thơ Nguyễn Thị",
+                str_email: "thont@phuquyland.net"
             },
             {
-                "str_fullname": "Thơ Nguyễn Thị",
-                "str_email": "thont1@phuquyland.net"
+                str_fullname: "Thơ Nguyễn Thị",
+                str_email: "thont1@phuquyland.net"
             },
             {
-                "str_fullname": "Thủy Nguyễn Thị",
-                "str_email": "thuynt@phuquyland.net"
+                str_fullname: "Thủy Nguyễn Thị",
+                str_email: "thuynt@phuquyland.net"
             },
             {
-                "str_fullname": "Dũng Nguyễn Tiến",
-                "str_email": "dungnt1@phuquyland.net"
+                str_fullname: "Dũng Nguyễn Tiến",
+                str_email: "dungnt1@phuquyland.net"
             },
             {
-                "str_fullname": "Anh Nguyễn Tuấn",
-                "str_email": "anhnt@phuquyland.net"
+                str_fullname: "Anh Nguyễn Tuấn",
+                str_email: "anhnt@phuquyland.net"
             },
             {
-                "str_fullname": "Quân Nguyễn Tùng",
-                "str_email": "quannt@phuquyland.net"
+                str_fullname: "Quân Nguyễn Tùng",
+                str_email: "quannt@phuquyland.net"
             },
             {
-                "str_fullname": "Dũng Nguyễn Văn",
-                "str_email": "dungnv@phuquyland.net"
+                str_fullname: "Dũng Nguyễn Văn",
+                str_email: "dungnv@phuquyland.net"
             },
             {
-                "str_fullname": "Sơn Nguyễn Văn",
-                "str_email": "sonnv@phuquyland.net"
+                str_fullname: "Sơn Nguyễn Văn",
+                str_email: "sonnv@phuquyland.net"
             },
             {
-                "str_fullname": "Vượng Nguyễn Văn",
-                "str_email": "vuongnv@phuquyland.net"
+                str_fullname: "Vượng Nguyễn Văn",
+                str_email: "vuongnv@phuquyland.net"
             },
             {
-                "str_fullname": "Tây Nguyễn Văn",
-                "str_email": "taynv@phuquyland.net"
+                str_fullname: "Tây Nguyễn Văn",
+                str_email: "taynv@phuquyland.net"
             },
             {
-                "str_fullname": "Thăng Nguyễn Xuân",
-                "str_email": "thangnx@phuquyland.net"
+                str_fullname: "Thăng Nguyễn Xuân",
+                str_email: "thangnx@phuquyland.net"
             },
             {
-                "str_fullname": "Đại Nguyễn Xuân",
-                "str_email": "dainx@phuquyland.net"
+                str_fullname: "Đại Nguyễn Xuân",
+                str_email: "dainx@phuquyland.net"
             },
             {
-                "str_fullname": "Nhung Ngô Thị Cẩm",
-                "str_email": "nhungntc@phuquyland.net"
+                str_fullname: "Nhung Ngô Thị Cẩm",
+                str_email: "nhungntc@phuquyland.net"
             },
             {
-                "str_fullname": "Thảo Ngô Thị Tâm",
-                "str_email": "thaontt@phuquyland.net"
+                str_fullname: "Thảo Ngô Thị Tâm",
+                str_email: "thaontt@phuquyland.net"
             },
             {
-                "str_fullname": "Lộc Ngô Văn",
-                "str_email": "locnv@phuquyland.net"
+                str_fullname: "Lộc Ngô Văn",
+                str_email: "locnv@phuquyland.net"
             },
             {
-                "str_fullname": "Võ Hồng Nhung",
-                "str_email": "nhungvh@phuquyland.net"
+                str_fullname: "Võ Hồng Nhung",
+                str_email: "nhungvh@phuquyland.net"
             },
             {
-                "str_fullname": "khách hàng online",
-                "str_email": "khachhang@phuquyland.net"
+                str_fullname: "khách hàng online",
+                str_email: "khachhang@phuquyland.net"
             },
             {
-                "str_fullname": "Nghĩa Phan Trọng",
-                "str_email": "nghiapt@phuquyland.net"
+                str_fullname: "Nghĩa Phan Trọng",
+                str_email: "nghiapt@phuquyland.net"
             },
             {
-                "str_fullname": "Nguyễn Quý Phi",
-                "str_email": "phinq@phuquyland.net"
+                str_fullname: "Nguyễn Quý Phi",
+                str_email: "phinq@phuquyland.net"
             },
             {
-                "str_fullname": "Report PhuQuyLand",
-                "str_email": "report@phuquyland.net"
+                str_fullname: "Report PhuQuyLand",
+                str_email: "report@phuquyland.net"
             },
             {
-                "str_fullname": "Land Phú Quý",
-                "str_email": "phuquyland.service@phuquyland.net"
+                str_fullname: "Land Phú Quý",
+                str_email: "phuquyland.service@phuquyland.net"
             },
             {
-                "str_fullname": "Gia Phạm Hoàng",
-                "str_email": "giaph@phuquyland.net"
+                str_fullname: "Gia Phạm Hoàng",
+                str_email: "giaph@phuquyland.net"
             },
             {
-                "str_fullname": "An Phạm Hải",
-                "str_email": "anph@phuquyland.net"
+                str_fullname: "An Phạm Hải",
+                str_email: "anph@phuquyland.net"
             },
             {
-                "str_fullname": "Linh Phạm Mai",
-                "str_email": "linhpm@phuquyland.net"
+                str_fullname: "Linh Phạm Mai",
+                str_email: "linhpm@phuquyland.net"
             },
             {
-                "str_fullname": "Phương Phạm Quỳnh",
-                "str_email": "phuongpq@phuquyland.net"
+                str_fullname: "Phương Phạm Quỳnh",
+                str_email: "phuongpq@phuquyland.net"
             },
             {
-                "str_fullname": "My Phạm Thảo",
-                "str_email": "mypt@phuquyland.net"
+                str_fullname: "My Phạm Thảo",
+                str_email: "mypt@phuquyland.net"
             },
             {
-                "str_fullname": "Thuỳ Phạm Thị",
-                "str_email": "thuypt1@phuquyland.net"
+                str_fullname: "Thuỳ Phạm Thị",
+                str_email: "thuypt1@phuquyland.net"
             },
             {
-                "str_fullname": "googleads quang cao",
-                "str_email": "googleads@phuquyland.net"
+                str_fullname: "googleads quang cao",
+                str_email: "googleads@phuquyland.net"
             },
             {
-                "str_fullname": "facebook Quảng cáo",
-                "str_email": "ads@phuquyland.net"
+                str_fullname: "facebook Quảng cáo",
+                str_email: "ads@phuquyland.net"
             },
             {
-                "str_fullname": "Nguyễn Thị Trúc Quỳnh",
-                "str_email": "trucquynh@phuquyland.net"
+                str_fullname: "Nguyễn Thị Trúc Quỳnh",
+                str_email: "trucquynh@phuquyland.net"
             },
             {
-                "str_fullname": "Quản Lý Sản Phẩm",
-                "str_email": "qlsp@phuquyland.net"
+                str_fullname: "Quản Lý Sản Phẩm",
+                str_email: "qlsp@phuquyland.net"
             },
             {
-                "str_fullname": "LOGIN TEAMVIEWER",
-                "str_email": "teamviewer@phuquyland.net"
+                str_fullname: "LOGIN TEAMVIEWER",
+                str_email: "teamviewer@phuquyland.net"
             },
             {
-                "str_fullname": "Vũ Khắc Hoàng Thu",
-                "str_email": "thuvkh@phuquyland.net"
+                str_fullname: "Vũ Khắc Hoàng Thu",
+                str_email: "thuvkh@phuquyland.net"
             },
             {
-                "str_fullname": "Thành Thái Văn",
-                "str_email": "thanhtv@phuquyland.net"
+                str_fullname: "Thành Thái Văn",
+                str_email: "thanhtv@phuquyland.net"
             },
             {
-                "str_fullname": "Thành Thân Quang",
-                "str_email": "thanhtq@phuquyland.net"
+                str_fullname: "Thành Thân Quang",
+                str_email: "thanhtq@phuquyland.net"
             },
             {
-                "str_fullname": "Đỗ Đức Thịnh",
-                "str_email": "thinhdd@phuquyland.net"
+                str_fullname: "Đỗ Đức Thịnh",
+                str_email: "thinhdd@phuquyland.net"
             },
             {
-                "str_fullname": "TIVI TIVI",
-                "str_email": "tivi@phuquyland.net"
+                str_fullname: "TIVI TIVI",
+                str_email: "tivi@phuquyland.net"
             },
             {
-                "str_fullname": "Vũ Thị Minh Trang",
-                "str_email": "trangvtm@phuquyland.net"
+                str_fullname: "Vũ Thị Minh Trang",
+                str_email: "trangvtm@phuquyland.net"
             },
             {
-                "str_fullname": "Ân Trương Quốc",
-                "str_email": "antq@phuquyland.net"
+                str_fullname: "Ân Trương Quốc",
+                str_email: "antq@phuquyland.net"
             },
             {
-                "str_fullname": "An Trần Hoàng",
-                "str_email": "anth@phuquyland.net"
+                str_fullname: "An Trần Hoàng",
+                str_email: "anth@phuquyland.net"
             },
             {
-                "str_fullname": "Thiện Trần Hoàng",
-                "str_email": "thienth@phuquyland.net"
+                str_fullname: "Thiện Trần Hoàng",
+                str_email: "thienth@phuquyland.net"
             },
             {
-                "str_fullname": "Trang Trần Minh",
-                "str_email": "trangtm@phuquyland.net"
+                str_fullname: "Trang Trần Minh",
+                str_email: "trangtm@phuquyland.net"
             },
             {
-                "str_fullname": "Khải Trần Xuân",
-                "str_email": "khaitx@phuquyland.net"
+                str_fullname: "Khải Trần Xuân",
+                str_email: "khaitx@phuquyland.net"
             },
             {
-                "str_fullname": "Ánh Trịnh Thị",
-                "str_email": "anhtt@phuquyland.net"
+                str_fullname: "Ánh Trịnh Thị",
+                str_email: "anhtt@phuquyland.net"
             },
             {
-                "str_fullname": "Vũ Văn Tuân",
-                "str_email": "tuanvv@phuquyland.net"
+                str_fullname: "Vũ Văn Tuân",
+                str_email: "tuanvv@phuquyland.net"
             },
             {
-                "str_fullname": "Tô Anh Tuấn",
-                "str_email": "tuanta@phuquyland.net"
+                str_fullname: "Tô Anh Tuấn",
+                str_email: "tuanta@phuquyland.net"
             },
             {
-                "str_fullname": "Thùy Tống Thị Minh",
-                "str_email": "thuyttm@phuquyland.net"
+                str_fullname: "Thùy Tống Thị Minh",
+                str_email: "thuyttm@phuquyland.net"
             },
             {
-                "str_fullname": "Đào Đình Việt",
-                "str_email": "vietdd1@phuquyland.net"
+                str_fullname: "Đào Đình Việt",
+                str_email: "vietdd1@phuquyland.net"
             },
             {
-                "str_fullname": "Tư Đoàn Văn",
-                "str_email": "tudv@phuquyland.net"
+                str_fullname: "Tư Đoàn Văn",
+                str_email: "tudv@phuquyland.net"
             },
             {
-                "str_fullname": "Hoàng Văn Đông",
-                "str_email": "donghv@phuquyland.net"
+                str_fullname: "Hoàng Văn Đông",
+                str_email: "donghv@phuquyland.net"
             },
             {
-                "str_fullname": "Kiều Quang  Tiến Đạt",
-                "str_email": "datkqt@phuquyland.net"
+                str_fullname: "Kiều Quang  Tiến Đạt",
+                str_email: "datkqt@phuquyland.net"
             },
             {
-                "str_fullname": "Tình Đậu Thị",
-                "str_email": "tinhdt@phuquyland.net"
+                str_fullname: "Tình Đậu Thị",
+                str_email: "tinhdt@phuquyland.net"
             },
             {
-                "str_fullname": "Long Đỗ Thế",
-                "str_email": "longdt@phuquyland.net"
+                str_fullname: "Long Đỗ Thế",
+                str_email: "longdt@phuquyland.net"
             },
             {
-                "str_fullname": "Linh Đỗ Thị Thùy",
-                "str_email": "linhdtt@phuquyland.net"
+                str_fullname: "Linh Đỗ Thị Thùy",
+                str_email: "linhdtt@phuquyland.net"
             },
             {
-                "str_fullname": "Dũng Đỗ Tiến",
-                "str_email": "dungdt@phuquyland.net"
+                str_fullname: "Dũng Đỗ Tiến",
+                str_email: "dungdt@phuquyland.net"
             },
             {
-                "str_fullname": "Việt Đỗ Đức",
-                "str_email": "vietdd@phuquyland.net"
+                str_fullname: "Việt Đỗ Đức",
+                str_email: "vietdd@phuquyland.net"
             }
         ]
     },
@@ -593,9 +593,49 @@ var ___DATA = {
     objProject: {
         items: []
     },
+    objMessage: {
+        items: [
+            "Bán hàng|ABC Shop đang có chương trình khuyến mãi mua 3 tặng 1 với toàn bộ sản phẩm tại cửa hàng đến ngày 01-05/11. Bạn ghé ngay cửa hàng vào tại địa chỉ…để nhận ưu đãi",
+            "Chương trình khách hàng thân thiết|Nhận ngay discount đặc biệt với chương trình “Bữa Trưa Tiết Kiệm” cùng Gửi tin nhắn “SAVE” đến số điện thoại của chúng tôi để được giảm giá 20% cho lần đặt hàng tiếp theo của bạn!",
+            "Sự kiện|Mang đến mùa hè bất ngờ cho con bạn bằng cách tham gia hoạt động của trung tâm miễn phí trong suốt tháng 7. Gọi ngay cho chúng tôi để đăng ký tham gia",
+            "Quảng cáo|Mọi tựa sách yêu thích của bạn đang ở ngay đây! Toàn bộ sản phẩm của nhà sách <>hiện đã có sẵn trên điện thoại di động. Giảm giá lớn chỉ duy nhất 3 ngày, hãy nhanh tay truy cập ngay...",
+            "Quảng cáo|Chúng tôi giới thiệu đến các bạn phần mềm SMS Marketing -  SMS BrandName chuyên nghiệp và giá rẻ, giúp các bạn có thể nhanh chóng gửi tin nhắn cho khách hàng.",
+            "Lời mời đăng ký|Hãy là người đầu tiên biết về chương trình ưu đãi giảm giá tại ! Nhấp vào để đăng ký ngay: <địa chỉ website>",
+            "Sự kiện|Vé hiện đã có sẵn cho chương trình từ thiện. Mua hai vé để nhận được món quà bất ngờ! Xem thêm thông tin chi tiết tại: <Địa chỉ website>",
+            "Chăm sóc|Xin thông báo: Quý khách có hẹn vào ngày mai lúc với . Mọi thắc mắc xin vui lòng liên hệ số điện thoại",
+            "Chăm sóc|Cuộc hẹn kiểm tra răng miệng của bạn với nha sĩ  được lên lịch vào ngày tại phòng khám <địa chỉ>, mọi chi tiết xin liên hệ số điện thoại",
+            "Chăm sóc|Ngân hàng xin thông báo cho bạn về cuộc hẹn lúc  tại địa chỉ <địa chỉ chi tiết>. Nhân viên hỗ trợ của bạn là , số điện thoại liên hệ",
+            "Chăm sóc|Nhân viên từ sẽ hướng dẫn bạn xem nhà vào. Vui lòng phản hồi vào số điện thoại này nếu bạn có nhu cầu thay đổi thời gian",
+            "Quảng cáo|Cua hang thoi trang ABC tung bung khuyen mai 50% nhan dip 20/10 cho tat ca cac chi em phu nu. Hay nhanh tay va sam cho minh bo canh moi nao. Chi tiet xem tai : ABC",
+            "Quảng cáo|Nhan dip ra mat BST moi, ABC xin giảm giá 30% toan bo san pham tu ngay 20-22/10. Dac biet moi khach den mua hang se nhan duoc mot phan qua bi mat cua shop. Dia chi : acbzxy. Chi tiet xem tai: ABC.vn",
+            "Quảng cáo|Khu biet thu cao cap ABC – House hien dang mo ban  voi gia cuc uu dai. Hay nhanh tay so huu cho minh mot can ho voi lai suat vay von 0% trong 30 thang dau tien. Lien he: 0987654321.",
+            "Quảng cáo|Xin chao anh Hung, em xin duoc gioi thieu cho anh khu chung cu cao cap cua ABC. Hien tai khu chung cu dang duoc mo ban voi gia cuc soc, uu dai vay von 50% va lai suat chi 0% trong 20 thang dau. Thong tin lien he: 0987654321",
+            "Quảng cáo|Nhan dip 2/9 ABC se giam gia 50% phan mem CRM cho doanh nghiep goi PRO CALL CENTER. Ap dung tu ngay 2/9 den het ngay 5/9. Xem chi tiet tai : https://ABC.vn",
+            "Quảng cáo|Nhan dip 8/3 nha hang ABC se giam gia 20% tong hoa don voi khach hang nu. Chi ap dung trong ngay 8/3. Dia chi : abcxyz.",
+            "Quảng cáo|Tang ngay phieu giam gia 1 trieu dong cho cac cap doi dang ky tour du lich Viet Nam – Singapore trong ngay 14-2. Hay cung nhau co mot chuyen di day thu vi voi ABC. Dang ky ngay tai : ABC.vn",
+            "Quảng cáo|ABC moi cho ra mat phan mem SMS marketing moi nhat, hay nhanh tay truy cap vao website https://ABC.vn de la nguoi dau tien su dung phan mem hien dai nay. Hotline : 0948003456",
+            "Quảng cáo|Tu ngay 6/10 cong ty ABC chinh thuc ra mat mau dien thoai thong minh the he moi, mau ma dep nhat tu truoc den nay… Lien he: ABC moi cho ra mat phan mem SMS marketing moi nhat, hay nhanh tay truy cap vao website https://ABC.vn de la nguoi dau tien su dung phan mem hien dai nay. Hotline : 0948003456",
+            "Quảng cáo|Tu ngay 6/10 cong ty ABC chinh thuc ra mat mau dien thoai thong minh the he moi, mau ma dep nhat tu truoc den nay… Lien he: …",
+            "Chăm sóc|Cam on anh Hung da su dung phan mem cua cua ABC. Neu co bat ky kho khan gi trong viec su dung phan mem hay lien den hotline : 0948003456 de duoc tu van truc tiep. Xem chi tiet tai: https://ABC.vn",
+            "Chăm sóc|ABC xin chuc mung sinh nhat anh Hung! ABC xin tang anh Hung phieu qua tang tri quá 200.000đ. Phieu chi co tac dung tu ngay",
+            "Chăm sóc|Xin ban hay tham gia dong gop y kien cho phan mem SMS marketing cua ABC va nhan that nhieu phan qua gia tri. Tham gia dong gop y kien tai: https://ABC.vn/dong-gop-y-kien.html",
+            "Chăm sóc|Hay tham gia binh chon cho thi sinh ban yeu thich nhat tai chuong trinh ABC. Hay nhanh tay binh chon tai abc.com.vn va nhan nhieu phan qua hap dan cua chuong trinh.",
+            "Chăm sóc|Cam on chi Hoa da su dung dich vu SMS Marketing cua eSMS. Neu co bat ky kho khan gi trong viec su dung dich vu hay lien den hotline : 0948003456 de duoc tu van truc tiep. Xem chi tiet tai: https://abc.vn",
+            "Chăm sóc|abc xin chuc mung sinh nhat anh Hung! abc xin tang anh Hung phieu qua tang tri quá 200.000đ. Phieu chi co tac dung tu ngay …..",
+            "Chăm sóc|Cam on ban da su dung dich vu tai ABC. Hay dong gop y kien cua ban ve dich vu cua chung toi va nhan cac phan qua hap dan tai dia chi: abcx",
+            "Chăm sóc|Tu ngay 25/1 sieu thi dien may ABC ap dung chuong trinh khuyen mai len den 50% danh cho hang ngan san pham. Chi tiet xem tai: http://abcd",
+            "Quảng cáo|Tu ngay …. ABC chinh thuc ra mat bo suu tap LOVE PARADISE, ghe tham cac chi nhanh cua ABC tren toan quoc de tro thanh nguoi dau tien so huu bo trang suc tuyet dep nay. Xem chi tiet tai: http://abcd",
+            "Quảng cáo|ABC tung bung khai truong. Dang ky ngay cac chuyen du lich trong nuoc chi tu 3 trieu dong. Xem them tai http://abcd. Tu choi soan TC gui 6266."
+        ]
+    },
     objViewMain: {
         str_name: '',
-        str_title: ''
+        str_title: '',
+        objItemSelected: {
+            id: 0,
+            str_name: '',
+            str_title: '',
+        }
     }
 };
 
