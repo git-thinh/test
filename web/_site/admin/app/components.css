@@ -1,0 +1,62 @@
+﻿
+/*////////////////////////////////////////////////////*/
+/*////////////////////////////////////////////////////*/
+
+/* dataTables.fixedColumns[BEGIN]: Ensure that the demo table scrolls */
+
+.kit_datatables_net table th, td {
+    white-space: nowrap;
+}
+
+.kit_datatables_net div.dataTables_wrapper {
+    width: 888px;
+    margin: 0;
+}
+
+.kit_datatables_net td.dataTables_empty {
+    background-color: #fff;
+    width: 100%;
+}
+
+    .kit_datatables_net td.dataTables_empty img {
+        width: 100%;
+        max-width: 256px;
+    }
+
+/********************************************************************/
+
+.kit_datatables_net .dataTables_wrapper
+.kit_datatables_net .dataTables_scroll div.dataTables_scrollBody,
+.kit_datatables_net table.dataTable.no-footer {
+    /*border-bottom: 1px solid #111;*/
+    border-bottom: none !important;
+}
+
+.kit_datatables_net .DTFC_LeftHeadWrapper,
+.kit_datatables_net .DTFC_RightHeadWrapper {
+    background: #fff !important;
+}
+
+.kit_datatables_net .DTFC_RightHeadBlocker {
+    background: #fff !important;
+}
+
+.kit_datatables_net .row.dt-table,
+.kit_datatables_net .ui.grid > .column:not(.row), .ui.grid > .row > .column {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.kit_datatables_net table.dataTable tbody tr.row_selected {
+    background-color: #B0BED9;
+}
+
+.kit_datatables_net table.dataTable tbody td.dtm-cell-free {
+    min-width: 2000px;
+}
+
+.kit_datatables_net table.dataTable tbody td.dataTables_empty {
+    position: absolute;
+}
+
+/* dataTables.fixedColumns[END] */

@@ -1075,11 +1075,13 @@ var app___init = function () {
 
 if (DEVICE_NAME == 'mobi') {
     head.load([
+        { components_css: 'app/components.css?v=' + new Date().getTime() },
         { components_js: 'app/components.js?v=' + new Date().getTime() },
         { reset_css: 'app/reset.css?v=' + new Date().getTime() },
     ], app___init);
 } else {
     head.load([
+        { components_css: 'app/components.css?v=' + new Date().getTime() },
         { components_js: 'app/components.js?v=' + new Date().getTime() },
         { datatables_css: 'app/jquery.dataTables.min.css' },
         { reset_css: 'app/reset.css?v=' + new Date().getTime() },

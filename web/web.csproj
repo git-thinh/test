@@ -71,6 +71,7 @@
     <Content Include="_api\function_1.sql" />
     <Content Include="_api\js.test.js" />
     <Content Include="_api\app.js" />
+    <Content Include="_site\admin\app\components.css" />
     <Content Include="_site\admin\app\components.js" />
     <Content Include="_site\admin\app\dataTables.fixedColumns.min.js" />
     <Content Include="_site\admin\app\jquery-3.5.1.slim.min.js" />

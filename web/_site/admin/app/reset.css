@@ -40,57 +40,6 @@ textarea {
     border: none !important;
 }
 
-/*////////////////////////////////////////////////////*/
-/*////////////////////////////////////////////////////*/
-
-/* dataTables.fixedColumns[BEGIN]: Ensure that the demo table scrolls */
-
-.app-grid-main table th, td {
-    white-space: nowrap;
-}
-
-.app-grid-main div.dataTables_wrapper {
-    width: 888px;
-    margin: 0;
-}
-
-/********************************************************************/
-
-.app-grid-main .dataTables_wrapper
-.dataTables_scroll div.dataTables_scrollBody,
-.app-grid-main table.dataTable.no-footer {
-    /*border-bottom: 1px solid #111;*/
-    border-bottom: none !important;
-}
-
-.app-grid-main .DTFC_LeftHeadWrapper,
-.app-grid-main .DTFC_RightHeadWrapper {
-    background: #fff !important;
-}
-
-.app-grid-main .DTFC_RightHeadBlocker {
-    background: #fff !important;
-}
-
-.app-grid-main .row.dt-table,
-.app-grid-main .ui.grid > .column:not(.row), .ui.grid > .row > .column {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-
-.app-grid-main table.dataTable tbody tr.row_selected {
-    background-color: #B0BED9;
-}
-
-.app-grid-main table.dataTable tbody td.dtm-cell-free {
-    min-width: 2000px;
-}
-
-.app-grid-main table.dataTable tbody td.dataTables_empty {
-    position: absolute;
-}
-
-/* dataTables.fixedColumns[END] */
 
 body {
     padding: 0;
