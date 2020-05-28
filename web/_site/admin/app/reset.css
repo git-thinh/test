@@ -36,13 +36,15 @@ textarea {
     border: none !important;
 }
 
-.pagination li a{
+.pagination li a {
     border: none !important;
 }
 
 /*////////////////////////////////////////////////////*/
 /*////////////////////////////////////////////////////*/
+
 /* dataTables.fixedColumns[BEGIN]: Ensure that the demo table scrolls */
+
 .app-grid-main table th, td {
     white-space: nowrap;
 }
@@ -81,7 +83,11 @@ textarea {
 }
 
 .app-grid-main table.dataTable tbody td.dtm-cell-free {
-    min-width: 900px;
+    min-width: 2000px;
+}
+
+.app-grid-main table.dataTable tbody td.dataTables_empty {
+    position: absolute;
 }
 
 /* dataTables.fixedColumns[END] */

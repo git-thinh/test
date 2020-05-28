@@ -34,6 +34,8 @@
                     break;
             }
 
+            view___load(scope___view);
+
             $(el).addClass('active');
         }
     }

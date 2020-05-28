@@ -30,6 +30,15 @@ if (location.href.indexOf('zalo_id') > 0) {
 
 /////////////////////////////////////////////////////////////////////
 
+var ___guid_id = function () {
+    return 'id-xxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+};
+
+/////////////////////////////////////////////////////////////////////
+
 var ___APP, ___VIEW = {}, ___VIEW_CF = {}, ___COM = {}, ___HTML = {},
     ___DL_CURRENT_EVENT = null, ___DL_CURRENT_ID = null,
     ___V_LOGOUT, ___V_MAIN;
@@ -1066,10 +1075,12 @@ var app___init = function () {
 
 if (DEVICE_NAME == 'mobi') {
     head.load([
+        { components_js: 'app/components.js?v=' + new Date().getTime() },
         { reset_css: 'app/reset.css?v=' + new Date().getTime() },
     ], app___init);
 } else {
     head.load([
+        { components_js: 'app/components.js?v=' + new Date().getTime() },
         { datatables_css: 'app/jquery.dataTables.min.css' },
         { reset_css: 'app/reset.css?v=' + new Date().getTime() },
         { datatables_js: 'app/jquery.dataTables.min.js' },
