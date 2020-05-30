@@ -171,7 +171,7 @@ ___COM["kit_datatables_net"] = {
             var fixed_left_column = options.fixed_left_column,
                 fixed_right_column = options.fixed_right_column;
 
-            var hasFixedColumn = options.fixed_left_column != 0 || options.fixed_right_column != 0;
+            var hasLastColumnFree = options.fixed_right_column == 0;
 
             var s_th = '', col_titles = Object.keys(obj);
             var a_columnDefs = [];
@@ -183,58 +183,21 @@ ___COM["kit_datatables_net"] = {
                     s_th += '<th>' + obj[col_name] + '</th>';
                 else
                     s_th += '<th></th>';
+            }
 
-                if (hasFixedColumn) {
-                    //if (i == col_titles.length - fixed_right_column - 1) {
-                    //    s_th += '<th></th>';
-                    //    a_columnDefs = [{ targets: (i + 1), className: 'dtm-cell-free', title: '' }];
-                    //}
-                } else {
-                    a_columnDefs = [{ targets: col_titles.length - 1, className: 'dtm-cell-free' }];
-                }
+            if (hasLastColumnFree) {
+                a_columnDefs = [{ targets: col_titles.length - 1, className: 'dtm-cell-free' }];
+            } else {
+                var col_last = col_titles.length - 1 - fixed_right_column;
+                a_columnDefs = [{ targets: col_last, className: 'dtm-cell-free', title: '' }];
             }
             $('#' + table_id___ + ' thead tr').html(s_th);
 
             var $table = $('#' + table_id___);
             $table.css({ width: window.innerWidth + 'px' });
 
-            if (hasFixedColumn) {
-                $table.DataTable({
-                    destroy: true,
-                    //scrollY: "300px",
-                    scrollY: (window.innerHeight - 150) + 'px',
-                    scrollX: true,
-                    scrollCollapse: true,
-                    //fixedColumns: {
-                    //    leftColumns: fixed_left_column,
-                    //    rightColumns: fixed_right_column
-                    //},
-                    paging: false,
-                    ordering: false,
-                    info: false,
-                    dom: 'rtip',
-                    data: arr_items,
-                    //columnDefs: a_columnDefs,
-                    //language: {
-                    //    emptyTable: "3333333333333333333333333"
-                    //}
-                });
+            if (hasLastColumnFree) {
 
-                setTimeout(function () {
-                    //////if ($.fn.DataTable.isDataTable('#example')) {
-                    //////    $('#example').dataTable().fnClearTable();
-                    //////    $('#example').dataTable().fnDestroy();
-                    //////}
-
-                    $('#' + table_id___ + '_wrapper').css({ width: window.innerWidth + 'px' });
-
-                    //$('.DTFC_LeftBodyLiner table tbody tr td:last-of-type').css({ 'border-right': '1px solid #333' });
-                    //$('.DTFC_RightBodyLiner table tbody tr td:first-child').css({ 'border-left': '1px solid #333' });
-
-                    //var it_ = { id: 1, str_subject: '', str_content: '' };
-                }, 50);
-
-            } else {
                 $table.DataTable({
                     destroy: true,
                     //scrollY: "300px",
@@ -242,7 +205,7 @@ ___COM["kit_datatables_net"] = {
                     scrollX: true,
                     scrollCollapse: false,
                     fixedColumns: {
-                        leftColumns: 0,
+                        leftColumns: fixed_left_column,
                         rightColumns: 0
                     },
                     paging: false,
@@ -255,6 +218,33 @@ ___COM["kit_datatables_net"] = {
                 setTimeout(function () {
                     $('#' + table_id___ + '_wrapper').css({ width: window.innerWidth + 'px' });
                 }, 50);
+
+            } else {
+
+                $table.DataTable({
+                    destroy: true,
+                    //scrollY: "300px",
+                    scrollY: (window.innerHeight - 150) + 'px',
+                    scrollX: true,
+                    scrollCollapse: true,
+                    fixedColumns: {
+                        leftColumns: fixed_left_column,
+                        rightColumns: fixed_right_column
+                    },
+                    paging: false,
+                    ordering: false,
+                    info: false,
+                    dom: 'rtip',
+                    data: arr_items,
+                    columnDefs: a_columnDefs
+                });
+
+                setTimeout(function () {
+                    $('#' + table_id___ + '_wrapper').css({ width: window.innerWidth + 'px' });
+                    $('.DTFC_LeftBodyLiner table tbody tr td:last-of-type').css({ 'border-right': '1px solid #333' });
+                    $('.DTFC_RightBodyLiner table tbody tr td:first-child').css({ 'border-left': '1px solid #333' });
+                }, 50);
+
             }
 
         }

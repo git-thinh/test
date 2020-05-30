@@ -6,6 +6,7 @@
     },
     mounted: function () {
         var _self = this;
+
         //console.log('vue.logint: mounted, role = ', _self.role___);
         //$('#' + _self.idvc___ + ' .styled').uniform({ radioClass: 'choice' });
 
@@ -34,7 +35,7 @@
                 var arr_items = [];
                 var options = {
                     fixed_left_column: 1,
-                    fixed_right_column: 0
+                    fixed_right_column: 1
                 };
 
                 for (var i = 0; i < 1000; i++) {
