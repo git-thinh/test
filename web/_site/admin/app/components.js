@@ -5,11 +5,20 @@ ___COM["kit_datatables_net"] = {
         '<div class="kit-datatables-net">' +
         '   <table :id="table_id___" class="stripe row-border order-column"></table>' +
         '   <div :id="pager_id___" class="pl-1 pr-1"></div>' +
+        '   <div class="pl-1 pr-1">' +
+        '       <div class="float-left pt-2">' +
+        '           Trang 1 | 9 - Tổng 99 bản ghi' +
+        '       </div>' +
+        '       <div class="float-right pt-1">' +
+        '           <ul class="pagination" v-html="pager_html___"></ul>' +
+        '       </div> ' +
+        '   </div>' +
         '</div>',
     data: function () {
         return {
             table_id___: ___guid_id(),
             pager_id___: ___guid_id(),
+            pager_html___: '',
         };
     },
     created: function () {
@@ -54,7 +63,7 @@ ___COM["kit_datatables_net"] = {
             }
             return items;
         },
-        f_table_draw_empty: function (obj) {
+        f_table_draw_empty: function (obj, options) {
             var _self = this;
             var table_id___ = _self.table_id___;
             var pager_id___ = _self.pager_id___;
@@ -100,7 +109,7 @@ ___COM["kit_datatables_net"] = {
                 $('#' + table_id___ + ' td.dataTables_empty img').css({ display: 'block' });
             }, 50);
         },
-        f_table_draw_loading: function (obj) {
+        f_table_draw_loading: function (obj, options) {
             var _self = this;
             var table_id___ = _self.table_id___;
             var pager_id___ = _self.pager_id___;
@@ -147,6 +156,25 @@ ___COM["kit_datatables_net"] = {
             }, 50);
         },
         f_table_draw: function (obj, arr_items, options) {
+            /*
+            
+            var obj = {
+                id: 'Mã tin',
+                str_group: 'Nhóm tin',
+                str_subject: 'Chủ đề tin',
+                str_content: 'Nội dung tin',
+                str_action: 'Thao tác'
+            };
+
+            var options = {
+                fixed_left_column: 1,
+                fixed_right_column: 1,
+                scroll_x: true,
+                scroll_y: (window.innerHeight - 150) + 'px'
+            };
+            
+            */
+
             var _self = this;
             var table_id___ = _self.table_id___;
             var pager_id___ = _self.pager_id___;
@@ -156,17 +184,14 @@ ___COM["kit_datatables_net"] = {
                 $('#' + table_id___).dataTable().fnDestroy();
             }
 
-            ////var obj = {
-            ////    id: 'Mã tin',
-            ////    str_group: 'Nhóm tin',
-            ////    str_subject: 'Chủ đề tin',
-            ////    str_content: 'Nội dung tin',
-            ////    str_action: 'Thao tác'
-            ////};
-
             if (options == null) options = {};
             if (options.fixed_left_column == null) options.fixed_left_column = 0;
             if (options.fixed_right_column == null) options.fixed_right_column = 0;
+
+            if (options.scroll_x == null) options.scroll_x = true;
+            if (options.scroll_y == null) options.scroll_y = (window.innerHeight - 150) + 'px';
+            var scroll_x = options.scroll_x,
+                scroll_y = options.scroll_y;
 
             var fixed_left_column = options.fixed_left_column,
                 fixed_right_column = options.fixed_right_column;
@@ -196,13 +221,46 @@ ___COM["kit_datatables_net"] = {
             var $table = $('#' + table_id___);
             $table.css({ width: window.innerWidth + 'px' });
 
+            if (arr_items.length > 0) {
+                var s_pager = '<li class="page-item"> \
+                    <a class="page-link" href="#" aria-label="Next"> \
+                        <i class="fa fa-step-backward"></i> \
+                    </a> \
+                </li> \
+                <li class="page-item"> \
+                    <a class="page-link" href="#" aria-label="Previous"> \
+                        <i class="fa fa-angle-left"></i> \
+                    </a> \
+                </li> \
+                <li class="page-item active" aria-current="page"> \
+                    <span class="page-link"> \
+                        1 \
+                        <span class="sr-only">(current)</span> \
+                    </span> \
+                </li> \
+                <li class="page-item"><a class="page-link" href="#">2</a></li> \
+                <li class="page-item"><a class="page-link" href="#">3</a></li> \
+                <li class="page-item"> \
+                    <a class="page-link" href="#" aria-label="Next"> \
+                        <i class="fa fa-angle-right"></i> \
+                    </a> \
+                </li> \
+                <li class="page-item"> \
+                    <a class="page-link" href="#" aria-label="Next"> \
+                        <i class="fa fa-step-forward"></i> \
+                    </a> \
+                </li>';
+
+                _self.pager_html___ = s_pager;
+            }
+
             if (hasLastColumnFree) {
 
                 $table.DataTable({
                     destroy: true,
                     //scrollY: "300px",
-                    scrollY: (window.innerHeight - 150) + 'px',
-                    scrollX: true,
+                    scrollX: scroll_x,
+                    scrollY: scroll_y,
                     scrollCollapse: false,
                     fixedColumns: {
                         leftColumns: fixed_left_column,
@@ -224,8 +282,10 @@ ___COM["kit_datatables_net"] = {
                 $table.DataTable({
                     destroy: true,
                     //scrollY: "300px",
-                    scrollY: (window.innerHeight - 150) + 'px',
-                    scrollX: true,
+                    //scrollY: (window.innerHeight - 150) + 'px',
+                    //scrollX: true,
+                    scrollX: scroll_x,
+                    scrollY: scroll_y,
                     scrollCollapse: true,
                     fixedColumns: {
                         leftColumns: fixed_left_column,
