@@ -13,7 +13,7 @@
   "header_filter": "",
 
   "main_left": "",
-  "main_body": "user___task|user___contact|mar88___msg_template|mar88___cus_all||user___chat|kanban___trello",
+  "main_body": "user___contact|user___task|mar88___msg_template|mar88___cus_all|user___chat|kanban___trello",
   "main_right": "",
   "footer": ""
 }

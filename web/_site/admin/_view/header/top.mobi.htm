@@ -1,13 +1,13 @@
 ﻿<div>
     <ul class="nav nav-fill">
         <li class="nav-item">
-            <a class="nav-link active" href="javascript:view___load('user___contact')">
-                <i class="fa fa-comment-alt"></i>
+            <a class="nav-link active" @click="item_click($event, 'user___contact', '')" href="javascript:void(-1);">
+                <i class="far fa-comment-alt"></i>
                 <span class="badge badge-danger badge-pill position-absolute">{{PROFILE.zalo.friends.length}}</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="javascript:view___load('user___task')">
+            <a class="nav-link" @click="item_click($event, 'user___task', '')" href="javascript:void(-1);">
                 <!--<i class="fas fa-thumbtack"></i>-->
                 <i class="fa fa-tasks"></i>
                 <span class="badge badge-danger badge-pill position-absolute">{{PROFILE.zalo.tasks.length}}</span>
