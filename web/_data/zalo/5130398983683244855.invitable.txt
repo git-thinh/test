@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Hungdv",
+    "id": "6421534735998136856",
+    "picture": {
+      "data": {
+        "url": "https://s120-ava-talk.zadn.vn/7/c/9/c/4/120/b084fc4da57b598ba5e41349c4bd38d5.jpg"
+      }
+    }
+  },
+  {
+    "name": "Nguyễn Mạnh Hà",
+    "id": "8211881882615378419",
+    "picture": {
+      "data": {
+        "url": "https://s120-ava-talk.zadn.vn/9/5/d/0/23/120/949d6a7659fc2f2e27a0af0acc8e009e.jpg"
+      }
+    }
+  },
+  {
+    "name": "Huy Nguyên",
+    "id": "956738199672863810",
+    "picture": {
+      "data": {
+        "url": "https://s120-ava-talk.zadn.vn/6/d/1/8/51/120/9403722b84097b4becf603d12822a88f.jpg"
+      }
+    }
+  },
+  {
+    "name": "Hoàng Doanh",
+    "id": "5735269537010167442",
+    "picture": {
+      "data": {
+        "url": "https://s120-ava-talk.zadn.vn/c/c/8/c/19/120/e580b34c9d6e9477c403f3f115f648b1.jpg"
+      }
+    }
+  },
+  {
+    "name": "Diệu Thanh",
+    "id": "5981869162397771270",
+    "picture": {
+      "data": {
+        "url": "https://s120-ava-talk.zadn.vn/f/5/c/0/6/120/cd73dd16dca5faabed3b269204c312ca.jpg"
+      }
+    }
+  },
+  {
+    "name": "Zalo",
+    "id": "4980490027534986523",
+    "picture": {
+      "data": {
+        "url": "https://s120-ava-talk.zadn.vn/e/6/2/5/36/120/16782d311b12da6d28daa13e343986b8.jpg"
+      }
+    }
+  }
+]

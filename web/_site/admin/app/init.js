@@ -1,5 +1,6 @@
 ﻿// sessionStorage['USER_ID'] = 'zalo.5130398983683244855'; //Hook login
 var USER_ID = sessionStorage['USER_ID'];
+var PROFILE = { zalo: null };
 
 var DEVICE_NAME = '';
 if (window.innerWidth < 400) DEVICE_NAME = 'mobi'; else if (window.innerWidth < 1025) DEVICE_NAME = 'tablet'
@@ -23,9 +24,30 @@ if (location.href.indexOf('zalo_id') > 0) {
     if (zalo_id) {
         USER_ID = 'zalo.' + zalo_id;
         sessionStorage['USER_ID'] = USER_ID;
-        alert(msg);
+        //alert(msg);
         location.href = location.href.split('?')[0];
     }
+}
+
+if (USER_ID && USER_ID.startsWith('zalo.')) {
+    var id = USER_ID.substr(5);
+    var fets = [
+        fetch('zalo/file?file_name=' + id + '.profile.txt').then(r => r.text()),
+        fetch('zalo/file?file_name=' + id + '.token.txt').then(r => r.text()),
+        fetch('zalo/file?file_name=' + id + '.friend.txt').then(r => r.text()),
+        fetch('zalo/file?file_name=' + id + '.invitable.txt').then(r => r.text()),
+        fetch('zalo/file?file_name=' + id + '.task.txt').then(r => r.text())
+    ];
+    Promise.all(fets).then(async arr => {
+        var a = arr.map(text => { return JSON.parse(text); });
+        PROFILE.zalo = JSON.parse(a[0].data);
+        PROFILE.zalo.token = a[1].data;
+        PROFILE.zalo.friends = JSON.parse(a[2].data);
+        PROFILE.zalo.invitables = JSON.parse(a[3].data);
+        PROFILE.zalo.tasks = JSON.parse(a[4].data);
+
+        console.log('???????????? PROFILE.zalo = ', PROFILE.zalo);
+    })
 }
 
 /////////////////////////////////////////////////////////////////////

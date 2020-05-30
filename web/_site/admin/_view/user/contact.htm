@@ -1,37 +1,36 @@
 ﻿<div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item" v-for="item in ___APP.objContact.items">
+        <li v-for="(item,index) in PROFILE.zalo.friends" @touchstart="selected_friend($event, index)" :id="item.id" @click="selected_friend($event, index)" class="list-group-item">
             <p class="float-left">
-                <img v-if="contact___has_avatar(item)" class="ui-avartar float-left" :src="item.str_avatar"/>
-                <i v-else class="ui-avartar fa fa-user-circle float-left"></i>
+                <img class="ui-avartar float-left" :src="item.picture.data.url" />
                 <span class="ui-info float-left">
-                    <b>{{ contact___get_name(item) }}</b><br />
-                    <em>Nice to meet yout!</em>
+                    <b>{{ item.name }}</b><br />
+                    <em>{{ item.tasks != null ? item.tasks.length : 0 }} tasks</em>
                 </span>
             </p>
             <div class="btn-group float-right" role="group">
                 <a class="ui-task">
-                    <i class="fa fa-tasks"></i>
-                    <span class="badge badge-success badge-pill position-absolute">1</span>
+                    <!--<i class="fa fa-tasks"></i>
+                    <span class="badge badge-success badge-pill position-absolute">1</span>-->
                 </a>
                 <a class="ui-group">
                     <i class="fa fa-users"></i>
-                    <span class="badge badge-success badge-pill position-absolute">1</span>
+                    <!--<span class="badge badge-success badge-pill position-absolute">1</span>-->
                 </a>
                 <a class="ui-message">
                     <i class="far fa-comment-alt"></i>
-                    <span class="badge badge-success badge-pill position-absolute">5+</span>
+                    <!--<span class="badge badge-success badge-pill position-absolute">5+</span>-->
                 </a>
                 <a class="ui-call">
                     <i class="fa fa-phone"></i>
-                    <span class="badge badge-success badge-pill position-absolute">1</span>
+                    <!--<span class="badge badge-success badge-pill position-absolute">1</span>-->
                 </a>
             </div>
         </li>
         <li class="list-group-item" style="text-align:center">
-            <button type="button" class="btn btn-warning">
+            <!--<button type="button" class="btn btn-warning">
                 Xem tiếp
-            </button>
+            </button>-->
         </li>
     </ul>
 </div>

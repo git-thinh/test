@@ -1,7 +1,8 @@
 ﻿{
     data: function () {
         return {
-            visible: false
+            visible: false,
+            zalo_test_ids: []
         };
     },
     mounted: function () {
@@ -9,8 +10,22 @@
         console.log('vue.logint: mounted, role = ', _self.role___);
 
         //$('#' + _self.idvc___ +' .styled').uniform({ radioClass: 'choice' });
+
+        fetch('zalo/ids').then(r => r.json()).then(rs_ => {
+            console.log('???????? = ', rs_);
+            if (rs_.ok) {
+                _self.zalo_test_ids = rs_.data;
+            }
+        });
     },
     methods: {
+        login_zalo_id: function(zalo_id) {
+            sessionStorage['USER_ID'] = 'zalo.' + zalo_id;
+            location.href = '/';
+        },
+        login_zalo: function() {
+            location.href = 'zalo/login';
+        },
         login: function() {
             ___login({
                 ok: true,

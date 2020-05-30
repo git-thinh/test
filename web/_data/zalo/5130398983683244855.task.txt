@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "title": "Mời anh chị tham gia họp giới thiệu App, vào khoảng 10h 31-05",
+        "date_start": 1590857081588,
+        "date_end": 1590857081588,
+        "cron_expression":"0 0/1 * * * ?",
+        "sender": "5130398983683244855",
+        "to_ids": ["*"],
+        "state": 0
+    },
+    {
+        "id": 2,
+        "title": "Thông báo gửi lặp lại sau 1 phút 1 lần",
+        "date_start": 1590857081588,
+        "date_end": 0,
+        "cron_expression":"0 0/1 * * * ?",
+        "sender": "5130398983683244855",
+        "to_ids": ["5130398983683244855"],
+        "state": 0
+    },
+    {
+        "id": 3,
+        "title": "Đón Hồng Giang học thêm Mr Nghĩa",
+        "date_start": 1590857081588,
+        "date_end": 0,
+        "cron_expression":"0 0/1 * * * ?",
+        "sender": "5130398983683244855",
+        "to_ids": ["5130398983683244855"],
+        "state": 0
+    }
+]

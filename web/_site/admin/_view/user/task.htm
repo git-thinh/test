@@ -1,0 +1,36 @@
+﻿<div>
+    <ul class="list-group list-group-flush">
+        <li v-for="(item,index) in PROFILE.zalo.tasks" @touchstart="selected_friend($event, index)" @click="selected_friend($event, index)" class="list-group-item">
+            <p class="float-left">
+                <i class="ui-avartar fa fa-user-check float-left"></i>
+                <span class="ui-info float-left">
+                    <b>{{ item.title }}</b><br />
+                    <em>{{ format_date(item.date_start) }} - {{ format_date(item.date_end) }}</em>
+                </span>
+            </p>
+            <div class="btn-group float-right" role="group">
+                <a class="ui-task">
+                    <!--<i class="fa fa-tasks"></i>
+                    <span class="badge badge-success badge-pill position-absolute">1</span>-->
+                </a>
+                <a class="ui-group">
+                    <i class="fa fa-users"></i>
+                    <span class="badge badge-success badge-pill position-absolute">{{item.to_ids[0] == '*' ? 'All' : item.to_ids.length}}</span>
+                </a>
+                <a class="ui-message">
+                    <i class="fas fa-history"></i>
+                    <span v-show="item.date_repeat > 0" class="badge badge-success badge-pill position-absolute">{{item.date_repeat}}</span>
+                </a>
+                <a class="ui-call">
+                    <i class="fa fa-trash-alt"></i>
+                    <!--<span class="badge badge-success badge-pill position-absolute">1</span>-->
+                </a>
+            </div>
+        </li>
+        <li class="list-group-item" style="text-align:center">
+            <!--<button type="button" class="btn btn-warning">
+                Xem tiếp
+            </button>-->
+        </li>
+    </ul>
+</div>

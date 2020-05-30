@@ -273,9 +273,7 @@ ___COM["kit_datatables_net"] = {
                     data: arr_items,
                     columnDefs: a_columnDefs
                 });
-                setTimeout(function () {
-                    $('#' + table_id___ + '_wrapper').css({ width: window.innerWidth + 'px' });
-                }, 50);
+                $('#' + table_id___ + '_wrapper').css({ width: window.innerWidth + 'px' });
 
             } else {
 
@@ -299,11 +297,9 @@ ___COM["kit_datatables_net"] = {
                     columnDefs: a_columnDefs
                 });
 
-                setTimeout(function () {
-                    $('#' + table_id___ + '_wrapper').css({ width: window.innerWidth + 'px' });
-                    $('.DTFC_LeftBodyLiner table tbody tr td:last-of-type').css({ 'border-right': '1px solid #333' });
-                    $('.DTFC_RightBodyLiner table tbody tr td:first-child').css({ 'border-left': '1px solid #333' });
-                }, 50);
+                $('#' + table_id___ + '_wrapper').css({ width: window.innerWidth + 'px' });
+                $('.DTFC_LeftBodyLiner table tbody tr td:last-of-type').css({ 'border-right': '1px solid #333' });
+                $('.DTFC_RightBodyLiner table tbody tr td:first-child').css({ 'border-left': '1px solid #333' });
 
             }
 

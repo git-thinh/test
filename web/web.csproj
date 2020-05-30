@@ -79,7 +79,7 @@
     <Content Include="_site\admin\app\jquery.dataTables.min.js" />
     <Content Include="_site\admin\app\reset.css" />
     <Content Include="_site\admin\_view\header\top.css" />
-    <Content Include="_site\admin\_view\mar88\msg_template - Copy.htm" />
+    <Content Include="_site\admin\_view\header\top.mobi - Copy.htm" />
     <Content Include="_site\admin\_view\mar88\msg_template.css" />
     <Content Include="_site\admin\_view\mar88\msg_template.js" />
     <Content Include="_site\admin\_view\mar88\cus_all.css" />
@@ -98,7 +98,12 @@
     <Content Include="_site\admin\_view\mar88\cus_all.htm" />
     <Content Include="_site\admin\_view\user\chat - Copy %282%29.htm" />
     <Content Include="_site\admin\_view\user\chat - Copy.css" />
+    <Content Include="_site\admin\_view\user\task.js" />
+    <Content Include="_site\admin\_view\user\task.css" />
+    <Content Include="_site\admin\_view\user\contact - Copy.htm" />
     <Content Include="_site\admin\_view\user\contact.css" />
+    <Content Include="_site\admin\_view\user\contact.js" />
+    <Content Include="_site\admin\_view\user\task.htm" />
     <Content Include="_site\kanban\app\classie.js" />
     <Content Include="_site\kanban\app\head.load.min.js" />
     <Content Include="_site\kanban\app\init.js" />

@@ -165,6 +165,13 @@
         "name": "message",
         "area_allow": [ "dailog" ],
         "enable": true
+      },
+      {
+        "type": "inline",
+        "title": "task",
+        "name": "task",
+        "area_allow": [ "dailog" ],
+        "enable": true
       }
     ]
   },

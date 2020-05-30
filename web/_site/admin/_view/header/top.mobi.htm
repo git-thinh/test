@@ -1,38 +1,40 @@
 ﻿<div>
     <ul class="nav nav-fill">
         <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link active" href="javascript:view___load('user___contact')">
                 <i class="fa fa-comment-alt"></i>
-                <span class="badge badge-danger badge-pill position-absolute">9+</span>
+                <span class="badge badge-danger badge-pill position-absolute">{{PROFILE.zalo.friends.length}}</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-thumbtack"></i>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-users"></i>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="javascript:view___load('user___task')">
+                <!--<i class="fas fa-thumbtack"></i>-->
                 <i class="fa fa-tasks"></i>
+                <span class="badge badge-danger badge-pill position-absolute">{{PROFILE.zalo.tasks.length}}</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-search"></i>
+            <a class="nav-link disabled" href="#">
+                <!--<i class="fas fa-users"></i>-->
             </a>
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user"></i>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#">
+                <!--<i class="fa fa-tasks"></i>-->
             </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#">
+                <!--<i class="fas fa-search"></i>-->
+            </a>
+        </li>
+        <li class="nav-item dropdown ui-profile">
+            <button class="btn nav-link dropdown-toggle pl-0" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <!--<i class="fas fa-user"></i>-->
+                <img :src="PROFILE.zalo.picture.data.url" class="rounded-circle" style="height:32px;" />
+            </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
+                <button class="btn dropdown-item">{{PROFILE.zalo.name}}</button>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="javascript:___logout()">Thoát</a>
             </div>

@@ -3,6 +3,10 @@
     padding-left: 5px;
 }
 
+    .header___top .ui-profile .dropdown-toggle::after {
+        display: none;
+    }
+
     .header___top .badge {
         font-size: 0.7em;
         padding: 1px 3px 2px 4px;

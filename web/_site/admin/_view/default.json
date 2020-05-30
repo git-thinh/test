@@ -1,19 +1,19 @@
 {
   "___loading": "",
-  "___login": "mar88___login|user___login_full|user___login",
+  "___login": "user___login|mar88___login|user___login_full|",
   "___confirm_pass": "",
   "___screen_lock": "",
 
   "sidebar_left": "",
   "sidebar_right": "",
 
-  "header_top": "mar88___menu|header___top",
+  "header_top": "header___top|mar88___menu|",
   "header_breadcrumb": "",
   "header_tab": "",
   "header_filter": "",
 
   "main_left": "",
-  "main_body": "mar88___msg_template|mar88___cus_all|user___contact|user___chat|kanban___trello",
+  "main_body": "user___task|user___contact|mar88___msg_template|mar88___cus_all||user___chat|kanban___trello",
   "main_right": "",
   "footer": ""
 }

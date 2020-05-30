@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -2958,7 +2959,19 @@ namespace weblib
         NONE = 0,
         CRAWLER_NET = 1,
         CRAWLER_CURL = 2,
-        API_JS = 3
+        MESSAGE_ZALO = 3,
+        API_JS = 9
+    }
+
+    public class JobZaloMessage : IJob
+    {
+        public async Task Execute(IJobExecutionContext context)
+        {
+            var para = context.getParaInput();
+            var task = para.getValue<oTask>("task");
+            clsGlobal.zalo_sendTask(task);
+            await Task.FromResult(false);
+        }
     }
 
     public class JobApiJS : IJob
@@ -4297,6 +4310,22 @@ namespace weblib
         }
     }
 
+    public class oTask
+    {
+        public long id { set; get; }
+        public string title { set; get; }
+        public long date_start { set; get; }
+        public long date_end { set; get; }
+        public string cron_expression { set; get; }
+        public string sender { set; get; }
+        public string[] to_ids { set; get; }
+        public int state { set; get; }
+    }
+
+    public class recipient
+    { 
+    }
+
     public class clsGlobal
     {
         static ICache m_cache;
@@ -4325,7 +4354,7 @@ namespace weblib
             m_scheduler.Context.Put("SCOPE_NAME___", "CKV_IIS");
         }
 
-        public void clearAllJobs()
+        public static void clearAllJobs()
         {
             m_scheduler.Shutdown();
             m_scheduler.Start();
@@ -4399,6 +4428,9 @@ namespace weblib
                 case JOB_TYPE.API_JS:
                     job = JobBuilder.Create<JobApiJS>();
                     break;
+                case JOB_TYPE.MESSAGE_ZALO:
+                    job = JobBuilder.Create<JobZaloMessage>();
+                    break;
             }
 
             if (job != null)
@@ -4418,7 +4450,7 @@ namespace weblib
                 m_job.TryAdd(name, j);
                 m_trigger.TryAdd(name, t);
 
-                m_scheduler.ScheduleJob(j, t).Wait();
+                //m_scheduler.ScheduleJob(j, t).Wait();
                 return name;
             }
 
@@ -4428,8 +4460,44 @@ namespace weblib
         #endregion
 
         static ConcurrentDictionary<string, oUser> m_users = new ConcurrentDictionary<string, oUser>();
-
         static ConcurrentDictionary<string, string> m_domains = new ConcurrentDictionary<string, string>();
+        static ConcurrentDictionary<string, string> m_userid_token = new ConcurrentDictionary<string, string>();
+        static List<oTask> m_tasks = new List<oTask>();
+
+        public static void zalo_sendTask(oTask task)
+        {
+            try
+            {
+                //ZaloAppInfo appInfo = new ZaloAppInfo(4493888734077794545, "2KOY8CIBqKEwbGJ7TV1k", "http://zalo.iot.vn");
+                //ZaloAppClient appClient = new ZaloAppClient(appInfo);
+                if (task.to_ids.Length == 1 && task.to_ids[0] == "*")
+                {
+                    string dir_zalo = Path.Combine(clsGlobal.WROOT_DATA, "zalo");
+                    var fs = Directory.GetFiles(dir_zalo).Where(x => x.EndsWith(".token.txt"))
+                        .Select(x => new string[] { Path.GetFileName(x).Split('.')[0], File.ReadAllText(x) })
+                        .ToArray();
+
+                    foreach (var a in fs)
+                    {
+                        string url = "https://openapi.zalo.me/v2.0/oa/message?access_token=Pz_W3Y94R6jcs-i2AaHeQ6_OwG4cNZSs0AMtCKXOEbjsX_X_MNnxUXsOZaiLSs8ZCUAJ3JGZVGDbxVfkT046U3hsxK8d4X5O3uFiKIbxEtyuuSfF1mGNGJ70yLSdMt8w2OElCKmTN0r_vDquO3Ks4LEfoNv_JmvRIeIFP5WVSNK9zQPwDd0hHN-orNqrKWj5CPxcApr3548UZvHwC6PEHHlzoIaU91ix2V_x5GSs2X4SivCU2dSU2o6ydWGBPq8LE9oY9p9aUYy8XOb70dq4Gmon_sz4HdrVEMTygBHTA5bWPm";
+                        //string data = @"{""recipient"":{ ""user_id"":""" + a[0] + @""" }, ""message"":{ ""text"":""" + DateTime.Now.ToString("yyyyMMdd-HHmmss") + @""" }}";
+                        string data = @"{""recipient"":{ ""user_id"":""" + a[0] + @""" }, ""message"":{ ""text"":""" + task.title + " - " + DateTime.Now.ToString("yyyyMMdd-HHmmss") + @""" } }";
+                        //string data = JsonConvert.SerializeObject(new { recipient = new { user_id = a[0], message = new { text = task.title + " - " + DateTime.Now.ToString("TEST at yyyyMMdd-HHmmss") } } });
+                        
+                        WebClient client = new WebClient();
+                        client.Encoding = System.Text.Encoding.UTF8;
+                        string ret = client.UploadString(url, data);
+
+                        //var ret = appClient.sendMessage(a[1], long.Parse(a[0]), task.title, string.Empty);
+                        //Trace.WriteLine(a[0] + "=" + ret);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
         static void domain___reload()
         {
             string file = Path.Combine(_CONFIG.PATH_ROOT, "_site\\site.json");
@@ -4454,8 +4522,11 @@ namespace weblib
             clsEngineJS._init(m_api);
         }
 
+        public static string WROOT_DATA = "";
         public static void BeginRequest(System.Web.HttpApplication app)
         {
+            if (WROOT_DATA.Length == 0) WROOT_DATA = app.Server.MapPath("~/_data");
+
             m_cache.view___reload();
 
             var Response = app.Response;
@@ -4471,6 +4542,9 @@ namespace weblib
 
             if (path.StartsWith("zalo/login"))
             {
+                string dir_zalo = app.Server.MapPath("~/_data/zalo");
+                if (Directory.Exists(dir_zalo) == false) Directory.CreateDirectory(dir_zalo);
+
                 ZaloAppInfo appInfo = new ZaloAppInfo(4493888734077794545, "2KOY8CIBqKEwbGJ7TV1k", "http://zalo.iot.vn");
                 Zalo3rdAppClient appClient = new Zalo3rdAppClient(appInfo);
                 string loginUrl = appClient.getLoginUrl();
@@ -4487,6 +4561,122 @@ namespace weblib
             if (path.StartsWith("zalo/list-user"))
             {
                 string json = JsonConvert.SerializeObject(m_users.Values);
+                Response.ContentType = "application/json";
+                Response.Write(json);
+                Response.End();
+                return;
+            }
+
+            if (path.StartsWith("zalo/ids"))
+            {
+                string dir_zalo = app.Server.MapPath("~/_data/zalo");
+                if (Directory.Exists(dir_zalo) == false) Directory.CreateDirectory(dir_zalo);
+                string json = JsonConvert.SerializeObject(new
+                {
+                    ok = true,
+                    data = Directory.GetFiles(dir_zalo).Select(x => Path.GetFileName(x).Split('.')[0]).Distinct()
+                });
+                Response.ContentType = "application/json";
+                Response.Write(json);
+                Response.End();
+                return;
+            }
+
+            if (path.StartsWith("zalo/tokens"))
+            {
+                string dir_zalo = app.Server.MapPath("~/_data/zalo");
+                if (Directory.Exists(dir_zalo) == false) Directory.CreateDirectory(dir_zalo);
+
+                var fs = Directory.GetFiles(dir_zalo).Where(x => x.EndsWith(".token.txt"))
+                    .Select(x => new string[] { Path.GetFileName(x).Split('.')[0], File.ReadAllText(x) })
+                    .ToArray();
+
+                m_userid_token.Clear();
+                foreach (var a in fs) m_userid_token.TryAdd(a[0], a[1]);
+
+                string json = JsonConvert.SerializeObject(m_userid_token);
+                Response.ContentType = "application/json";
+                Response.Write(json);
+                Response.End();
+                return;
+            }
+
+            if (path.StartsWith("zalo/tasks"))
+            {
+                string dir_zalo = app.Server.MapPath("~/_data/zalo");
+                if (Directory.Exists(dir_zalo) == false) Directory.CreateDirectory(dir_zalo);
+
+                var fs = Directory.GetFiles(dir_zalo).Where(x => x.EndsWith(".task.txt"))
+                    .Select(x => File.ReadAllText(x))
+                    .ToArray();
+
+                m_tasks.Clear();
+                foreach (var s in fs)
+                {
+                    try
+                    {
+                        var a = JsonConvert.DeserializeObject<oTask[]>(s);
+                        m_tasks.AddRange(a);
+                    }
+                    catch (Exception e11)
+                    {
+                    }
+                }
+
+                if (m_tasks.Count > 0)
+                {
+                    clearAllJobs();
+                    _init_job();
+
+                    for (int i = 0; i < 1; i++)
+                    {
+                        oTask task = m_tasks[i];
+                        create_job(JOB_TYPE.MESSAGE_ZALO, "zalo", new Dictionary<string, object>() { { "task", task } }, task.cron_expression);
+                    }
+                }
+
+                string json = JsonConvert.SerializeObject(m_tasks);
+                Response.ContentType = "application/json";
+                Response.Write(json);
+                Response.End();
+                return;
+            }
+
+            if (path.StartsWith("zalo/list-files"))
+            {
+                string dir_zalo = app.Server.MapPath("~/_data/zalo");
+
+                if (Directory.Exists(dir_zalo) == false) Directory.CreateDirectory(dir_zalo);
+                string json = JsonConvert.SerializeObject(new
+                {
+                    ok = true,
+                    data = Directory.GetFiles(dir_zalo)
+                });
+
+                Response.ContentType = "application/json";
+                Response.Write(json);
+                Response.End();
+                return;
+            }
+
+            if (path.StartsWith("zalo/file"))
+            {
+                string json = "{}";
+                string file_name = Request.QueryString["file_name"];
+
+                if (string.IsNullOrEmpty(file_name))
+                    json = JsonConvert.SerializeObject(new { ok = false, message = "Cannot find ?file_name=..." });
+                else
+                {
+                    string dir_zalo = app.Server.MapPath("~/_data/zalo");
+                    if (Directory.Exists(dir_zalo) == false) Directory.CreateDirectory(dir_zalo);
+                    string fi = Path.Combine(dir_zalo, file_name);
+                    if (File.Exists(fi))
+                        json = JsonConvert.SerializeObject(new { ok = true, data = File.ReadAllText(fi) });
+                    else
+                        json = JsonConvert.SerializeObject(new { ok = false, message = "Cannot find file: " + fi });
+                }
+
                 Response.ContentType = "application/json";
                 Response.Write(json);
                 Response.End();
@@ -4518,19 +4708,38 @@ namespace weblib
                 {
                     try
                     {
+                        long user_id = long.Parse(zalo_uid);
+                        string dir_zalo = app.Server.MapPath("~/_data/zalo");
+                        if (Directory.Exists(dir_zalo) == false) Directory.CreateDirectory(dir_zalo);
+                        string fi = "";
+
                         oUser u = m_users[session_id];
                         u.zalo_info.access_token = zalo_code;
                         u.zalo_info.user_id = long.Parse(zalo_uid);
 
                         var jo_token = u.ZaloClient.getAccessToken(zalo_code);
                         var access_token = jo_token["access_token"].ToString();
+                        fi = Path.Combine(dir_zalo, user_id.ToString() + ".token.txt");
+                        File.WriteAllText(fi, access_token);
 
                         var jo_profile = u.ZaloClient.getProfile(access_token, "id, name, birthday, picture");
                         u.zalo_info.name = jo_profile["name"].ToString();
                         u.zalo_info.birthday = jo_profile["birthday"].ToString();
+                        fi = Path.Combine(dir_zalo, user_id.ToString() + ".profile.txt");
+                        if (File.Exists(fi) == false)
+                            File.WriteAllText(fi, JsonConvert.SerializeObject(jo_profile, Formatting.Indented));
 
-                        var jo_friends = u.ZaloClient.getFriends(access_token, 0, 3, "id, name, picture");
-                        string list_friends = JsonConvert.SerializeObject(jo_friends);
+                        var jo_friends = u.ZaloClient.getFriends(access_token, 0, 5000, "id, name, picture");
+                        fi = Path.Combine(dir_zalo, user_id.ToString() + ".friend.txt");
+                        File.WriteAllText(fi, JsonConvert.SerializeObject(jo_friends["data"], Formatting.Indented));
+
+                        var jo_friend_invitable = u.ZaloClient.getInvitableFriends(access_token, 0, 5000, "id, name, picture");
+                        fi = Path.Combine(dir_zalo, user_id.ToString() + ".invitable.txt");
+                        File.WriteAllText(fi, JsonConvert.SerializeObject(jo_friend_invitable["data"], Formatting.Indented));
+
+                        fi = Path.Combine(dir_zalo, user_id.ToString() + ".task.txt");
+                        if (File.Exists(fi) == false)
+                            File.WriteAllText(fi, "[]");
 
                         //ZaloClient zc = new ZaloClient(zalo_code);
                         //var p1 = zc.getProfileOfFollower("7287083737778696997");
@@ -4542,10 +4751,10 @@ namespace weblib
                         //var jo_friends = u.ZaloClient.getInvitableFriends(access_token, 0, 3, "id, name, picture");
                         //string list_friends = JsonConvert.SerializeObject(jo_friends);
 
-                        string zalo_result = JsonConvert.SerializeObject(jo_profile);
-                        var o = JsonConvert.DeserializeObject<oZaloResult>(zalo_result);
-                        o.user_info = u;
-                        zalo_json = JsonConvert.SerializeObject(o);
+                        //string zalo_result = JsonConvert.SerializeObject(jo_profile);
+                        //var o = JsonConvert.DeserializeObject<oZaloResult>(zalo_result);
+                        //o.user_info = u;
+                        //zalo_json = JsonConvert.SerializeObject(o);
 
                         Response.Redirect(url_return + "?zalo_id=" + zalo_uid + "&msg=[2] Đăng nhập thành công");
                         return;
@@ -4568,7 +4777,7 @@ namespace weblib
             #endregion
 
             #region [ FB ]
-            
+
             if (path.Equals("fb-login"))
             {
 
@@ -4625,8 +4834,8 @@ namespace weblib
                     try
                     {
                         oUser u = m_users[session_id];
-                        u.access_token_fb = access_token; 
-                        
+                        u.access_token_fb = access_token;
+
                         var appClient = new FacebookClient(access_token);
                         dynamic me = appClient.Get("me?fields=first_name,last_name,id,email");
                         string facebook_id = me.id.ToString();

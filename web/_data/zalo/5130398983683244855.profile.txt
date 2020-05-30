@@ -1,0 +1,10 @@
+{
+  "birthday": "28/08/1984",
+  "name": "Thinh",
+  "id": "5130398983683244855",
+  "picture": {
+    "data": {
+      "url": "https://s120-ava-talk.zadn.vn/7/5/c/b/1/120/ca96210ff1addff45f03e144ec4aa052.jpg"
+    }
+  }
+}
