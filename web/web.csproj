@@ -88,6 +88,8 @@
     <Content Include="_site\admin\_view\mar88\cus_all.js" />
     <Content Include="_site\admin\_view\mar88\msg_template.htm" />
     <Content Include="_site\admin\_view\mar88\msg_timer.htm" />
+    <Content Include="_site\admin\_view\mar88\msg_action_add_item.htm" />
+    <Content Include="_site\admin\_view\mar88\msg_action_view_item.htm" />
     <Content Include="_site\admin\_view\mar88\report_broadcast_msg.htm" />
     <Content Include="_site\admin\_view\mar88\menu.js" />
     <Content Include="_site\admin\_view\mar88\login.css" />

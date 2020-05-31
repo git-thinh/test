@@ -10,6 +10,10 @@
         //$('#' + _self.idvc___ + ' .styled').uniform({ radioClass: 'choice' });
     },
     methods: {
+        menu_action_click: function(menu_code) {
+            console.log('menu_action_click = ', menu_code);
+            ___APP.objViewMain.on_menu_action_selected(menu_code);
+        },
         item_click: function(event, scope___view, str_title) {
             var el;
             if (event && event.target) el = event.target;

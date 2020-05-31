@@ -47,6 +47,40 @@
         ___APP.objViewMain.str_title = 'Tin nhắn';
         //___APP.objViewMain.objItemSelected.str_title = 'Tin nhắn abc';
         ___APP.objViewMain.on_search_text = _self.on_search_text;
+        ___APP.objViewMain.on_select_changed = _self.on_select_changed;
+        ___APP.objViewMain.on_menu_action_selected = _self.on_menu_action_selected;
+        ___APP.objViewMain.arr_menu_actions = [
+            {
+                code: 'VIEW_ITEM',
+                title: 'Xem thông tin',
+                active: false
+            },
+            {
+                code: 'ADD_ITEM',
+                title: 'Thêm mới',
+                active: true
+            },
+            {
+                code: 'EDIT_ITEM',
+                title: 'Cập nhật bản ghi',
+                active: false
+            },
+            {
+                code: 'ACTIVE_ITEM',
+                title: 'Cho phép hoặc cấm sử dụng',
+                active: false
+            },
+            {
+                code: 'SCHEDULE_ITEM',
+                title: 'Lập lịch chạy gửi nhóm KH',
+                active: false
+            },
+            {
+                code: 'REPORT_SEND_ITEM',
+                title: 'Kết quả nhắn tin',
+                active: false
+            }
+        ];
 
         _self.f_load_table();
     },
@@ -62,17 +96,109 @@
             if (is_select) {
                 _self.selected_raw_data = row_data;
                 ___APP.objViewMain.objItemSelected.str_title = row_data[0][1] + '[' + row_data[0][0] + ']';
+                ___APP.objViewMain.arr_menu_actions = [
+                    {
+                        code: 'VIEW_ITEM',
+                        title: 'Xem thông tin',
+                        active: true
+                    },
+                    {
+                        code: 'ADD_ITEM',
+                        title: 'Thêm mới',
+                        active: true
+                    },
+                    {
+                        code: 'EDIT_ITEM',
+                        title: 'Cập nhật bản ghi',
+                        active: true
+                    },
+                    {
+                        code: 'ACTIVE_ITEM',
+                        title: 'Cho phép hoặc cấm sử dụng',
+                        active: true
+                    },
+                    {
+                        code: 'SCHEDULE_ITEM',
+                        title: 'Lập lịch chạy gửi nhóm KH',
+                        active: true
+                    },
+                    {
+                        code: 'REPORT_SEND_ITEM',
+                        title: 'Kết quả nhắn tin',
+                        active: true
+                    }
+                ];
             } else {
                 _self.selected_raw_data = null;
                 ___APP.objViewMain.objItemSelected.str_title = '';
+                ___APP.objViewMain.arr_menu_actions = [
+                    {
+                        code: 'VIEW_ITEM',
+                        title: 'Xem thông tin',
+                        active: false
+                    },
+                    {
+                        code: 'ADD_ITEM',
+                        title: 'Thêm mới',
+                        active: true
+                    },
+                    {
+                        code: 'EDIT_ITEM',
+                        title: 'Cập nhật bản ghi',
+                        active: false
+                    },
+                    {
+                        code: 'ACTIVE_ITEM',
+                        title: 'Cho phép hoặc cấm sử dụng',
+                        active: false
+                    },
+                    {
+                        code: 'SCHEDULE_ITEM',
+                        title: 'Lập lịch chạy gửi nhóm KH',
+                        active: false
+                    },
+                    {
+                        code: 'REPORT_SEND_ITEM',
+                        title: 'Kết quả nhắn tin',
+                        active: false
+                    }
+                ];
             }
+        },
+        on_menu_action_selected: function (menu_code) {
+            var _self = this;
+            console.log('????? on_menu_action_selected = ', menu_code);
+            switch (menu_code) {
+                case 'VIEW_ITEM':
+                    break;
+                case 'ADD_ITEM':
+                    break;
+                case 'EDIT_ITEM':
+                    break;
+                case 'ACTIVE_ITEM':
+                    break;
+                case 'SCHEDULE_ITEM':
+                    break;
+                case 'REPORT_SEND_ITEM':
+                    break;
+            }
+
+            //case 'view_item':
+            //case 'add_item':
+            //case 'edit_item':
+            //case 'active_item':
+            //case 'schedule_item':
+            //case 'report_send_item':
+            var view = 'mar88___msg_action_' + menu_code.toLowerCase();
+            view___load(view, 'popup');
+
         },
         f_load_table: function (keyword) {
             var _self = this;
             console.log('????? keyword = ', keyword);
 
             _self.selected_raw_data = null;
-        ___APP.objViewMain.objItemSelected.str_title = '';
+            ___APP.objViewMain.objItemSelected.str_title = '';
 
             var vue_table = _self.$refs['VUE_KIT_TABLE'];
             if (vue_table) {

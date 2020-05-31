@@ -7,12 +7,8 @@
             <div class="dropdown-menu" aria-labelledby="menu_dropdown___segment">
                 <button class="btn dropdown-item" @click="item_click($event, 'mar88___cus_group', 'Nhóm khách hàng')">Nhóm khách hàng</button>
                 <button class="btn dropdown-item" @click="item_click($event, 'mar88___cus_label', 'Nhãn khách hàng')">Nhãn khách hàng</button>
-                <button class="btn dropdown-item active" @click="item_click($event, 'mar88___cus_all', 'Khách hàng')">Khách hàng</button>
-                <div class="dropdown-divider"></div>
-                <button class="btn dropdown-item" @click="item_click($event, 'mar88___msg_template', 'Tin nhắn mẫu')">Tin nhắn mẫu</button>
-                <button class="btn dropdown-item" @click="item_click($event, 'mar88___msg_timer', 'Lịch chạy tin nhắn')">Lịch chạy tin nhắn</button>
-                <div class="dropdown-divider"></div>
-                <button class="btn dropdown-item" @click="item_click($event, 'mar88___report_broadcast_msg', 'BC kết quả nhắn tin')">BC kết quả nhắn tin</button>
+                <button class="btn dropdown-item" @click="item_click($event, 'mar88___cus_all', 'Khách hàng')">Khách hàng</button>
+                <button class="btn dropdown-item active" @click="item_click($event, 'mar88___msg_template', 'Tin nhắn')">Tin nhắn</button>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="javascript:___logout();">Thoát</a>
             </div>
@@ -28,7 +24,8 @@
         <span class="input-group-append">
             <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
         </span>-->
-        <input class="form-control py-2 border-none" type="search" placeholder="search" style="background:#f1f3f4;" autocomplete="off" onkeypress="if(event.key === 'Enter') ___APP.objViewMain.on_search_text(this.value)" />
+        <input class="form-control py-2 border-none" type="search" placeholder="search" style="background:#f1f3f4;" autocomplete="off" 
+               onkeypress="if(event.key === 'Enter') ___APP.objViewMain.on_search_text(this.value)" />
         <span class="input-group-append" style="background:#f1f3f4;">
             <div class="input-group-text bg-transparent border-none"><i class="fa fa-search"></i></div>
         </span>
@@ -39,16 +36,8 @@
             <span class="navbar-toggler-icon"></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menu_dropdown___cpanel">
-            <button class="btn dropdown-item" @click="item_click($event, 'mar88___cus_group', 'Nhóm khách hàng')">Nhóm khách hàng</button>
-            <button class="btn dropdown-item" @click="item_click($event, 'mar88___cus_label', 'Nhãn khách hàng')">Nhãn khách hàng</button>
-            <button class="btn dropdown-item active" @click="item_click($event, 'mar88___cus_all', 'Khách hàng')">Khách hàng</button>
-            <div class="dropdown-divider"></div>
-            <button class="btn dropdown-item" @click="item_click($event, 'mar88___msg_template', 'Tin nhắn mẫu')">Tin nhắn mẫu</button>
-            <button class="btn dropdown-item" @click="item_click($event, 'mar88___msg_timer', 'Lịch chạy tin nhắn')">Lịch chạy tin nhắn</button>
-            <div class="dropdown-divider"></div>
-            <button class="btn dropdown-item" @click="item_click($event, 'mar88___report_broadcast_msg', 'BC kết quả nhắn tin')">BC kết quả nhắn tin</button>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="javascript:___logout();">Thoát</a>
+            <button v-for="menu in ___APP.objViewMain.arr_menu_actions" :class="['btn dropdown-item', menu.active ? '' : 'disabled']" 
+                    @click="menu_action_click(menu.code)">{{menu.title}}</button>
         </div>
     </div>
 </nav>

@@ -86,6 +86,10 @@ var ___DATA = {
     view___dialog_2: null,
     view___dialog_3: null,
 
+    view___popup_1: null,
+    view___popup_2: null,
+    view___popup_3: null,
+
     objApp: {
         is_mobile: window.innerWidth < 481,
         int_width: window.innerWidth
@@ -631,6 +635,13 @@ var ___DATA = {
         str_name: '',
         str_title: '',
         on_search_text: function (keyword) { },
+        on_select_changed: function (is_select, row_data) { },
+        on_menu_action_selected: function (menu_code) { },
+        arr_menu_actions: [{
+            code: 'test',
+            title: 'test',
+            active: false
+        }],
         objItemSelected: {
             id: 0,
             str_name: '',
@@ -916,31 +927,41 @@ window.addEventListener("hashchange", function (h) {
 
 /////////////////////////////////////////////////////////////////////
 
-var view___load = (view, view_called) => {
+var view___load = (view, type, view_called) => {
     if (view == null || view.length == 0) return;
 
     if (___HTML[view] == null)
         return console.error('VIEW___LOAD: ERROR -> ' + view + ': Template HTML is not exist');
 
-    var cf;
-    var views = Object.keys(___VIEW);
-    for (var i = 0; i < views.length; i++) {
-        if (Array.isArray(___VIEW[views[i]].views)) {
-            for (var j = 0; j < ___VIEW[views[i]].views.length; j++) {
-                if (___VIEW[views[i]].views[j].key == view) {
-                    cf = ___VIEW[views[i]].views[j];
-                    break;
-                }
-            }
-        }
-        if (cf != null) break;
-    }
+    //var cf;
+    //var views = Object.keys(___VIEW);
+    //for (var i = 0; i < views.length; i++) {
+    //    if (Array.isArray(___VIEW[views[i]].views)) {
+    //        for (var j = 0; j < ___VIEW[views[i]].views.length; j++) {
+    //            if (___VIEW[views[i]].views[j].key == view) {
+    //                cf = ___VIEW[views[i]].views[j];
+    //                break;
+    //            }
+    //        }
+    //    }
+    //    if (cf != null) break;
+    //}
 
     console.log('VIEW___LOAD: ' + view);
 
-    if (cf && cf.ok) {
-        ___APP.view___main_body = view;
-    } else console.error('VIEW___LOAD: ERROR -> ' + view + ': ok is false Or Config is null', JSON.stringify(cf));
+    //if (cf && cf.ok) {
+    if (___COM[view]) {
+        switch (type) {
+            case 'popup':
+                ___APP.view___popup_1 = ___COM[view];
+                break;
+            case 'main':
+            default:
+                ___APP.view___main_body = ___COM[view];
+                break;
+        }
+    }
+    //} else console.error('VIEW___LOAD: ERROR -> ' + view + ': ok is false Or Config is null', JSON.stringify(cf));
 };
 
 var view___dialog = (event, view) => {
@@ -972,6 +993,8 @@ var view___dialog = (event, view) => {
         ___APP.$data.view___dialog_1 = view;
     }, 1, event);
 };
+
+var view_popup
 
 var ___login = (user) => {
     console.log('___login: user = ', user);
