@@ -4,21 +4,56 @@ ___COM["kit_datatables_net"] = {
     template:
         '<div class="kit-datatables-net">' +
         '   <table :id="table_id___" class="stripe row-border order-column"></table>' +
-        '   <div :id="pager_id___" class="pl-1 pr-1"></div>' +
-        '   <div class="pl-1 pr-1">' +
+        '   <div :id="pager___.id" class="pl-1 pr-1" v-show="pager___.visiable">' +
         '       <div class="float-left pt-2">' +
-        '           Trang 1 | 9 - Tổng 99 bản ghi' +
+        '           Trang {{pager___.page_number}} | {{pager___.page_total}} - Tổng {{items___.length}} bản ghi' +
         '       </div>' +
         '       <div class="float-right pt-1">' +
-        '           <ul class="pagination" v-html="pager_html___"></ul>' +
+        '           <ul class="pagination">' +
+        '               <li class="page-item">' +
+        '                   <button class="page-link border-none" @click="f_pager_go(1)" aria-label="Next">' +
+        '                       <i class="fa fa-step-backward"></i>' +
+        '                   </button>' +
+        '               </li>' +
+        '               <li class="page-item">' +
+        '                   <button class="page-link border-none" @click="f_pager_go(pager___.page_number - 1)" aria-label="Previous">' +
+        '                       <i class="fa fa-angle-left"></i>' +
+        '                   </button>' +
+        '               </li>' +
+        '               <li v-for="page_index in (1, (pager___.page_number + 5) > pager___.page_total ? pager___.page_total : (pager___.page_number + 5))" :class="[\'page-item\', page_index == pager___.page_number ? \'active\' : \'\']"  ' +
+        '                       v-if="page_index >= (pager___.page_number < pager___.page_total - 5 ? pager___.page_number : (pager___.page_total - 5)) - 1">' +
+        '                   <button class="page-link border-none" @click="f_pager_go(page_index)">{{page_index}}</button>' +
+        '               </li>' +
+        '               <li class="page-item" v-show="pager___.page_number + 5 < pager___.page_total">' +
+        '                   <button class="page-link border-none" @click="f_pager_go(pager___.page_number + 6)"> ... </button>' +
+        '               </li>' +
+        '               <li class="page-item">' +
+        '                   <button class="page-link border-none" @click="f_pager_go(pager___.page_number + 1)" aria-label="Next">' +
+        '                       <i class="fa fa-angle-right"></i>' +
+        '                   </button>' +
+        '               </li>' +
+        '               <li class="page-item">' +
+        '                   <button class="page-link border-none" @click="f_pager_go(pager___.page_total)" aria-label="Next">' +
+        '                       <i class="fa fa-step-forward"></i>' +
+        '                   </button>' +
+        '               </li>' +
+        '           </ul>' +
         '       </div> ' +
         '   </div>' +
         '</div>',
     data: function () {
         return {
             table_id___: ___guid_id(),
-            pager_id___: ___guid_id(),
-            pager_html___: '',
+            col_titles___: {},
+            options___: {},
+            items___: [],
+            pager___: {
+                visiable: false,
+                id: ___guid_id(),
+                page_size: 15,
+                page_number: 1,
+                page_total: 0
+            }
         };
     },
     created: function () {
@@ -29,8 +64,8 @@ ___COM["kit_datatables_net"] = {
         //console.log('vue.logint: mounted, role = ', _self.role___);
         //$('#' + _self.idvc___ + ' .styled').uniform({ radioClass: 'choice' });
 
-        ___APP.objViewMain.str_title = 'Tin nhắn';
-        ___APP.objViewMain.objItemSelected.str_title = 'Tin nhắn abc';
+        //___APP.objViewMain.str_title = 'Tin nhắn';
+        //___APP.objViewMain.objItemSelected.str_title = 'Tin nhắn abc';
 
         //Vue.nextTick(function (_sf) {
         //_self.f_table_draw();
@@ -155,6 +190,14 @@ ___COM["kit_datatables_net"] = {
                 $('#' + table_id___ + ' td.dataTables_empty img').css({ display: 'block' });
             }, 50);
         },
+        f_pager_go: function (page_number) {
+            var _self = this;
+            var pager___ = _self.pager___;
+            if (page_number == pager___.page_number) return;
+            pager___.page_number = page_number;
+
+            _self.f_table_draw(_self.col_titles___, _self.items___, _self.options___)
+        },
         f_table_draw: function (obj, arr_items, options) {
             /*
             
@@ -176,8 +219,31 @@ ___COM["kit_datatables_net"] = {
             */
 
             var _self = this;
+            _self.col_titles___ = obj;
+            _self.options___ = options;
+
             var table_id___ = _self.table_id___;
-            var pager_id___ = _self.pager_id___;
+            var pager___ = _self.pager___;
+            var page_size = pager___.page_size;
+            var page_number = pager___.page_number;
+            var page_total = 0;
+
+            var items___ = arr_items;
+            _self.items___ = arr_items;
+
+            page_total = Number((items___.length / page_size).toString().split('.')[0]);
+            if (items___.length % page_size != 0) page_total++;
+            pager___.page_total = page_total;
+
+            var page_items = [];
+            var min = (page_number - 1) * page_size,
+                max = page_number * page_size;
+            if (max > items___.length) max = items___.length;
+
+            for (var i = min; i < max; i++) page_items.push(items___[i]);
+            pager___.visiable = true;
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
 
             if ($.fn.DataTable.isDataTable('#' + table_id___)) {
                 $('#' + table_id___).dataTable().fnClearTable();
@@ -220,43 +286,11 @@ ___COM["kit_datatables_net"] = {
 
             var $table = $('#' + table_id___);
             $table.css({ width: window.innerWidth + 'px' });
-
-            if (arr_items.length > 0) {
-                var s_pager = '<li class="page-item"> \
-                    <a class="page-link" href="#" aria-label="Next"> \
-                        <i class="fa fa-step-backward"></i> \
-                    </a> \
-                </li> \
-                <li class="page-item"> \
-                    <a class="page-link" href="#" aria-label="Previous"> \
-                        <i class="fa fa-angle-left"></i> \
-                    </a> \
-                </li> \
-                <li class="page-item active" aria-current="page"> \
-                    <span class="page-link"> \
-                        1 \
-                        <span class="sr-only">(current)</span> \
-                    </span> \
-                </li> \
-                <li class="page-item"><a class="page-link" href="#">2</a></li> \
-                <li class="page-item"><a class="page-link" href="#">3</a></li> \
-                <li class="page-item"> \
-                    <a class="page-link" href="#" aria-label="Next"> \
-                        <i class="fa fa-angle-right"></i> \
-                    </a> \
-                </li> \
-                <li class="page-item"> \
-                    <a class="page-link" href="#" aria-label="Next"> \
-                        <i class="fa fa-step-forward"></i> \
-                    </a> \
-                </li>';
-
-                _self.pager_html___ = s_pager;
-            }
+            var data_table;
 
             if (hasLastColumnFree) {
 
-                $table.DataTable({
+                data_table = $table.DataTable({
                     destroy: true,
                     //scrollY: "300px",
                     scrollX: scroll_x,
@@ -270,14 +304,15 @@ ___COM["kit_datatables_net"] = {
                     ordering: false,
                     info: false,
                     dom: 'rtip',
-                    data: arr_items,
-                    columnDefs: a_columnDefs
+                    data: page_items,
+                    columnDefs: a_columnDefs,
+                    select: true
                 });
                 $('#' + table_id___ + '_wrapper').css({ width: window.innerWidth + 'px' });
 
             } else {
 
-                $table.DataTable({
+                data_table = $table.DataTable({
                     destroy: true,
                     //scrollY: "300px",
                     //scrollY: (window.innerHeight - 150) + 'px',
@@ -293,16 +328,27 @@ ___COM["kit_datatables_net"] = {
                     ordering: false,
                     info: false,
                     dom: 'rtip',
-                    data: arr_items,
-                    columnDefs: a_columnDefs
+                    data: page_items,
+                    columnDefs: a_columnDefs,
+                    select: true
                 });
 
                 $('#' + table_id___ + '_wrapper').css({ width: window.innerWidth + 'px' });
-                $('.DTFC_LeftBodyLiner table tbody tr td:last-of-type').css({ 'border-right': '1px solid #333' });
-                $('.DTFC_RightBodyLiner table tbody tr td:first-child').css({ 'border-left': '1px solid #333' });
-
+                //$('.DTFC_LeftBodyLiner table tbody tr td:last-of-type').css({ 'border-right': '1px solid #333' });
+                //$('.DTFC_RightBodyLiner table tbody tr td:first-child').css({ 'border-left': '1px solid #333' });
             }
 
+            data_table.on('select', function (e, dt, type, indexes) {
+                var rowData = data_table.rows(indexes).data().toArray();
+                console.log('select = ', rowData);
+                if (_self.$parent.on_select_changed)
+                    _self.$parent.on_select_changed(true, rowData);
+            }).on('deselect', function (e, dt, type, indexes) {
+                var rowData = data_table.rows(indexes).data().toArray();
+                console.log('deselect = ', rowData);
+                if (_self.$parent.on_select_changed)
+                    _self.$parent.on_select_changed(false, rowData);
+            });
         }
     }
 };
