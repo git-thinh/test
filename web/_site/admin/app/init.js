@@ -672,7 +672,7 @@ var ___MIXIN = {
         var _self = this;
         _self.___init_class();
         console.log('MIXIN: mounted -> ' + _self.view_id);
-        if (_self.view_id.indexOf('___logout') != -1) ___V_LOGOUT = _self;
+        if (_self.view_id && _self.view_id.indexOf('___logout') != -1) ___V_LOGOUT = _self;
     },
     methods: {
         ___init_class: function () {

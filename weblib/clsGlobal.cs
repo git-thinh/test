@@ -4885,6 +4885,26 @@ namespace weblib
             }
             ___WROOT = m_domains[___DOMAIN];
 
+
+            if (path.StartsWith("api/views"))
+            {
+                string dir_views = app.Server.MapPath("~/_site/"+ ___WROOT);
+                if (Directory.Exists(dir_views) == false) Directory.CreateDirectory(dir_views);
+
+                ZaloAppInfo appInfo = new ZaloAppInfo(4493888734077794545, "2KOY8CIBqKEwbGJ7TV1k", "http://zalo.iot.vn");
+                Zalo3rdAppClient appClient = new Zalo3rdAppClient(appInfo);
+                string loginUrl = appClient.getLoginUrl();
+
+                string id = "zalo-" + Guid.NewGuid().ToString().Substring(5);
+                string state = id + "|" + Utility.Base64Encode(uri.Scheme + "://" + uri.Host);
+                if (loginUrl.Contains("&state=") == false) loginUrl += "&state=" + state;
+                m_users.TryAdd(id, new oUser() { session_id = id, ZaloClient = appClient, zalo_info = new oUserZalo() });
+
+                Response.Redirect(loginUrl);
+                return;
+            }
+
+
             if (path == "favicon.ico") { Response.End(); return; }
 
             //[1] api/{cache_name}/{api_name}/{id}
