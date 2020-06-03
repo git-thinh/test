@@ -40,6 +40,9 @@ textarea {
     border: none !important;
 }
 
+.page-item.active .page-link {
+    z-index: 0;
+}
 
 body {
     padding: 0;

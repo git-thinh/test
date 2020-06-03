@@ -4888,19 +4888,26 @@ namespace weblib
 
             if (path.StartsWith("api/views"))
             {
-                string dir_views = app.Server.MapPath("~/_site/"+ ___WROOT);
-                if (Directory.Exists(dir_views) == false) Directory.CreateDirectory(dir_views);
+                string json = "{}";
+                string dir_views = app.Server.MapPath("~/_site/" + ___WROOT + "/_view");                
+                if (Directory.Exists(dir_views)) {
+                    string[] dirs = Directory.GetDirectories(dir_views);
+                    List<string> ls = new List<string>();
+                    for (int i = 0; i < dirs.Length; i++) {
+                        string[] fs = Directory.GetFiles(dirs[i], "*.htm");
+                        ls.AddRange(fs);
+                    }
 
-                ZaloAppInfo appInfo = new ZaloAppInfo(4493888734077794545, "2KOY8CIBqKEwbGJ7TV1k", "http://zalo.iot.vn");
-                Zalo3rdAppClient appClient = new Zalo3rdAppClient(appInfo);
-                string loginUrl = appClient.getLoginUrl();
-
-                string id = "zalo-" + Guid.NewGuid().ToString().Substring(5);
-                string state = id + "|" + Utility.Base64Encode(uri.Scheme + "://" + uri.Host);
-                if (loginUrl.Contains("&state=") == false) loginUrl += "&state=" + state;
-                m_users.TryAdd(id, new oUser() { session_id = id, ZaloClient = appClient, zalo_info = new oUserZalo() });
-
-                Response.Redirect(loginUrl);
+                    var a = ls
+                        .Select(x => x.Substring(0, x.Length - 4).Split('\\'))
+                        .Select(x => x[x.Length - 2] + "___" + x[x.Length - 1])
+                        .Where(x => !x.Contains('-') && !x.Contains(' '))
+                        .ToArray();
+                    json = JsonConvert.SerializeObject(a);
+                }
+                Response.ContentType = "application/json";
+                Response.Write(json);
+                Response.End();
                 return;
             }
 

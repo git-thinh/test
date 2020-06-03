@@ -202,10 +202,10 @@
                     str_group: 'Nhóm tin',
                     str_subject: 'Chủ đề tin',
                     str_content: 'Nội dung tin',
-                    str_cus_segment: 'Nhóm khách hàng',
+                    str_cus_segment: 'Nhóm KH',
                     str_schedule: 'Lịch chạy',
                     str_action: 'Thao tác',
-                    str_counter_cus_received: 'KH đã nhận',
+                    str_counter_cus_received: 'KH nhận',
                     str_state: 'Tình trạng'
                 };
 
@@ -226,7 +226,7 @@
                 _self.arr_test.forEach((text, index_) => {
                     if (keyword == null || text.toLowerCase().indexOf(keyword) != -1) {
                         var a = text.split('|');
-                        arr_items.push([index_ + 1, a[0], a[1], a[2], 'Tất cả', '0 0/1 * * * ?', 'BROADCAST_ZALO', index_ == 0 ? 9 : 0, index_ == 0 ? 'Đang chạy' : 'Tạm dừng']);
+                        arr_items.push([index_ + 1, a[0], a[1], a[2], 'Tất cả', '0 0/1 * * * ?', 'ZALO', index_ == 0 ? 9 : 0, index_ == 0 ? 'Đang chạy' : 'Tạm dừng']);
                     }
                 });
 

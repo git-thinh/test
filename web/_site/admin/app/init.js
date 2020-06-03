@@ -752,7 +752,7 @@ var ___MIXIN = {
     },
 };
 
-var view___init = (callback) => {
+var view___init_____bak = (callback) => {
     fetch(___PATH_DOMAIN + '_view/config.json').then(r => r.json()).then(async cf_ => {
         ___VIEW = cf_;
         var fets = [];
@@ -867,10 +867,138 @@ var view___init = (callback) => {
     }).catch((err) => callback({ ok: false, message: err.message }));
 };
 
+
+var view___init = (callback) => {
+    fetch(___PATH_DOMAIN + '_view/config.json').then(r1 => r1.json()).then(async cf_ => {
+        ___VIEW = [];
+
+        fetch('api/views').then(r2 => r2.json()).then(async vs_ => {
+
+            var urls = _.map(vs_, function (o) { return (___PATH_DOMAIN + '_view/' + o.split('___').join('/')).toLowerCase(); });
+            //console.log('?????????? = ', urls);
+
+            ___VIEW = _.map(vs_, function (o) {
+                var a_ = o.split('___');
+                var scope_ = a_[0];
+                var name_ = a_[1];
+                return {
+                    type: 'inline',
+                    scope: scope_,
+                    title: name_,
+                    name: name_,
+                    enable: true,
+                    key: o,
+                    ok: false,
+                    url_js: null
+                };
+            });
+            console.log('?????????? ___VIEW = ', ___VIEW);
+
+            var fets = [];
+            for (var i = 0; i < urls.length; i++) {
+                fets.push(fetch(urls[i] + '.htm'));
+                fets.push(fetch(urls[i] + '.mobi.htm'));
+                fets.push(fetch(urls[i] + '.tablet.htm'));
+                fets.push(fetch(urls[i] + '.js'));
+                fets.push(fetch(urls[i] + '.css'));
+            }
+
+            var results = await Promise.all(fets).then(async fs => {
+                var a = [];
+                for (var i = 0; i < fs.length; i++) {
+                    var r = fs[i];
+                    var type = r.url.substr(r.url.length - 2, 2);
+                    var p = r.url.split('/');
+                    var scope = p[p.length - 2];
+                    var api = p[p.length - 1].split('.')[0];
+                    var key = scope + '___' + api;
+                    var index = -1;
+                    var text = '';
+
+                    //console.log(r.url, r.ok);
+
+                    if (type == 'js') {
+                        if (r.ok) text = await r.text();
+                        if (text.length == 0)
+                            text = '{ data: function () { return {}; }, mounted: function () {}, methods: {} }';
+
+                        text = text.trim().substr(1);
+
+                        var str_template = '___HTML["' + key + '"]';
+                        if (___HTML[key + '.' + DEVICE_NAME] != null) str_template = '___HTML["' + key + '.' + DEVICE_NAME + '"]';
+
+                        text = '___COM["' + key + '"] = { mixins: [___MIXIN], template: ' + str_template + ', \r\n ' + text + ' \r\n ' +
+                            'Vue.component("' + key + '", ___COM["' + key + '"]); \r\n ';
+                        var url_js = URL.createObjectURL(new Blob([text], { type: 'text/javascript' }));
+
+                        index = _.findIndex(___VIEW, function (o_) { return o_.key == key; });
+                        if (index != -1) {
+                            ___VIEW[index].url_js = url_js;
+                            ___VIEW[index].ok = false;
+                            ___VIEW[index].key = key;
+                        }
+
+                        //console.log(scope, api, index);
+                        //console.log(key, str_template);
+                        //console.log(key, url_js);
+
+                        a.push({ key: key, scope: scope, api: api, type: 'js', url_js: url_js });
+                    } else if (r.ok) {
+                        text = await r.text();
+                        switch (type) {
+                            case 'tm': // htm
+                                //console.log('HTM -> ', key);
+                                ___HTML[key] = text;
+                                break;
+                            case 'ss': // css
+                                var url_css = ___PATH_DOMAIN + '_view/' + scope + '/' + api + '.css';
+                                var el = document.createElement('link');
+                                el.setAttribute('rel', 'stylesheet');
+                                el.setAttribute('href', url_css);
+                                el.setAttribute('id', key + '___css');
+                                document.getElementsByTagName('head')[0].appendChild(el);
+                                break;
+                        }
+                    }
+                }
+                //console.log('a === ', a);
+                return a;
+            }).then(async a => {
+                var js_add = await Promise.all(a.map(it => {
+                    if (___HTML[it.key] == null) ___HTML[it.key] = '<div></div>';
+                    return new Promise((resolve, reject) => {
+                        var el = document.createElement('script');
+                        el.setAttribute('src', it.url_js);
+                        el.setAttribute('id', it.key + '___js');
+                        el.onload = function () {
+                            resolve(it);
+                        };
+                        document.getElementsByTagName('head')[0].appendChild(el);
+                    });
+                }));
+                return js_add;
+            });
+
+            //console.log(JSON.stringify(results));
+            results.forEach(r => {
+                var index = _.findIndex(___VIEW, function (o) { return o.key == r.key; });
+                if (index != -1) {
+                    ___VIEW[index].ok = true;
+                    console.log('VIEW___INIT: ' + ___VIEW[index].key + ' = true');
+                }
+            });
+
+            callback({ ok: true, configs: results });
+        });
+
+    }).catch((err) => callback({ ok: false, message: err.message }));
+};
+
 var view___get = (scope_, name_) => {
-    if (Array.isArray(___VIEW[scope_].views)) {
-        var views = _.filter(___VIEW[scope_].views, function (o) { return o.name != null && o.name == name_; });
-        if (views.length > 0) return views[0];
+    //console.log('view___get ===== ', scope_, name_);
+    if (Array.isArray(___VIEW)) {
+        var view = _.find(___VIEW, function (o) { return o.name != null && o.name == name_ && o.scope != null && o.scope == scope_; });
+        return view;
     }
     return null;
 };
