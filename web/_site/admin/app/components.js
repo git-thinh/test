@@ -363,13 +363,12 @@ ___COM["kit_popup"] = {
         '       <div class="modal-wrapper">' +
         '           <div class="modal-container">' +
 
-
         '               <div class="modal-header" v-show="header.visiable">' +
         '                   <slot name="header">' +
-        '                       [HEADER]' +
+        '                       <h3 class="mr-auto">{{header.title}}</h3>' +
+        '                       <button class="btn" @click="f_close"><i class="fas fa-times"></i></button>' +
         '                   </slot>' +
         '               </div>' +
-
 
         '               <div class="modal-body">' +
         '                   <slot name="body">' +
@@ -377,14 +376,12 @@ ___COM["kit_popup"] = {
         '                   </slot>' +
         '               </div>' +
 
-
         '               <div class="modal-footer">' +
         '                   <slot name="footer">' +
         '                       [FOOTER]' +
         '                       <button class="modal-default-button" @click="$emit(\'close\')">OK</button>' +
         '                   </slot>' +
         '               </div>' +
-
 
         '           </div>' +
         '       </div>' +
@@ -394,7 +391,8 @@ ___COM["kit_popup"] = {
         return {
             pop_id: ___guid_id(),
             header: {
-                visiable: false
+                visiable: true,
+                title: '[HEADER]'
             }
         };
     },
@@ -403,11 +401,16 @@ ___COM["kit_popup"] = {
     },
     mounted: function () {
         var _self = this;
-        console.log('?????????????? hideHeader = ', _self.hideHeader);
-        //if (_self.hideHeader == true)
-        //    _self.header.visiable = false;
+        if (_self.hideHeader == true || _self.hideHeader == 'true')
+            _self.header.visiable = false;
     },
     methods: {
+        f_close: function () {
+            var _self = this;
+            var v = ___APP.view___popup_1;
+            console.log('?????????????? v = ', v);
+            ___APP.view___popup_1 = null;
+        }
     }
 };
 Vue.component('kit_popup', ___COM["kit_popup"]);
