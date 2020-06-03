@@ -354,7 +354,63 @@ ___COM["kit_datatables_net"] = {
 };
 Vue.component('kit_datatables_net', ___COM["kit_datatables_net"]);
 
+___COM["kit_popup"] = {
+    mixins: [___MIXIN],
+    props: ['strTitle', 'hideHeader'],
+    template:
+        '<div class="kit-popup" :id="pop_id">' +
+        '   <div class="modal-mask">' +
+        '       <div class="modal-wrapper">' +
+        '           <div class="modal-container">' +
 
+
+        '               <div class="modal-header" v-show="header.visiable">' +
+        '                   <slot name="header">' +
+        '                       [HEADER]' +
+        '                   </slot>' +
+        '               </div>' +
+
+
+        '               <div class="modal-body">' +
+        '                   <slot name="body">' +
+        '                       [BODY]' +
+        '                   </slot>' +
+        '               </div>' +
+
+
+        '               <div class="modal-footer">' +
+        '                   <slot name="footer">' +
+        '                       [FOOTER]' +
+        '                       <button class="modal-default-button" @click="$emit(\'close\')">OK</button>' +
+        '                   </slot>' +
+        '               </div>' +
+
+
+        '           </div>' +
+        '       </div>' +
+        '   </div>' +
+        '</div>',
+    data: function () {
+        return {
+            pop_id: ___guid_id(),
+            header: {
+                visiable: false
+            }
+        };
+    },
+    created: function () {
+        var _self = this;
+    },
+    mounted: function () {
+        var _self = this;
+        console.log('?????????????? hideHeader = ', _self.hideHeader);
+        //if (_self.hideHeader == true)
+        //    _self.header.visiable = false;
+    },
+    methods: {
+    }
+};
+Vue.component('kit_popup', ___COM["kit_popup"]);
 
 
 

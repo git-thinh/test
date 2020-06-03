@@ -678,7 +678,9 @@ var ___MIXIN = {
         ___init_class: function () {
             var _self = this;
             var el = _self.$el;
-            classie.add(el, '___com').add(el, _self.view_id);
+
+            if (_self.view_id)
+                classie.add(el, '___com').add(el, _self.view_id);
 
             var id = 'idvc___' + _self._uid;
             el.setAttribute('id', id);
@@ -1234,3 +1236,5 @@ if (DEVICE_NAME == 'mobi') {
         { reset_css: 'app/reset.css?v=' + new Date().getTime() },
     ], app___init);
 }
+
+////setTimeout(function () { view___load('mar88___msg_action_add_item', 'popup'); }, 1500);
