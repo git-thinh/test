@@ -61,7 +61,7 @@ var ___guid_id = function () {
 
 /////////////////////////////////////////////////////////////////////
 
-var ___APP, ___VIEW = {}, ___VIEW_CF = {}, ___COM = {}, ___HTML = {},
+var ___APP, ___VIEW = {}, ___VIEW_CF = {}, ___COM = {}, ___HTML = {}, ___KIT_FN = {}, ___KIT_DATA = {},
     ___DL_CURRENT_EVENT = null, ___DL_CURRENT_ID = null,
     ___V_LOGOUT, ___V_MAIN;
 
@@ -652,7 +652,9 @@ var ___DATA = {
 
 var ___MIXIN = {
     props: [
+        'ref-name',
         'is-dialog',
+        'popup-index',
         'obj-user'
     ],
     data: function () {
@@ -667,15 +669,17 @@ var ___MIXIN = {
     computed: {
         view_id: function () { return this.$vnode.componentOptions.tag; }
     },
-    created: function () { },
+    created: function () {
+        var _self = this;
+    },
     mounted: function () {
         var _self = this;
-        _self.___init_class();
+        _self.___init_com();
         console.log('MIXIN: mounted -> ' + _self.view_id);
         if (_self.view_id && _self.view_id.indexOf('___logout') != -1) ___V_LOGOUT = _self;
     },
     methods: {
-        ___init_class: function () {
+        ___init_com: function () {
             var _self = this;
             var el = _self.$el;
 
@@ -686,9 +690,19 @@ var ___MIXIN = {
             el.setAttribute('id', id);
             _self.idvc___ = id;
 
-            //console.log('MIXIN: ___init_class ' + _self.view_id + ', role = ', el.parentElement.getAttribute('role'));
-            //console.log('MIXIN: ___init_class ' + _self.view_id + ', is-dialog = ', _self.isDialog);
-            //console.log('MIXIN: ___init_class ' + _self.view_id + ', _uid = ', _self._uid);
+            //console.log('MIXIN: ___init_com ' + _self.view_id + ', role = ', el.parentElement.getAttribute('role'));
+            //console.log('MIXIN: ___init_com ' + _self.view_id + ', is-dialog = ', _self.isDialog);
+            //console.log('MIXIN: ___init_com ' + _self.view_id + ', _uid = ', _self._uid);
+
+            if (_self.popupIndex != null) {
+                classie.add(el, '___com').add(el, '___com_popup');
+                el.setAttribute('tabindex', _self.popupIndex);
+            }
+
+            if (_self.refName != null && _self.$parent) {
+                //console.log(':ref-name = ', _self.refName);
+                _self.$parent.$refs[_self.refName] = _self;
+            }
 
             var pa = el.parentElement;
             if (pa && pa.hasAttribute('role')) {
@@ -699,7 +713,7 @@ var ___MIXIN = {
                 classie.add(el, ___DL_CURRENT_ID);
 
                 var rec = ___DL_CURRENT_EVENT.target.getBoundingClientRect();
-                console.log('MIXIN: ___init_class ' + ___DL_CURRENT_ID + ', ' + _self.view_id + ', rec = ', rec);
+                console.log('MIXIN: ___init_com ' + ___DL_CURRENT_ID + ', ' + _self.view_id + ', rec = ', rec);
                 //_self.dialog___.opacity = 0;
                 //_self.dialog___.top = rec.bottom + 'px';
 
@@ -745,9 +759,9 @@ var ___MIXIN = {
             handler: function (val, oldVal) {
                 var _self = this;
                 //console.log('MIXIN_WATCH: ' + _self.view_id);
-                console.log('MIXIN_WATCH: ___init_class ' + _self.view_id + ', is-dialog = ', _self.isDialog);
+                console.log('MIXIN_WATCH: ___init_com ' + _self.view_id + ', is-dialog = ', _self.isDialog);
                 if (_self.isDialog != true)
-                    Vue.nextTick(function () { _self.___init_class(); });
+                    Vue.nextTick(function () { _self.___init_com(); });
             },
             deep: true
         }
@@ -1156,6 +1170,23 @@ var ___logout = () => {
     location.reload();
 };
 
+var ___popup_close = (event) => {
+    if (event && event.target) {
+        var el = event.target.closest('.___com_popup');
+        if (el) {
+            if (el.hasAttribute('tabindex')) {
+                var s_tabindex = el.getAttribute('tabindex');
+                var tabindex = Number(s_tabindex);
+                if (isNaN(tabindex) == false) {
+                    if (___APP['view___popup_' + tabindex] != null) {
+                        ___APP['view___popup_' + tabindex] = null;
+                    }
+                }
+            }
+        }
+    }
+};
+
 /////////////////////////////////////////////////////////////////////
 
 var setup_loading = function (visible) {
@@ -1237,4 +1268,4 @@ if (DEVICE_NAME == 'mobi') {
     ], app___init);
 }
 
-////setTimeout(function () { view___load('mar88___msg_action_add_item', 'popup'); }, 1500);
+setTimeout(function () { view___load('mar88___msg_action_add_item', 'popup'); }, 1000);

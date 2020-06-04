@@ -80,6 +80,7 @@
     <Content Include="_site\admin\app\reset.css" />
     <Content Include="_site\admin\_view\header\top.css" />
     <Content Include="_site\admin\_view\header\top.mobi - Copy.htm" />
+    <Content Include="_site\admin\_view\mar88\msg_action_add_item.js" />
     <Content Include="_site\admin\_view\mar88\msg_template.css" />
     <Content Include="_site\admin\_view\mar88\msg_template.js" />
     <Content Include="_site\admin\_view\mar88\cus_all.css" />

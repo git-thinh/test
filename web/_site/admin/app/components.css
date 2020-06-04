@@ -70,6 +70,7 @@
 
 /****************************************/
 
+
 .modal-mask {
     position: fixed;
     z-index: 9998;
@@ -85,10 +86,11 @@
 .modal-wrapper {
     display: table-cell;
     vertical-align: middle;
+    text-align: center;
 }
 
 .modal-container {
-    width: 300px;
+    min-width: 300px;
     margin: 0px auto;
     padding: 0;
     background-color: #fff;
@@ -96,6 +98,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.3s ease;
     font-family: Helvetica, Arial, sans-serif;
+    display: inline-block;
 }
 
 .modal-header h3 {
