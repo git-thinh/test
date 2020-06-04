@@ -487,16 +487,17 @@ ___COM["kit_form"] = {
 
                 switch (item.type) {
                     case 'text':
+                        ___KIT_FN[id] = function (event, field_index, id, index) { _self.f_text_changed(event, field_index, id, index); };
                         item.value = (item.value_default == null ? '' : item.value_default);
                         s += '<div class="form-group text-left"> \
                                 <label for="exampleInputEmail1">'+ item.caption + '</label> \
-                                <input type="' + item.type + '" class="form-control" aria-describedby="' + id + '" value="' + item.value + '"> \
+                                <input type="' + item.type + '" oninput="___KIT_FN[\'' + id + '\'](event,' + i + ',\'' + id + '\',' + j + ');" class="form-control" aria-describedby="' + id + '" value="' + item.value + '"> \
                                 <small id="'+ id + '" class="form-text text-muted">' + (item.help_text == null ? '' : item.help_text) + '</small> \
                               </div>';
                         break;
                     case 'switch':
                         ___KIT_DATA[id] = item.list;
-                        ___KIT_FN[id] = function (event, id, index) { _self.f_switch_changed(event, id, index); };
+                        ___KIT_FN[id] = function (event, field_index, id, index) { _self.f_switch_changed(event, field_index, id, index); };
 
                         if (item.list) {
                             for (var j = 0; j < item.list.length; j++) {
@@ -506,15 +507,16 @@ ___COM["kit_form"] = {
 
                         item.value = item_selected.id;
                         s += '<div class="custom-control custom-switch text-left"> \
-                                  <input type="checkbox" class="custom-control-input" id="' + id + '" onchange="___KIT_FN[\'' + id + '\'](event,\'' + id + '\',' + j + ');" ' + (item_selected.id == 1 ? ' checked ' : '') + '> \
+                                  <input type="checkbox" class="custom-control-input" id="' + id + '" onchange="___KIT_FN[\'' + id + '\'](event,' + i + ',\'' + id + '\',' + j + ');" ' + (item_selected.id == 1 ? ' checked ' : '') + '> \
                                   <label class="custom-control-label ' + id + '" for="' + id + '">' + item_selected.text + '</label> \
                                 </div>';
                         break;
                     case 'textarea':
+                        ___KIT_FN[id] = function (event, field_index, id, index) { _self.f_text_changed(event, field_index, id, index); };
                         item.value = (item.value_default == null ? '' : item.value_default);
                         s += '<div class="form-group text-left"> \
                                 <label for="exampleInputEmail1">'+ item.caption + '</label> \
-                                <textarea type="'+ item.type + '" class="form-control" aria-describedby="' + id + '" rows="5">' + item.value + '</textarea> \
+                                <textarea type="'+ item.type + '" oninput="___KIT_FN[\'' + id + '\'](event,' + i + ',\'' + id + '\',' + j + ');" class="form-control" aria-describedby="' + id + '" rows="5">' + item.value + '</textarea> \
                                 <small id="'+ id + '" class="form-text text-muted">' + (item.help_text == null ? '' : item.help_text) + '</small> \
                               </div>';
                         break;
@@ -564,7 +566,8 @@ ___COM["kit_form"] = {
 
             _self.options.items[field_index].value = ___KIT_DATA[id][index];
         },
-        f_switch_changed: function (event, id, index) {
+        f_switch_changed: function (event, field_index, id, index) {
+            var _self = this;
             //console.log(event.target);
             console.log(id, index, ___KIT_DATA[id][index]);
             //var el = document.getElementById(id);
@@ -572,6 +575,11 @@ ___COM["kit_form"] = {
 
             //$('.' + id).removeClass('active');
             //$('.' + id + '.item' + index).addClass('active');
+        },
+        f_text_changed: function (event, field_index, id, index) {
+            var _self = this;
+            //console.log(event.target.value, field_index, id, index);
+            _self.options.items[field_index].value = event.target.value;
         },
         f_close: function (event) {
         }

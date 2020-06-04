@@ -103,7 +103,7 @@
                 var v_form = v_popup.$refs['REF_KIT_FORM'];
                 if (v_form) {
                     var data = v_form.f_get_data();
-                    console.log('data = ', data);
+                    console.log('data = ', data.items);
                 }
             }
         },
