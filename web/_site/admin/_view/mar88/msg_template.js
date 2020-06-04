@@ -71,7 +71,21 @@
         },
         on_select_changed: function (is_select, row_data) {
             var _self = this;
+
+            var obj = {
+                id: row_data[0][0],
+                str_group: row_data[0][1],
+                str_subject: row_data[0][2],
+                str_content: row_data[0][3],
+                str_cus_segment: row_data[0][4],
+                str_schedule: row_data[0][5],
+                str_counter_cus_received: row_data[0][6],
+                str_state: row_data[0][7]
+            };
+            ___APP.objViewMain.objSelected = obj;
+
             console.log('????? on_select_changed = ', is_select, row_data);
+            console.log('????? on_select_changed = ', is_select, obj);
 
             if (is_select) {
                 _self.selected_raw_data = row_data;
@@ -91,6 +105,7 @@
             } else {
                 _self.selected_raw_data = null;
                 ___APP.objViewMain.objItemSelected.str_title = '';
+                ___APP.objViewMain.objSelected = null;
                 ___APP.objViewMain.arr_menu_actions = [
                     {
                         code: 'ADD_ITEM',

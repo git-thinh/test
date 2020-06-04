@@ -15,6 +15,19 @@
             var v_form = v_popup.$refs['REF_KIT_FORM'];
             //console.log('v_form = ', v_form);
             if (v_form) {
+                var obj = ___APP.objViewMain.objSelected;
+
+                ////var obj = {
+                ////    id: row_data[0][0],
+                ////    str_group: row_data[0][1],
+                ////    str_subject: row_data[0][2],
+                ////    str_content: row_data[0][3],
+                ////    str_cus_segment: row_data[0][4],
+                ////    str_schedule: row_data[0][5],
+                ////    str_counter_cus_received: row_data[0][6],
+                ////    str_state: row_data[0][7]
+                ////};
+
                 var options = {
                     items: [
                         {
@@ -30,11 +43,13 @@
                         },
                         {
                             type: 'text',
-                            caption: 'Chủ đề tin'
+                            caption: 'Chủ đề tin',
+                            value_default: obj.str_subject
                         },
                         {
                             type: 'textarea',
-                            caption: 'Nội dung tin'
+                            caption: 'Nội dung tin',
+                            value_default: obj.str_content
                         },
                         {
                             type: 'dropdown',

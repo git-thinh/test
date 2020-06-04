@@ -646,7 +646,8 @@ var ___DATA = {
             id: 0,
             str_name: '',
             str_title: '',
-        }
+        },
+        objSelected: null
     }
 };
 
