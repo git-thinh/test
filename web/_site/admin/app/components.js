@@ -509,7 +509,7 @@ ___COM["kit_form"] = {
                     case 'textarea':
                         s += '<div class="form-group text-left"> \
                                 <label for="exampleInputEmail1">'+ item.caption + '</label> \
-                                <textarea type="'+ item.type + '" class="form-control" aria-describedby="' + id + '" rows="5"></textarea> \
+                                <textarea type="'+ item.type + '" class="form-control" aria-describedby="' + id + '" rows="5">' + (item.value_default == null ? '' : item.value_default) + '</textarea> \
                                 <small id="'+ id + '" class="form-text text-muted">' + (item.help_text == null ? '' : item.help_text) + '</small> \
                               </div>';
                         break;
