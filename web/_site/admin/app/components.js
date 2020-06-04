@@ -481,13 +481,30 @@ ___COM["kit_form"] = {
             for (var i = 0; i < items.length; i++) {
                 item = items[i];
                 id = ___guid_id();
+                temp = '';
+
                 switch (item.type) {
                     case 'text':
                         s += '<div class="form-group text-left"> \
                                 <label for="exampleInputEmail1">'+ item.caption + '</label> \
-                                <input type="'+ item.type + '" class="form-control" aria-describedby="' + id + '"> \
+                                <input type="'+ item.type + '" class="form-control" aria-describedby="' + id + '" value="' + (item.value_default == null ? '' : item.value_default) + '"> \
                                 <small id="'+ id + '" class="form-text text-muted">' + (item.help_text == null ? '' : item.help_text) + '</small> \
                               </div>';
+                        break;
+                    case 'switch':
+                        ___KIT_DATA[id] = item.list;
+                        ___KIT_FN[id] = function (event, id, index) { _self.f_switch_changed(event, id, index); };
+
+                        if (item.list) {
+                            for (var j = 0; j < item.list.length; j++) {
+                                if (item.list[j].selected == true) item_selected = item.list[j];
+                            }
+                        }
+
+                        s += '<div class="custom-control custom-switch text-left"> \
+                                  <input type="checkbox" class="custom-control-input" id="' + id + '" onchange="___KIT_FN[\'' + id + '\'](event,\'' + id + '\',' + j + ');" ' + (item_selected.id == 1 ? ' checked ' : '') + '> \
+                                  <label class="custom-control-label ' + id + '" for="' + id + '">' + item_selected.text + '</label> \
+                                </div>';
                         break;
                     case 'textarea':
                         s += '<div class="form-group text-left"> \
@@ -513,7 +530,7 @@ ___COM["kit_form"] = {
                                 <label>'+ item.caption + '</label> \
                                 <div class="dropdown"> \
                                       <button class="btn btn-secondary dropdown-toggle" type="button" id="'+ id + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> \
-                                        '+ (item_selected != null ? item_selected.text : '') +' \
+                                        '+ (item_selected != null ? item_selected.text : '') + ' \
                                       </button> \
                                       <div class="dropdown-menu" aria-labelledby="'+ id + '">' + temp + '</div> \
                                 </div> \
@@ -532,6 +549,15 @@ ___COM["kit_form"] = {
 
             $('.' + id).removeClass('active');
             $('.' + id + '.item' + index).addClass('active');
+        },
+        f_switch_changed: function (event, id, index) {
+            //console.log(event.target);
+            console.log(id, index, ___KIT_DATA[id][index]);
+            //var el = document.getElementById(id);
+            //if (el) el.innerHTML = ___KIT_DATA[id][index].text;
+
+            //$('.' + id).removeClass('active');
+            //$('.' + id + '.item' + index).addClass('active');
         },
         f_close: function (event) {
         }

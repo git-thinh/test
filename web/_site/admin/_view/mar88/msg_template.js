@@ -51,33 +51,13 @@
         ___APP.objViewMain.on_menu_action_selected = _self.on_menu_action_selected;
         ___APP.objViewMain.arr_menu_actions = [
             {
-                code: 'VIEW_ITEM',
-                title: 'Xem thông tin',
-                active: false
-            },
-            {
                 code: 'ADD_ITEM',
-                title: 'Thêm mới',
+                title: 'Thêm mới tin nhắn',
                 active: true
             },
             {
                 code: 'EDIT_ITEM',
-                title: 'Cập nhật tin nhắn và lịch chạy',
-                active: false
-            },
-            {
-                code: 'ACTIVE_ITEM',
-                title: 'Cho phép hoặc cấm sử dụng',
-                active: false
-            },
-            //{
-            //    code: 'SCHEDULE_ITEM',
-            //    title: 'Lập lịch chạy gửi nhóm KH',
-            //    active: false
-            //},
-            {
-                code: 'REPORT_SEND_ITEM',
-                title: 'Kết quả nhắn tin',
+                title: 'Cập nhật tin nhắn',
                 active: false
             }
         ];
@@ -98,33 +78,13 @@
                 ___APP.objViewMain.objItemSelected.str_title = row_data[0][1] + '[' + row_data[0][0] + '] - ' + row_data[0][2];
                 ___APP.objViewMain.arr_menu_actions = [
                     {
-                        code: 'VIEW_ITEM',
-                        title: 'Xem thông tin',
-                        active: true
-                    },
-                    {
                         code: 'ADD_ITEM',
-                        title: 'Thêm mới',
+                        title: 'Thêm mới tin nhắn',
                         active: true
                     },
                     {
                         code: 'EDIT_ITEM',
-                        title: 'Cập nhật tin nhắn và lịch chạy',
-                        active: true
-                    },
-                    {
-                        code: 'ACTIVE_ITEM',
-                        title: 'Cho phép hoặc cấm sử dụng',
-                        active: true
-                    },
-                    //{
-                    //    code: 'SCHEDULE_ITEM',
-                    //    title: 'Lập lịch chạy gửi nhóm KH',
-                    //    active: true
-                    //},
-                    {
-                        code: 'REPORT_SEND_ITEM',
-                        title: 'Kết quả nhắn tin',
+                        title: 'Cập nhật tin nhắn',
                         active: true
                     }
                 ];
@@ -133,33 +93,13 @@
                 ___APP.objViewMain.objItemSelected.str_title = '';
                 ___APP.objViewMain.arr_menu_actions = [
                     {
-                        code: 'VIEW_ITEM',
-                        title: 'Xem thông tin',
-                        active: false
-                    },
-                    {
                         code: 'ADD_ITEM',
-                        title: 'Thêm mới',
+                        title: 'Thêm mới tin nhắn',
                         active: true
                     },
                     {
                         code: 'EDIT_ITEM',
-                        title: 'Cập nhật tin nhắn và lịch chạy',
-                        active: false
-                    },
-                    {
-                        code: 'ACTIVE_ITEM',
-                        title: 'Cho phép hoặc cấm sử dụng',
-                        active: false
-                    },
-                    //{
-                    //    code: 'SCHEDULE_ITEM',
-                    //    title: 'Lập lịch chạy gửi nhóm KH',
-                    //    active: false
-                    //},
-                    {
-                        code: 'REPORT_SEND_ITEM',
-                        title: 'Kết quả nhắn tin',
+                        title: 'Cập nhật tin nhắn',
                         active: false
                     }
                 ];
@@ -171,18 +111,11 @@
             var view_code;
 
             switch (menu_code) {
-                case 'VIEW_ITEM':
-                    break;
                 case 'ADD_ITEM':
                     view_code = 'mar88___msg_action_add_item';
                     break;
                 case 'EDIT_ITEM':
-                    break;
-                case 'ACTIVE_ITEM':
-                    break;
-                //case 'SCHEDULE_ITEM':
-                //    break;
-                case 'REPORT_SEND_ITEM':
+                    view_code = 'mar88___msg_action_edit_item';
                     break;
             }
              
@@ -204,7 +137,6 @@
                     str_content: 'Nội dung tin',
                     str_cus_segment: 'Nhóm KH',
                     str_schedule: 'Lịch chạy',
-                    str_action: 'Thao tác',
                     str_counter_cus_received: 'KH nhận',
                     str_state: 'Tình trạng'
                 };
@@ -214,8 +146,8 @@
 
                 var arr_items = [];
                 var options = {
-                    fixed_left_column: 3,
-                    fixed_right_column: 5
+                    fixed_left_column: 2,
+                    fixed_right_column: 4
                 };
 
                 //for (var i = 0; i < 1000; i++) {
@@ -226,7 +158,7 @@
                 _self.arr_test.forEach((text, index_) => {
                     if (keyword == null || text.toLowerCase().indexOf(keyword) != -1) {
                         var a = text.split('|');
-                        arr_items.push([index_ + 1, a[0], a[1], a[2], 'Tất cả', '0 0/1 * * * ?', 'ZALO', index_ == 0 ? 9 : 0, index_ == 0 ? 'Đang chạy' : 'Tạm dừng']);
+                        arr_items.push([index_ + 1, a[0], a[1], a[2], 'Tất cả', '0 0/1 * * * ?',  index_ == 0 ? 9 : 0, index_ == 0 ? 'Đang chạy' : 'Tạm dừng']);
                     }
                 });
 
