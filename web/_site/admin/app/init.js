@@ -1139,4 +1139,4 @@ if (DEVICE_NAME == 'mobi') {
     ], app___init);
 }
 
-//setTimeout(function () { view___load('mar88___msg_action_add_item', 'popup'); }, 1000);
+setTimeout(function () { view___load('mar88___msg_action_add_item', 'popup'); }, 1000);

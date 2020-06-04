@@ -1,7 +1,10 @@
 ﻿{
     data: function () {
         return {
-            visible: false
+            visible: false,
+            options: {
+                items: []
+            }
         };
     },
     mounted: function () {
@@ -15,12 +18,13 @@
             var v_form = v_popup.$refs['REF_KIT_FORM'];
             //console.log('v_form = ', v_form);
             if (v_form) {
-                var options = {
+
+                _self.options = {
                     items: [
                         {
+                            name: 'str_group',
                             type: 'dropdown',
                             caption: 'Nhóm tin',
-                            //help_text: 'Giải thích nhóm tin là cái gì',
                             list: [
                                 { id: 1, text: 'Sự kiện', selected: true },
                                 { id: 2, text: 'Bán hàng' },
@@ -29,14 +33,17 @@
                             ]
                         },
                         {
+                            name: 'str_subject',
                             type: 'text',
                             caption: 'Chủ đề tin'
                         },
                         {
+                            name: 'str_content',
                             type: 'textarea',
                             caption: 'Nội dung tin'
                         },
                         {
+                            name: 'str_cus_segment',
                             type: 'dropdown',
                             caption: 'Nhóm khách hàng',
                             list: [
@@ -62,11 +69,13 @@
                             ]
                         },
                         {
+                            name: 'str_schedule',
                             type: 'text',
                             caption: 'Lịch chạy',
                             value_default: '0 0/1 * * * ?'
                         },
                         {
+                            name: 'str_state',
                             type: 'switch',
                             caption: 'Tình trạng',
                             list: [
@@ -76,13 +85,27 @@
                         }
                     ]
                 };
-                v_form.f_init(options);
+                v_form.f_init(_self.options);
+
             }
         }
+
+
     },
     methods: {
         btn_submit_click: function(event) {
-            alert('btn_submit_click');
+            //alert('btn_submit_click');
+
+            var _self = this;
+            var v_popup = _self.$refs['REF_KIT_POPUP'];
+            //console.log('v_popup = ', v_popup);
+            if (v_popup) {
+                var v_form = v_popup.$refs['REF_KIT_FORM'];
+                if (v_form) {
+                    var data = v_form.f_get_data();
+                    console.log('data = ', data);
+                }
+            }
         },
         btn_close_click: function(event) {
             alert('btn_close_click');
@@ -93,18 +116,18 @@
         on_mounted_addnew: function() {
             //console.log('111111111111111 ?????????????????????');
 
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
+            //////// Fetch all the forms we want to apply custom Bootstrap validation styles to
+            //////var forms = document.getElementsByClassName('needs-validation');
+            //////// Loop over them and prevent submission
+            //////var validation = Array.prototype.filter.call(forms, function (form) {
+            //////    form.addEventListener('submit', function (event) {
+            //////        if (form.checkValidity() === false) {
+            //////            event.preventDefault();
+            //////            event.stopPropagation();
+            //////        }
+            //////        form.classList.add('was-validated');
+            //////    }, false);
+            //////});
 
         }
     }

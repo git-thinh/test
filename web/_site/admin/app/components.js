@@ -454,9 +454,7 @@ Vue.component('kit_popup', ___COM["kit_popup"]);
 ___COM["kit_form"] = {
     mixins: [___MIXIN],
     props: ['onCreated', 'onMounted'],
-    template:
-        '<div class="kit-form" :id="kit_id___" v-html="form_html">' +
-        '</div>',
+    template: '<div class="kit-form" :id="kit_id___" v-html="form_html"></div>',
     data: function () {
         return {
             kit_id___: ___guid_id(),
@@ -471,6 +469,10 @@ ___COM["kit_form"] = {
         var _self = this;
     },
     methods: {
+        f_get_data: function () {
+            var _self = this;
+            return _self.options;
+        },
         f_init: function (options) {
             var _self = this;
             _self.options = options;
@@ -485,9 +487,10 @@ ___COM["kit_form"] = {
 
                 switch (item.type) {
                     case 'text':
+                        item.value = (item.value_default == null ? '' : item.value_default);
                         s += '<div class="form-group text-left"> \
                                 <label for="exampleInputEmail1">'+ item.caption + '</label> \
-                                <input type="'+ item.type + '" class="form-control" aria-describedby="' + id + '" value="' + (item.value_default == null ? '' : item.value_default) + '"> \
+                                <input type="' + item.type + '" class="form-control" aria-describedby="' + id + '" value="' + item.value + '"> \
                                 <small id="'+ id + '" class="form-text text-muted">' + (item.help_text == null ? '' : item.help_text) + '</small> \
                               </div>';
                         break;
@@ -501,36 +504,43 @@ ___COM["kit_form"] = {
                             }
                         }
 
+                        item.value = item_selected.id;
                         s += '<div class="custom-control custom-switch text-left"> \
                                   <input type="checkbox" class="custom-control-input" id="' + id + '" onchange="___KIT_FN[\'' + id + '\'](event,\'' + id + '\',' + j + ');" ' + (item_selected.id == 1 ? ' checked ' : '') + '> \
                                   <label class="custom-control-label ' + id + '" for="' + id + '">' + item_selected.text + '</label> \
                                 </div>';
                         break;
                     case 'textarea':
+                        item.value = (item.value_default == null ? '' : item.value_default);
                         s += '<div class="form-group text-left"> \
                                 <label for="exampleInputEmail1">'+ item.caption + '</label> \
-                                <textarea type="'+ item.type + '" class="form-control" aria-describedby="' + id + '" rows="5">' + (item.value_default == null ? '' : item.value_default) + '</textarea> \
+                                <textarea type="'+ item.type + '" class="form-control" aria-describedby="' + id + '" rows="5">' + item.value + '</textarea> \
                                 <small id="'+ id + '" class="form-text text-muted">' + (item.help_text == null ? '' : item.help_text) + '</small> \
                               </div>';
                         break;
                     case 'dropdown':
 
                         ___KIT_DATA[id] = item.list;
-                        ___KIT_FN[id] = function (event, id, index) { _self.f_dropdown_changed(event, id, index); };
+                        ___KIT_FN[id] = function (event, field_index, id, index) { _self.f_dropdown_changed(event, field_index, id, index); };
 
                         if (item.list) {
                             for (var j = 0; j < item.list.length; j++) {
                                 temp += '<button class="' + id + ' item' + j + ' dropdown-item btn' + (item.list[j].selected == true ? ' active' : '') + '" ' +
-                                    'onclick="___KIT_FN[\'' + id + '\'](event,\'' + id + '\',' + j + ');">' + item.list[j].text + '</button>';
+                                    'onclick="___KIT_FN[\'' + id + '\'](event,' + i + ',\'' + id + '\',' + j + ');">' + item.list[j].text + '</button>';
                                 if (item.list[j].selected == true) item_selected = item.list[j];
                             }
                         }
+
+                        item.value = {
+                            id: (item_selected != null ? item_selected.id : 0),
+                            text: (item_selected != null ? item_selected.text : '')
+                        };
 
                         s += '<div class="form-group text-left"> \
                                 <label>'+ item.caption + '</label> \
                                 <div class="dropdown"> \
                                       <button class="btn btn-secondary dropdown-toggle" type="button" id="'+ id + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> \
-                                        '+ (item_selected != null ? item_selected.text : '') + ' \
+                                        '+ item.value.text + ' \
                                       </button> \
                                       <div class="dropdown-menu" aria-labelledby="'+ id + '">' + temp + '</div> \
                                 </div> \
@@ -541,14 +551,18 @@ ___COM["kit_form"] = {
             }
             _self.form_html = s;
         },
-        f_dropdown_changed: function (event, id, index) {
+        f_dropdown_changed: function (event, field_index, id, index) {
+            var _self = this;
+
             //console.log(event.target);
-            console.log(id, index, ___KIT_DATA[id][index]);
+            //console.log(id, index, ___KIT_DATA[id][index]);
             var el = document.getElementById(id);
             if (el) el.innerHTML = ___KIT_DATA[id][index].text;
 
             $('.' + id).removeClass('active');
             $('.' + id + '.item' + index).addClass('active');
+
+            _self.options.items[field_index].value = ___KIT_DATA[id][index];
         },
         f_switch_changed: function (event, id, index) {
             //console.log(event.target);
