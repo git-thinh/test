@@ -505,9 +505,12 @@ ___COM["kit_form"] = {
                             }
                         }
 
-                        item.value = item_selected.id;
+                        item.value = {
+                            id: (item_selected != null ? item_selected.id : 0),
+                            text: (item_selected != null ? item_selected.text : '')
+                        };
                         s += '<div class="custom-control custom-switch text-left"> \
-                                  <input type="checkbox" class="custom-control-input" id="' + id + '" onchange="___KIT_FN[\'' + id + '\'](event,' + i + ',\'' + id + '\',' + j + ');" ' + (item_selected.id == 1 ? ' checked ' : '') + '> \
+                                  <input type="checkbox" class="custom-control-input" id="' + id + '" value="' + (item_selected.id == 1 ? 1 : 0) + '" onchange="___KIT_FN[\'' + id + '\'](event,' + i + ',\'' + id + '\',-1);" ' + (item_selected.id == 1 ? ' checked ' : '') + '> \
                                   <label class="custom-control-label ' + id + '" for="' + id + '">' + item_selected.text + '</label> \
                                 </div>';
                         break;
@@ -555,26 +558,38 @@ ___COM["kit_form"] = {
         },
         f_dropdown_changed: function (event, field_index, id, index) {
             var _self = this;
-
             //console.log(event.target);
             //console.log(id, index, ___KIT_DATA[id][index]);
             var el = document.getElementById(id);
             if (el) el.innerHTML = ___KIT_DATA[id][index].text;
-
             $('.' + id).removeClass('active');
             $('.' + id + '.item' + index).addClass('active');
-
             _self.options.items[field_index].value = ___KIT_DATA[id][index];
         },
         f_switch_changed: function (event, field_index, id, index) {
             var _self = this;
-            //console.log(event.target);
-            console.log(id, index, ___KIT_DATA[id][index]);
-            //var el = document.getElementById(id);
-            //if (el) el.innerHTML = ___KIT_DATA[id][index].text;
+            if (event && event.target) {
+                _self.options.items[field_index].value = null;
 
-            //$('.' + id).removeClass('active');
-            //$('.' + id + '.item' + index).addClass('active');
+                var el = event.target;
+                if (el.hasAttribute('value')) {
+                    var sval = el.getAttribute('value');
+                    //console.log(field_index, id, index, sval, ___KIT_DATA[id]);
+                    var val = Number(sval);
+                    if (isNaN(val) == false) {
+                        if (___KIT_DATA[id] && Array.isArray(___KIT_DATA[id])) {
+                            var it = _.find(___KIT_DATA[id], function (o) { return o.id != val; });
+                            if (it) {
+                                $('.' + id).html(it.text);
+                                el.setAttribute('value', it.id);
+                                _self.options.items[field_index].value = it;
+                                //console.log(field_index, id, index, val, JSON.stringify(it));
+                            }
+                        }
+                    }
+                    //_self.options.items[field_index].value = ___KIT_DATA[id][index];
+                }
+            }
         },
         f_text_changed: function (event, field_index, id, index) {
             var _self = this;
@@ -587,5 +602,27 @@ ___COM["kit_form"] = {
 };
 Vue.component('kit_form', ___COM["kit_form"]);
 
+___COM["kit_alert"] = {
+    mixins: [___MIXIN],
+    props: ['onCreated', 'onMounted'],
+    template: '<div class="kit-alert" :id="kit_id___" v-html="form_html"></div>',
+    data: function () {
+        return {
+            kit_id___: ___guid_id(),
+            form_html: '',
+            options: null
+        };
+    },
+    methods: {
+        f_init: function (options) {
+            var _self = this;
+            _self.options = options;
+            _self.form_html = s;
+        },
+        f_close: function (event) {
+        }
+    }
+};
+Vue.component('kit_alert', ___COM["kit_alert"]);
 
 

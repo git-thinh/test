@@ -90,6 +90,10 @@ var ___DATA = {
     view___popup_2: null,
     view___popup_3: null,
 
+    view___alert_1: null,
+    view___alert_2: null,
+    view___alert_3: null,
+
     objApp: {
         is_mobile: window.innerWidth < 481,
         int_width: window.innerWidth
@@ -648,8 +652,80 @@ var ___DATA = {
             str_title: '',
         },
         objSelected: null
+    },
+    objMar88: {
+        messages: [
+            {
+                id: 0,
+                int_cus_segment: 0,
+                int_group: 1,
+                int_schedule: 1235900,
+                int_state: 0,
+                str_content: "2",
+                str_cus_segment: "",
+                str_group: "Sự kiện",
+                str_schedule: "Chạy hàng ngày vào lúc 23 giờ 59 phút",
+                str_state: "",
+                str_subject: "1"
+            }
+        ],
+        groups: [
+            { id: 1, text: 'Sự kiện', selected: true },
+            { id: 2, text: 'Bán hàng' },
+            { id: 3, text: 'Chăm sóc' },
+            { id: 4, text: 'Quảng cáo' }
+        ],
+        schedules: [
+            { id: 1235900, text: 'Chạy hàng ngày vào lúc 23 giờ 59 phút', selected: true },
+
+            { id: 101, text: 'Chạy liên tục sau 1 phút 1 lần' },
+            { id: 105, text: 'Chạy liên tục sau 5 phút 1 lần' },
+            { id: 110, text: 'Chạy liên tục sau 10 phút 1 lần' },
+            { id: 115, text: 'Chạy liên tục sau 15 phút 1 lần' },
+            { id: 130, text: 'Chạy liên tục sau 30 phút 1 lần' },
+
+            { id: 1, text: 'Chạy liên tục sau 1 giờ 1 lần' },
+            { id: 2, text: 'Chạy liên tục sau 2 giờ 1 lần' },
+            { id: 3, text: 'Chạy liên tục sau 3 giờ 1 lần' },
+            { id: 4, text: 'Chạy liên tục sau 4 giờ 1 lần' },
+            { id: 5, text: 'Chạy liên tục sau 5 giờ 1 lần' },
+            { id: 6, text: 'Chạy liên tục sau 6 giờ 1 lần' },
+            { id: 7, text: 'Chạy liên tục sau 7 giờ 1 lần' },
+            { id: 8, text: 'Chạy liên tục sau 8 giờ 1 lần' },
+            { id: 9, text: 'Chạy liên tục sau 9 giờ 1 lần' },
+            { id: 10, text: 'Chạy liên tục sau 10 giờ 1 lần' },
+            { id: 11, text: 'Chạy liên tục sau 11 giờ 1 lần' },
+            { id: 12, text: 'Chạy liên tục sau 12 giờ 1 lần' },
+        ],
+        customer_segments: [
+            { id: 0, text: 'Tất cả', selected: true },
+            { id: 1, text: 'Khách hàng đã đăng ký vay tại F88 trên POL trong 30 ngày gần nhất' },
+            { id: 2, text: 'Khách hàng đã đăng ký vay tại F88 trên POL trong 60 ngày gần nhất' },
+            { id: 3, text: 'Khách hàng đã đăng ký vay nhưng không thành công tại PGD F88 trong trong 30 ngày gần nhất' },
+            { id: 4, text: 'Khách hàng đã đăng ký vay nhưng không thành công tại PGD F88 trong trong 60 ngày gần nhất' },
+            { id: 5, text: 'Khách hàng đã vay được tại F88 trong 30 ngày gần nhất' },
+            { id: 6, text: 'Khách hàng đã vay được tại F88 trong 60 ngày gần nhất' },
+            { id: 7, text: 'Khách hàng đã vay nhưng đang inactive dưới 60 ngày' },
+            { id: 8, text: 'Khách hàng đã vay nhưng đang inactive dưới 60-119 ngày' },
+            { id: 9, text: 'Khách hàng đã vay nhưng đang inactive dưới 120-239 ngày' },
+            { id: 10, text: 'Khách hàng đã vay nhưng đang inactive dưới từ 240 ngày trở lên' },
+            { id: 11, text: 'Khách hàng có điểm tín dụng TỐT' },
+            { id: 12, text: 'Khách hàng có điểm tín dụng KHÁ' },
+            { id: 13, text: 'Khách hàng có điểm tín dụng TRUNG' },
+            { id: 14, text: 'Khách hàng có tần suất vay tại F88 (tính theo số lượng HĐ đã mở)' },
+            { id: 15, text: 'Khách hàng có loại tài sản đã từng cầm cố tại F88' },
+            { id: 16, text: 'Khách hàng nhận ít nhất 1 trong 3 tin nhắn gần nhất' },
+            { id: 17, text: 'Khách hàng đọc ít nhất 1 trong 3 tin nhắn gần nhất' },
+            { id: 18, text: 'Khách hàng phản hồi lại ít nhất 1 trong 3 tin nhắn gần nhất' }
+        ],
+        message_states: [
+            { id: 1, text: 'Đang chạy' },
+            { id: 0, text: 'Tạm dừng', selected: true }
+        ]
     }
 };
+
+
 
 var ___MIXIN = {
     props: [

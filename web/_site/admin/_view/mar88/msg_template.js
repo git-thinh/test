@@ -147,6 +147,18 @@
             if (vue_table) {
                 var obj = {
                     id: 'Mã',
+
+                    //int_cus_segment: 0,
+                    //int_group: 1,
+                    //int_schedule: 1235900,
+                    //int_state: 0,
+                    //str_content: "2",
+                    //str_cus_segment: "",
+                    //str_group: "Sự kiện",
+                    //str_schedule: "Chạy hàng ngày vào lúc 23 giờ 59 phút",
+                    //str_state: "",
+                    //str_subject: "1"
+
                     str_group: 'Nhóm tin',
                     str_subject: 'Chủ đề tin',
                     str_content: 'Nội dung tin',

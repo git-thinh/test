@@ -22,15 +22,10 @@
                 _self.options = {
                     items: [
                         {
-                            name: 'str_group',
+                            name: 'int_group', 
                             type: 'dropdown',
                             caption: 'Nhóm tin',
-                            list: [
-                                { id: 1, text: 'Sự kiện', selected: true },
-                                { id: 2, text: 'Bán hàng' },
-                                { id: 3, text: 'Chăm sóc' },
-                                { id: 4, text: 'Quảng cáo' }
-                            ]
+                            list: ___APP.objMar88.groups
                         },
                         {
                             name: 'str_subject',
@@ -43,45 +38,23 @@
                             caption: 'Nội dung tin'
                         },
                         {
-                            name: 'str_cus_segment',
+                            name: 'int_cus_segment', 
                             type: 'dropdown',
                             caption: 'Nhóm khách hàng',
-                            list: [
-                                { id: 0, text: 'Tất cả', selected: true },
-                                { id: 1, text: 'Khách hàng đã đăng ký vay tại F88 trên POL trong 30 ngày gần nhất' },
-                                { id: 2, text: 'Khách hàng đã đăng ký vay tại F88 trên POL trong 60 ngày gần nhất' },
-                                { id: 3, text: 'Khách hàng đã đăng ký vay nhưng không thành công tại PGD F88 trong trong 30 ngày gần nhất' },
-                                { id: 4, text: 'Khách hàng đã đăng ký vay nhưng không thành công tại PGD F88 trong trong 60 ngày gần nhất' },
-                                { id: 5, text: 'Khách hàng đã vay được tại F88 trong 30 ngày gần nhất' },
-                                { id: 6, text: 'Khách hàng đã vay được tại F88 trong 60 ngày gần nhất' },
-                                { id: 7, text: 'Khách hàng đã vay nhưng đang inactive dưới 60 ngày' },
-                                { id: 8, text: 'Khách hàng đã vay nhưng đang inactive dưới 60-119 ngày' },
-                                { id: 9, text: 'Khách hàng đã vay nhưng đang inactive dưới 120-239 ngày' },
-                                { id: 10, text: 'Khách hàng đã vay nhưng đang inactive dưới từ 240 ngày trở lên' },
-                                { id: 11, text: 'Khách hàng có điểm tín dụng TỐT' },
-                                { id: 12, text: 'Khách hàng có điểm tín dụng KHÁ' },
-                                { id: 13, text: 'Khách hàng có điểm tín dụng TRUNG' },
-                                { id: 14, text: 'Khách hàng có tần suất vay tại F88 (tính theo số lượng HĐ đã mở)' },
-                                { id: 15, text: 'Khách hàng có loại tài sản đã từng cầm cố tại F88' },
-                                { id: 16, text: 'Khách hàng nhận ít nhất 1 trong 3 tin nhắn gần nhất' },
-                                { id: 17, text: 'Khách hàng đọc ít nhất 1 trong 3 tin nhắn gần nhất' },
-                                { id: 18, text: 'Khách hàng phản hồi lại ít nhất 1 trong 3 tin nhắn gần nhất' }
-                            ]
+                            list: ___APP.objMar88.customer_segments
                         },
                         {
-                            name: 'str_schedule',
-                            type: 'text',
+                            name: 'int_schedule',
+                            type: 'dropdown',
                             caption: 'Lịch chạy',
-                            value_default: '0 0/1 * * * ?'
+                            value_default: '0 0/1 * * * ?',
+                            list: ___APP.objMar88.schedules
                         },
                         {
-                            name: 'str_state',
+                            name: 'int_state',
                             type: 'switch',
                             caption: 'Tình trạng',
-                            list: [
-                                { id: 1, text: 'Đang chạy' },
-                                { id: 0, text: 'Tạm dừng', selected: true }
-                            ]
+                            list: ___APP.objMar88.message_states
                         }
                     ]
                 };
@@ -95,20 +68,74 @@
     methods: {
         btn_submit_click: function(event) {
             //alert('btn_submit_click');
-
             var _self = this;
+            var obj = {};
             var v_popup = _self.$refs['REF_KIT_POPUP'];
             //console.log('v_popup = ', v_popup);
             if (v_popup) {
                 var v_form = v_popup.$refs['REF_KIT_FORM'];
                 if (v_form) {
                     var data = v_form.f_get_data();
-                    console.log('data = ', data.items);
+                    //console.log('data = ', data.items);
+                    if (data && data.items) {
+                        for (var i = 0; i < data.items.length; i++) {
+                            var it = data.items[i];
+                            if (it.list)
+                                obj[it.name] = it.value.id;
+                            else
+                                obj[it.name] = it.value;
+                        }
+                    }
                 }
             }
+
+            if (Object.keys(obj).length > 0) {
+                //___APP.objMar88.groups
+                //___APP.objMar88.customer_segments
+                //___APP.objMar88.schedules
+                //___APP.objMar88.message_states
+                // int_group, str_subject, str_content, int_cus_segment, int_schedule, int_state
+
+                obj.str_group = '';
+                obj.str_cus_segment = '';
+                obj.str_schedule = '';
+                obj.str_state = '';
+
+                if (obj.int_group) {
+                    var it = _.find(___APP.objMar88.groups, function (x) { return x.id == obj.int_group; });
+                    if (it) obj.str_group = it.text;
+                }
+
+                if (obj.int_cus_segment) {
+                    var it = _.find(___APP.objMar88.customer_segments, function (x) { return x.id == obj.int_cus_segment; });
+                    if (it) obj.str_cus_segment = it.text;
+                }
+
+                if (obj.int_schedule) {
+                    var it = _.find(___APP.objMar88.schedules, function (x) { return x.id == obj.int_schedule; });
+                    if (it) obj.str_schedule = it.text;
+                }
+
+                if (obj.int_state) {
+                    var it = _.find(___APP.objMar88.message_states, function (x) { return x.id == obj.int_state; });
+                    if (it) obj.str_state = it.text;
+                }
+            }
+
+            if (obj.str_subject == null || obj.str_subject.toString().length == 0) {
+
+                return;
+            }
+
+            if (obj.str_content == null || obj.str_content.toString().length == 0) {
+
+                return;
+            }
+
+            console.log(obj);
         },
         btn_close_click: function(event) {
-            alert('btn_close_click');
+            //alert('btn_close_click');
         },
         on_created_addnew: function() {
             //console.log('000000000000000 ?????????????????????');
