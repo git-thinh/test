@@ -123,16 +123,18 @@
             }
 
             if (obj.str_subject == null || obj.str_subject.toString().length == 0) {
-
+                ___error('Vui lòng nhập tiêu đề tin nhắn');
                 return;
             }
 
             if (obj.str_content == null || obj.str_content.toString().length == 0) {
-
+                ___error('Vui lòng nhập nội dung tin nhắn');
                 return;
             }
 
             console.log(obj);
+
+            ___alert('Tạo tin nhắn thành công');
         },
         btn_close_click: function(event) {
             //alert('btn_close_click');

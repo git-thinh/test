@@ -59,9 +59,11 @@
 .kit_datatables_net table.dataTable tbody td.dataTables_empty {
     position: absolute;
 }
+
 .kit_datatables_net .DTFC_LeftBodyLiner table tbody tr td:last-of-type {
     border-right: 1px solid #333;
 }
+
 .kit_datatables_net .DTFC_RightBodyLiner table tbody tr td:first-child {
     border-left: 1px solid #333;
 }
@@ -70,6 +72,35 @@
 
 /****************************************/
 
+.kit-alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: inline-block;
+    z-index: 99999;
+}
+
+    .kit-alert .kit-alert-bg-modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #000;
+        opacity: 0.3;
+        z-index: 0;
+    }
+
+    .kit-alert .alert {
+        min-width: 600px;
+        margin: auto;
+        max-width: 80%;
+        z-index: 1;
+    }
+
+/****************************************/
 
 .modal-mask {
     position: fixed;

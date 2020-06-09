@@ -94,6 +94,11 @@ var ___DATA = {
     view___alert_2: null,
     view___alert_3: null,
 
+    objAlert: {
+        css_type: 'alert-success',
+        str_message: '',
+    },
+
     objApp: {
         is_mobile: window.innerWidth < 481,
         int_width: window.innerWidth
@@ -1132,6 +1137,18 @@ var ___popup_close = (event) => {
             }
         }
     }
+};
+
+var ___alert = function (str_message) {
+    ___APP.objAlert.css_type = 'alert-success';
+    ___APP.objAlert.str_message = str_message;
+    ___APP.view___alert_1 = ___COM['kit_alert'];
+};
+
+var ___error = function (str_message) {
+    ___APP.objAlert.css_type = 'alert-danger';
+    ___APP.objAlert.str_message = str_message;
+    ___APP.view___alert_1 = ___COM['kit_alert'];
 };
 
 /////////////////////////////////////////////////////////////////////

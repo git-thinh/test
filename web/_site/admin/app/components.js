@@ -605,11 +605,22 @@ Vue.component('kit_form', ___COM["kit_form"]);
 ___COM["kit_alert"] = {
     mixins: [___MIXIN],
     props: ['onCreated', 'onMounted'],
-    template: '<div class="kit-alert" :id="kit_id___" v-html="form_html"></div>',
+    template:
+        '<div class="kit-alert d-flex justify-content-center" :id="kit_id___"> \
+            <div class="kit-alert-bg-modal"></div> \
+            <div :class="[\'alert\', ___APP.objAlert.css_type]" role="alert"> \
+              <h4 class="alert-heading">Thông báo</h4> \
+              <p>{{___APP.objAlert.str_message}}</p> \
+              <hr> \
+              <p class="mb-0 text-right"> \
+                <button type="button" class="btn btn-primary" @click="f_close($event)">Ok</button> \
+                <!--<button type="button" class="btn btn-secondary" @click="f_close($event)">Cancel</button>--> \
+              </p> \
+            </div> \
+        </div>',
     data: function () {
         return {
             kit_id___: ___guid_id(),
-            form_html: '',
             options: null
         };
     },
@@ -617,9 +628,18 @@ ___COM["kit_alert"] = {
         f_init: function (options) {
             var _self = this;
             _self.options = options;
-            _self.form_html = s;
         },
         f_close: function (event) {
+            var el = event.target.closest('.kit-alert');
+            if (el) {
+                if (el.hasAttribute('alert-index')) {
+                    var sindex = el.getAttribute('alert-index');
+                    var index = Number(sindex);
+                    if (isNaN(index) == false) {
+                        ___APP['view___alert_' + index] = null;
+                    }
+                }
+            }
         }
     }
 };
