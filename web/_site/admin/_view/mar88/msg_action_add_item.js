@@ -30,11 +30,13 @@
                         {
                             name: 'str_subject',
                             type: 'text',
+                            value_default: ___guid_id(),
                             caption: 'Chủ đề tin'
                         },
                         {
                             name: 'str_content',
                             type: 'textarea',
+                            value_default: ___guid_id(),
                             caption: 'Nội dung tin'
                         },
                         {
@@ -101,22 +103,22 @@
                 obj.str_schedule = '';
                 obj.str_state = '';
 
-                if (obj.int_group) {
+                if (obj.int_group != null) {
                     var it = _.find(___APP.objMar88.groups, function (x) { return x.id == obj.int_group; });
                     if (it) obj.str_group = it.text;
                 }
 
-                if (obj.int_cus_segment) {
+                if (obj.int_cus_segment != null) {
                     var it = _.find(___APP.objMar88.customer_segments, function (x) { return x.id == obj.int_cus_segment; });
                     if (it) obj.str_cus_segment = it.text;
                 }
 
-                if (obj.int_schedule) {
+                if (obj.int_schedule != null) {
                     var it = _.find(___APP.objMar88.schedules, function (x) { return x.id == obj.int_schedule; });
                     if (it) obj.str_schedule = it.text;
                 }
 
-                if (obj.int_state) {
+                if (obj.int_state != null) {
                     var it = _.find(___APP.objMar88.message_states, function (x) { return x.id == obj.int_state; });
                     if (it) obj.str_state = it.text;
                 }
@@ -135,6 +137,9 @@
             console.log(obj);
 
             ___alert('Tạo tin nhắn thành công');
+
+
+
         },
         btn_close_click: function(event) {
             //alert('btn_close_click');

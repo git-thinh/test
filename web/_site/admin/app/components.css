@@ -22,6 +22,7 @@
 
 /********************************************************************/
 
+.kit_datatables_net .DTFC_LeftBodyLiner,
 .kit_datatables_net .DTFC_RightBodyLiner {
     overflow-y: hidden !important;
 }
@@ -59,19 +60,24 @@
 .kit_datatables_net table.dataTable tbody td.dataTables_empty {
     position: absolute;
 }
-
+/*
 .kit_datatables_net .DTFC_LeftBodyLiner table tbody tr td:last-of-type {
     border-right: 1px solid #333;
 }
 
 .kit_datatables_net .DTFC_RightBodyLiner table tbody tr td:first-child {
     border-left: 1px solid #333;
+}*/
+
+.kit_datatables_net .DTFC_LeftWrapper .DTFC_LeftBodyWrapper {
+    border-right: 1px solid #333 !important;
+}
+.kit_datatables_net .DTFC_RightWrapper .DTFC_RightBodyWrapper {
+    border-left: 1px solid #333 !important;
 }
 
 /* dataTables.fixedColumns[END] */
-
 /****************************************/
-
 .kit-alert {
     position: fixed;
     top: 0;

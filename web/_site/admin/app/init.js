@@ -757,7 +757,7 @@ var ___MIXIN = {
     mounted: function () {
         var _self = this;
         _self.___init_com();
-        console.log('MIXIN: mounted -> ' + _self.view_id);
+        //console.log('MIXIN: mounted -> ' + _self.view_id);
         if (_self.view_id && _self.view_id.indexOf('___logout') != -1) ___V_LOGOUT = _self;
     },
     methods: {
@@ -1232,4 +1232,4 @@ if (DEVICE_NAME == 'mobi') {
     ], app___init);
 }
 
-setTimeout(function () { view___load('mar88___msg_action_add_item', 'popup'); }, 1000);
+//setTimeout(function () { view___load('mar88___msg_action_add_item', 'popup'); }, 1000);
