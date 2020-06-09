@@ -387,28 +387,45 @@ ___COM["kit_datatables_net"] = {
                     data: 'salary',
                     title: 'Lương',
                 },
+                ////{
+                ////    title: '',
+                ////    //defaultContent: '<button>Click!</button>'
+                ////    render: function (data, type, item) {
+                ////        var checked = item.id % 3 == 0 ? ' checked ' : '';
+                ////        var id_ = ___guid_id();
+                ////        return '<div class="custom-control custom-switch"> \
+                ////          <input type="checkbox" class="custom-control-input" id="'+ id_ + '"' + checked + '> \
+                ////          <label class="custom-control-label" for="'+ id_ + '"></label> \
+                ////        </div>'
+                ////    },
+                ////},
+                //{
+                //    title: '',
+                //    //defaultContent: '<button>Click!</button>'
+                //    render: function (data, type, item) {
+                //        var checked = item.id % 5 == 0 ? ' checked ' : '';
+                //        var id_ = ___guid_id();
+                //        return '<div class="custom-control custom-checkbox"> \
+                //          <input class="custom-control-input" type="checkbox" value="" id="'+ id_ + '"' + checked + '> \
+                //          <label class="custom-control-label" for="'+ id_ + '"></label> \
+                //        </div>'
+                //    },
+                //},
                 {
+                    //data: 'salary',
                     title: '',
-                    //defaultContent: '<button>Click!</button>'
                     render: function (data, type, item) {
-                        var checked = item.id % 3 == 0 ? ' checked ' : '';
-                        var id_ = ___guid_id();
-                        return '<div class="custom-control custom-switch"> \
-                          <input type="checkbox" class="custom-control-input" id="'+ id_ + '"' + checked + '> \
-                          <label class="custom-control-label" for="'+ id_ + '"></label> \
-                        </div>'
-                    },
-                },
-                {
-                    title: '',
-                    //defaultContent: '<button>Click!</button>'
-                    render: function (data, type, item) {
-                        var checked = item.id % 5 == 0 ? ' checked ' : '';
-                        var id_ = ___guid_id();
-                        return '<div class="custom-control custom-checkbox"> \
-                          <input class="custom-control-input" type="checkbox" value="" id="'+ id_ + '"' + checked + '> \
-                          <label class="custom-control-label" for="'+ id_ + '"></label> \
-                        </div>'
+                        var id1_ = ___guid_id();
+                        var s =
+                            '<div class="dropdown">' +
+                            '    <button class="btn btn-light dropdown-toggle" type="button" id="dd-' + id1_ + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog"></i></button>' +
+                            '    <div class="dropdown-menu" aria-labelledby="dd-' + id1_ + '">' +
+                            '        <button class="dropdown-item">Action</button>' +
+                            '        <button class="dropdown-item">Another action</button>' +
+                            '        <button class="dropdown-item">Something else here</button>' +
+                            '    </div>' +
+                            '</div>';
+                        return s;
                     },
                 }
             ];
@@ -963,13 +980,15 @@ ___COM["kit_datatables_net"] = {
                 ordering: false,
                 info: false,
                 dom: 'rtip',
-                select: true,
+                //select: true,
 
                 data: data,
                 columns: options.columns
             });
 
             $('#' + kit_id___ + '_wrapper').css({ width: window.innerWidth + 'px' });
+
+            $('.dropdown-toggle').dropdown();
         }
     }
 };

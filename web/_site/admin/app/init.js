@@ -1226,7 +1226,7 @@ if (DEVICE_NAME == 'mobi') {
         { datatables_css: 'app/jquery.dataTables.min.css' },
         { datatables_js: 'app/jquery.dataTables.min.js' },
         { datatables_js_fix_col: 'app/dataTables.fixedColumns.min.js' },
-        { datatables_js_select_col: 'app/dataTables.select.min.js' },
+        //{ datatables_js_select_col: 'app/dataTables.select.min.js' },
 
         { reset_css: 'app/reset.css?v=' + new Date().getTime() },
     ], app___init);
