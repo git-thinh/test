@@ -356,6 +356,10 @@ ___COM["kit_datatables_net"] = {
                     _self.$parent.on_select_changed(false, rowData);
             });
         },
+        f_click: function (event) {
+            var _self = this;
+
+        },
         f_table_draw_test_1: function (data, options) {
             if (options == null) options = {};
 
@@ -428,15 +432,36 @@ ___COM["kit_datatables_net"] = {
                 //        return s;
                 //    },
                 //},
+                //{
+                //    //data: 'salary',
+                //    title: '',
+                //    render: function (data, type, item) {
+                //        var id1_ = ___guid_id();
+                //        var s =
+                //            '<button type="button" class="btn btn-light" data-container="body" data-toggle="popover" data-placement="bottom" ' +
+                //            ' data-trigger="focus" title="Dismissible popover" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">' +
+                //            '<i class="fas fa-cog"></i>' +
+                //            '</button>';
+                //        return s;
+                //    },
+                //},
                 {
                     //data: 'salary',
                     title: '',
                     render: function (data, type, item) {
-                        var id1_ = ___guid_id();
-                        var s =
-                            '<button type="button" class="btn btn-light" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">' +
-                            '<i class="fas fa-cog"></i>' +
-                            '</button>';
+                        var id_ = ___guid_id();
+
+                        //////$('[data-toggle="popover"]').popover({
+                        //////    html: true,
+                        //////    template: '<div class="popover"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div><div class="popover-footer"><a href="#" class="btn btn-info btn-sm">Close</a></div></div>'
+                        //////});
+
+                        //////// Custom jQuery to hide popover on click of the close button
+                        //////$(document).on("click", ".popover-footer .btn", function () {
+                        //////    $(this).parents(".popover").popover('hide');
+                        //////});
+
+                        var s = '<button type="button" class="btn btn-light" onclick="___com_raise_click(event,\'f_click\')"><i class="fas fa-cog"></i></button>';
                         return s;
                     },
                 }
@@ -1001,7 +1026,7 @@ ___COM["kit_datatables_net"] = {
             $('#' + kit_id___ + '_wrapper').css({ width: window.innerWidth + 'px' });
 
             //$('.dropdown-toggle').dropdown();
-            $('[data-toggle="popover"]').popover({ container: 'body' });
+            //$('[data-toggle="popover"]').popover({ container: 'body' });
         }
     }
 };

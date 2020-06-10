@@ -59,6 +59,17 @@ var ___guid_id = function () {
     });
 };
 
+var ___com_raise_click = function (event, func_name) {
+    if (event != null && func_name != null) {
+        if (event.target) {
+            var el = event.target.closest('.___com');
+            if (el) {
+
+            }
+        }
+    }
+};
+
 /////////////////////////////////////////////////////////////////////
 
 var ___APP, ___VIEW = {}, ___VIEW_CF = {}, ___COM = {}, ___HTML = {}, ___KIT_FN = {}, ___KIT_DATA = {},
