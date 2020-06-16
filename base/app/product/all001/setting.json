@@ -1,0 +1,24 @@
+{
+  "active": true,
+  "caption": "HIWEB ECOMMERCE",
+  "title": "My Products",
+  "screen": "ALL_PRODUCT",
+  "actions": [
+    {
+      "order": 0,
+      "type": "link",
+      "icon": "",
+      "style": "",
+      "title": "Import",
+      "code": "IMPORT_PRODUCT"
+    },
+    {
+      "order": 0,
+      "type": "button",
+      "icon": "",
+      "style": "btn btn-primary",
+      "title": "Create Product",
+      "code": "CREATE_PRODUCT"
+    }
+  ]
+}

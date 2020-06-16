@@ -71,5 +71,37 @@
       "style.css",
       "temp.htm"
     ]
+  },
+  {
+    "scope": "product",
+    "name": "all001",
+    "key": "product___all001",
+    "title": "",
+    "files": [
+      "controller.js",
+      "setting.json",
+      "temp.htm"
+    ]
+  },
+  {
+    "scope": "product",
+    "name": "collection001",
+    "key": "product___collection001",
+    "title": "",
+    "files": [
+      "controller.js",
+      "lost.4799c96f.svg",
+      "setting.json",
+      "temp.htm"
+    ]
+  },
+  {
+    "scope": "sidebar",
+    "name": "1",
+    "key": "sidebar___1",
+    "title": "",
+    "files": [
+      "temp.htm"
+    ]
   }
 ]

@@ -1,8 +1,8 @@
 ﻿var Hiweb = (function () {
-    function HiwebObject(options) {
+    function VueEngine(options) {
         options = options || {};
 
-        var _APP, _HTML = {}, _COM = {},
+        var _APP, _HTML = {}, _COM = {}, _COM_ST = {},
             _VIEWS = [], _VIEW_CF = {},
             _DATA = {
                 view: {
@@ -35,6 +35,111 @@
                     alert_3: null
                 }
             };
+
+        var _MIXIN = {
+            props: [
+                'ref-name',
+                'is-dialog',
+                'popup-index',
+                'obj-user'
+            ],
+            data: function () {
+                return {
+                    role___: null,
+                    dialog___: {
+                        top: '0px',
+                        left: '0px'
+                    }
+                }
+            },
+            computed: {
+                view_id: function () { return this.$vnode.componentOptions.tag; }
+            },
+            created: function () {
+                var _self = this;
+            },
+            mounted: function () {
+                var _self = this;
+                //_self.___init_com();
+                //console.log('MIXIN: mounted -> ' + _self.view_id);
+                //if (_self.view_id && _self.view_id.indexOf('___logout') != -1) ___V_LOGOUT = _self;
+            },
+            methods: {
+                ___init_com: function () {
+                    var _self = this;
+                    var el = _self.$el;
+
+                    if (_self.view_id)
+                        classie.add(el, '___com').add(el, _self.view_id);
+
+                    var id = 'idvc___' + _self._uid;
+                    el.setAttribute('id', id);
+                    _self.idvc___ = id;
+
+                    //console.log('MIXIN: ___init_com ' + _self.view_id + ', role = ', el.parentElement.getAttribute('role'));
+                    //console.log('MIXIN: ___init_com ' + _self.view_id + ', is-dialog = ', _self.isDialog);
+                    //console.log('MIXIN: ___init_com ' + _self.view_id + ', _uid = ', _self._uid);
+
+                    if (_self.popupIndex != null) {
+                        classie.add(el, '___com').add(el, '___com_popup');
+                        el.setAttribute('tabindex', _self.popupIndex);
+                    }
+
+                    if (_self.refName != null && _self.$parent) {
+                        //console.log(':ref-name = ', _self.refName);
+                        _self.$parent.$refs[_self.refName] = _self;
+                    }
+
+                    ////var pa = el.parentElement;
+                    ////if (pa && pa.hasAttribute('role')) {
+                    ////    var role = pa.getAttribute('role');
+                    ////    _self.role___ = role;
+                    ////} else if (_self.isDialog == true) {
+                    ////    _self.role___ = 'dialog';
+                    ////    classie.add(el, ___DL_CURRENT_ID);
+
+                    ////    var rec = ___DL_CURRENT_EVENT.target.getBoundingClientRect();
+                    ////    console.log('MIXIN: ___init_com ' + ___DL_CURRENT_ID + ', ' + _self.view_id + ', rec = ', rec);
+                    ////    //_self.dialog___.opacity = 0;
+                    ////    //_self.dialog___.top = rec.bottom + 'px';
+
+                    ////    var dl = document.querySelector('.' + ___DL_CURRENT_ID);
+                    ////    if (dl) {
+                    ////        dl.style.opacity = 0;
+                    ////        dl.style.top = rec.bottom + 'px';
+                    ////    }
+
+                    ////    setTimeout(function () {
+                    ////        var dl = document.querySelector('.' + ___DL_CURRENT_ID);
+                    ////        if (dl) {
+                    ////            var r1 = dl.getBoundingClientRect();
+                    ////            //console.log(rec.x + r1.width, window.innerWidth);
+                    ////            if (rec.x + r1.width > window.innerWidth) {
+                    ////                dl.style.left = 'auto';
+                    ////                dl.style.right = '0px';
+                    ////            } else {
+                    ////                dl.style.right = 'auto';
+                    ////                dl.style.left = rec.x + 'px';
+                    ////            }
+                    ////            dl.style.opacity = 1;
+                    ////        }
+                    ////    }, 100);
+                    ////}
+                }
+            },
+            watch: {
+                $data: {
+                    handler: function (val, oldVal) {
+                        var _self = this;
+                        //console.log('MIXIN_WATCH: ' + _self.view_id);
+                        console.log('MIXIN_WATCH: ___init_com ' + _self.view_id + ', is-dialog = ', _self.isDialog);
+                        //if (_self.isDialog != true)
+                        //    Vue.nextTick(function () { _self.___init_com(); });
+                    },
+                    deep: true
+                }
+            },
+        };
 
         function _guidID() {
             return 'id-xxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -80,59 +185,67 @@
                     //console.log(cfLoading);
                     if (cfLoading) {
                         _viewInit(cfLoading, () => {
-                            var vueLoading = window[_KITNAME]._getComponent(viewLoading);
+                            //var vueLoading = window[_KITNAME]._getComponent(viewLoading);
                             //console.log(vueLoading);
-                            _APP.view.loading = vueLoading;
+                            _APP.view.loading = _COM[viewLoading];
                         });
                     }
                 }
             }
         }
 
-        function _showLogin() {
-            if (_VIEW_CF.login) {
-                var viewLogin = _VIEW_CF.login.split('|')[0];
-                var cfLogin = _.find(_VIEWS, function (o) { return o.key == viewLogin; });
-                //console.log(cfLogin);
-                if (cfLogin) {
-                    _viewInit(cfLogin, () => {
-                        var vueLogin = window[_KITNAME]._getComponent(viewLogin);
-                        //console.log(vueLogin);
-                        _APP.view.main_body = vueLogin;
-                        _APP.view.loading = null;
-                    });
-                }
-            }
-        }
-
-        function _showDashboard() {
-            for (var area in _VIEW_CF) {
-                if (area.startsWith('sidebar')
-                    || area.startsWith('header')
-                    || area.startsWith('main')
-                    || area.startsWith('footer')) {
-                    var viewName = _VIEW_CF[area];
-                    if (viewName && viewName.length > 0) {
-                        viewName = viewName.split('|')[0];
-                        var cf = _.find(_VIEWS, function (o) { return o.key == viewName; });
-                        console.log(area, viewName, cf);
-                        if (cf) {
-                            _viewInit(cf, () => {
-                                var v = window[_KITNAME]._getComponent(viewName);
-                                //_APP.view.main_body = v;
-                                console.log('???????????? ', v)
-                            });
-                        }
+        function _showLogin(visiable) {
+            if (visiable == false)
+                _APP.view.main_body = null;
+            else {
+                if (_VIEW_CF.login) {
+                    var viewLogin = _VIEW_CF.login.split('|')[0];
+                    var cfLogin = _.find(_VIEWS, function (o) { return o.key == viewLogin; });
+                    //console.log(cfLogin);
+                    if (cfLogin) {
+                        _viewInit(cfLogin, () => {
+                            //var vueLogin = window[_KITNAME]._getComponent(viewLogin);
+                            //console.log(vueLogin);
+                            _APP.view.main_body = _COM[viewLogin];
+                            _APP.view.loading = null;
+                        });
                     }
                 }
             }
         }
 
+        function _showDashboard() {
+            _mainLoading(false);
+            _showLogin(false);
+
+            var areas = _.filter(Object.keys(_VIEW_CF), function (o) {
+                return (o.startsWith('sidebar')
+                    || o.startsWith('header')
+                    || o.startsWith('main')
+                    || o.startsWith('footer')) && _VIEW_CF[o] != null && _VIEW_CF[o].length > 0;
+            });
+            //console.log(areas);
+            areas.forEach((area) => {
+                var viewName = _VIEW_CF[area];
+                if (viewName && viewName.length > 0) {
+                    viewName = viewName.split('|')[0];
+                    var cf = _.find(_VIEWS, function (o) { return o.key == viewName; });
+                    //console.log(area, viewName, cf);
+                    if (cf) {
+                        _viewInit(cf, () => {
+                            //var v = window[_KITNAME]._getComponent(viewName);
+                            _APP.view[area] = _COM[viewName];
+                        });
+                    }
+                }
+            });
+        }
+
         ///////////////////////////////////////////////////////////
 
         function _appInit(cb) {
-            _VIEW_CF = _getUrl('app/config.json', 'json');
-            _VIEWS = _getUrl('app/list.json', 'json');
+            _VIEW_CF = _getUrl('app/config.json?v=' + new Date().getTime(), 'json');
+            _VIEWS = _getUrl('app/list.json?v=' + new Date().getTime(), 'json');
             if (_VIEWS == null) _VIEWS = [];
             if (_VIEW_CF == null) _VIEW_CF = {};
             if (_VIEW_CF && _VIEWS) {
@@ -167,6 +280,7 @@
                     var fileHtml = _.find(cf.files, function (o) { return o == 'temp.htm' });
                     var fileJs = _.find(cf.files, function (o) { return o == 'controller.js' });
                     var fileCss = _.find(cf.files, function (o) { return o == 'style.css' });
+                    var fileSetting = _.find(cf.files, function (o) { return o == 'setting.json' });
 
                     if (fileCss) {
                         var urlCss = 'app/' + cf.scope + '/' + cf.name + '/style.css';
@@ -180,13 +294,16 @@
                     if (fileHtml) {
                         var htm = _getUrl('app/' + cf.scope + '/' + cf.name + '/temp.htm');
                         _HTML[key] = htm;
-                    } else {
-                        _HTML[key] = '<div></div>';
-                    }
+                    } else _HTML[key] = '<div></div>';
+
+                    if (fileSetting) {
+                        var st = _getUrl('app/' + cf.scope + '/' + cf.name + '/setting.json', 'json');
+                        st = st || { enable: true };
+                        _COM_ST[key] = st;
+                    } else _COM_ST[key] = { enable: true };
 
                     var textJs = '';
                     if (fileJs) textJs = _getUrl('app/' + cf.scope + '/' + cf.name + '/controller.js');
-
 
                     if (textJs.length == 0)
                         textJs = '{ data: function () { return {}; }, mounted: function () {}, methods: {} }';
@@ -202,7 +319,7 @@
                         _KITNAME + '._setComponent("' + key + '", ' + dynName + '); \r\n\r\n ' +
                         'Vue.component("' + key + '", ' + dynName + '); \r\n ';
                     var urlJs = URL.createObjectURL(new Blob([textJs], { type: 'text/javascript' }));
-                    console.log('VIEW_INIT: ' + key + ' = ' + urlJs);
+                    //console.log('VIEW_INIT: ' + key + ' = ' + urlJs);
                     head.load([{ vueComJs: urlJs }], cb);
                 }
             }
@@ -237,14 +354,17 @@
             showLogin: _showLogin,
             login: function () {
                 _showDashboard();
-            }
+            },
+            goScreen: function (screenName) {
+
+            },
         };
     }
 
     var instance;
     return {
         getInstance: function (options) {
-            if (instance === undefined) instance = new HiwebObject(options);
+            if (instance === undefined) instance = new VueEngine(options);
             return instance;
         }
     };

@@ -21,7 +21,7 @@
         <div class="w-100">
             <div class="w-100 d-flex flex-column">
                 <div class="w-100">
-                    <component v-bind:is="view.header_top"></component>
+                    <!--header_top-->
                 </div>
                 <div class="w-100 d-none d-md-block">
                     <component v-bind:is="view.header_breadcrumb"></component>
@@ -41,6 +41,7 @@
                     <component v-bind:is="view.main_left"></component>
                 </div>
                 <div role="main" class="flex-fill h-100">
+                    <component v-bind:is="view.header_top"></component>
                     <component v-bind:is="view.main_body"></component>
                 </div>
             </div>
