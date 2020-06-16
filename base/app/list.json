@@ -1,5 +1,14 @@
 [
   {
+    "scope": "header",
+    "name": "1",
+    "key": "header___1",
+    "title": "",
+    "files": [
+      "temp.htm"
+    ]
+  },
+  {
     "scope": "loading",
     "name": "1",
     "key": "loading___1",
@@ -24,6 +33,41 @@
     "title": "",
     "files": [
       "controller.js",
+      "happiness.ef8d9cfd.svg",
+      "style.css",
+      "temp.htm"
+    ]
+  },
+  {
+    "scope": "login",
+    "name": "2",
+    "key": "login___2",
+    "title": "",
+    "files": [
+      "controller.js",
+      "style.css",
+      "temp.htm"
+    ]
+  },
+  {
+    "scope": "login",
+    "name": "3",
+    "key": "login___3",
+    "title": "",
+    "files": [
+      "controller.js",
+      "style.css",
+      "temp.htm"
+    ]
+  },
+  {
+    "scope": "login",
+    "name": "4",
+    "key": "login___4",
+    "title": "",
+    "files": [
+      "controller.js",
+      "happiness.ef8d9cfd.svg",
       "style.css",
       "temp.htm"
     ]
