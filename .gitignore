@@ -47,3 +47,6 @@ download_themes/debug.log
 /calendar/gcalendar/packages
 /calendar/gcalendar/.vs
 /web/.vs
+/viewjson/bin
+/viewjson/obj
+/base/viewjson.pdb

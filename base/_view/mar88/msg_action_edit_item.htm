@@ -1,0 +1,20 @@
+﻿<div style="position:fixed;top:0;left:0;width:100%;height:100vh;">
+    
+    <kit_popup :ref-name="'REF_KIT_POPUP'" on-created="on_created_addnew" on-mounted="on_mounted_addnew">
+        <div slot="header">
+            <h3>
+                Cập nhật tin nhắn
+            </h3>
+        </div>
+        <div slot="body">
+            <div style="min-width:800px;">
+                <kit_form :ref-name="'REF_KIT_FORM'"></kit_form>
+            </div>
+        </div>
+        <div slot="footer">
+            <button name="btn_submit_click" type="button" class="btn btn-primary">Cập nhật</button>
+            <button onclick="___popup_close(event)" type="button" class="btn btn-secondary">Hủy</button>
+        </div>
+    </kit_popup>
+
+</div>

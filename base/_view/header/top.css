@@ -1,0 +1,78 @@
+﻿
+.header___top {
+    padding-left: 5px;
+}
+
+    .header___top .ui-profile .dropdown-toggle::after {
+        display: none;
+    }
+
+    .header___top .badge {
+        font-size: 0.7em;
+        padding: 1px 3px 2px 4px;
+        top: 5px;
+        left: 27px;
+    }
+
+    .header___top ul,
+    .header___top ol,
+    .header___top ul li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+        .header___top ul li a {
+            position: relative;
+            display: inline-block;
+        }
+
+        .header___top ul li i {
+            font-size: 1.2em;
+        }
+
+        .header___top ul li a.active {
+            border-bottom: 2px solid dodgerblue;
+        }
+
+    .header___top li:first-child,
+    .header___top li:last-of-type {
+        max-width: 50px;
+    }
+
+.header___top {
+    padding-left: 5px;
+}
+
+    .header___top .badge {
+        font-size: 0.7em;
+        padding: 1px 3px 2px 4px;
+        top: 5px;
+        left: 27px;
+    }
+
+    .header___top ul,
+    .header___top ol,
+    .header___top ul li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+        .header___top ul li a {
+            position: relative;
+            display: inline-block;
+        }
+
+        .header___top ul li i {
+            font-size: 1.2em;
+        }
+
+        .header___top ul li a.active {
+            border-bottom: 2px solid dodgerblue;
+        }
+
+    .header___top li:first-child,
+    .header___top li:last-of-type {
+        max-width: 50px;
+    }

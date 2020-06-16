@@ -1,0 +1,103 @@
+﻿
+.user___task {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 42px);
+    overflow: auto;
+    padding-bottom: 99px;
+}
+
+    .user___task ul,
+    .user___task p {
+        padding: 0;
+        margin: 0;
+    }
+
+    .user___task p,
+    .user___task div.btn-group {
+    }
+
+    .user___task p {
+        width: calc(100% - 110px);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .user___task div.btn-group {
+        width: 110px;
+        padding-top: 4px;
+    }
+
+    .user___task ul li {
+        padding-left: 0.3em;
+        padding-right: 0.3em;
+    }
+
+        .user___task ul li img {
+        }
+
+
+        .user___task ul li .ui-avartar {
+            width: 32px;
+            margin-right: 7px;
+            margin-top: 7px;
+        }
+
+        .user___task ul li img.ui-avartar {
+            border-radius: 50%;
+            border: 1px solid orange;
+        }
+
+        .user___task ul li i.ui-avartar {
+            font-size: 24px;
+            color: #ddd;
+        }
+
+        .user___task ul li .ui-info {
+            line-height: 16px;
+            padding: 0px 0 0 0;
+            width: calc(100% - 40px);
+        }
+
+            .user___task ul li .ui-info b {
+                font-size: 0.8em;
+                font-weight: normal;
+                color: #000;
+                font-family: arial;
+            }
+
+            .user___task ul li .ui-info em {
+                font-size: 0.7em;
+                color: #555;
+            }
+
+        .user___task ul li .ui-group,
+        .user___task ul li .ui-task,
+        .user___task ul li .ui-call,
+        .user___task ul li .ui-message {
+            padding: 0;
+            position: relative;
+            width: 32px;
+            margin-left: 4px;
+        }
+
+        .user___task ul li .btn-group i {
+            color: #999;
+            font-size: 1em;
+            padding: 7px 0 0 0;
+            min-width: 35px;
+        }
+
+        .user___task ul li .btn-group .badge {
+            padding: 2px 3px 2px 3px;
+            min-width: 16px;
+            text-align: center;
+            font-weight: normal;
+            font-size: 0.7em;
+            right: 0;
+            top: 0;
+        }
+
+        .user___task ul li .ui-call {
+            margin-left: 0px;
+        }

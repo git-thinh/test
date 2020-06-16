@@ -7,6 +7,29 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web", "web\web.csproj", "{6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "weblib", "weblib\weblib.csproj", "{D4046A5D-592A-4297-B832-B12CE78A88B1}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "base", "base\", "{D19AF69B-7699-4F00-AA90-D15FF75A07C5}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_61895"
+		Debug.AspNetCompiler.PhysicalPath = "base\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61895\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_61895"
+		Release.AspNetCompiler.PhysicalPath = "base\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61895\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "61895"
+		SlnRelativePath = "base\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "viewjson", "viewjson\viewjson.csproj", "{F11C9933-128C-4B8E-926F-666294E6FBFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +44,14 @@ Global
 		{D4046A5D-592A-4297-B832-B12CE78A88B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4046A5D-592A-4297-B832-B12CE78A88B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4046A5D-592A-4297-B832-B12CE78A88B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D19AF69B-7699-4F00-AA90-D15FF75A07C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D19AF69B-7699-4F00-AA90-D15FF75A07C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D19AF69B-7699-4F00-AA90-D15FF75A07C5}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{D19AF69B-7699-4F00-AA90-D15FF75A07C5}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{F11C9933-128C-4B8E-926F-666294E6FBFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F11C9933-128C-4B8E-926F-666294E6FBFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F11C9933-128C-4B8E-926F-666294E6FBFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F11C9933-128C-4B8E-926F-666294E6FBFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
