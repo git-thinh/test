@@ -1,0 +1,13 @@
+[
+  {
+    "scope": "login",
+    "name": "1",
+    "key": "login___1",
+    "title": "",
+    "files": [
+      "controller.js",
+      "style.css",
+      "template.htm"
+    ]
+  }
+]
