@@ -1,5 +1,23 @@
 [
   {
+    "scope": "loading",
+    "name": "1",
+    "key": "loading___1",
+    "title": "",
+    "files": [
+      "temp.htm"
+    ]
+  },
+  {
+    "scope": "loading",
+    "name": "2",
+    "key": "loading___2",
+    "title": "",
+    "files": [
+      "temp.htm"
+    ]
+  },
+  {
     "scope": "login",
     "name": "1",
     "key": "login___1",
@@ -7,7 +25,7 @@
     "files": [
       "controller.js",
       "style.css",
-      "template.htm"
+      "temp.htm"
     ]
   }
 ]

@@ -36,10 +36,6 @@ textarea {
     border: none !important;
 }
 
-.pagination li a {
-    border: none !important;
-}
-
 .page-item.active .page-link {
     z-index: 0;
 }
@@ -48,5 +44,3 @@ body {
     padding: 0;
     margin: 0;
 }
-
-/****************************************/
