@@ -41,8 +41,10 @@
                     <component v-bind:is="view.main_left"></component>
                 </div>
                 <div role="main" class="flex-fill h-100 bg-light">
-                    <component v-bind:is="view.header_top"></component>
-                    <component v-bind:is="view.main_body"></component>
+                    <div class="container">
+                        <component v-bind:is="view.header_top"></component>
+                        <component v-bind:is="view.main_body"></component>
+                    </div>
                 </div>
             </div>
 

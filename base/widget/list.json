@@ -1,0 +1,236 @@
+[
+  {
+    "enable": true,
+    "root": "widget",
+    "scope": "header",
+    "name": "1",
+    "key": "widget_header_1",
+    "title": "",
+    "error": "",
+    "files": [
+      "temp.htm"
+    ],
+    "setting": {
+      "active": false,
+      "title": "",
+      "screen": "",
+      "groups": [],
+      "actions": []
+    }
+  },
+  {
+    "enable": true,
+    "root": "widget",
+    "scope": "login",
+    "name": "1",
+    "key": "widget_login_1",
+    "title": "",
+    "error": "",
+    "files": [
+      "controller.js",
+      "happiness.ef8d9cfd.svg",
+      "style.css",
+      "temp.htm"
+    ],
+    "setting": {
+      "active": false,
+      "title": "",
+      "screen": "",
+      "groups": [],
+      "actions": []
+    }
+  },
+  {
+    "enable": true,
+    "root": "widget",
+    "scope": "login",
+    "name": "2",
+    "key": "widget_login_2",
+    "title": "",
+    "error": "",
+    "files": [
+      "controller.js",
+      "style.css",
+      "temp.htm"
+    ],
+    "setting": {
+      "active": false,
+      "title": "",
+      "screen": "",
+      "groups": [],
+      "actions": []
+    }
+  },
+  {
+    "enable": true,
+    "root": "widget",
+    "scope": "login",
+    "name": "3",
+    "key": "widget_login_3",
+    "title": "",
+    "error": "",
+    "files": [
+      "controller.js",
+      "style.css",
+      "temp.htm"
+    ],
+    "setting": {
+      "active": false,
+      "title": "",
+      "screen": "",
+      "groups": [],
+      "actions": []
+    }
+  },
+  {
+    "enable": true,
+    "root": "widget",
+    "scope": "login",
+    "name": "4",
+    "key": "widget_login_4",
+    "title": "",
+    "error": "",
+    "files": [
+      "controller.js",
+      "happiness.ef8d9cfd.svg",
+      "style.css",
+      "temp.htm"
+    ],
+    "setting": {
+      "active": false,
+      "title": "",
+      "screen": "",
+      "groups": [],
+      "actions": []
+    }
+  },
+  {
+    "enable": true,
+    "root": "widget",
+    "scope": "product",
+    "name": "all001",
+    "key": "widget_product_all001",
+    "title": "",
+    "error": "",
+    "files": [
+      "controller.js",
+      "setting.json",
+      "temp.htm"
+    ],
+    "setting": {
+      "active": true,
+      "title": "My Products",
+      "screen": "all_product",
+      "groups": [
+        {
+          "code": "ecommerce",
+          "title": "HIWEB ECOMMERCE"
+        }
+      ],
+      "actions": [
+        {
+          "order": 0,
+          "type": "link",
+          "icon": "",
+          "style": "",
+          "css": "",
+          "title": "Import",
+          "code": "IMPORT_PRODUCT",
+          "permistion": {
+            "users": [
+              "*"
+            ],
+            "groups": [
+              "*"
+            ]
+          }
+        },
+        {
+          "order": 0,
+          "type": "button",
+          "icon": "",
+          "style": "",
+          "css": "btn btn-primary",
+          "title": "Create Product",
+          "code": "CREATE_PRODUCT",
+          "permistion": {
+            "users": [
+              "*"
+            ],
+            "groups": [
+              "*"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "enable": true,
+    "root": "widget",
+    "scope": "product",
+    "name": "collection001",
+    "key": "widget_product_collection001",
+    "title": "",
+    "error": "",
+    "files": [
+      "controller.js",
+      "lost.4799c96f.svg",
+      "setting.json",
+      "temp.htm"
+    ],
+    "setting": {
+      "active": true,
+      "title": "My Collections",
+      "screen": "collection",
+      "groups": [
+        {
+          "code": "ecommerce",
+          "title": "HIWEB ECOMMERCE"
+        }
+      ],
+      "actions": [
+        {
+          "order": 0,
+          "type": "button",
+          "icon": "",
+          "style": "",
+          "css": "btn btn-primary",
+          "title": "Create Collection",
+          "code": "CREATE_COLLECTION",
+          "permistion": {
+            "users": [
+              "*"
+            ],
+            "groups": [
+              "*"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "enable": true,
+    "root": "widget",
+    "scope": "sidebar",
+    "name": "1",
+    "key": "widget_sidebar_1",
+    "title": "",
+    "error": "",
+    "files": [
+      "avatar-1.jpg",
+      "style.css",
+      "temp - Copy (2).htm",
+      "temp - Copy.htm",
+      "temp.htm"
+    ],
+    "setting": {
+      "active": false,
+      "title": "",
+      "screen": "",
+      "groups": [],
+      "actions": []
+    }
+  }
+]

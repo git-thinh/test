@@ -2,6 +2,8 @@
     function VueEngine(options) {
         options = options || {};
 
+        //#region [ Contractor, Variable, Function base ]
+
         var _APP, _HTML = {}, _COM = {}, _COM_ST = {},
             _VIEWS = [], _VIEW_CF = {},
             _DATA = {
@@ -180,7 +182,9 @@
             return result;
         }
 
-        ///////////////////////////////////////////////////////////
+        //#endregion
+
+        //#region [ mainLoading, showLogin, showDashboard ]
 
         function _mainLoading(visiable) {
             if (visiable == false)
@@ -189,13 +193,15 @@
                 if (_VIEW_CF.loading) {
                     var viewLoading = _VIEW_CF.loading.split('|')[0];
                     var cfLoading = _.find(_VIEWS, function (o) { return o.key == viewLoading; });
-                    //console.log(cfLoading);
+                    //console.log(viewLoading, cfLoading);
                     if (cfLoading) {
                         _viewInit(cfLoading, () => {
                             //var vueLoading = window[_KITNAME]._getComponent(viewLoading);
-                            //console.log(vueLoading);
+                            //console.log(viewLoading, true);
                             _APP.view.loading = _COM[viewLoading];
                         });
+                    } else {
+                        console.info('!!!!!Cannot find view: ' + viewLoading);
                     }
                 }
             }
@@ -216,6 +222,8 @@
                             _APP.view.main_body = _COM[viewLogin];
                             _APP.view.loading = null;
                         });
+                    } else {
+                        console.info('!!!!!Cannot find view: ' + viewLoading);
                     }
                 }
             }
@@ -248,18 +256,29 @@
             });
         }
 
-        ///////////////////////////////////////////////////////////
+        //#endregion
+
+        //#region [ Init: app, vue, kit, widget ]
 
         function _appInit(cb) {
-            _VIEW_CF = _getUrl('app/config.json?v=' + new Date().getTime(), 'json');
-            _VIEWS = _getUrl('app/list.json?v=' + new Date().getTime(), 'json');
-            if (_VIEWS == null) _VIEWS = [];
-            if (_VIEW_CF == null) _VIEW_CF = {};
-            if (_VIEW_CF && _VIEWS) {
-                _vueInit(cb);
-            } else {
-                console.error('Cannot found the file: app/config.json or app/list.json');
-            }
+            var ws = _getUrl('widget/list.json?v=' + new Date().getTime(), 'json');
+            var ks = _getUrl('kit/list.json?v=' + new Date().getTime(), 'json');
+            if (ws == null) ws = [];
+            if (ks == null) ks = [];
+            _VIEWS = ws;
+            if (ks.length > 0) for (var i = 0; i < ks.length; i++) _VIEWS.push(ks[i]);
+
+            _kitInit(() => {
+
+                _VIEW_CF = _getUrl('widget/config.json?v=' + new Date().getTime(), 'json');
+                if (_VIEW_CF == null) _VIEW_CF = {};
+                if (_VIEW_CF && _VIEWS) {
+                    _vueInit(cb);
+                } else {
+                    console.error('Cannot found the file: app/config.json or app/list.json');
+                }
+
+            });
         }
 
         function _vueInit(cb) {
@@ -287,10 +306,9 @@
                     var fileHtml = _.find(cf.files, function (o) { return o == 'temp.htm' });
                     var fileJs = _.find(cf.files, function (o) { return o == 'controller.js' });
                     var fileCss = _.find(cf.files, function (o) { return o == 'style.css' });
-                    var fileSetting = _.find(cf.files, function (o) { return o == 'setting.json' });
 
                     if (fileCss) {
-                        var urlCss = 'app/' + cf.scope + '/' + cf.name + '/style.css';
+                        var urlCss = cf.root + '/' + cf.scope + '/' + cf.name + '/style.css';
                         var el = document.createElement('link');
                         el.setAttribute('rel', 'stylesheet');
                         el.setAttribute('href', urlCss);
@@ -299,18 +317,12 @@
                     }
 
                     if (fileHtml) {
-                        var htm = _getUrl('app/' + cf.scope + '/' + cf.name + '/temp.htm');
+                        var htm = _getUrl(cf.root + '/' + cf.scope + '/' + cf.name + '/temp.htm');
                         _HTML[key] = htm;
                     } else _HTML[key] = '<div></div>';
 
-                    if (fileSetting) {
-                        var st = _getUrl('app/' + cf.scope + '/' + cf.name + '/setting.json', 'json');
-                        st = st || { enable: true };
-                        _COM_ST[key] = st;
-                    } else _COM_ST[key] = { enable: true };
-
                     var textJs = '';
-                    if (fileJs) textJs = _getUrl('app/' + cf.scope + '/' + cf.name + '/controller.js');
+                    if (fileJs) textJs = _getUrl(cf.root + '/' + cf.scope + '/' + cf.name + '/controller.js');
 
                     if (textJs.length == 0)
                         textJs = '{ data: function () { return {}; }, mounted: function () {}, methods: {} }';
@@ -332,6 +344,25 @@
             }
         }
 
+        function _kitInit(cb) {
+            var kits = _.filter(_VIEWS, function (o) { return o.root == 'kit'; });
+            if (kits.length > 0) {
+                var ks = JSON.parse(JSON.stringify(kits));
+                _kitInitQueue(ks, cb);
+            } else if (cb) cb();
+        }
+
+        function _kitInitQueue(kits, cb) {
+            if (kits.length > 0) {
+                var cf = kits.shift();
+                _viewInit(cf, () => {
+                    _kitInitQueue(kits, cb);
+                });
+            } else if (cb) cb();
+        }
+
+        //#endregion
+
         return {
             _getMixin: function () { return _MIXIN; },
             _setComponent: function (keyView, objVueCom) { _COM[keyView] = objVueCom; },
@@ -341,12 +372,7 @@
             init: function (libs) {
                 libs = libs || [];
                 if (libs.length > 0) {
-                    var items = [];
-                    for (var i = 0; i < libs.length; i++) {
-                        var item = {};
-                        item['item_' + i] = libs[i] + '?v=' + new Date().getTime();
-                        items.push(item);
-                    }
+                    var items = libs.map((item) => { return item + '?v=' + new Date().getTime() });
                     head.load(items, () => {
                         _appInit(() => {
                             //_mainLoading();

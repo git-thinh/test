@@ -1,19 +1,19 @@
 {
-  "loading": "loading___1",
-  "login": "login___1",
+  "loading": "kit_loading_2",
+  "login": "widget_login_1",
   "confirm_pass": "",
   "screen_lock": "",
 
   "sidebar_left": "",
   "sidebar_right": "",
 
-  "header_top": "header___1",
+  "header_top": "widget_header_1",
   "header_breadcrumb": "",
   "header_tab": "",
   "header_filter": "",
 
-  "main_left": "sidebar___1",
-  "main_body": "product___all001",
+  "main_left": "widget_sidebar_1",
+  "main_body": "widget_product_all001",
   "main_right": "",
   "footer": ""
 }

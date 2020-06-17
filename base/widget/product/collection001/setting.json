@@ -1,0 +1,26 @@
+{
+  "active": true,
+  "title": "My Collections",
+  "screen": "collection",
+  "groups": [
+    {
+      "code": "ecommerce",
+      "title": "HIWEB ECOMMERCE"
+    }
+  ],
+  "actions": [
+    {
+      "order": 0,
+      "type": "button",
+      "icon": "",
+      "style": "",
+      "css": "btn btn-primary",
+      "title": "Create Collection",
+      "code": "CREATE_COLLECTION",
+      "permistion": {
+        "users": [ "*" ],
+        "groups": [ "*" ]
+      }
+    }
+  ]
+}
