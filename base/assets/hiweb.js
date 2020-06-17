@@ -85,7 +85,7 @@
 
                     //console.log('MIXIN: ___init_com ' + _self.viewKey + ', role = ', el.parentElement.getAttribute('role'));
                     //console.log('MIXIN: ___init_com ' + _self.viewKey + ', is-dialog = ', _self.isDialog);
-                    console.log('MIXIN: ___init_com = ' + _self.viewKey + ', id = ', id, _self.$vnode);
+                    //console.log('MIXIN: ___init_com = ' + _self.viewKey + ', id = ', id, _self.$vnode);
 
                     if (_self.popupIndex != null) {
                         classie.add(el, '___com').add(el, '___com_popup');

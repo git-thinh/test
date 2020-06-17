@@ -1,36 +1,44 @@
 ﻿<div>
     <nav class="sidebar">
         <div class="sidebar-header">
-            <h3>Bootstrap Sidebar</h3>
-            <strong>BS</strong>
+            <div class="dropdown">
+                <div class="btn bg-white border-none dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="float-left img-thumbnail rounded-circle" src="app/sidebar/1/avatar-1.jpg" style="width:68px;" />
+                    <div class="float-left ml-1">
+                        <div class="h5 text-left">KK</div>
+                        <div class="h6 text-left">Khanh</div>
+                    </div>
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
         </div>
 
-        <ul class="list-unstyled components">
+        <ul class="uc-menu">
             <li class="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="fas fa-home"></i>
-                    Home
+                    <i class="fe fe-home fe-dropdown-arrow"></i>
+                    Dashboards
                 </a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                     <li>
-                        <a href="#">Home 1</a>
+                        <a href="#">Dashboard 1</a>
                     </li>
                     <li>
-                        <a href="#">Home 2</a>
+                        <a href="#">Dashboard 2</a>
                     </li>
                     <li>
-                        <a href="#">Home 3</a>
+                        <a href="#">Dashboard 3</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="#">
-                    <i class="fas fa-briefcase"></i>
-                    About
-                </a>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="fas fa-copy"></i>
-                    Pages
+                    <i class="fe fe-file"></i>
+                    CMS
                 </a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     <li>
@@ -43,6 +51,10 @@
                         <a href="#">Page 3</a>
                     </li>
                 </ul>
+                <a href="#">
+                    <i class="fe fe-image"></i>
+                    Images
+                </a>
             </li>
             <li>
                 <a href="#">

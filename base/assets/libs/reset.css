@@ -40,6 +40,22 @@ textarea {
     z-index: 0;
 }
 
+.wp-100 {
+    width: 100px !important;
+}
+
+.wp-150 {
+    width: 150px !important;
+}
+
+.wp-200 {
+    width: 200px !important;
+}
+
+.wp-250 {
+    width: 250px !important;
+}
+
 body {
     padding: 0;
     margin: 0;
