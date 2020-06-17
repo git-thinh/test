@@ -2,7 +2,7 @@
   "active": true,
   "caption": "HIWEB ECOMMERCE",
   "title": "My Products",
-  "screen": "ALL_PRODUCT",
+  "screen": "all_product",
   "actions": [
     {
       "order": 0,

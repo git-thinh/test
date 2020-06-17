@@ -40,7 +40,7 @@
                 <div :class="['h-100 w-25 d-none', view.main_left ? 'd-md-block' : '']">
                     <component v-bind:is="view.main_left"></component>
                 </div>
-                <div role="main" class="flex-fill h-100">
+                <div role="main" class="flex-fill h-100 bg-light">
                     <component v-bind:is="view.header_top"></component>
                     <component v-bind:is="view.main_body"></component>
                 </div>

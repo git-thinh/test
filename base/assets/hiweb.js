@@ -53,32 +53,39 @@
                 }
             },
             computed: {
-                view_id: function () { return this.$vnode.componentOptions.tag; }
+                viewKey: function () {
+                    var tag = this.$vnode.tag;
+                    if (tag) {
+                        var a = tag.split('-');
+                        tag = a[a.length - 1];
+                    }
+                    return tag;
+                }
             },
             created: function () {
                 var _self = this;
             },
             mounted: function () {
                 var _self = this;
-                //_self.___init_com();
-                //console.log('MIXIN: mounted -> ' + _self.view_id);
-                //if (_self.view_id && _self.view_id.indexOf('___logout') != -1) ___V_LOGOUT = _self;
+                _self.___init_com();
+                //console.log('MIXIN: mounted -> ' + _self.viewKey);
+                //if (_self.viewKey && _self.viewKey.indexOf('___logout') != -1) ___V_LOGOUT = _self;
             },
             methods: {
                 ___init_com: function () {
                     var _self = this;
                     var el = _self.$el;
 
-                    if (_self.view_id)
-                        classie.add(el, '___com').add(el, _self.view_id);
+                    if (_self.viewKey)
+                        classie.add(el, '___com').add(el, _self.viewKey);
 
                     var id = 'idvc___' + _self._uid;
                     el.setAttribute('id', id);
                     _self.idvc___ = id;
 
-                    //console.log('MIXIN: ___init_com ' + _self.view_id + ', role = ', el.parentElement.getAttribute('role'));
-                    //console.log('MIXIN: ___init_com ' + _self.view_id + ', is-dialog = ', _self.isDialog);
-                    //console.log('MIXIN: ___init_com ' + _self.view_id + ', _uid = ', _self._uid);
+                    //console.log('MIXIN: ___init_com ' + _self.viewKey + ', role = ', el.parentElement.getAttribute('role'));
+                    //console.log('MIXIN: ___init_com ' + _self.viewKey + ', is-dialog = ', _self.isDialog);
+                    console.log('MIXIN: ___init_com = ' + _self.viewKey + ', id = ', id, _self.$vnode);
 
                     if (_self.popupIndex != null) {
                         classie.add(el, '___com').add(el, '___com_popup');
@@ -99,7 +106,7 @@
                     ////    classie.add(el, ___DL_CURRENT_ID);
 
                     ////    var rec = ___DL_CURRENT_EVENT.target.getBoundingClientRect();
-                    ////    console.log('MIXIN: ___init_com ' + ___DL_CURRENT_ID + ', ' + _self.view_id + ', rec = ', rec);
+                    ////    console.log('MIXIN: ___init_com ' + ___DL_CURRENT_ID + ', ' + _self.viewKey + ', rec = ', rec);
                     ////    //_self.dialog___.opacity = 0;
                     ////    //_self.dialog___.top = rec.bottom + 'px';
 
@@ -128,16 +135,16 @@
                 }
             },
             watch: {
-                $data: {
-                    handler: function (val, oldVal) {
-                        var _self = this;
-                        //console.log('MIXIN_WATCH: ' + _self.view_id);
-                        console.log('MIXIN_WATCH: ___init_com ' + _self.view_id + ', is-dialog = ', _self.isDialog);
-                        //if (_self.isDialog != true)
-                        //    Vue.nextTick(function () { _self.___init_com(); });
-                    },
-                    deep: true
-                }
+                //$data: {
+                //    handler: function (val, oldVal) {
+                //        var _self = this;
+                //        //console.log('MIXIN_WATCH: ' + _self.viewKey);
+                //        console.log('MIXIN_WATCH: ___init_com ' + _self.viewKey + ', is-dialog = ', _self.isDialog);
+                //        //if (_self.isDialog != true)
+                //        //    Vue.nextTick(function () { _self.___init_com(); });
+                //    },
+                //    deep: true
+                //}
             },
         };
 
@@ -315,7 +322,7 @@
                     var dynName = _guidName() + '_' + (new Date()).getTime();
                     textJs =
                         //'var ' + dynName + ' = { mixins: [___MIXIN], template: ' + strTemplate + ', \r\n ' + text + ' \r\n ' +
-                        'var ' + dynName + ' = { \r\n template: ' + strTemplate + ', \r\n ' + textJs + ' \r\n\r\n ' +
+                        'var ' + dynName + ' = { mixins: [' + _KITNAME + '._getMixin()], \r\n template: ' + strTemplate + ', \r\n ' + textJs + ' \r\n\r\n ' +
                         _KITNAME + '._setComponent("' + key + '", ' + dynName + '); \r\n\r\n ' +
                         'Vue.component("' + key + '", ' + dynName + '); \r\n ';
                     var urlJs = URL.createObjectURL(new Blob([textJs], { type: 'text/javascript' }));
@@ -326,6 +333,7 @@
         }
 
         return {
+            _getMixin: function () { return _MIXIN; },
             _setComponent: function (keyView, objVueCom) { _COM[keyView] = objVueCom; },
             _getComponent: function (keyView) { return _COM[keyView]; },
             _getViewHtml: function (keyView) { return _HTML[keyView]; },
@@ -336,7 +344,7 @@
                     var items = [];
                     for (var i = 0; i < libs.length; i++) {
                         var item = {};
-                        item['item_' + i] = 'assets/libs/' + libs[i] + '?v=' + new Date().getTime();
+                        item['item_' + i] = libs[i] + '?v=' + new Date().getTime();
                         items.push(item);
                     }
                     head.load(items, () => {
@@ -372,12 +380,14 @@
 var _KITNAME = '_HW';
 var _HW = Hiweb.getInstance();
 _HW.init([
-    'jquery-3.5.1.slim.min.js',
-    'popper.min.js',
-    'lodash.min.js',
-    'classie.js',
-    'vue.min.js',
-    'bootstrap.min.js',
-    'bootstrap.min.css',
-    'reset.css'
+    'assets/libs/jquery-3.5.1.slim.min.js',
+    'assets/libs/popper.min.js',
+    'assets/libs/lodash.min.js',
+    'assets/libs/classie.js',
+    'assets/libs/vue.min.js',
+    'assets/libs/bootstrap.min.js',
+    'assets/libs/bootstrap.min.css',
+    'assets/fonts/fontawesome5/all.css',
+    'assets/fonts/feather/feather.css',
+    'assets/libs/reset.css'
 ]);

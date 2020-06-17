@@ -2,7 +2,7 @@
   "active": true,
   "caption": "HIWEB ECOMMERCE",
   "title": "My Collections",
-  "screen": "COLLECTION",
+  "screen": "collection",
   "actions": [
     {
       "order": 0,
