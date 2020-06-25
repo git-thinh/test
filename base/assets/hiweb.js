@@ -2,7 +2,7 @@
     function VueEngine(options) {
         options = options || {};
 
-        //#region [ Contractor, Variable, Function base ]
+        //#region [ _DATA, _MIXIN ]
 
         var _APP, _HTML = {}, _COM = {}, _COM_ST = {},
             _VIEWS = [], _VIEW_CF = {},
@@ -149,6 +149,10 @@
                 //}
             },
         };
+
+        //#endregion
+
+        //#region [ Contractor, Variable, Function base ]
 
         function _guidID() {
             return 'id-xxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {

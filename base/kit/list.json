@@ -2,6 +2,25 @@
   {
     "enable": true,
     "root": "kit",
+    "scope": "checkbox",
+    "name": "1",
+    "key": "kit_checkbox_1",
+    "title": "",
+    "error": "",
+    "files": [
+      "temp.htm"
+    ],
+    "setting": {
+      "active": false,
+      "title": "",
+      "screen": "",
+      "groups": [],
+      "actions": []
+    }
+  },
+  {
+    "enable": true,
+    "root": "kit",
     "scope": "loading",
     "name": "1",
     "key": "kit_loading_1",
