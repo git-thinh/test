@@ -1,4 +1,8 @@
 ﻿
+.kit_table_1 .card-body {
+    padding: 0px;
+}
+
 .kit_table_1 .table-sm thead th {
     font-size: .625rem;
 }
