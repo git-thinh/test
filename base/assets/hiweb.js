@@ -40,6 +40,8 @@
 
         var _MIXIN = {
             props: [
+                'api',
+                'title',
                 'ref-name',
                 'is-dialog',
                 'popup-index',

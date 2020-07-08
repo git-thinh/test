@@ -10,6 +10,9 @@
         //if (_self.title && _self.title.length > 0) {
         //    _self.label = _self.title;
         //}
+
+        //alert(_self.title);
+
     },
     methods: {
         _onActionEvent: function(event, codeAction) {

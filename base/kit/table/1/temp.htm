@@ -12,13 +12,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr v-for="item in list">
                             <th scope="row">
-                                <kit_checkbox_1></kit_checkbox_1>
+                                <kit_checkbox_1 :title="item.text"></kit_checkbox_1>
                             </th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <td>
+                                <kit_checkbox_2 :title="'99999'"></kit_checkbox_2>
+                            </td>
+                            <td>
+                                <kit_checkbox_2 :title="'6666'"></kit_checkbox_2>
+                            </td>
+                            <td><button @click="clickSomething(item.id)">{{item.id}}</button></td>
                         </tr>
                         <tr>
                             <th scope="row">2</th>

@@ -8,6 +8,28 @@
     "title": "",
     "error": "",
     "files": [
+      "controller.js",
+      "temp.htm"
+    ],
+    "setting": {
+      "active": false,
+      "title": "",
+      "screen": "",
+      "groups": [],
+      "actions": []
+    }
+  },
+  {
+    "enable": true,
+    "root": "kit",
+    "scope": "checkbox",
+    "name": "2",
+    "key": "kit_checkbox_2",
+    "title": "",
+    "error": "",
+    "files": [
+      "controller.js",
+      "style.css",
       "temp.htm"
     ],
     "setting": {
@@ -65,6 +87,7 @@
     "title": "",
     "error": "",
     "files": [
+      "controller.js",
       "style.css",
       "temp.htm"
     ],
