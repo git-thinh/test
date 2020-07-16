@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">-->
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <script src="assets/libs/head.load.min.js"></script>
+</head>
+<body>
+    <div id="app" class="d-flex flex-column fixed-top h-100" style="z-index:-1;">
+        <component v-bind:is="view.loading"></component>
+        <component v-bind:is="view.login"></component>
+        <component v-bind:is="view.confirm_pass"></component>
+        <component v-bind:is="view.screen_lock"></component>
+
+        <component v-bind:is="view.sidebar_left"></component>
+        <component v-bind:is="view.sidebar_right"></component>
+
+        <div class="w-100">
+            <div class="w-100 d-flex flex-column">
+                <div class="w-100">
+                    <!--header_top-->
+                </div>
+                <div class="w-100 d-none d-md-block">
+                    <component v-bind:is="view.header_breadcrumb"></component>
+                </div>
+                <div class="w-100 d-none d-md-block">
+                    <component v-bind:is="view.header_tab"></component>
+                </div>
+                <div class="w-100 d-none d-md-block">
+                    <component v-bind:is="view.header_filter"></component>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 flex-fill">
+
+            <div class="d-flex w-100 h-100">
+                <div :class="['h-100 wp-200 d-none', view.main_left ? 'd-md-block' : '']">
+                    <component v-bind:is="view.main_left"></component>
+                </div>
+                <div role="main" class="flex-fill h-100 bg-light">
+                    <div class="container">
+                        <component v-bind:is="view.header_top"></component>
+                        <component v-bind:is="view.main_body"></component>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="w-100">
+            <component v-bind:is="view.footer"></component>
+        </div>
+        <component v-bind:is="view.dialog_1" :is-dialog="true"></component>
+
+        <component v-bind:is="view.popup_1" :popup-index="1"></component>
+        <component v-bind:is="view.popup_2" :popup-index="2"></component>
+        <component v-bind:is="view.popup_3" :popup-index="3"></component>
+
+        <component v-bind:is="view.alert_1" :alert-index="1"></component>
+        <component v-bind:is="view.alert_2" :alert-index="2"></component>
+        <component v-bind:is="view.alert_3" :alert-index="3"></component>
+    </div>
+
+    <script src="assets/hiweb.js"></script>
+</body>
+</html>
