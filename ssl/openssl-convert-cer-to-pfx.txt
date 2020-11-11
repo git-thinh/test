@@ -1,2 +1,2 @@
 openssl pkcs12 -export -out fb.iot.vn.pfx -inkey private.key -in certificate.crt
-openssl pkcs12 -export -out admin.iot.vn.pfx -inkey private.key -in certificate.crt
+openssl pkcs12 -export -out test1.iot.vn.pfx -inkey test1.iot.vn.key -in test1.iot.vn.crt
